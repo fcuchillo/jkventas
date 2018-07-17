@@ -1,0 +1,142 @@
+[07-Nov-2016 15:09:38 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 35
+[07-Nov-2016 15:09:38 UTC] PHP Stack trace:
+[07-Nov-2016 15:09:38 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[07-Nov-2016 15:09:38 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[07-Nov-2016 15:09:38 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 35
+[07-Nov-2016 15:09:38 UTC] PHP Stack trace:
+[07-Nov-2016 15:09:38 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[07-Nov-2016 15:09:38 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[11-Nov-2016 15:05:37 UTC] PHP Fatal error:  Call to undefined method TransferFile::json() in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 38
+[11-Nov-2016 15:05:37 UTC] PHP Stack trace:
+[11-Nov-2016 15:05:37 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[11-Nov-2016 15:05:37 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[11-Nov-2016 15:05:37 UTC] PHP   3. call_user_func_array:{/var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:514}() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:514
+[11-Nov-2016 15:05:37 UTC] PHP   4. REST_Controller->_remap() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:514
+[11-Nov-2016 15:05:37 UTC] PHP   5. call_user_func_array:{/var/www/html/preproduccion/PyENDES/application/libraries/REST_Controller.php:723}() /var/www/html/preproduccion/PyENDES/application/libraries/REST_Controller.php:723
+[11-Nov-2016 15:05:37 UTC] PHP   6. TransferFile->uploadFileForAndroid_post() /var/www/html/preproduccion/PyENDES/application/libraries/REST_Controller.php:723
+[11-Nov-2016 15:05:37 UTC] PHP Fatal error:  Call to undefined method TransferFile::json() in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 38
+[11-Nov-2016 15:05:37 UTC] PHP Stack trace:
+[11-Nov-2016 15:05:37 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[11-Nov-2016 15:05:37 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[11-Nov-2016 15:05:37 UTC] PHP   3. call_user_func_array:{/var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:514}() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:514
+[11-Nov-2016 15:05:37 UTC] PHP   4. REST_Controller->_remap() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:514
+[11-Nov-2016 15:05:37 UTC] PHP   5. call_user_func_array:{/var/www/html/preproduccion/PyENDES/application/libraries/REST_Controller.php:723}() /var/www/html/preproduccion/PyENDES/application/libraries/REST_Controller.php:723
+[11-Nov-2016 15:05:37 UTC] PHP   6. TransferFile->uploadFileForAndroid_post() /var/www/html/preproduccion/PyENDES/application/libraries/REST_Controller.php:723
+[11-Nov-2016 21:45:45 UTC] PHP Fatal error:  Call to a member function database() on null in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 11
+[11-Nov-2016 21:45:46 UTC] PHP Stack trace:
+[11-Nov-2016 21:45:46 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[11-Nov-2016 21:45:46 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[11-Nov-2016 21:45:46 UTC] PHP   3. TransferFile->__construct() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:500
+[11-Nov-2016 21:45:46 UTC] PHP Fatal error:  Call to a member function database() on null in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 11
+[11-Nov-2016 21:45:46 UTC] PHP Stack trace:
+[11-Nov-2016 21:45:46 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[11-Nov-2016 21:45:46 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[11-Nov-2016 21:45:46 UTC] PHP   3. TransferFile->__construct() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:500
+[11-Nov-2016 21:50:11 UTC] PHP Fatal error:  Call to a member function database() on null in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 11
+[11-Nov-2016 21:50:11 UTC] PHP Stack trace:
+[11-Nov-2016 21:50:11 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[11-Nov-2016 21:50:11 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[11-Nov-2016 21:50:11 UTC] PHP   3. TransferFile->__construct() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:500
+[11-Nov-2016 21:50:11 UTC] PHP Fatal error:  Call to a member function database() on null in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 11
+[11-Nov-2016 21:50:11 UTC] PHP Stack trace:
+[11-Nov-2016 21:50:11 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[11-Nov-2016 21:50:11 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[11-Nov-2016 21:50:11 UTC] PHP   3. TransferFile->__construct() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:500
+[11-Nov-2016 22:02:50 UTC] PHP Fatal error:  Cannot use try without catch or finally in /var/www/html/preproduccion/PyENDES/application/controllers/TransferFile.php on line 36
+[11-Nov-2016 22:02:50 UTC] PHP Stack trace:
+[11-Nov-2016 22:02:50 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[11-Nov-2016 22:02:50 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[11-Nov-2016 22:03:50 UTC] PHP Fatal error:  Cannot use try without catch or finally in /var/www/html/preproduccion/PyENDES/application/controllers/TransferFile.php on line 36
+[11-Nov-2016 22:03:50 UTC] PHP Stack trace:
+[11-Nov-2016 22:03:50 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[11-Nov-2016 22:03:50 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[11-Nov-2016 22:17:32 UTC] PHP Fatal error:  Call to a member function database() on null in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 11
+[11-Nov-2016 22:17:32 UTC] PHP Stack trace:
+[11-Nov-2016 22:17:32 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[11-Nov-2016 22:17:32 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[11-Nov-2016 22:17:32 UTC] PHP   3. TransferFile->__construct() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:500
+[11-Nov-2016 22:17:32 UTC] PHP Fatal error:  Call to a member function database() on null in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 11
+[11-Nov-2016 22:17:32 UTC] PHP Stack trace:
+[11-Nov-2016 22:17:32 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[11-Nov-2016 22:17:32 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[11-Nov-2016 22:17:32 UTC] PHP   3. TransferFile->__construct() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:500
+[11-Nov-2016 22:35:45 UTC] PHP Parse error:  syntax error, unexpected 'public' (T_PUBLIC) in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 61
+[11-Nov-2016 22:35:45 UTC] PHP Stack trace:
+[11-Nov-2016 22:35:45 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[11-Nov-2016 22:35:45 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[11-Nov-2016 22:35:45 UTC] PHP Parse error:  syntax error, unexpected 'public' (T_PUBLIC) in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 61
+[11-Nov-2016 22:35:45 UTC] PHP Stack trace:
+[11-Nov-2016 22:35:45 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[11-Nov-2016 22:35:45 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[14-Nov-2016 13:23:01 UTC] PHP Fatal error:  Call to a member function database() on null in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 11
+[14-Nov-2016 13:23:01 UTC] PHP Stack trace:
+[14-Nov-2016 13:23:01 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[14-Nov-2016 13:23:01 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[14-Nov-2016 13:23:01 UTC] PHP   3. TransferFile->__construct() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:500
+[14-Nov-2016 13:23:01 UTC] PHP Fatal error:  Call to a member function database() on null in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 11
+[14-Nov-2016 13:23:01 UTC] PHP Stack trace:
+[14-Nov-2016 13:23:01 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[14-Nov-2016 13:23:01 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[14-Nov-2016 13:23:01 UTC] PHP   3. TransferFile->__construct() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:500
+[14-Nov-2016 13:23:38 UTC] PHP Fatal error:  Call to a member function database() on null in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 11
+[14-Nov-2016 13:23:38 UTC] PHP Stack trace:
+[14-Nov-2016 13:23:38 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[14-Nov-2016 13:23:38 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[14-Nov-2016 13:23:38 UTC] PHP   3. TransferFile->__construct() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:500
+[14-Nov-2016 13:23:38 UTC] PHP Fatal error:  Call to a member function database() on null in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 11
+[14-Nov-2016 13:23:38 UTC] PHP Stack trace:
+[14-Nov-2016 13:23:38 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[14-Nov-2016 13:23:38 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[14-Nov-2016 13:23:38 UTC] PHP   3. TransferFile->__construct() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:500
+[14-Nov-2016 13:31:47 UTC] PHP Fatal error:  Call to undefined function execUploadXml() in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 87
+[14-Nov-2016 13:31:47 UTC] PHP Stack trace:
+[14-Nov-2016 13:31:47 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[14-Nov-2016 13:31:47 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[14-Nov-2016 13:31:47 UTC] PHP   3. call_user_func_array:{/var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:514}() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:514
+[14-Nov-2016 13:31:47 UTC] PHP   4. REST_Controller->_remap() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:514
+[14-Nov-2016 13:31:47 UTC] PHP   5. call_user_func_array:{/var/www/html/preproduccion/PyENDES/application/libraries/REST_Controller.php:723}() /var/www/html/preproduccion/PyENDES/application/libraries/REST_Controller.php:723
+[14-Nov-2016 13:31:47 UTC] PHP   6. TransferFile->uploadFileForAndroid1_post() /var/www/html/preproduccion/PyENDES/application/libraries/REST_Controller.php:723
+[14-Nov-2016 13:31:47 UTC] PHP Fatal error:  Call to undefined function execUploadXml() in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 87
+[14-Nov-2016 13:31:47 UTC] PHP Stack trace:
+[14-Nov-2016 13:31:47 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[14-Nov-2016 13:31:47 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[14-Nov-2016 13:31:47 UTC] PHP   3. call_user_func_array:{/var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:514}() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:514
+[14-Nov-2016 13:31:47 UTC] PHP   4. REST_Controller->_remap() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:514
+[14-Nov-2016 13:31:47 UTC] PHP   5. call_user_func_array:{/var/www/html/preproduccion/PyENDES/application/libraries/REST_Controller.php:723}() /var/www/html/preproduccion/PyENDES/application/libraries/REST_Controller.php:723
+[14-Nov-2016 13:31:47 UTC] PHP   6. TransferFile->uploadFileForAndroid1_post() /var/www/html/preproduccion/PyENDES/application/libraries/REST_Controller.php:723
+[14-Nov-2016 13:32:49 UTC] PHP Fatal error:  Call to undefined function execUploadXml() in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 87
+[14-Nov-2016 13:32:49 UTC] PHP Stack trace:
+[14-Nov-2016 13:32:49 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[14-Nov-2016 13:32:49 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[14-Nov-2016 13:32:49 UTC] PHP   3. call_user_func_array:{/var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:514}() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:514
+[14-Nov-2016 13:32:49 UTC] PHP   4. REST_Controller->_remap() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:514
+[14-Nov-2016 13:32:49 UTC] PHP   5. call_user_func_array:{/var/www/html/preproduccion/PyENDES/application/libraries/REST_Controller.php:723}() /var/www/html/preproduccion/PyENDES/application/libraries/REST_Controller.php:723
+[14-Nov-2016 13:32:49 UTC] PHP   6. TransferFile->uploadFileForAndroid1_post() /var/www/html/preproduccion/PyENDES/application/libraries/REST_Controller.php:723
+[14-Nov-2016 13:32:49 UTC] PHP Fatal error:  Call to undefined function execUploadXml() in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 87
+[14-Nov-2016 13:32:49 UTC] PHP Stack trace:
+[14-Nov-2016 13:32:49 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[14-Nov-2016 13:32:49 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[14-Nov-2016 13:32:49 UTC] PHP   3. call_user_func_array:{/var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:514}() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:514
+[14-Nov-2016 13:32:49 UTC] PHP   4. REST_Controller->_remap() /var/www/html/preproduccion/PyENDES/system/core/CodeIgniter.php:514
+[14-Nov-2016 13:32:49 UTC] PHP   5. call_user_func_array:{/var/www/html/preproduccion/PyENDES/application/libraries/REST_Controller.php:723}() /var/www/html/preproduccion/PyENDES/application/libraries/REST_Controller.php:723
+[14-Nov-2016 13:32:49 UTC] PHP   6. TransferFile->uploadFileForAndroid1_post() /var/www/html/preproduccion/PyENDES/application/libraries/REST_Controller.php:723
+[14-Nov-2016 15:19:54 UTC] PHP Parse error:  syntax error, unexpected 'foreach' (T_FOREACH) in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 69
+[14-Nov-2016 15:19:54 UTC] PHP Stack trace:
+[14-Nov-2016 15:19:54 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[14-Nov-2016 15:19:54 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[14-Nov-2016 15:20:49 UTC] PHP Parse error:  syntax error, unexpected 'foreach' (T_FOREACH) in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 69
+[14-Nov-2016 15:20:49 UTC] PHP Stack trace:
+[14-Nov-2016 15:20:49 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[14-Nov-2016 15:20:49 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[14-Nov-2016 15:55:59 UTC] PHP Parse error:  syntax error, unexpected '$this' (T_VARIABLE), expecting function (T_FUNCTION) in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 10
+[14-Nov-2016 15:55:59 UTC] PHP Stack trace:
+[14-Nov-2016 15:55:59 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[14-Nov-2016 15:55:59 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[14-Nov-2016 15:57:10 UTC] PHP Parse error:  syntax error, unexpected '$this' (T_VARIABLE), expecting function (T_FUNCTION) in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 10
+[14-Nov-2016 15:57:10 UTC] PHP Stack trace:
+[14-Nov-2016 15:57:10 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[14-Nov-2016 15:57:10 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
+[14-Nov-2016 15:57:57 UTC] PHP Parse error:  syntax error, unexpected '$file' (T_VARIABLE), expecting ';' or '{' in /var/www/html/preproduccion/PyENDES/application/controllers/service/TransferFile.php on line 131
+[14-Nov-2016 15:57:57 UTC] PHP Stack trace:
+[14-Nov-2016 15:57:57 UTC] PHP   1. {main}() /var/www/html/preproduccion/PyENDES/index.php:0
+[14-Nov-2016 15:57:57 UTC] PHP   2. require_once() /var/www/html/preproduccion/PyENDES/index.php:293
