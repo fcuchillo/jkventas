@@ -45,3 +45,5 @@ class PyENDES_RegistroDao extends MasterEncuestaDao implements PyENDES_RegistroC
         return $this->data;
     }
 }
+
+//comentario
