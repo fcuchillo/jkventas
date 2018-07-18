@@ -71,57 +71,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | the query builder class.
 */
 
-
-/*$active_group = 'registro';
-$query_builder = TRUE;
-
-$db['registro'] = array(
-	'dsn'	=> '',
-	'hostname' => '172.18.1.102',
-	'username' => 'us_inei_bdendes_des',
-	'password' => 'spaz3ceSp#Fe',
-	'database' => 'INEI_BDENDES_REGISTRO',
-	'dbdriver' => 'mysqli',
-	'dbprefix' => '',
-	'pconnect' => FALSE,
-//	'db_debug' => TRUE,//(ENVIRONMENT !== 'production'),
-    'db_debug' => TRUE,//(ENVIRONMENT !== 'production'),
-	'cache_on' => FALSE,
-	'cachedir' => '',
-	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
-	'swap_pre' => '',
-	'encrypt' => FALSE,
-	'compress' => FALSE,
-	'stricton' => FALSE,
-	'failover' => array(),
-	'save_queries' => TRUE
-);
-
-$active_group = 'registro_consistencia';
-$db['registro_consistencia'] = array(
-	'dsn'	=> '',
-	'hostname' => '172.18.1.102',
-	'username' => 'us_inei_bdendes_des',
-	'password' => 'spaz3ceSp#Fe',
-	'database' => 'INEI_BDENDES_REGISTRO_CONSISTENCIA',
-	'dbdriver' => 'mysqli',
-	'dbprefix' => '',
-	'pconnect' => FALSE,
-//	'db_debug' => TRUE,//(ENVIRONMENT !== 'production'),
-    'db_debug' => TRUE,//(ENVIRONMENT !== 'production'),
-	'cache_on' => FALSE,
-	'cachedir' => '',
-	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
-	'swap_pre' => '',
-	'encrypt' => FALSE,
-	'compress' => FALSE,
-	'stricton' => FALSE,
-	'failover' => array(),
-	'save_queries' => TRUE
-);
-*/
 $active_group = 'jkventas';
 $db['jkventas'] = array(
 	'dsn'	=> '',
@@ -132,8 +81,8 @@ $db['jkventas'] = array(
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'developing'),
- //   'db_debug' => TRUE,
+	//'db_debug' => (ENVIRONMENT !== 'developing'),
+        'db_debug' => TRUE,
 	'cache_on' => FALSE,
 	'cachedir' => '',
 	'char_set' => 'utf8',
@@ -146,28 +95,4 @@ $db['jkventas'] = array(
 	'save_queries' => TRUE
 );
 
-/*
-$active_groupthree = 'registroProduccion';
-$db['registroProduccion'] = array(
-	'dsn'	=> '',
-	'hostname' => '172.18.1.11',
-	'username' => 'us_bdendes_registro_web',
-	'password' => 'W3bEnd3$Reg2015',
-	'database' => 'INEI_BDENDES_REGISTRO',
-	'dbdriver' => 'mysqli',
-	'dbprefix' => '',
-	'pconnect' => FALSE,
-//	'db_debug' => TRUE,//(ENVIRONMENT !== 'production'),
-    'db_debug' => (ENVIRONMENT !== 'production'),
-	'cache_on' => FALSE,
-	'cachedir' => '',
-	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
-	'swap_pre' => '',
-	'encrypt' => FALSE,
-	'compress' => FALSE,
-	'stricton' => FALSE,
-	'failover' => array(),
-	'save_queries' => TRUE
-);
-*/
+require_once 'eloquent.php';

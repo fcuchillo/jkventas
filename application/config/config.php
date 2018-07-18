@@ -23,8 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-
-$config['base_url'] = 'http://localhost:8080/jkventas/';
+$config['base_url']='';
+//$config['base_url'] = 'http://localhost:8080/jkventas/';
 //$config['base_url'] = 'http://webinei.inei.gob.pe/PyENDES/';
 //$config['base_url'] = 'http://webinei.inei.gob.pe/PyENDES/';
 
@@ -39,7 +39,7 @@ $config['base_url'] = 'http://localhost:8080/jkventas/';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = '';
+$config['index_page'] = 'index.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -142,7 +142,7 @@ $config['subclass_prefix'] = 'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = FALSE;
+$config['composer_autoload'] = 'vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -320,7 +320,7 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = '%GOB.INEI.PyENDES:ProjectBlue%';
+$config['encryption_key'] = '';
 
 /*
 |--------------------------------------------------------------------------
