@@ -72,3 +72,6 @@ class Usuario extends Endes_controller {
       //header ("Location: http://webinei.inei.gob.pe/PyENDES/");
   }
 }
+
+
+//hola mundo cruel
