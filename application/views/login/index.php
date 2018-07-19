@@ -7,7 +7,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>ENDES | Log in</title>
+  <title>jkventas | Log in</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/dist/css/AdminLTE.min.css">
@@ -17,8 +17,8 @@
 <div class="login-box">
   <div class="login-box-body">
     <p class="login-box-msg">Iniciar Session</p>
-    <!--<form action="Usuario/login" method="POST" name="frmLogeoUsuario">-->
-    <form action="Encuesta/Cobertura/index" method="POST" name="frmLogeoUsuario">
+    <form action="Login/login" method="POST" name="frmLogeoUsuario">
+    <!--<form action="Encuesta/Cobertura/index" method="POST" name="frmLogeoUsuario">-->
       <div class="form-group has-feedback">
           <input type="text" class="form-control" placeholder="Usuario" name="usuario" id="usuario" required="true" value=""><span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
@@ -46,13 +46,6 @@
       increaseArea: '20%'
     });
   });
-
-  function acceder() {
-    var tokenPass = sha1(<?=$this->session->userdata['tokenSession']['tokenSessionPass']; ?> + $('#clave').val());
-    $('#clave').val(tokenPass);
-    return true;
-  }
-
 </script>
 </body>
 </html>

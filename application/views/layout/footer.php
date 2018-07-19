@@ -21,8 +21,6 @@
 <script src="<?php echo base_url();?>assets/dist/js/demo.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/plugins/alertify/alertify.min.js"></script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8uHaaP9mi29M9RL9XmUjof_0OMH_pSlU" type="text/javascript"></script>
-<!-- PyEndes script -->
 <script src="<?php echo base_url();?>assets/content/js/loading.js" type="text/javascript" ></script>
 
 </body>

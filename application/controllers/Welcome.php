@@ -20,8 +20,8 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$countries = Usuario::where('usuario_id','=',1)->get();
-                //var_dump($countries);
+		//$countries = Usuario::where('usuario_id','=',1)->get();
+                $countries = Usuario::all();
 		print_r($countries->toArray());
 		// $this->load->view('welcome_message');
 	}
