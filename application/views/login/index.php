@@ -1,8 +1,8 @@
 <html>
 <?php
-//if (isset($this->session->userdata["session_user"])) {
-//    redirect('login/authentication','refresh');
-//}
+if (isset($this->session->userdata["session_user"])) {
+    redirect('login/authentication','refresh');
+}
 ?>
 <head>
   <meta charset="utf-8">

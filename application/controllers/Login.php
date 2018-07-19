@@ -3,7 +3,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends jkventas_controller {
-    private $ModelEncuesta;
     public function __construct() {
         parent::__construct();
         $this->load->library(array('session','form_validation'));
@@ -38,11 +37,11 @@ class Login extends jkventas_controller {
 
         //$data_user=$this->UsuarioModel->getAllMenubyUsuario($usuario);
         $session_data = array(
-          'usuario'       => $user[0]->USUARIO,
-          'nombre'        => $user[0]->USUARIO,
-          'area'          => $user[0]->ESTADO,
-          'apellidos'     => $user[0]->USUARIO,
-          'clave'         => $user[0]->CLAVE
+          'usuario'       => $user[0]->usuario,
+          'nombre'        => $user[0]->usuario,
+          'area'          => $user[0]->estado,
+          'apellidos'     => $user[0]->usuario,
+          'clave'         => $user[0]->clave
         );
         
         $data["title"]= 'Welcome';
@@ -58,7 +57,7 @@ class Login extends jkventas_controller {
       }*/ 
    }
     public function authentication() {     
-        $this->VerificarsiAccedeDesdePath();
+//        $this->VerificarsiAccedeDesdePath();
         $data['title'] = 'login'; 
         $this->load->view('layout/header',$data);
         $this->load->view('layout/menu', $this->CargadoDelMenu());
