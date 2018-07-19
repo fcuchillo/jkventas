@@ -3,7 +3,7 @@
     <div class="pull-right hidden-xs">
         <b>Version</b> 1.0.0
     </div>
-    <strong>Encuesta Demgráfica y de Salud Familiar – ENDES.</strong>
+    <strong>jkventas team – copyright ® y ©</strong>
 </footer>
 
 </div>

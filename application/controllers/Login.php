@@ -47,9 +47,9 @@ class Login extends jkventas_controller {
         
         $data["title"]= 'Welcome';
         $this->session->set_userdata('session_user', $session_data);
-        //$this->load->view('layout/header',$data);
-        $this->load->view('layout/header');
-        $this->load->view('layout/menu');
+        $this->load->view('layout/header',$data);
+        //$this->load->view('layout/header');
+        $this->load->view('layout/menu',$this->CargadoDelMenu());
         $this->load->view('layout/body');
         $this->load->view('layout/footer');
      /* } else {

@@ -1,18 +1,18 @@
 <?php 
+
 class jkventas_controller extends CI_Controller{
 	public $datosparamenu;
 	  public function __construct() {
     	parent::__construct();
-            //$this->load->model(array('PyENDES_EncuestaModel','PyENDES_RegistroModel'));
+            $this->load->model(array('Menu'));
 	  }
-	  public function CargadoDelMenu(){
-	  /*if(isset($_SESSION['session_user'])) { 
-    	  $usuario =$this->session->userdata['session_user']['usuario'];
-          $this->datosparamenu['menu']=$this->PyENDES_EncuestaModel->ObtenerMenuparaUsuario($usuario);
-          $this->datosparamenu['modulos']= $this->PyENDES_EncuestaModel->ObtenerTodosModulos($usuario);
-            }
-            return $this->datosparamenu;*/
-	  }
+	public function CargadoDelMenu(){
+	  if(isset($_SESSION['session_user'])) { 
+            $usuario =$this->session->userdata['session_user']['usuario'];
+            $this->datosparamenu['menu']= Menu::all();
+          }
+          return $this->datosparamenu;
+	}
       public function CargadoMenuPorusuario(){
         /*if(isset($_SESSION['session_user'])) { 
           $usuario =$this->session->userdata['session_user']['usuario'];
