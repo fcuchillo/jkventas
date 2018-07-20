@@ -33,28 +33,25 @@ class Login extends jkventas_controller {
 //      $claveBD = $this->UsuarioModel->obtenerClave($usuario);
       
 //      $tokenSesionPassTmp = sha1($tokenSesionPass.$claveBD[0]->CLAVE);
-
-
-        //$data_user=$this->UsuarioModel->getAllMenubyUsuario($usuario);
+    if(isset($user) && isset($user[0]->usuario)){
         $session_data = array(
           'usuario'       => $user[0]->usuario,
           'nombre'        => $user[0]->usuario,
           'area'          => $user[0]->estado,
           'apellidos'     => $user[0]->usuario,
-          'clave'         => $user[0]->clave
+          'clave'         => $user[0]->clave,
+          'usuario_id'    => $user[0]->usuario_id
         );
-        
         $data["title"]= 'Welcome';
         $this->session->set_userdata('session_user', $session_data);
         $this->load->view('layout/header',$data);
-        //$this->load->view('layout/header');
         $this->load->view('layout/menu',$this->CargadoDelMenu());
         $this->load->view('layout/body');
         $this->load->view('layout/footer');
-     /* } else {
-        header ("Location: http://webinei.inei.gob.pe/desarrollo/PyENDES/");
-        //header ("Location: http://webinei.inei.gob.pe/PyENDES/");
-      }*/ 
+     } 
+      else {
+        header ("Location: ".base_url());
+      }
    }
     public function authentication() {     
 //        $this->VerificarsiAccedeDesdePath();
@@ -71,8 +68,8 @@ class Login extends jkventas_controller {
       $this->session->unset_userdata('apellidos');
       $this->session->unset_userdata('clave');
       $this->session->sess_destroy();
-      header ("Location: http://localhost:8080/jkventas/");
-  }
+      header ("Location: ".base_url());
+    }
 }
 
 

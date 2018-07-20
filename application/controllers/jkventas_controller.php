@@ -4,13 +4,27 @@ class jkventas_controller extends CI_Controller{
 	public $datosparamenu;
 	  public function __construct() {
     	parent::__construct();
-            $this->load->model(array('Menu'));
+            $this->load->model(array('Menu','Usuariopor_rol','Menu_por_rol'));
 	  }
 	public function CargadoDelMenu(){
 	  if(isset($_SESSION['session_user'])) { 
             $usuario =$this->session->userdata['session_user']['usuario'];
-            $this->datosparamenu['menu']= Menu::all();
-          }
+            $usuario_id =$this->session->userdata['session_user']['usuario_id'];
+            $rol= Usuariopor_rol::where('usuario_id','=',$usuario_id)->first();
+//          $menu_rol= Menu_por_rol::all();
+//          $menu_rol= Menu_por_rol::select('menu_id')->where('rol_id','=',$rol->rol_id)->get();
+//          foreach ($menu_rol as $v){
+//                print_r($v->menu_id);
+//            }
+       /*     $this->datosparamenu['menu_padre']= Menu::where(array('padre_id' => NULL))
+                                                      ->whereIn('menu_id',function($query){
+                                                       $menu_rol= Menu_por_rol::select('menu_id')->where('rol_id','=',1)->get();
+                                                       $query->select('menu_id')->from($menu_rol);
+                                                      })->get();
+            $this->datosparamenu['menu_hijo']= Menu::all();*/
+            $this->datosparamenu['menu_padre']= Menu::where(array('padre_id' => NULL))->get();
+            $this->datosparamenu['menu_hijo']= Menu::all();
+            }
           return $this->datosparamenu;
 	}
       public function CargadoMenuPorusuario(){

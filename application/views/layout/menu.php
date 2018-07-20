@@ -16,21 +16,27 @@
         <li class="header">MENU DE NAVEGACIÓN</li>
 
 <?php
+if(isset($menu_hijo)){
+    foreach ($menu_padre as $padre){
             echo '<li class="treeview ">';
             echo '<a href="#">';
-            echo '<i class="fa fa-check-circle"></i> <span>ADMIN</span>';
+            echo '<i class="fa fa-check-circle"></i> <span>'.$padre->titulo.'</span>';
             echo '<span class="pull-right-container">';
             echo '<i class="fa fa-angle-left pull-right"></i>';
             echo '</span>';
             echo '</a>';
             echo '<ul class="treeview-menu">';
-            if(isset($menu)){
-                    foreach($menu as $item){
-                        echo '<li class=""><a href="'.base_url().$item->link.'"><i class="fa fa-circle-o"></i>'.utf8_encode($item->titulo).'</a></li>';    
+            if(isset($menu_hijo)){
+                    foreach($menu_hijo as $item){
+                        if($padre->menu_id==$item->padre_id){
+                            echo '<li class=""><a href="'.base_url().$item->link.'"><i class="fa fa-circle-o"></i>'.utf8_encode($item->titulo).'</a></li>';    
+                        }
                     }     
                 }
             echo '</ul>';
             echo '</li>';
+    }
+}
 ?>      
 </ul>
     </section>
