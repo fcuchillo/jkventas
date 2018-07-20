@@ -2,11 +2,11 @@
 <div class="content-wrapper">
     <!--Region Section Header-->
     <section class="content-header">
-        <h1>Cobertura</h1>
+        <h1>Productos</h1>
         <ol class="breadcrumb">
             <li><a href="<?=base_url()?>login/authentication"><i class="fa fa-dashboard"></i> Inicio</a></li>
-            <li><a href="#">Cobertura</a></li>
-            <li class="active">Cobertura</li>
+            <li><a href="#">Productos</a></li>
+            <li class="active">Productos</li>
         </ol>
     </section>
     
@@ -38,43 +38,61 @@
                             </select>
                         </div>
                         
-                        <div class="col-md-1">
+                        <div class="col-md-1" style="display: inline-block; width: 11% ">
                             <label class="PyENDES-Label">Mes</label>
-                            <select class="form-control input-sm" id="mes" name="mes">
-                                <option value="00">Todos</option>
-                            </select>
+                            <?php
+                                echo '<select class="form-control input-sm" id="mes" name="mes"><option value="0">Todos</option>';
+                                foreach ($mes as $value) {?>
+                                    <?php echo '<option value="'.$value->mes_id.'" >'.$value->nombre.'</option>';
+                                }
+                                echo '</select>';
+                            ?> 
                         </div>
                         
-                        <div class="col-md-2">
+                        <div class="col-md-1" style="display: inline-block; width: 11% ">
+                            <label class="PyENDES-Label">Estado</label>                            
+                            <?php
+                                echo '<select class="form-control input-sm" id="estado" name="estado"><option value="0">Todos</option>';
+                                foreach ($estado as $value) {?>
+                                    <?php echo '<option value="'.$value->estado_id.'" >'.$value->descripcion.'</option>';
+                                }
+                                echo '</select>';
+                            ?>                                
+                        </div>
+                        
+                        <div class="col-md-2" style="display: inline-block; width: 15% ">
                             <label class="PyENDES-Label">Marca</label>
-                            <select class="form-control input-sm" id="marca" name="marca">
-                                <option value="0">Todos</option>
-                                <option value="1">Conglomerado</option>
-                                <option value="2">Vivienda</option>
-                                <option value="3">Hogar</option>
-                            </select>
+                            <?php
+                                echo '<select class="form-control input-sm" id="marca" name="marca"><option value="0">Todos</option>';
+                                foreach ($marca as $value) {?>
+                                    <?php echo '<option value="'.$value->marca_id.'" >'.$value->nombre.'</option>';
+                                }
+                                echo '</select>';
+                            ?>                    
                         </div>
                         
-                        <div class="col-md-2">
+                        <div class="col-md-2" style="display: inline-block; width: 15% ">
                             <label class="PyENDES-Label">Categoria</label>
-                            <select class="form-control input-sm" id="categoria" name="categoria">
-                                <option value="0">Todos</option>
-                                <option value="1">Transferidos</option>
-                                <option value="2">No Transferidos</option>
-                            </select>
+                            <?php
+                                echo '<select class="form-control input-sm" id="categoria" name="categoria"><option value="0">Todos</option>';
+                                foreach ($categoria as $value) {?>
+                                    <?php echo '<option value="'.$value->categoria_id.'" >'.$value->nombre.'</option>';
+                                }
+                                echo '</select>';
+                            ?>  
                         </div>
                         
-                        <div class="col-md-1"> 
+                        <div class="col-md-1" style="display: inline-block; width: 20% "> 
                             <label class="PyENDES-Label">Nombre</label>
                             <input type="text" class="form-control input-sm" id="nombre" name="nombre" placeholder="">
                         </div> 
                         
                         <div class="col-md-2">
-                            <div style="display: inline-block; width: 49% ">
+                            <div style="display: inline-block; width: 39% ">
                                 <label style="visibility: collapse">Buscar</label>
                                 <button type="button" class="btn btn-block btn-primary btn-sm" id="btnBuscar">Buscar</button>
                             </div>
-                            <div style="display: inline-block; width: 49%">
+                            <div style="display: inline-block; width: 39%">
                                 <label style="visibility: collapse">Limpiar</label>  
                                 <button type="submit" class="btn btn-block btn-primary btn-sm" id="btnLimpiar">Limpiar</button>
                             </div>
@@ -89,11 +107,15 @@
         <!--Region Box Result-->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Resultado</h3>
+<!--                <h3 class="box-title">Lista de Productos</h3>-->
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
                     <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
                 </div>
+                
+                <div class="col-md-2" style="display: inline-block; width: 7% " >                                            
+                    <button type="button" class="btn btn-block btn-primary btn-sm" id="btnAgregar">Agregar</button>                    
+                </div>                
             </div>
             
             <div class="box-body" id="divContenedorProducto" style="display: none" >
@@ -105,7 +127,10 @@
                                 <table id="tblProducto" class="table table-sm table-condensed table-bordered" name="NombreReporte004">
                                     <thead id="headCoberturaConglomerado">
                                         <tr class="info">
-                                            <th><center>PRODUCTO_ID</center></th>
+                                            <th><center>MODIFICAR</center></th>
+                                            <th><center>ELIMINAR</center></th>
+                                            <th><center>MES</center></th>            
+                                            <th><center>PRODUCTO</center></th>
                                             <th><center>MARCA</center></th>
                                             <th><center>CATEGORIA</center></th>
                                             <th><center>NOMBRE</center></th>
@@ -115,6 +140,7 @@
                                             <th><center>PRECIO VENTA</center></th>
                                             <th><center>TALLA</center></th>
                                             <th><center>COLOR</center></th>
+                                            <th><center>Estado</center></th>
                                             <th><center>OBSERVACION</center></th>
                                         </tr>            
                                     </thead>
@@ -123,17 +149,20 @@
                                         foreach ($producto as $value) {
                                             echo 
                                             '<tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td>'.$value->mes.'</td>
                                                 <td>'.$value->producto_id.'</td>
-                                                <td>'.$value->marca_id.'</td>
-                                                <td>'.$value->categoria_id.'</td>
-                                                <td>'.$value->nombre.'</td>
-                                                <td>'.$value->producto_id.'</td>
+                                                <td>'.$value->marca.'</td>
+                                                <td>'.$value->categoria.'</td>
+                                                <td>'.$value->nombre.'</td>                                                
                                                 <td>'.$value->descripcion.'</td>
                                                 <td>'.$value->fecha_compra.'</td>
                                                 <td>'.$value->precio_compra.'</td>
                                                 <td>'.$value->precio_venta.'</td>
                                                 <td>'.$value->talla.'</td>
                                                 <td>'.$value->color.'</td>
+                                                <td>'.$value->estado.'</td>
                                                 <td>'.$value->observacion.'</td>                                                    
                                             </tr>';
                                         }
