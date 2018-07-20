@@ -27,17 +27,17 @@ class jkventas_controller extends CI_Controller{
             }
           return $this->datosparamenu;
 	}
-      public function CargadoMenuPorusuario(){
-        /*if(isset($_SESSION['session_user'])) { 
-          $usuario =$this->session->userdata['session_user']['usuario'];
-         return $this->PyENDES_EncuestaModel->ObtenerMenuparaUsuario($usuario);
-         }*/
+      public function CargarMenuPadre(){
+        if(isset($_SESSION['session_user'])) { 
+          
+         return Menu::where(array('padre_id' => NULL))->get();
+         }
       }
-      public function CargadoModulos(){
-        /*if(isset($_SESSION['session_user'])) { 
+      public function CargarMenuHijo(){
+        if(isset($_SESSION['session_user'])) { 
           $usuario =$this->session->userdata['session_user']['usuario'];
-         return $this->PyENDES_EncuestaModel->ObtenerTodosModulos($usuario);
-         }*/
+         return Menu::all();
+         }
       }
       /*public function VerificarsiAccedeDesdePath(){
         //Validamos si es el path principal ? , si lo es deje accesar desde url

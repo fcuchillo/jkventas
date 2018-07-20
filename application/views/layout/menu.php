@@ -16,7 +16,7 @@
         <li class="header">MENU DE NAVEGACIÓN</li>
 
 <?php
-if(isset($menu_hijo)){
+if(isset($menu_padre)){
     foreach ($menu_padre as $padre){
             echo '<li class="treeview ">';
             echo '<a href="#">';
