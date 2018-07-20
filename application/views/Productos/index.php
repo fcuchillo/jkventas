@@ -264,6 +264,7 @@ function buscarCoberturasConglomerado(){
             },
         },
         columns:[ 
+            
             { data:"mes",                   class:"textFont text-left"/*,      width: "20" */    },
             { data:"producto_id",           class:"textFont text-left"/*,      width: "100"*/    },
             { data:"marca",                 class:"textFont text-left"/*,      width: "100"*/    },
