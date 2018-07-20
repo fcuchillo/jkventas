@@ -118,29 +118,29 @@
                 </div>                
             </div>
             
-            <div class="box-body" id="divContenedorProducto" style="display: none" >
+            <div class="box-body" id="divContenedorProducto">
                 <div class="row">
                     <div class="col-sm-12">
                         <center><label style="visibility: collapse">Espacio : </label></center>
                         <!--Region Report-->
                             
-                                <table id="tblProducto" class="table table-sm table-condensed table-bordered" name="NombreReporte004">
+                                <table id="tblProducto" class="table table-sm table-condensed table-bordered" name="tblProducto">
                                     <thead id="headCoberturaConglomerado">
                                         <tr class="info">
-                                            <th><center>MODIFICAR</center></th>
-                                            <th><center>ELIMINAR</center></th>
+<!--                                            <th><center>MODIFICAR</center></th>
+                                            <th><center>ELIMINAR</center></th>-->
                                             <th><center>MES</center></th>            
                                             <th><center>PRODUCTO</center></th>
                                             <th><center>MARCA</center></th>
                                             <th><center>CATEGORIA</center></th>
                                             <th><center>NOMBRE</center></th>
-                                            <th><center>DESCRIPCION</center></th>
-                                            <th><center>FECHA COMPRA</center></th>
-                                            <th><center>PRECIO COMRPO</center></th>
-                                            <th><center>PRECIO VENTA</center></th>
                                             <th><center>TALLA</center></th>
-                                            <th><center>COLOR</center></th>
-                                            <th><center>Estado</center></th>
+                                            <th><center>COLOR</center></th>                                            
+                                            <th><center>PRECIO COMRPO</center></th>
+                                            <th><center>PRECIO VENTA</center></th>                                            
+                                            <th><center>FECHA COMPRA</center></th>
+                                            <th><center>ESTADO</center></th>
+                                            <th><center>DESCRIPCION</center></th>
                                             <th><center>OBSERVACION</center></th>
                                         </tr>            
                                     </thead>
@@ -148,21 +148,19 @@
                                         <?php
                                         foreach ($producto as $value) {
                                             echo 
-                                            '<tr>
-                                                <td></td>
-                                                <td></td>
+                                            '<tr>                                          
                                                 <td>'.$value->mes.'</td>
                                                 <td>'.$value->producto_id.'</td>
                                                 <td>'.$value->marca.'</td>
                                                 <td>'.$value->categoria.'</td>
                                                 <td>'.$value->nombre.'</td>                                                
-                                                <td>'.$value->descripcion.'</td>
-                                                <td>'.$value->fecha_compra.'</td>
-                                                <td>'.$value->precio_compra.'</td>
-                                                <td>'.$value->precio_venta.'</td>
                                                 <td>'.$value->talla.'</td>
                                                 <td>'.$value->color.'</td>
+                                                <td>'.$value->precio_compra.'</td>
+                                                <td>'.$value->precio_venta.'</td>                                                
+                                                <td>'.$value->fecha_compra.'</td>
                                                 <td>'.$value->estado.'</td>
+                                                <td>'.$value->descripcion.'</td>
                                                 <td>'.$value->observacion.'</td>                                                    
                                             </tr>';
                                         }
@@ -187,51 +185,64 @@
 <script>
     
 var myTable;
+var anio=null;
+var mes=null;
+var estado=null;
+var marca=null;
+var categoria=null
+var nombre=null;
 
 $(document).ready(function () {
 
-    $('#divContenedorProducto').css("display", "");
-    $('#divContenedorVivienda').css("display", "none");
-    $('#divContenedorHogar').css("display", "none");
-
+  
     $('#btnBuscar').on('click', function() {
-        if($('#nivel').val() === "1") { 
-            buscarCoberturasConglomerado(); 
-            $('#divContenedorProducto').css("display", "");
-            $('#divContenedorVivienda').css("display", "none");
-            $('#divContenedorHogar').css("display", "none");
-        }
-        if($('#nivel').val() === "2") { 
-            buscarCoberturasVivienda();
-            $('#divContenedorProducto').css("display", "none");
-            $('#divContenedorVivienda').css("display", "");
-            $('#divContenedorHogar').css("display", "none");
-        }
-        if($('#nivel').val() === "3") { 
-            buscarCoberturasHogar();
-            $('#divContenedorProducto').css("display", "none");
-            $('#divContenedorVivienda').css("display", "none");
-            $('#divContenedorHogar').css("display", "");
-        }
+     ObtenerParametros();
+    buscarCoberturasConglomerado();
     });
-
-    $('#mesIni').change(function(evento) {
-        cargarMesesFin();
-    });
-
-    $('#nivel').change(function(evento) {
-        cargarEstado();
-    })
+//    $('#mesIni').change(function(evento) {
+//        cargarMesesFin();
+//    });
+//
+//    $('#nivel').change(function(evento) {
+//        cargarEstado();
+//    })
 
     $('#btnLimpiar').on('click', function(){        
         $('#mes').append('<option value="0" selected="selected">Todos</option>');
+        $('#estado').val(0);
         $('#marca').val(0);
         $('#categoria').val(0);
         $("#nombre").val("");            
     });
 });
 
+function ObtenerParametros(){
+    anio=$('#anio').val();
+    mes=$('#mes').val();
+    estado= $('#estado').val();
+    marca= $('#marca').val();
+    categoria=$('#categoria').val();
+    nombre=$("#nombre").val();   
+}
 function buscarCoberturasConglomerado(){
+        
+//    $.ajax({
+//        type : 'post',
+//        url : 'Productos/ObtenerProductos',
+//        data:{nombre:nombre},
+//        beforeSend: function(){
+//        },
+//        success : function(result) {
+//            $('#modal-new').modal('hide');
+//            getAllParameter_manzana();
+//            cargar_tabla_manzana();
+//            cargar_tabla_manzana_detalle();
+//        },
+//        error: function(result, status) {
+//            alert('Error ' + status + ' al cargar la información,<br>Intente nuevamente.')
+//        }
+//    });  
+
     jsShowWindowLoad();
     myTable = $('#tblProducto').DataTable({
         initComplete: function () {
@@ -240,166 +251,36 @@ function buscarCoberturasConglomerado(){
         scrollY: 450,
         scrollX: true,
         ajax: {
-            url: "../Cobertura/obtenerReporte004",
+            url: "../Productos/ObtenerProductos",
             dataSrc: "",
             type:"POST",
             data: { 
-                anio            : $("#anio").val(), 
-                mesIni          : $("#mesIni").val(), 
-                mesFin          : $("#mesFin").val(), 
-                equipo          : $("#equipo").val(), 
-                nivel           : $("#nivel").val(), 
-                estado          : $("#estado").val(), 
-                conglomerado    : $("#conglomerado").val(),
-                DNI             : $("#clave") .val()
+                anio        : anio, 
+                mes         : mes, 
+                estado      : estado, 
+                marca       : marca,                 
+                categoria   : categoria,                 
+                nombre      : nombre
             },
         },
         columns:[ 
-            { data:"ORDEN",                 class:"textFont text-left"/*,      width: "20" */    },
-            { data:"DEPARTAMENTO",          class:"textFont text-left"/*,      width: "100"*/    },
-            { data:"EQUIPO",                class:"textFont text-left"/*,      width: "100"*/    },
-            { data:"DNI",                   class:"textFont text-left"/*,      width: "80" */    },
-            { data:"SUPERVISORA",           class:"textFont text-left"/*,      width: "200"*/    },
-            { data:"MES",                   class:"textFont text-left"/*,      width: "100"*/    },
-            { data:"AREA",                  class:"textFont text-left"/*,      width: "60" */    },
-            { data:"CONGLOMERADO",          class:"textFont text-left"/*,      width: "40" */    },
-            { data:"ESTADO",                class:"textFont text-left"/*,      width: "40" */    },
-            { data:"CAB1",                  class:"textFont text-left"/*,      width: "40" */    },
-            { data:"CAB2",                  class:"textFont text-left"/*,      width: "40" */    }
+            { data:"mes",                   class:"textFont text-left"/*,      width: "20" */    },
+            { data:"producto_id",           class:"textFont text-left"/*,      width: "100"*/    },
+            { data:"marca",                 class:"textFont text-left"/*,      width: "100"*/    },
+            { data:"categoria",             class:"textFont text-left"/*,      width: "80" */    },
+            { data:"nombre",                class:"textFont text-left"/*,      width: "200"*/    },
+            { data:"talla",                 class:"textFont text-left"/*,      width: "40" */    },
+            { data:"color",                 class:"textFont text-left"/*,      width: "40" */    },            
+            { data:"precio_compra",         class:"textFont text-left"/*,      width: "40" */    },            
+            { data:"precio_venta",          class:"textFont text-left"/*,      width: "40" */    },
+            { data:"fecha_compra",          class:"textFont text-left"/*,      width: "60" */    },
+            { data:"estado",                class:"textFont text-left"/*,      width: "40" */    },            
+            { data:"descripcion",           class:"textFont text-left"/*,      width: "100"*/    },
+            { data:"observacion",           class:"textFont text-left"/*,      width: "40" */    }
         ],
         bDestroy: true
     });
 }
 
-function buscarCoberturasVivienda(){
-    jsShowWindowLoad();
-    myTable = $('#tblCoberturaVivienda').DataTable({
-        initComplete: function () {
-            jsRemoveWindowLoad();
-        },
-        scrollY: 450,
-        scrollX: true,
-        ajax: {
-            url: "../Cobertura/obtenerReporte004",
-            dataSrc: "",
-            type:"POST",
-            data: { 
-                anio            : $("#anio").val(), 
-                mesIni          : $("#mesIni").val(), 
-                mesFin          : $("#mesFin").val(), 
-                equipo          : $("#equipo").val(), 
-                nivel           : $("#nivel").val(), 
-                estado          : $("#estado").val(), 
-                conglomerado    : $("#conglomerado").val(),
-                DNI             : $("#clave") .val()
-            },
-        },
-        columns:[ 
-            { data:"ORDEN",                 class:"textFont text-left"/*,      width: "20"  */   },
-            { data:"DEPARTAMENTO",          class:"textFont text-left"/*,      width: "100" */   },
-            { data:"EQUIPO",                class:"textFont text-left"/*,      width: "35"  */   },
-            { data:"DNI",                   class:"textFont text-left"/*,      width: "80"  */   },
-            { data:"SUPERVISORA",           class:"textFont text-left"/*,      width: "200" */   },
-            { data:"MES",                   class:"textFont text-left"/*,      width: "100" */   },
-            { data:"AREA",                  class:"textFont text-left"/*,      width: "60"  */   },
-            { data:"CONGLOMERADO",          class:"textFont text-left"/*,      width: "40"  */   },
-            { data:"CAB1",                  class:"textFont text-left"/*,      width: "40"  */   },
-            { data:"CAB2",                  class:"textFont text-left"/*,      width: "40"  */   },
-            { data:"CAB3",                  class:"textFont text-left"/*,      width: "40"  */   },
-            { data:"CAB4",                  class:"textFont text-left"/*,      width: "40"  */   },
-            { data:"CAB5",                  class:"textFont text-left"/*,      width: "40"  */   },
-            { data:"CAB6",                  class:"textFont text-left"/*,      width: "40"  */   }
-        ],
-        bDestroy: true
-    });
-}
-
-function buscarCoberturasHogar(){
-    jsShowWindowLoad();
-    myTable = $('#tblCoberturaHogar').DataTable({
-        initComplete: function () {
-            jsRemoveWindowLoad();
-        },
-        scrollY: 450,
-        scrollX: true,
-        ajax: {
-            url: "../Cobertura/obtenerReporte004",
-            dataSrc: "",
-            type:"POST",
-            data: { 
-                anio            : $("#anio").val(), 
-                mesIni          : $("#mesIni").val(), 
-                mesFin          : $("#mesFin").val(), 
-                equipo          : $("#equipo").val(), 
-                nivel           : $("#nivel").val(), 
-                estado          : $("#estado").val(), 
-                conglomerado    : $("#conglomerado").val(),
-                DNI             : $("#clave") .val()
-            },
-        },
-        columns:[ 
-            { data:"ORDEN",                 class:"textFont text-left"/*,      width: "20"  */   },
-            { data:"DEPARTAMENTO",          class:"textFont text-left"/*,      width: "100" */   },
-            { data:"EQUIPO",                class:"textFont text-left"/*,      width: "35"  */   },
-            { data:"DNI",                   class:"textFont text-left"/*,      width: "80"  */   },
-            { data:"SUPERVISORA",           class:"textFont text-left"/*,      width: "200" */   },
-            { data:"MES",                   class:"textFont text-left"/*,      width: "100" */   },
-            { data:"AREA",                  class:"textFont text-left"/*,      width: "60"  */   },
-            { data:"CONGLOMERADO",          class:"textFont text-left"/*,      width: "40"  */   },
-            { data:"CAB1",                  class:"textFont text-left"/*,      width: "40"  */   },
-            { data:"CAB2",                  class:"textFont text-left"/*,      width: "40"  */   },
-            { data:"CAB3",                  class:"textFont text-left"/*,      width: "40"  */   },
-            { data:"CAB4",                  class:"textFont text-left"/*,      width: "40"  */   },
-            { data:"CAB5",                  class:"textFont text-left"/*,      width: "40"  */   },
-            { data:"CAB6",                  class:"textFont text-left"/*,      width: "40"  */   },
-            { data:"CAB7",                  class:"textFont text-left"/*,      width: "40"  */   }
-        ],
-        bDestroy: true
-    });
-}
-
-function cargarMesesFin() {
-    var mes = $('#mesIni').val();
-    $.ajax({
-        type : 'GET',
-        dataType : 'JSON',
-        url : '../ControlTransferencia/obtenerMeses',
-        success : function(result) {
-            $('#mesFin').empty();
-            $('#mesFin').append('<option value="0" selected="selected">Todos</option>');
-            $.each(result, function(j, item) {
-                if (item.MES >= mes && mes != 0)
-                    $('#mesFin').append($('<option>').text(item.DESCRIPCION).attr('value', item.MES));
-            });
-        },
-        error : function(xhr, ajaxOptions, thrownError) {
-            alert(xhr.status + ' ' + thrownError);
-        }
-    });
-}
-
-function cargarEstado(){
-    var nivel = $('#nivel').val();
-
-    if(nivel !== "3") {
-        if(nivel === "1") {
-            $('#estado').empty();
-            $('#estado').append('<option value="0" selected="selected">Todos</option>');
-            $('#estado').append('<option value="1" >Transferidos</option>');
-            $('#estado').append('<option value="2" >No Transferidos</option>');
-        }
-        if(nivel === "2") {
-            $('#estado').empty();
-            $('#estado').append('<option value="0" selected="selected">Todos</option>');
-            $('#estado').append('<option value="1" >Con GPS</option>');
-            $('#estado').append('<option value="2" ">Sin GPS</option>');
-        }
-    }
-    else {
-        $('#estado').empty();
-        $('#estado').append('<option value="0" selected="selected">Todos</option>');
-        $("#estado").prop('disabled', 'disabled');
-    }
-}
 </script>
 <!--End Region Scripts-->
