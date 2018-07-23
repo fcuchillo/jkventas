@@ -10,34 +10,25 @@ class jkventas_controller extends CI_Controller{
 	public function CargadoDelMenu(){
 	  if(isset($_SESSION['session_user'])) { 
             $usuario =$this->session->userdata['session_user']['usuario'];
-            $usuario_id =$this->session->userdata['session_user']['usuario_id'];
-            $rol= Usuariopor_rol::where('usuario_id','=',$usuario_id)->first();
-//          $menu_rol= Menu_por_rol::all();
-//          $menu_rol= Menu_por_rol::select('menu_id')->where('rol_id','=',$rol->rol_id)->get();
-//          foreach ($menu_rol as $v){
-//                print_r($v->menu_id);
-//            }
-       /*     $this->datosparamenu['menu_padre']= Menu::where(array('padre_id' => NULL))
-                                                      ->whereIn('menu_id',function($query){
-                                                       $menu_rol= Menu_por_rol::select('menu_id')->where('rol_id','=',1)->get();
-                                                       $query->select('menu_id')->from($menu_rol);
-                                                      })->get();
-            $this->datosparamenu['menu_hijo']= Menu::all();*/
-            $this->datosparamenu['menu_padre']= Menu::where(array('padre_id' => NULL))->get();
-            $this->datosparamenu['menu_hijo']= Menu::all();
+            $this->datosparamenu['menu_padre']= $this->CargarMenuPadre();
+            $this->datosparamenu['menu_hijo'] = $this->CargarMenuHijo();
             }
           return $this->datosparamenu;
 	}
       public function CargarMenuPadre(){
         if(isset($_SESSION['session_user'])) { 
-          
-         return Menu::where(array('padre_id' => NULL))->get();
+         return $this->datosparamenu['menu_padre']= $this->DB::table("t_menu")->select("*")->where(array('padre_id' => NULL))
+                                                      ->whereIn('menu_id',function($query){
+                                                       $usuario_id =$this->session->userdata['session_user']['usuario_id'];
+                                                       $rol= Usuariopor_rol::where('usuario_id','=',$usuario_id)->first();
+                                                       $query->select('menu_id')->from('t_menu_x_rol')->where('rol_id','=',$rol->rol_id);
+                                                      })->get();
          }
       }
       public function CargarMenuHijo(){
         if(isset($_SESSION['session_user'])) { 
           $usuario =$this->session->userdata['session_user']['usuario'];
-         return Menu::all();
+         return Menu::all()->sortBy('orden');
          }
       }
       /*public function VerificarsiAccedeDesdePath(){
