@@ -1,7 +1,7 @@
 <?php
  require_once 'application/controllers/jkventas_controller.php';
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+use Illuminate\Database\Capsule\Manager as DB;
 class Productos extends jkventas_controller {
     public function __construct() {
         parent::__construct();
@@ -12,7 +12,8 @@ class Productos extends jkventas_controller {
     
     public function index() {
         $data['layout_body']    = 'Productos/index';
-        $data['producto']       = $this->DB::select('CALL Lista_Productos(?,?,?,?,?,?)',['2018', 0, 0,0,0,'']);        
+//        $data['producto']       = DB::select('CALL Lista_Productos(?,?,?,?,?,?)',['2018', 0, 0,0,0,'']);  
+        $data['producto'] =null;
         $data['mes']            = Mes::all();
         $data['estado']         = Estado::all();
         $data['marca']          = Marca::all();
@@ -31,6 +32,17 @@ class Productos extends jkventas_controller {
         $categoria  = $this->input->post('categoria');
         $nombre     = $this->input->post('nombre');        
         $datos      = DB::select('CALL Lista_Productos(?,?,?,?,?,?)',[$anio,$mes,$estado,$marca,$categoria,$nombre]); 
+       echo json_encode($datos);
+    }
+    
+    public function Obtenerp(){
+//        $anio       = $this->input->post('anio');
+//        $mes        = $this->input->post('mes');
+//        $estado     = $this->input->post('estado');
+//        $marca      = $this->input->post('marca');
+//        $categoria  = $this->input->post('categoria');
+//        $nombre     = $this->input->post('nombre');        
+        $datos      = DB::select('CALL Lista_Productos(?,?,?,?,?,?)',['2018', 0, 0,0,0,'']); 
        echo json_encode($datos);
     }
  

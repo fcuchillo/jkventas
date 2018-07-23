@@ -127,8 +127,8 @@
                                 <table id="tblProducto" class="table table-sm table-condensed table-bordered" name="tblProducto">
                                     <thead id="headCoberturaConglomerado">
                                         <tr class="info">
-<!--                                            <th><center>MODIFICAR</center></th>
-                                            <th><center>ELIMINAR</center></th>-->
+                                            <!--<th><center>MODIFICAR</center></th>-->
+                                            <!--<th><center>ELIMINAR</center></th>-->
                                             <th><center>MES</center></th>            
                                             <th><center>PRODUCTO</center></th>
                                             <th><center>MARCA</center></th>
@@ -146,9 +146,11 @@
                                     </thead>
                                     <tbody>
                                         <?php
+                                        if(isset($producto)){
                                         foreach ($producto as $value) {
                                             echo 
-                                            '<tr>                                          
+                                            '<tr>       
+
                                                 <td>'.$value->mes.'</td>
                                                 <td>'.$value->producto_id.'</td>
                                                 <td>'.$value->marca.'</td>
@@ -163,6 +165,7 @@
                                                 <td>'.$value->descripcion.'</td>
                                                 <td>'.$value->observacion.'</td>                                                    
                                             </tr>';
+                                        }
                                         }
                                         ?>
                                     </tbody>
@@ -181,7 +184,7 @@
 
 <!--Region Scripts-->
 <script src="<?php echo base_url(); ?>assets/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<!--<script src="<?php echo base_url(); ?>assets/content/js/registro/controlTransferencia.js"></script>-->
+
 <script>
     
 var myTable;
@@ -191,77 +194,85 @@ var estado=null;
 var marca=null;
 var categoria=null
 var nombre=null;
+var editor;
 
 $(document).ready(function () {
-
-  
-    $('#btnBuscar').on('click', function() {
-     ObtenerParametros();
-    buscarCoberturasConglomerado();
-    });
-//    $('#mesIni').change(function(evento) {
-//        cargarMesesFin();
-//    });
-//
-//    $('#nivel').change(function(evento) {
-//        cargarEstado();
-//    })
-
-    $('#btnLimpiar').on('click', function(){        
-        $('#mes').append('<option value="0" selected="selected">Todos</option>');
-        $('#estado').val(0);
-        $('#marca').val(0);
-        $('#categoria').val(0);
-        $("#nombre").val("");            
-    });
-});
-
-function ObtenerParametros(){
-    anio=$('#anio').val();
-    mes=$('#mes').val();
-    estado= $('#estado').val();
-    marca= $('#marca').val();
-    categoria=$('#categoria').val();
-    nombre=$("#nombre").val();   
-}
-function buscarCoberturasConglomerado(){
-        
-//    $.ajax({
-//        type : 'post',
-//        url : 'Productos/ObtenerProductos',
-//        data:{nombre:nombre},
-//        beforeSend: function(){
-//        },
-//        success : function(result) {
-//            $('#modal-new').modal('hide');
-//            getAllParameter_manzana();
-//            cargar_tabla_manzana();
-//            cargar_tabla_manzana_detalle();
-//        },
-//        error: function(result, status) {
-//            alert('Error ' + status + ' al cargar la información,<br>Intente nuevamente.')
-//        }
-//    });  
-
-    jsShowWindowLoad();
+    editor = new $.fn.dataTable.Editor( {
+    ajax: "../Productos/Obtenerp",
+    table: "#tblProducto",
+    idSrc: "producto_id",
+    fields: [ {
+                label: "mes:",
+                name: "mes"
+            }, {
+                label: "producto_id:",
+                name: "producto_id"
+            }, {
+                label: "marca:",
+                name: "marca"
+            }, {
+                label: "categoria:",
+                name: "categoria"
+            }, {
+                label: "nombre:",
+                name: "nombre"
+            }, {
+                label: "talla",
+                name: "talla",
+//                type: "datetime"
+            }, {
+                label: "color:",
+                name: "color"
+            },
+            {
+                label: "precio_compra:",
+                name: "precio_compra"
+            }, {
+                label: "precio_venta:",
+                name: "precio_venta"
+            }, {
+                label: "fecha_compra:",
+                name: "fecha_compra"
+            }, {
+                label: "estado:",
+                name: "estado"
+            }, {
+                label: "descripcion:",
+                name: "descripcion"
+            }, {
+                label: "observacion:",
+                name: "observacion"
+            }
+        ]
+    } );
+ 
+    // Activate an inline edit on click of a table cell
+    $('#tblProducto').on( 'click', 'tbody td:not(:first-child)', function (e) {
+        console.log(this);
+        editor.inline( this );
+    } );
+ 
     myTable = $('#tblProducto').DataTable({
         initComplete: function () {
             jsRemoveWindowLoad();
         },
+        dom: "Bfrtip",
+        order: [[ 1, 'asc' ]],
         scrollY: 450,
         scrollX: true,
+        idSrc:  'producto_id',
         ajax: {
-            url: "../Productos/ObtenerProductos",
+            url: "../Productos/Obtenerp",
             dataSrc: "",
             type:"POST",
-            data: { 
-                anio        : anio, 
-                mes         : mes, 
-                estado      : estado, 
-                marca       : marca,                 
-                categoria   : categoria,                 
-                nombre      : nombre
-            },
+//            data: { 
+//                anio        : anio, 
+//                mes         : mes, 
+//                estado      : estado, 
+//                marca       : marca,                 
+//                categoria   : categoria,                 
+//                nombre      : nombre
+//            },
         },
         columns:[ 
             
@@ -279,9 +290,102 @@ function buscarCoberturasConglomerado(){
             { data:"descripcion",           class:"textFont text-left"/*,      width: "100"*/    },
             { data:"observacion",           class:"textFont text-left"/*,      width: "40" */    }
         ],
+        select: {
+            style:    'os',
+            selector: 'td:first-child'
+        },
+        
         bDestroy: true
-    });
-}
+  }); 
+   });
+  
+//    $('#btnBuscar').on('click', function() {
+//     ObtenerParametros();
+//    buscarCoberturasConglomerado();
+//    });
+////    $('#mesIni').change(function(evento) {
+////        cargarMesesFin();
+////    });
+////
+////    $('#nivel').change(function(evento) {
+////        cargarEstado();
+////    })
+//
+//    $('#btnLimpiar').on('click', function(){        
+//        $('#mes').append('<option value="0" selected="selected">Todos</option>');
+//        $('#estado').val(0);
+//        $('#marca').val(0);
+//        $('#categoria').val(0);
+//        $("#nombre").val("");            
+//    });
+//});
+//
+//function ObtenerParametros(){
+//    anio=$('#anio').val();
+//    mes=$('#mes').val();
+//    estado= $('#estado').val();
+//    marca= $('#marca').val();
+//    categoria=$('#categoria').val();
+//    nombre=$("#nombre").val();   
+//}
+//function buscarCoberturasConglomerado(){
+//        
+////    $.ajax({
+////        type : 'post',
+////        url : 'Productos/ObtenerProductos',
+////        data:{nombre:nombre},
+////        beforeSend: function(){
+////        },
+////        success : function(result) {
+////            $('#modal-new').modal('hide');
+////            getAllParameter_manzana();
+////            cargar_tabla_manzana();
+////            cargar_tabla_manzana_detalle();
+////        },
+////        error: function(result, status) {
+////            alert('Error ' + status + ' al cargar la información,<br>Intente nuevamente.')
+////        }
+////    });  
+//
+//    jsShowWindowLoad();
+//    myTable = $('#tblProducto').DataTable({
+//        initComplete: function () {
+//            jsRemoveWindowLoad();
+//        },
+//        scrollY: 450,
+//        scrollX: true,
+//        ajax: {
+//            url: "../Productos/ObtenerProductos",
+//            dataSrc: "",
+//            type:"POST",
+//            data: { 
+//                anio        : anio, 
+//                mes         : mes, 
+//                estado      : estado, 
+//                marca       : marca,                 
+//                categoria   : categoria,                 
+//                nombre      : nombre
+//            },
+//        },
+//        columns:[ 
+//            
+//            { data:"mes",                   class:"textFont text-left"/*,      width: "20" */    },
+//            { data:"producto_id",           class:"textFont text-left"/*,      width: "100"*/    },
+//            { data:"marca",                 class:"textFont text-left"/*,      width: "100"*/    },
+//            { data:"categoria",             class:"textFont text-left"/*,      width: "80" */    },
+//            { data:"nombre",                class:"textFont text-left"/*,      width: "200"*/    },
+//            { data:"talla",                 class:"textFont text-left"/*,      width: "40" */    },
+//            { data:"color",                 class:"textFont text-left"/*,      width: "40" */    },            
+//            { data:"precio_compra",         class:"textFont text-left"/*,      width: "40" */    },            
+//            { data:"precio_venta",          class:"textFont text-left"/*,      width: "40" */    },
+//            { data:"fecha_compra",          class:"textFont text-left"/*,      width: "60" */    },
+//            { data:"estado",                class:"textFont text-left"/*,      width: "40" */    },            
+//            { data:"descripcion",           class:"textFont text-left"/*,      width: "100"*/    },
+//            { data:"observacion",           class:"textFont text-left"/*,      width: "40" */    }
+//        ],
+//        bDestroy: true
+//    });
+
 
 </script>
 <!--End Region Scripts-->
