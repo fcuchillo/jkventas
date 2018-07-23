@@ -129,8 +129,9 @@
                                         <tr class="info">
                                             <!--<th><center>MODIFICAR</center></th>-->
                                             <!--<th><center>ELIMINAR</center></th>-->
-                                            <th><center>MES</center></th>            
+                                            
                                             <th><center>PRODUCTO</center></th>
+                                            <th><center>MES</center></th>            
                                             <th><center>MARCA</center></th>
                                             <th><center>CATEGORIA</center></th>
                                             <th><center>NOMBRE</center></th>
@@ -150,9 +151,8 @@
                                         foreach ($producto as $value) {
                                             echo 
                                             '<tr>       
-
-                                                <td>'.$value->mes.'</td>
                                                 <td>'.$value->producto_id.'</td>
+                                                <td>'.$value->mes.'</td>                                                
                                                 <td>'.$value->marca.'</td>
                                                 <td>'.$value->categoria.'</td>
                                                 <td>'.$value->nombre.'</td>                                                
@@ -197,56 +197,52 @@ var nombre=null;
 var editor;
 
 $(document).ready(function () {
+    
+    $('#btnBuscar').on('click', function() {
+        ObtenerParametros();
+        buscarCoberturasConglomerado();
+    });
+    
+    $('#btnLimpiar').on('click', function(){        
+        $('#mes').append('<option value="0" selected="selected">Todos</option>');
+        $('#estado').val(0);
+        $('#marca').val(0);
+        $('#categoria').val(0);
+        $("#nombre").val("");            
+    });
+});
+
+function ObtenerParametros(){
+    anio=$('#anio').val();
+    mes=$('#mes').val();
+    estado= $('#estado').val();
+    marca= $('#marca').val();
+    categoria=$('#categoria').val();
+    nombre=$("#nombre").val();   
+}
+
+function buscarCoberturasConglomerado(){
     editor = new $.fn.dataTable.Editor( {
-    ajax: "../Productos/Obtenerp",
+    ajax: "../Productos/ObtenerProductos",
     table: "#tblProducto",
     idSrc: "producto_id",
-    fields: [ {
-                label: "mes:",
-                name: "mes"
-            }, {
-                label: "producto_id:",
-                name: "producto_id"
-            }, {
-                label: "marca:",
-                name: "marca"
-            }, {
-                label: "categoria:",
-                name: "categoria"
-            }, {
-                label: "nombre:",
-                name: "nombre"
-            }, {
-                label: "talla",
-                name: "talla",
-//                type: "datetime"
-            }, {
-                label: "color:",
-                name: "color"
-            },
-            {
-                label: "precio_compra:",
-                name: "precio_compra"
-            }, {
-                label: "precio_venta:",
-                name: "precio_venta"
-            }, {
-                label: "fecha_compra:",
-                name: "fecha_compra"
-            }, {
-                label: "estado:",
-                name: "estado"
-            }, {
-                label: "descripcion:",
-                name: "descripcion"
-            }, {
-                label: "observacion:",
-                name: "observacion"
-            }
+    fields: [ 
+        {name: "producto_id"}, 
+        {name: "mes"}, 
+        {name: "marca"}, 
+        {name: "categoria"}, 
+        {name: "nombre"}, 
+        {name: "talla"}, 
+        {name: "color"},
+        {name: "precio_compra"}, 
+        {name: "precio_venta"}, 
+        {name: "fecha_compra"}, 
+        {name: "estado"}, 
+        {name: "descripcion"}, 
+        {name: "observacion"}
         ]
-    } );
- 
-    // Activate an inline edit on click of a table cell
+    } ); 
+
     $('#tblProducto').on( 'click', 'tbody td:not(:first-child)', function (e) {
         console.log(this);
         editor.inline( this );
@@ -262,22 +258,22 @@ $(document).ready(function () {
         scrollX: true,
         idSrc:  'producto_id',
         ajax: {
-            url: "../Productos/Obtenerp",
+            url: "../Productos/ObtenerProductos",
             dataSrc: "",
             type:"POST",
-//            data: { 
-//                anio        : anio, 
-//                mes         : mes, 
-//                estado      : estado, 
-//                marca       : marca,                 
-//                categoria   : categoria,                 
-//                nombre      : nombre
-//            },
+            data: { 
+                anio        : anio, 
+                mes         : mes, 
+                estado      : estado, 
+                marca       : marca,                 
+                categoria   : categoria,                 
+                nombre      : nombre
+            },
         },
         columns:[ 
             
-            { data:"mes",                   class:"textFont text-left"/*,      width: "20" */    },
             { data:"producto_id",           class:"textFont text-left"/*,      width: "100"*/    },
+            { data:"mes",                   class:"textFont text-left"/*,      width: "20" */    },            
             { data:"marca",                 class:"textFont text-left"/*,      width: "100"*/    },
             { data:"categoria",             class:"textFont text-left"/*,      width: "80" */    },
             { data:"nombre",                class:"textFont text-left"/*,      width: "200"*/    },
@@ -297,7 +293,7 @@ $(document).ready(function () {
         
         bDestroy: true
   }); 
-   });
+  }
   
 //    $('#btnBuscar').on('click', function() {
 //     ObtenerParametros();
