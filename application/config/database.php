@@ -74,8 +74,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'jkventas';
 $db['jkventas'] = array(
 	'dsn'	=> '',
-	'hostname' => '172.17.10.8',
-	'username' => 'dorisdhf',
+	'hostname' => 'localhost',
+	'username' => 'root',
 	'password' => 'Facil123',
 	'database' => 'jykale_bd',
 	'dbdriver' => 'mysqli',

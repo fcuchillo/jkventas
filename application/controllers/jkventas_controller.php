@@ -5,6 +5,7 @@ class jkventas_controller extends CI_Controller{
 	  public function __construct() {
     	parent::__construct();
             $this->load->model(array('Menu','Usuariopor_rol','Menu_por_rol'));
+            $this->DB=new Illuminate\Database\Capsule\Manager;
 	  }
 	public function CargadoDelMenu(){
 	  if(isset($_SESSION['session_user'])) { 

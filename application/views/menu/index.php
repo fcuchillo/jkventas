@@ -69,11 +69,11 @@
                         <?php
                         foreach ($menus as $atributo){
                             echo '<tr>'
-                                    .'<td>'.$atributo->titulo.'</td>'
-                                    .'<td>'.$atributo->link.'</td>'
+                                    .'<td>'.$atributo->menu.'</td>'
+                                    .'<td>'.$atributo->ruta.'</td>'
                                     .'<td>'.$atributo->descripcion.'</td>'
                                     .'<td>'.$atributo->orden.'</td>'
-                                    .'<td>'.$atributo->padre_id.'</td>'
+                                    .'<td>'.$atributo->padre.'</td>'
                                     .'<td>'.$atributo->estado.'</td>'.
                                  '</tr>';
                         }
