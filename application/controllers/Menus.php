@@ -16,12 +16,12 @@ class Menus extends jkventas_controller {
         $data['layout_body']    = 'menu/index';
         $data['menu_padre']     = $this->CargarMenuPadre();
         $data['menu_hijo']      = $this->CargarMenuHijo();
-        $data['menus']          = $this->DB::select('CALL Lista_Menus()');
+        $data['menus']          = null;//$this->DB::select('CALL Lista_Menus()');
         $data['title']          = 'Menu';
         $this->load->view('main_template', $data);    
         //mas modificaciones
     }
-    public function defaulto(){
-        return null;
+    public function ObtenerListadodeMenu(){
+        echo json_encode($this->DB::select('CALL Lista_Menus()'));
     }    
 }

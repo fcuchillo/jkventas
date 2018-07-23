@@ -14,17 +14,18 @@
 <script src="<?php echo base_url();?>assets/plugins/file/fileinput.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-<script src="<?php echo base_url();?>assets/plugins/datatables/jquery.dataTables.min.js" charset = "utf8" type="text/javascript"></script>
+<script src="<?php echo base_url();?>assets/plugins/datatables/js/jquery.dataTables.min.js" charset = "utf8" type="text/javascript"></script>
 
 <script src="<?php echo base_url();?>assets/plugins/datatables/extensions/Editor/js/dataTables.editor.min.js" charset = "utf8" type="text/javascript"></script>
 
-<script src="<?php echo base_url();?>assets/plugins/datatables/dataTables.bootstrap.min.js" charset = "utf8" type="text/javascript"></script>
+<script src="<?php echo base_url();?>assets/plugins/datatables/js/dataTables.bootstrap.min.js" charset = "utf8" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/plugins/fastclick/fastclick.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/dist/js/app.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/dist/js/demo.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/plugins/alertify/alertify.min.js"></script>
 
 <script src="<?php echo base_url();?>assets/content/js/loading.js" type="text/javascript" ></script>
+<script src="<?php echo base_url(); ?>assets/plugins/jQuery/jquery-2.2.3.min.js"></script>
 
 </body>
 </html>

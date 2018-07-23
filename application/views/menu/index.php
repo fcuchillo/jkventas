@@ -54,8 +54,8 @@
                 </div>
             </div>
             <div class="box-body">
-                <table id="surveyResult" class="table table-condensed table-striped" data-toggle="table" >
-                    <thead id="surveyResultHead">
+                <table id="tblmenu" class="table table-condensed table-striped" data-toggle="table" >
+                    <thead id="tblmenucabecera">
                         <tr class="info">
                             <th align="center">Menú</th>
                             <th align="center">Ruta</th>
@@ -67,15 +67,17 @@
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($menus as $atributo){
-                            echo '<tr>'
-                                    .'<td>'.$atributo->menu.'</td>'
-                                    .'<td>'.$atributo->ruta.'</td>'
-                                    .'<td>'.$atributo->descripcion.'</td>'
-                                    .'<td>'.$atributo->orden.'</td>'
-                                    .'<td>'.$atributo->padre.'</td>'
-                                    .'<td>'.$atributo->estado.'</td>'.
-                                 '</tr>';
+                        if(isset($menus)){
+                            foreach ($menus as $atributo){
+                                echo '<tr>'
+                                        .'<td>'.$atributo->menu.'</td>'
+                                        .'<td>'.$atributo->ruta.'</td>'
+                                        .'<td>'.$atributo->descripcion.'</td>'
+                                        .'<td>'.$atributo->orden.'</td>'
+                                        .'<td>'.$atributo->padre.'</td>'
+                                        .'<td>'.$atributo->estado.'</td>'.
+                                     '</tr>';
+                            }
                         }
                         ?>
                     </tbody>
@@ -112,3 +114,74 @@
     </div>
 </div>
 <!--End Region Modal-->
+
+<script>
+    
+var myTable;
+var editor;
+$(document).ready(function () {
+    editor = new $.fn.dataTable.Editor( {
+    ajax: "../Menus/ObtenerListadodeMenu",
+    table: "#tblmenu",
+    idSrc: "menu_id",
+    fields: [ {
+                label: "Menu:",
+                name: "menu"
+            }, {
+                label: "Ruta:",
+                name: "ruta"
+            }, {
+                label: "Descripcion:",
+                name: "descripcion"
+            }, {
+                label: "Orden:",
+                name: "Orden"
+            }, {
+                label: "Padre:",
+                name: "padre"
+            }, {
+                label: "Estado",
+                name: "estado",
+                type: "select"
+            }
+        ]
+    } );
+ 
+    // Activate an inline edit on click of a table cell
+    $('#tblmenu').on( 'click', 'tbody td:not(:first-child)', function (e) {
+        editor.inline( this );
+    } );
+ 
+    myTable = $('#tblmenu').DataTable({
+        initComplete: function () {
+            jsRemoveWindowLoad();
+        },
+        order: [[ 1, 'asc' ]],
+        scrollY: 450,
+        scrollX: true,
+        idSrc:  'menu_id',
+        ajax: {
+            url: "../Menus/ObtenerListadodeMenu",
+            dataSrc: "",
+            type:"POST"
+        },
+        columns:[ 
+            
+            { data:"menu",           class:"textFont text-left"/*,      width: "20" */    },
+            { data:"ruta",           class:"textFont text-left"/*,      width: "100"*/    },
+            { data:"descripcion",    class:"textFont text-left"/*,      width: "100"*/    },
+            { data:"orden",          class:"textFont text-left"/*,      width: "80" */    },
+            { data:"padre",          class:"textFont text-left"/*,      width: "200"*/    },
+            { data:"estado",         class:"textFont text-left"/*,      width: "40" */    }
+        ],
+        select: {
+            style:    'os',
+            selector: 'td:first-child'
+        },
+        bDestroy: true
+  }); 
+   });
+  
+
+
+</script>
