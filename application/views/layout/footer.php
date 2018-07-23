@@ -15,6 +15,9 @@
 <script src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/plugins/datatables/jquery.dataTables.min.js" charset = "utf8" type="text/javascript"></script>
+
+<script src="<?php echo base_url();?>assets/plugins/datatables/extensions/Editor/js/dataTables.editor.min.js" charset = "utf8" type="text/javascript"></script>
+
 <script src="<?php echo base_url();?>assets/plugins/datatables/dataTables.bootstrap.min.js" charset = "utf8" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/plugins/fastclick/fastclick.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/dist/js/app.min.js" type="text/javascript"></script>
