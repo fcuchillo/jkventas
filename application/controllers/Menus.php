@@ -20,5 +20,8 @@ class Menus extends jkventas_controller {
         $data['title']          = 'Menu';
         $this->load->view('main_template', $data);    
         //mas modificaciones
+    }
+    public function defaulto(){
+        return null;
     }    
 }
