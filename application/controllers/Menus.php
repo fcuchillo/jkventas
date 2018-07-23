@@ -18,6 +18,6 @@ class Menus extends jkventas_controller {
         $data['menus']          = Menu::all();
         $data['title']          = 'Menu';
         $this->load->view('main_template', $data);    
-        //aqui
+        //mas modificaciones
     }    
 }
