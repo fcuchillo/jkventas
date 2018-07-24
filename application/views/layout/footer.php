@@ -25,7 +25,6 @@
 <script src="<?php echo base_url();?>assets/plugins/alertify/alertify.min.js"></script>
 
 <script src="<?php echo base_url();?>assets/content/js/loading.js" type="text/javascript" ></script>
-<script src="<?php echo base_url(); ?>assets/plugins/jQuery/jquery-2.2.3.min.js"></script>
 
 </body>
 </html>
