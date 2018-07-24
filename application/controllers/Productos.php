@@ -34,6 +34,29 @@ class Productos extends jkventas_controller {
         $datos      = DB::select('CALL Lista_Productos(?,?,?,?,?,?)',[$anio,$mes,$estado,$marca,$categoria,$nombre]); 
        echo json_encode($datos);
     }
+    
+    public function MantenimientoProducto(){
+        $producto_id    = $this->input->post($data[1]['action']);   
+//        print_r($producto_id);
+        foreach ($producto_id as $key => $value) {
+//            foreach ($value as $key => $value) {
+//                print_r($key);
+        if ($key=='action'){
+            print_r($key);
+        }
+                
+                
+//            }
+        }      
+
+        
+//        $producto       = Productos::where('producto_id','=',$producto_id )->first();
+//        $producto->delete();
+        $datos          = DB::select('CALL Lista_Productos(?,?,?,?,?,?)',['2018', 0, 0,0,0,'']); 
+//        print_r($producto);
+       echo json_encode($datos);
+    }
+    
 }
 
 

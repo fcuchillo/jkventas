@@ -14,8 +14,10 @@
 <script src="<?php echo base_url();?>assets/plugins/file/fileinput.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-<script src="<?php echo base_url();?>assets/plugins/datatables/js/jquery.dataTables.min.js" charset = "utf8" type="text/javascript"></script>
 
+<script src="<?php echo base_url();?>assets/plugins/datatables/js/jquery.dataTables.min.js" charset = "utf8" type="text/javascript"></script>
+<script src="<?php echo base_url();?>assets/plugins/datatables/buttons/js/dataTables.buttons.min.js" type="text/javascript" ></script>
+<script src="<?php echo base_url();?>assets/plugins/datatables/select/js/dataTables.select.min.js" type="text/javascript" ></script>
 <script src="<?php echo base_url();?>assets/plugins/datatables/extensions/Editor/js/dataTables.editor.min.js" charset = "utf8" type="text/javascript"></script>
 
 <script src="<?php echo base_url();?>assets/plugins/datatables/js/dataTables.bootstrap.min.js" charset = "utf8" type="text/javascript"></script>
@@ -25,6 +27,9 @@
 <script src="<?php echo base_url();?>assets/plugins/alertify/alertify.min.js"></script>
 
 <script src="<?php echo base_url();?>assets/content/js/loading.js" type="text/javascript" ></script>
+
+
+
 
 </body>
 </html>

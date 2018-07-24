@@ -127,7 +127,7 @@
                                 <table id="tblProducto" class="table table-sm table-condensed table-bordered" name="tblProducto">
                                     <thead id="headCoberturaConglomerado">
                                         <tr class="info">
-                                            <!--<th><center>MODIFICAR</center></th>-->
+                                            <th><center>MODIFICAR</center></th>
                                             <!--<th><center>ELIMINAR</center></th>-->
                                             
                                             <th><center>PRODUCTO</center></th>
@@ -151,6 +151,7 @@
                                         foreach ($producto as $value) {
                                             echo 
                                             '<tr>       
+                                                <td></td>
                                                 <td>'.$value->producto_id.'</td>
                                                 <td>'.$value->mes.'</td>                                                
                                                 <td>'.$value->marca.'</td>
@@ -223,7 +224,7 @@ function ObtenerParametros(){
 
 function buscarCoberturasConglomerado(){
     editor = new $.fn.dataTable.Editor( {
-    ajax: "../Productos/ObtenerProductos",
+    ajax: "../Productos/MantenimientoProducto",
     table: "#tblProducto",
     idSrc: "producto_id",
     fields: [ 
@@ -271,7 +272,12 @@ function buscarCoberturasConglomerado(){
             },
         },
         columns:[ 
-            
+            {
+                data: null,
+                defaultContent: '',
+                className: 'select-checkbox',
+                orderable: false
+            },
             { data:"producto_id",           class:"textFont text-left"/*,      width: "100"*/    },
             { data:"mes",                   class:"textFont text-left"/*,      width: "20" */    },            
             { data:"marca",                 class:"textFont text-left"/*,      width: "100"*/    },
@@ -290,6 +296,11 @@ function buscarCoberturasConglomerado(){
             style:    'os',
             selector: 'td:first-child'
         },
+        buttons: [
+            { extend: "create", editor: editor },
+            { extend: "edit",   editor: editor },
+            { extend: "remove", editor: editor }
+        ],
         
         bDestroy: true
   }); 

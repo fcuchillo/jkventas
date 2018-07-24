@@ -8,7 +8,13 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
  <script src="<?php echo base_url(); ?>assets/plugins/jQuery/jquery-2.2.3.min.js"></script>
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css">  
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/css/dataTables.bootstrap.css">
+  <!--<link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/css/dataTables.bootstrap.css">-->
+  
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/buttons/css/buttons.dataTables.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/select/css/select.dataTables.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/extensions/Editor/css/editor.dataTables.min.css">
+  
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/jQueryUI/jquery-ui.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/AdminLTE.min.css">  
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/skins/_all-skins.min.css">
@@ -17,6 +23,8 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/alertify/alertify.core.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/alertify/alertify.default.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/file/fileinput.css"/>
+  
+ 
 
   <!-- PyEndes icons -->
   <link rel="icon" href="<?php echo base_url(); ?>assets/dist/img/endes_logo.png" type="image/png">  
