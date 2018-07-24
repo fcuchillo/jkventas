@@ -1,8 +1,8 @@
 <?php
-
+require BASEPATH.'../vendor/autoload.php';
 /* Eloquent ORM Configuration */
-$capsule = new Illuminate\Database\Capsule\Manager();
-
+use Illuminate\Database\Capsule\Manager as Capsule;
+$capsule = new Capsule;
 $capsule->addConnection([
     'driver'    => 'mysql',
     'host'      => $db['jkventas']['hostname'],
@@ -13,7 +13,6 @@ $capsule->addConnection([
     'collation' => $db['jkventas']['dbcollat'],
     'prefix'    => $db['jkventas']['dbprefix']
 ]);
-
 // Make this Capsule instance available globally via static methods... (optional)
 $capsule->setAsGlobal();
 

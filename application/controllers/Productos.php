@@ -1,7 +1,7 @@
 <?php
  require_once 'application/controllers/jkventas_controller.php';
 // require_once 'assets/plugins/datatables/extensions/Editor/php/DataTables.php';
-// include( "../../php/DataTables.php" );
+ include( "assets/plugins/datatables/extensions/Editor/php/DataTables.php" );
 defined('BASEPATH') OR exit('No direct script access allowed');
 use Illuminate\Database\Capsule\Manager as DB;
 use DataTables\Editor,
@@ -12,6 +12,7 @@ use DataTables\Editor,
     DataTables\Editor\Upload,
     DataTables\Editor\Validate,
     DataTables\Editor\ValidateOptions;
+use Illuminate\Http\Request;
 class Productos extends jkventas_controller {
     public function __construct() {
         parent::__construct();
@@ -83,17 +84,61 @@ class Productos extends jkventas_controller {
 //        $datos          = DB::select('CALL Lista_Productos(?,?,?,?,?,?)',['2018', 0, 0,0,0,'']); 
     }
     public function todo(){
-        Editor::inst( Producto::all())
+        Editor::inst(Producto::all())
     ->fields(
-        Field::inst( 'nombre' )
+            Field::inst( 'producto_id' )
             ->validator( Validate::notEmpty( ValidateOptions::inst()
                 ->message( 'A first name is required' ) 
             ) ),
-        Field::inst( 'color' )
+            Field::inst( 'anio' )
+            ->validator( Validate::notEmpty( ValidateOptions::inst()
+                ->message( 'A first name is required' ) 
+            ) ),
+            Field::inst( 'marca_id' )
+            ->validator( Validate::notEmpty( ValidateOptions::inst()
+                ->message( 'A first name is required' ) 
+            ) ),
+            Field::inst( 'categoria_id' )
+            ->validator( Validate::notEmpty( ValidateOptions::inst()
+                ->message( 'A first name is required' ) 
+            ) ),
+            Field::inst( 'nombre' )
+            ->validator( Validate::notEmpty( ValidateOptions::inst()
+                ->message( 'A first name is required' ) 
+            ) ),
+            Field::inst( 'talla' )
+            ->validator( Validate::notEmpty( ValidateOptions::inst()
+                ->message( 'A first name is required' ) 
+            ) ),
+            Field::inst( 'color' )
+            ->validator( Validate::notEmpty( ValidateOptions::inst()
+                ->message( 'A first name is required' ) 
+            ) ),
+            Field::inst( 'precio_compra' )
+            ->validator( Validate::notEmpty( ValidateOptions::inst()
+                ->message( 'A first name is required' ) 
+            ) ),
+            Field::inst( 'precio_venta' )
+            ->validator( Validate::notEmpty( ValidateOptions::inst()
+                ->message( 'A first name is required' ) 
+            ) ),
+            Field::inst( 'fecha_compra' )
+            ->validator( Validate::notEmpty( ValidateOptions::inst()
+                ->message( 'A first name is required' ) 
+            ) ),
+        Field::inst( 'estado_id' )
+            ->validator( Validate::notEmpty( ValidateOptions::inst()
+                ->message( 'A first name is required' ) 
+            ) ),
+        Field::inst( 'descripcion' )
             ->validator( Validate::notEmpty( ValidateOptions::inst()
                 ->message( 'A last name is required' )  
-            ) )
-        /*Field::inst( 'position' ),
+            ) ),
+        Field::inst( 'observacion' )
+            ->validator( Validate::notEmpty( ValidateOptions::inst()
+                ->message( 'A last name is required' )  
+            ) )  
+        /*Field::inst( 'observaciones' ),
         Field::inst( 'email' )
             ->validator( Validate::email( ValidateOptions::inst()
                 ->message( 'Please enter an e-mail address' )   
@@ -111,7 +156,7 @@ class Productos extends jkventas_controller {
             ->getFormatter( Format::dateSqlToFormat( 'Y-m-d' ) )
             ->setFormatter( Format::dateFormatToSql('Y-m-d' ) )*/
     )
-    ->process( $_POST )
+    ->process($_POST)
     ->json();
     }
 }

@@ -130,19 +130,20 @@
                                             <th><center>MODIFICAR</center></th>
                                             <!--<th><center>ELIMINAR</center></th>-->
                                             
-                                            <!--<th><center>PRODUCTO</center></th>-->
-                                            <!--<th><center>MES</center></th>-->            
-                                            <!--<th><center>MARCA</center></th>-->
-                                            <!--<th><center>CATEGORIA</center></th>-->
+                                            <th><center>PRODUCTO</center></th>
+                                            <th><center>ANIO</center></th>
+                                            <th><center>MES</center></th>
+                                            <th><center>MARCA</center></th>
+                                            <th><center>CATEGORIA</center></th>
                                             <th><center>NOMBRE</center></th>
-                                            <!--<th><center>TALLA</center></th>-->
+                                            <th><center>TALLA</center></th>
                                             <th><center>COLOR</center></th>                                            
-                                            <!--<th><center>PRECIO COMRPO</center></th>-->
-                                            <!--<th><center>PRECIO VENTA</center></th>-->                                            
-                                            <!--<th><center>FECHA COMPRA</center></th>-->
-                                            <!--<th><center>ESTADO</center></th>-->
-                                            <!--<th><center>DESCRIPCION</center></th>-->
-                                            <!--<th><center>OBSERVACION</center></th>-->
+                                            <th><center>PRECIO COMRPO</center></th>
+                                            <th><center>PRECIO VENTA</center></th>                                            
+                                            <th><center>FECHA COMPRA</center></th>
+                                            <th><center>ESTADO</center></th>
+                                            <th><center>DESCRIPCION</center></th>
+                                            <th><center>OBSERVACION</center></th>
                                         </tr>            
                                     </thead>
                                     <tbody>
@@ -216,19 +217,20 @@ editor = new $.fn.dataTable.Editor( {
     table: "#tblProducto",
     idSrc: "producto_id",
     fields: [ 
-       /* {name: "producto_id"}, 
-        {name: "mes"}, 
-        {name: "marca"}, 
-        {name: "categoria"}, */
+        {name: "producto_id"}, 
+        {name: "anio"}, 
+        {name: "mes_id"}, 
+        {name: "marca_id"}, 
+        {name: "categoria_id"}, 
         {name: "nombre"}, 
-       // {name: "talla"}, 
-        {name: "color"}
-        /*{name: "precio_compra"}, 
+        {name: "talla"}, 
+        {name: "color"},
+        {name: "precio_compra"}, 
         {name: "precio_venta"}, 
         {name: "fecha_compra"}, 
-        {name: "estado"}, 
+        {name: "estado_id"}, 
         {name: "descripcion"}, 
-        {name: "observacion"}*/
+        {name: "observacion"}
         ]
     } ); 
 
@@ -266,19 +268,20 @@ editor = new $.fn.dataTable.Editor( {
                 className: 'select-checkbox',
                 orderable: false
             },
-//            /*{ data:"producto_id",           class:"textFont text-left"/*,      width: "100"*/    },
-//            { data:"mes",                   class:"textFont text-left"/*,      width: "20" */    },            
-//            { data:"marca",                 class:"textFont text-left"/*,      width: "100"*/    },
-//            { data:"categoria",             class:"textFont text-left"/*,      width: "80" */    },
+            { data:"producto_id",           class:"textFont text-left"/*,      width: "100"*/    },
+            { data:"anio",                   class:"textFont text-left"/*,      width: "20" */    },            
+            { data:"mes_id",                   class:"textFont text-left"/*,      width: "20" */    },            
+            { data:"marca_id",                 class:"textFont text-left"/*,      width: "100"*/    },
+            { data:"categoria_id",             class:"textFont text-left"/*,      width: "80" */    },
             { data:"nombre",                class:"textFont text-left"/*,      width: "200"*/    },
-//            { data:"talla",                 class:"textFont text-left"/*,      width: "40" */    },
-            { data:"color",                 class:"textFont text-left"/*,      width: "40" */    }            
-//            { data:"precio_compra",         class:"textFont text-left"/*,      width: "40" */    },            
-//            { data:"precio_venta",          class:"textFont text-left"/*,      width: "40" */    },
-//            { data:"fecha_compra",          class:"textFont text-left"/*,      width: "60" */    },
-//            { data:"estado",                class:"textFont text-left"/*,      width: "40" */    },            
-//            { data:"descripcion",           class:"textFont text-left"/*,      width: "100"*/    },
-//            { data:"observacion",           class:"textFont text-left"/*,      width: "40" */    }
+            { data:"talla",                 class:"textFont text-left"/*,      width: "40" */    },
+            { data:"color",                 class:"textFont text-left"/*,      width: "40" */    },            
+            { data:"precio_compra",         class:"textFont text-left"/*,      width: "40" */    },            
+            { data:"precio_venta",          class:"textFont text-left"/*,      width: "40" */    },
+            { data:"fecha_compra",          class:"textFont text-left"/*,      width: "60" */    },
+            { data:"estado_id",                class:"textFont text-left"/*,      width: "40" */    },            
+            { data:"descripcion",           class:"textFont text-left"/*,      width: "100"*/    },
+            { data:"observacion",           class:"textFont text-left"/*,      width: "40" */    }
         ],
         select: {
             style:    'os',
