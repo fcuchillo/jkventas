@@ -6,6 +6,7 @@ require_once 'application/controllers/jkventas_controller.php';
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 class Menus extends jkventas_controller {
     public function __construct() {
         parent::__construct();
@@ -23,5 +24,21 @@ class Menus extends jkventas_controller {
     }
     public function ObtenerListadodeMenu(){
         echo json_encode($this->DB::select('CALL Lista_Menus()'));
-    }    
+    }
+    public function EditarMenu(){
+//        $result=new  Array();
+         $menu = Menu::where('menu_id', '=', 1)->first();
+         $menus=$this->input->post($data);
+         foreach ($menus as $valor) {
+            print_r($valor->menu);
+        }
+        print_r($menu);
+        try {
+            $menu->save();
+        } catch (Exception $e) {
+            $result['status'] = 'error';
+            $result['message'] = 'Ocurrió un problema al actualizar... '.$e->getMessage();
+        }
+        return $result;   
+    }
 }

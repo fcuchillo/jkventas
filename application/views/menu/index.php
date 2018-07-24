@@ -57,6 +57,8 @@
                 <table id="tblmenu" class="table table-condensed table-striped" data-toggle="table" >
                     <thead id="tblmenucabecera">
                         <tr class="info">
+                            <th align="center">Menu_id</th>
+                            <th align="center"></th>
                             <th align="center">Menú</th>
                             <th align="center">Ruta</th>
                             <th align="center">Descripción</th>
@@ -120,11 +122,61 @@
 var myTable;
 var editor;
 $(document).ready(function () {
+    myTable = $('#tblmenu').DataTable({
+        initComplete: function () {
+            jsRemoveWindowLoad();
+        },
+        order: [[ 1, 'asc' ]],
+        scrollY: 450,
+        scrollX: true,
+        idSrc:  'menu_id',
+        keys: true,
+        ajax: {
+            url: "../Menus/ObtenerListadodeMenu",
+            dataSrc: "",
+            type:"POST"
+        },
+        columns:[ 
+            
+            { data:"menu_id",        class:"textFont text-left"/*,      width: "20" */    },
+            { data:"menu_id_1",        class:"textFont text-left"},
+            { data:"menu",           class:"textFont text-left"/*,      width: "20" */    },
+            { data:"ruta",           class:"textFont text-left"/*,      width: "100"*/    },
+            { data:"descripcion",    class:"textFont text-left"/*,      width: "100"*/    },
+            { data:"orden",          class:"textFont text-left"/*,      width: "80" */    },
+            { data:"padre",          class:"textFont text-left"/*,      width: "200"*/    },
+            { data:"estado",         class:"textFont text-left"/*,      width: "40" */    }
+        ],
+        select: {
+            style:    'os',
+            selector: 'td:first-child'
+        },
+//        columnDefs: [
+//            {
+//                targets: [ 1 ],
+//                hidden: true,
+//                searchable: false
+//            }      
+//        ],
+        bDestroy: true
+  }); 
     editor = new $.fn.dataTable.Editor( {
-    ajax: "../Menus/ObtenerListadodeMenu",
+    ajax: {url:"../Menus/EditarMenu",
+          type:"post",
+          data:{menu_id:1}
+    },
     table: "#tblmenu",
     idSrc: "menu_id",
     fields: [ {
+                label: "Menu_id:",
+                name: "menu_id"
+            },
+            {
+                label: "Menu_id:",
+                name: "menu_id_1",
+//                visible:false
+            },
+            {
                 label: "Menu:",
                 name: "menu"
             }, {
@@ -151,35 +203,6 @@ $(document).ready(function () {
     $('#tblmenu').on( 'click', 'tbody td:not(:first-child)', function (e) {
         editor.inline( this );
     } );
- 
-    myTable = $('#tblmenu').DataTable({
-        initComplete: function () {
-            jsRemoveWindowLoad();
-        },
-        order: [[ 1, 'asc' ]],
-        scrollY: 450,
-        scrollX: true,
-        idSrc:  'menu_id',
-        ajax: {
-            url: "../Menus/ObtenerListadodeMenu",
-            dataSrc: "",
-            type:"POST"
-        },
-        columns:[ 
-            
-            { data:"menu",           class:"textFont text-left"/*,      width: "20" */    },
-            { data:"ruta",           class:"textFont text-left"/*,      width: "100"*/    },
-            { data:"descripcion",    class:"textFont text-left"/*,      width: "100"*/    },
-            { data:"orden",          class:"textFont text-left"/*,      width: "80" */    },
-            { data:"padre",          class:"textFont text-left"/*,      width: "200"*/    },
-            { data:"estado",         class:"textFont text-left"/*,      width: "40" */    }
-        ],
-        select: {
-            style:    'os',
-            selector: 'td:first-child'
-        },
-        bDestroy: true
-  }); 
    });
   
 
