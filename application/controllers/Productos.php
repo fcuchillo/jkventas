@@ -1,7 +1,17 @@
 <?php
  require_once 'application/controllers/jkventas_controller.php';
+// require_once 'assets/plugins/datatables/extensions/Editor/php/DataTables.php';
+// include( "../../php/DataTables.php" );
 defined('BASEPATH') OR exit('No direct script access allowed');
 use Illuminate\Database\Capsule\Manager as DB;
+use DataTables\Editor,
+    DataTables\Editor\Field,
+    DataTables\Editor\Format,
+    DataTables\Editor\Mjoin,
+    DataTables\Editor\Options,
+    DataTables\Editor\Upload,
+    DataTables\Editor\Validate,
+    DataTables\Editor\ValidateOptions;
 class Productos extends jkventas_controller {
     public function __construct() {
         parent::__construct();
@@ -36,27 +46,74 @@ class Productos extends jkventas_controller {
     }
     
     public function MantenimientoProducto(){
-        $producto_id    = $this->input->post($data[1]['action']);   
+//        $todo    = $this->input->post($data);   
+         $todo    = $_POST['data'];
+//        var_dump($todo);
 //        print_r($producto_id);
-        foreach ($producto_id as $key => $value) {
+        $objeto= array();
+        $accion=null;
+        if(isset($todo)){
+        foreach ($todo as $key => $value) {
 //            foreach ($value as $key => $value) {
 //                print_r($key);
         if ($key=='action'){
-            print_r($key);
+            $accion=$value;
+        } else {
+            $objeto=$value;
         }
+        }   
                 
-                
-//            }
+//            } 
         }      
-
+        $producto_id=null;
+//        var_dump($objeto);
+        foreach ($objeto as $key =>$value){
+//            foreach ($value as $key => $value) {
+                if($key=='producto_id'){
+                    $producto_id=$value;
+                }
+//            }
+        }
         
-//        $producto       = Productos::where('producto_id','=',$producto_id )->first();
+        if($producto_id!=null && isset($producto_id)){
+          $producto= Producto::where('producto_id','=',$producto_id)->first();  
+        }
+//        var_dump($producto);
 //        $producto->delete();
-        $datos          = DB::select('CALL Lista_Productos(?,?,?,?,?,?)',['2018', 0, 0,0,0,'']); 
-//        print_r($producto);
-       echo json_encode($datos);
+//        $datos          = DB::select('CALL Lista_Productos(?,?,?,?,?,?)',['2018', 0, 0,0,0,'']); 
     }
-    
+    public function todo(){
+        Editor::inst( Producto::all())
+    ->fields(
+        Field::inst( 'nombre' )
+            ->validator( Validate::notEmpty( ValidateOptions::inst()
+                ->message( 'A first name is required' ) 
+            ) ),
+        Field::inst( 'color' )
+            ->validator( Validate::notEmpty( ValidateOptions::inst()
+                ->message( 'A last name is required' )  
+            ) )
+        /*Field::inst( 'position' ),
+        Field::inst( 'email' )
+            ->validator( Validate::email( ValidateOptions::inst()
+                ->message( 'Please enter an e-mail address' )   
+            ) ),
+        Field::inst( 'office' ),
+        Field::inst( 'extn' ),
+        Field::inst( 'age' )
+            ->validator( Validate::numeric() )
+            ->setFormatter( Format::ifEmpty(null) ),
+        Field::inst( 'salary' )
+            ->validator( Validate::numeric() )
+            ->setFormatter( Format::ifEmpty(null) ),
+        Field::inst( 'start_date' )
+            ->validator( Validate::dateFormat( 'Y-m-d' ) )
+            ->getFormatter( Format::dateSqlToFormat( 'Y-m-d' ) )
+            ->setFormatter( Format::dateFormatToSql('Y-m-d' ) )*/
+    )
+    ->process( $_POST )
+    ->json();
+    }
 }
 
 

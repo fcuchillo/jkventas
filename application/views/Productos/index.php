@@ -130,19 +130,19 @@
                                             <th><center>MODIFICAR</center></th>
                                             <!--<th><center>ELIMINAR</center></th>-->
                                             
-                                            <th><center>PRODUCTO</center></th>
-                                            <th><center>MES</center></th>            
-                                            <th><center>MARCA</center></th>
-                                            <th><center>CATEGORIA</center></th>
+                                            <!--<th><center>PRODUCTO</center></th>-->
+                                            <!--<th><center>MES</center></th>-->            
+                                            <!--<th><center>MARCA</center></th>-->
+                                            <!--<th><center>CATEGORIA</center></th>-->
                                             <th><center>NOMBRE</center></th>
-                                            <th><center>TALLA</center></th>
+                                            <!--<th><center>TALLA</center></th>-->
                                             <th><center>COLOR</center></th>                                            
-                                            <th><center>PRECIO COMRPO</center></th>
-                                            <th><center>PRECIO VENTA</center></th>                                            
-                                            <th><center>FECHA COMPRA</center></th>
-                                            <th><center>ESTADO</center></th>
-                                            <th><center>DESCRIPCION</center></th>
-                                            <th><center>OBSERVACION</center></th>
+                                            <!--<th><center>PRECIO COMRPO</center></th>-->
+                                            <!--<th><center>PRECIO VENTA</center></th>-->                                            
+                                            <!--<th><center>FECHA COMPRA</center></th>-->
+                                            <!--<th><center>ESTADO</center></th>-->
+                                            <!--<th><center>DESCRIPCION</center></th>-->
+                                            <!--<th><center>OBSERVACION</center></th>-->
                                         </tr>            
                                     </thead>
                                     <tbody>
@@ -199,18 +199,99 @@ var editor;
 
 $(document).ready(function () {
     
-    $('#btnBuscar').on('click', function() {
-        ObtenerParametros();
-        buscarCoberturasConglomerado();
-    });
-    
-    $('#btnLimpiar').on('click', function(){        
-        $('#mes').append('<option value="0" selected="selected">Todos</option>');
-        $('#estado').val(0);
-        $('#marca').val(0);
-        $('#categoria').val(0);
-        $("#nombre").val("");            
-    });
+//    $('#btnBuscar').on('click', function() {
+////        ObtenerParametros();
+//        buscarCoberturasConglomerado();
+//    });
+//    
+//    $('#btnLimpiar').on('click', function(){        
+//        $('#mes').append('<option value="0" selected="selected">Todos</option>');
+//        $('#estado').val(0);
+//        $('#marca').val(0);
+//        $('#categoria').val(0);
+//        $("#nombre").val("");            
+//    });
+editor = new $.fn.dataTable.Editor( {
+    ajax: "../Productos/todo",
+    table: "#tblProducto",
+    idSrc: "producto_id",
+    fields: [ 
+       /* {name: "producto_id"}, 
+        {name: "mes"}, 
+        {name: "marca"}, 
+        {name: "categoria"}, */
+        {name: "nombre"}, 
+       // {name: "talla"}, 
+        {name: "color"}
+        /*{name: "precio_compra"}, 
+        {name: "precio_venta"}, 
+        {name: "fecha_compra"}, 
+        {name: "estado"}, 
+        {name: "descripcion"}, 
+        {name: "observacion"}*/
+        ]
+    } ); 
+
+    $('#tblProducto').on( 'click', 'tbody td:not(:first-child)', function (e) {
+//        console.log(this);
+        editor.inline( this );
+    } );
+ 
+   $('#tblProducto').DataTable({
+//        initComplete: function () {
+//            jsRemoveWindowLoad();
+//        },
+        dom: "Bfrtip",
+        order: [[ 1, 'asc' ]],
+        scrollY: 450,
+        scrollX: true,
+        idSrc:  'producto_id',
+        ajax: "../Productos/todo",
+//            url: "../Productos/todo",
+//            dataSrc: "",
+//            type:"POST"
+//            data: { 
+//                anio        : anio, 
+//                mes         : mes, 
+//                estado      : estado, 
+//                marca       : marca,                 
+//                categoria   : categoria,                 
+//                nombre      : nombre
+//            },
+//        },
+        columns:[ 
+            {
+                data: null,
+                defaultContent: '',
+                className: 'select-checkbox',
+                orderable: false
+            },
+//            /*{ data:"producto_id",           class:"textFont text-left"/*,      width: "100"*/    },
+//            { data:"mes",                   class:"textFont text-left"/*,      width: "20" */    },            
+//            { data:"marca",                 class:"textFont text-left"/*,      width: "100"*/    },
+//            { data:"categoria",             class:"textFont text-left"/*,      width: "80" */    },
+            { data:"nombre",                class:"textFont text-left"/*,      width: "200"*/    },
+//            { data:"talla",                 class:"textFont text-left"/*,      width: "40" */    },
+            { data:"color",                 class:"textFont text-left"/*,      width: "40" */    }            
+//            { data:"precio_compra",         class:"textFont text-left"/*,      width: "40" */    },            
+//            { data:"precio_venta",          class:"textFont text-left"/*,      width: "40" */    },
+//            { data:"fecha_compra",          class:"textFont text-left"/*,      width: "60" */    },
+//            { data:"estado",                class:"textFont text-left"/*,      width: "40" */    },            
+//            { data:"descripcion",           class:"textFont text-left"/*,      width: "100"*/    },
+//            { data:"observacion",           class:"textFont text-left"/*,      width: "40" */    }
+        ],
+        select: {
+            style:    'os',
+            selector: 'td:first-child'
+        },
+        buttons: [
+            { extend: "create", editor: editor },
+            { extend: "edit",   editor: editor },
+            { extend: "remove", editor: editor }
+        ],
+        
+        bDestroy: true
+  });
 });
 
 function ObtenerParametros(){
@@ -224,28 +305,28 @@ function ObtenerParametros(){
 
 function buscarCoberturasConglomerado(){
     editor = new $.fn.dataTable.Editor( {
-    ajax: "../Productos/MantenimientoProducto",
+    ajax: "../Productos/todo",
     table: "#tblProducto",
     idSrc: "producto_id",
     fields: [ 
-        {name: "producto_id"}, 
+       /* {name: "producto_id"}, 
         {name: "mes"}, 
         {name: "marca"}, 
-        {name: "categoria"}, 
+        {name: "categoria"}, */
         {name: "nombre"}, 
-        {name: "talla"}, 
-        {name: "color"},
-        {name: "precio_compra"}, 
+       // {name: "talla"}, 
+        {name: "color"}
+        /*{name: "precio_compra"}, 
         {name: "precio_venta"}, 
         {name: "fecha_compra"}, 
         {name: "estado"}, 
         {name: "descripcion"}, 
-        {name: "observacion"}
+        {name: "observacion"}*/
         ]
     } ); 
 
     $('#tblProducto').on( 'click', 'tbody td:not(:first-child)', function (e) {
-        console.log(this);
+//        console.log(this);
         editor.inline( this );
     } );
  
@@ -259,17 +340,17 @@ function buscarCoberturasConglomerado(){
         scrollX: true,
         idSrc:  'producto_id',
         ajax: {
-            url: "../Productos/ObtenerProductos",
+            url: "../Productos/todo",
             dataSrc: "",
-            type:"POST",
-            data: { 
-                anio        : anio, 
-                mes         : mes, 
-                estado      : estado, 
-                marca       : marca,                 
-                categoria   : categoria,                 
-                nombre      : nombre
-            },
+            type:"POST"
+//            data: { 
+//                anio        : anio, 
+//                mes         : mes, 
+//                estado      : estado, 
+//                marca       : marca,                 
+//                categoria   : categoria,                 
+//                nombre      : nombre
+//            },
         },
         columns:[ 
             {
@@ -278,19 +359,19 @@ function buscarCoberturasConglomerado(){
                 className: 'select-checkbox',
                 orderable: false
             },
-            { data:"producto_id",           class:"textFont text-left"/*,      width: "100"*/    },
-            { data:"mes",                   class:"textFont text-left"/*,      width: "20" */    },            
-            { data:"marca",                 class:"textFont text-left"/*,      width: "100"*/    },
-            { data:"categoria",             class:"textFont text-left"/*,      width: "80" */    },
+//            /*{ data:"producto_id",           class:"textFont text-left"/*,      width: "100"*/    },
+//            { data:"mes",                   class:"textFont text-left"/*,      width: "20" */    },            
+//            { data:"marca",                 class:"textFont text-left"/*,      width: "100"*/    },
+//            { data:"categoria",             class:"textFont text-left"/*,      width: "80" */    },
             { data:"nombre",                class:"textFont text-left"/*,      width: "200"*/    },
-            { data:"talla",                 class:"textFont text-left"/*,      width: "40" */    },
-            { data:"color",                 class:"textFont text-left"/*,      width: "40" */    },            
-            { data:"precio_compra",         class:"textFont text-left"/*,      width: "40" */    },            
-            { data:"precio_venta",          class:"textFont text-left"/*,      width: "40" */    },
-            { data:"fecha_compra",          class:"textFont text-left"/*,      width: "60" */    },
-            { data:"estado",                class:"textFont text-left"/*,      width: "40" */    },            
-            { data:"descripcion",           class:"textFont text-left"/*,      width: "100"*/    },
-            { data:"observacion",           class:"textFont text-left"/*,      width: "40" */    }
+//            { data:"talla",                 class:"textFont text-left"/*,      width: "40" */    },
+            { data:"color",                 class:"textFont text-left"/*,      width: "40" */    }            
+//            { data:"precio_compra",         class:"textFont text-left"/*,      width: "40" */    },            
+//            { data:"precio_venta",          class:"textFont text-left"/*,      width: "40" */    },
+//            { data:"fecha_compra",          class:"textFont text-left"/*,      width: "60" */    },
+//            { data:"estado",                class:"textFont text-left"/*,      width: "40" */    },            
+//            { data:"descripcion",           class:"textFont text-left"/*,      width: "100"*/    },
+//            { data:"observacion",           class:"textFont text-left"/*,      width: "40" */    }
         ],
         select: {
             style:    'os',

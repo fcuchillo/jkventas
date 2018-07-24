@@ -34,20 +34,19 @@ class Database {
 	 * Constructor
 	 */
 
-	/**
-	 * Database instance constructor.
-	 *  @param string[] $opts Array of connection parameters for the database:
-	 *    <code>
-	 *      array(
-	 *          "user" => "", // User name
-	 *          "pass" => "", // Password
-	 *          "host" => "", // Host name
-	 *          "port" => "", // Port
-	 *          "db"   => "", // Database name
-	 *          "type" => ""  // Datable type: "Mysql", "Postgres" or "Sqlite"
-	 *      )
-	 *    </code>
-	 */
+	
+	 /* Database instance constructor.
+	   @param string[] $opts Array of connection parameters for the database:*/
+//	     <code>
+        /* public $opts=array(
+	           "user" => "dorisdhf", // User name
+	           "pass" => "Facil123", // Password
+	           "host" => "fcuchillo", // Host name
+	           "port" => "3306", // Port
+	           "db"   => "jykale_bd", // Database name
+	           "type" => "Mysql"  // Datable type: "Mysql", "Postgres" or "Sqlite"
+	       );*/
+//	     </code>
 	function __construct( $opts )
 	{
 		$types = array( 'Mysql', 'Oracle', 'Postgres', 'Sqlite', 'Sqlserver', 'Db2', 'Firebird' );
