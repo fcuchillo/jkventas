@@ -8,7 +8,6 @@
 
 </div>
 <!-- ./wrapper -->
-<script src="<?php echo base_url();?>assets/plugins/jQuery/jquery-2.2.3.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/plugins/jQuery/jquery.form.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/plugins/jQueryUI/jquery-ui.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/plugins/file/fileinput.js" type="text/javascript"></script>

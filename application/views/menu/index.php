@@ -57,8 +57,8 @@
                 <table id="tblmenu" class="table table-condensed table-striped" data-toggle="table" >
                     <thead id="tblmenucabecera">
                         <tr class="info">
-                            <th align="center">Menu_id</th>
-                            <th align="center"></th>
+                            <th align="center"><center><a href="#"><span class="glyphicon glyphicon-plus"></span></a></center></th>
+                            <!--<th align="center"></th>-->
                             <th align="center">Menú</th>
                             <th align="center">Ruta</th>
                             <th align="center">Descripción</th>
@@ -98,7 +98,8 @@
                 </button>
                 <h4 class="modal-title" id="popuptitle"></h4>
             </div>
-            <div class="modal-body">
+            <div id="data-menu"></div>
+<!--            <div class="modal-body">
                 <table id="inquestResultHouseholds" class="table table-condensed table-striped" data-toggle="table" >
                     <thead id="inquestResultHeadtwo">
                         <tr class="info">
@@ -111,100 +112,87 @@
                         </tr>            
                     </thead>
                 </table> 
+            </div>-->
+            <div class="modal-content"> 
+                <div class="modal-header">
+                    <button type="button" class="btn btn-block btn-danger btn-sm" id="btnGuardar" name="btnGuardar">Aceptar</button>
+                </div> 
             </div>
         </div>
     </div>
 </div>
 <!--End Region Modal-->
-
 <script>
-    
 var myTable;
-var editor;
 $(document).ready(function () {
-    myTable = $('#tblmenu').DataTable({
+    cargarTodoMenu();
+    $('#btnMenueditar').click(function(){
+//        $('#myModal').modal('show'); 
+        alert('hiciste click');
+    });
+    $('#btnGuardar').click(function(){
+        EditarMenu();
+    });
+    
+  });
+  
+  function EditarMenu(){
+       var form = $("#frmMenu");
+       var data = form.serialize();
+//       console.log(data);
+        $.ajax({
+          type:'post',
+          data:data,
+          url:'../Menus/EditarMenu',
+          success:function(response){
+            console.log(response);
+            $('#myModal').modal('hide'); 
+            cargarTodoMenu();
+          }
+      })
+  }
+  
+  function cargarTodoMenu(){
+        myTable = $('#tblmenu').DataTable({
         initComplete: function () {
             jsRemoveWindowLoad();
         },
-        order: [[ 1, 'asc' ]],
-        scrollY: 450,
-        scrollX: true,
-        idSrc:  'menu_id',
-        keys: true,
-        ajax: {
-            url: "../Menus/ObtenerListadodeMenu",
-            dataSrc: "",
-            type:"POST"
-        },
+        ajax:{
+            dataType: 'json',
+            url:'../Menus/ObtenerListadodeMenu',
+            type:'post',
+            dataSrc:""
+        }, 
         columns:[ 
-            
-            { data:"menu_id",        class:"textFont text-left"/*,      width: "20" */    },
-            { data:"menu_id_1",        class:"textFont text-left"},
-            { data:"menu",           class:"textFont text-left"/*,      width: "20" */    },
+            { data: 'id', render: function(value, type, full, meta) {
+                  return '<td><center>'+
+                         '<a href="javascript:void(0);" id="btnMenueditar" onclick="Editar('+full.menu_id+');" ><span class="glyphicon glyphicon-pencil"></span></a>'+
+                         '</center></td>'
+                        }  },
+            { data:"menu",           class:"textFont text-left",order:false/*,      width: "20" */    },
             { data:"ruta",           class:"textFont text-left"/*,      width: "100"*/    },
             { data:"descripcion",    class:"textFont text-left"/*,      width: "100"*/    },
             { data:"orden",          class:"textFont text-left"/*,      width: "80" */    },
             { data:"padre",          class:"textFont text-left"/*,      width: "200"*/    },
             { data:"estado",         class:"textFont text-left"/*,      width: "40" */    }
         ],
-        select: {
-            style:    'os',
-            selector: 'td:first-child'
-        },
-//        columnDefs: [
-//            {
-//                targets: [ 1 ],
-//                hidden: true,
-//                searchable: false
-//            }      
-//        ],
+        columnDefs: [
+        { "orderable": false, "targets": 0 }
+        ],
+        autoWidth: true,
         bDestroy: true
-  }); 
-    editor = new $.fn.dataTable.Editor( {
-    ajax: {url:"../Menus/EditarMenu",
-          type:"post",
-          data:{menu_id:1}
-    },
-    table: "#tblmenu",
-    idSrc: "menu_id",
-    fields: [ {
-                label: "Menu_id:",
-                name: "menu_id"
-            },
-            {
-                label: "Menu_id:",
-                name: "menu_id_1",
-//                visible:false
-            },
-            {
-                label: "Menu:",
-                name: "menu"
-            }, {
-                label: "Ruta:",
-                name: "ruta"
-            }, {
-                label: "Descripcion:",
-                name: "descripcion"
-            }, {
-                label: "Orden:",
-                name: "Orden"
-            }, {
-                label: "Padre:",
-                name: "padre"
-            }, {
-                label: "Estado",
-                name: "estado",
-                type: "select"
-            }
-        ]
-    } );
- 
-    // Activate an inline edit on click of a table cell
-    $('#tblmenu').on( 'click', 'tbody td:not(:first-child)', function (e) {
-        editor.inline( this );
-    } );
-   });
-  
-
-
+  });   
+  }
+  function Editar(id){
+      $.ajax({
+          type:'post',
+          data:{menu_id:id},
+          url:'../Menus/ObtenerMenu',
+          success:function(response){
+            console.log(response);
+            $('#myModal').modal('show'); 
+            $('#data-menu').html(response);
+          }
+      })
+  }
 </script>
