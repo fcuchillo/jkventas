@@ -139,7 +139,6 @@ $(document).ready(function () {
   function EditarMenu(){
        var form = $("#frmMenu");
        var data = form.serialize();
-//       console.log(data);
         $.ajax({
           type:'post',
           data:data,

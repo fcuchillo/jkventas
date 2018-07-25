@@ -5,9 +5,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-//use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 
 class Menu extends Eloquent {
 

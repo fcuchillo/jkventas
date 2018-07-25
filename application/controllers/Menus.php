@@ -4,7 +4,7 @@ require_once 'application/controllers/jkventas_controller.php';
 
 
 //use Exception;
-use aplication\models\Menu;
+//use aplication\models\Menu;
 use Illuminate\Http\Request;
 //use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -81,7 +81,7 @@ class Menus extends jkventas_controller {
         echo $s;
     }
     
-    function EditarMenu(Request $request ){
+    function EditarMenu(){
         $menu_id=$this->input->post('menu_id');
 //        $menu_id=$this->input->post('titulo');
 //        $menu_id=$this->input->post('icono');
@@ -93,11 +93,11 @@ class Menus extends jkventas_controller {
         
          
             
-//        $menu= Menu::where('menu_id','=',$menu_id)->first();
-        $model  = $request->all();
-        $menu->fill($model);
-//         $menu->setMenu_descripcion($this->input->post('descripcion'));
-//         $menu->save();
-        var_dump($menu);
+        $menu= Menu::where('menu_id','=',$menu_id)->first();
+//        $model  = $request->all();
+//        $menu->fill($model);
+         $menu->setMenu_descripcion($this->input->post('descripcion'));
+         $menu->save();
+//        var_dump($menu);
     }
 }
