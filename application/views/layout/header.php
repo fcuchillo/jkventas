@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/alertify/alertify.core.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/alertify/alertify.default.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/file/fileinput.css"/>
-  
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/multiselect/css/multi-select.css">
  
 
   <!-- PyEndes icons -->

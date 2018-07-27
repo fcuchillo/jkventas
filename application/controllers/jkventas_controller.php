@@ -31,6 +31,11 @@ class jkventas_controller extends CI_Controller{
          return Menu::all()->sortBy('orden');
          }
       }
+      public function CargarDatosPadre($menu_id){
+          //falta no cargar el mismo
+//          return Menu::where(array('padre_id' => NULL))->whereNotIn('menu_id',$menu_id)->get();
+          return Menu::where(array('padre_id' => NULL))->get();
+      }
       /*public function VerificarsiAccedeDesdePath(){
         //Validamos si es el path principal ? , si lo es deje accesar desde url
         if ($this->uri->uri_string()) {
