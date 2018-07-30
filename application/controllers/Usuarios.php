@@ -24,14 +24,18 @@ class Usuarios  extends jkventas_controller {
     public function ObtenerUsuario(){
         $usuario_id=$this->input->post('usuario_id');
         $usuario= Usuario::where('usuario_id','=',$usuario_id)->first();
-        echo $this->renderizarhtml($usuario,'edit');       
+        $usuario->accion='edit';
+        echo json_encode($usuario);
+//        echo $this->renderizarhtml($usuario,'edit');       
     }
     public function AgregarUsuario(){
         $id = $this->DB::table('t_usuario')->max('usuario_id');
         $usuario= new Usuario();
         $id=$id+1;
         $usuario->usuario_id=$id;
-        echo $this->renderizarhtml($usuario,'add');
+        $usuario->accion='add';
+        echo json_encode($usuario);
+//        echo $this->renderizarhtml($usuario,'add');
     }
     function EditarUsuario(){
         //obtencion de formulario en json
@@ -41,25 +45,36 @@ class Usuarios  extends jkventas_controller {
         $accion=$this->input->post('accion');
         if($accion=='edit'){
         $usuario= Usuario::where('usuario_id','=',$usuario_id)->first();
-        $usuario->usuario=$this->input->post('usuario');
-        $usuario->clave=$this->input->post('clave');
-        $usuario->observacion=$this->input->post('observacion');
-        $usuario->estado=$this->input->post('estado');
-        $usuario->save();
         }
-        else if($accion=='add'){
-        $usuario=new Menu();
+        if($accion=='add'){
+        $usuario=new Usuario();
         $id = $this->DB::table('t_usuario')->max('usuario_id');
-        $id=$id+1;
-        $data=array (
-           'usuario_id'=>$id,
-           'usuario'=>$this->input->post('titulo'),
-            'clave'=>$this->input->post('clave'),
-            'estado'=>$this->input->post('estado'),
-            'observacion'=>$this->input->post('observacion'),
-        );
-        $this->db->insert('t_usuario',$data);
+        $usuario->usuario_id=$id+1;
         }
+        //campos generales
+        $usuario->usuario=$usuario->isEmpty($this->input->post('usuario'));
+        $usuario->clave=$usuario->isEmpty($this->input->post('clave'));
+        $usuario->observacion=$usuario->isEmpty($this->input->post('observacion'));
+        $usuario->estado=$this->input->post('estado')==1?true:false;
+        $usuario->save();
+        
+//        else if($accion=='add'){
+//        
+//        $usuario->usuario=$nombre;
+//        $usuario->clave=$clave;
+//        $usuario->observacion=$observacion;
+//        $usuario->estado=$estado;
+//        $usuario->save();
+//        $id=$id+1;
+//        $data=array (
+//           'usuario_id'=>$id,
+//           'usuario'=>$this->input->post('titulo'),
+//            'clave'=>$this->input->post('clave'),
+//            'estado'=>$this->input->post('estado'),
+//            'observacion'=>$this->input->post('observacion'),
+//        );
+//        $this->db->insert('t_usuario',$data);
+//        }
         echo $result;
     }
     function renderizarhtml(Usuario $usuario,$accion){
@@ -172,4 +187,12 @@ class Usuarios  extends jkventas_controller {
         $rol=Rol::where('rol_id','=',$rol_id)->first();
         echo $this->RenderHtmlRol($rol,'edit');
     }
+    function CargadodeRol(){
+        $usuario_id=$this->input->post('usuario_id');
+        $rol_id= Usuariopor_rol::where('usuario_id','=',$usuario_id)->first();
+        $roles['rol']= Rol::where('rol_id','=',$rol_id->rol_id)->first();
+        $roles['todo']= Rol::all('rol_id','titulo');
+        echo json_encode($roles);
+    }
+
 }

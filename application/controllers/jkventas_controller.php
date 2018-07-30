@@ -17,7 +17,7 @@ class jkventas_controller extends CI_Controller{
 	}
       public function CargarMenuPadre(){
         if(isset($_SESSION['session_user'])) { 
-         return $this->datosparamenu['menu_padre']= $this->DB::table("t_menu")->select("*")->where(array('padre_id' => NULL))
+         return $this->DB::table("t_menu")->select("*")->where(array('padre_id' => NULL))
                                                       ->whereIn('menu_id',function($query){
                                                        $usuario_id =$this->session->userdata['session_user']['usuario_id'];
                                                        $rol= Usuariopor_rol::where('usuario_id','=',$usuario_id)->first();
@@ -28,7 +28,13 @@ class jkventas_controller extends CI_Controller{
       public function CargarMenuHijo(){
         if(isset($_SESSION['session_user'])) { 
           $usuario =$this->session->userdata['session_user']['usuario'];
-         return Menu::all()->sortBy('orden');
+//         return Menu::all()->sortBy('orden');
+          return $this->DB::table("t_menu")->select("*")->whereNotNull('padre_id')
+                                                      ->whereIn('menu_id',function($query){
+                                                       $usuario_id =$this->session->userdata['session_user']['usuario_id'];
+                                                       $rol= Usuariopor_rol::where('usuario_id','=',$usuario_id)->first();
+                                                       $query->select('menu_id')->from('t_menu_x_rol')->where('rol_id','=',$rol->rol_id);
+                                                      })->get()->sortBy('orden');
          }
       }
       public function CargarDatosPadre($menu_id){

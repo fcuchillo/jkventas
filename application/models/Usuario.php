@@ -8,5 +8,7 @@ class Usuario extends Eloquent {
     protected $table = 't_usuario';
 
     public $timestamps = false;
-
+    function isEmpty($value){
+        return empty(trim($value))?null:$value;
+    }
 }

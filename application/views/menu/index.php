@@ -251,6 +251,7 @@ $(document).ready(function () {
               var registrados = [];
               registrados=json2['registrados'];
            $('#disponibles option').remove();
+//           $('#disponibles').multiSelect('refresh');
             $.each(json2['todo'], function(j, resultado) {
                if(registrados.length>=0 && registrados.indexOf(resultado.rol_id) != -1){
                    $('#disponibles').append($('<option>').text(resultado.titulo).attr({value:resultado.rol_id,selected:'selected'}));
@@ -262,7 +263,7 @@ $(document).ready(function () {
             $('#disponibles').multiSelect({
                 selectableHeader: "<div class='custom-header'><center><strong>ROL NO ASIGNADO</strong></center></div>",
                 selectionHeader:  "<div class='custom-header'><center><strong>ROL ASIGNADO</strong></center></div>",    
-                refresh:true
+                refresh:false
             });
             $('#menu_id').val(menu_id);
             $('#myModalRoles').modal('show'); 

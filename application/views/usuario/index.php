@@ -60,6 +60,7 @@
                             <th align="center"><center><a href="javascript:void(0);" onclick="AgregarUsuario();"><span class="glyphicon glyphicon-plus"></span></a></center></th>
                             <th align="center">Usuario</th>
                             <th align="center">Clave</th>
+                            <th align="center">Rol</th>
                             <th align="center">Estado</th>
                             <th align="center">Observacion</th>
                         </tr>            
@@ -77,27 +78,58 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">x</span>
                 </button>
-                <h4 class="modal-title" id="popuptitle"></h4>
+                <h4 class="modal-title" id="popuptitle">MANTENIMIENTO DE USUARIO</h4>
             </div>
-            <div id="data-usuario"></div>
-<!--            <div class="modal-body">
-                <table id="inquestResultHouseholds" class="table table-condensed table-striped" data-toggle="table" >
-                    <thead id="inquestResultHeadtwo">
-                        <tr class="info">
-                            <th ><center>Hogar</center></th>
-                            <th ><center>Nombre de Jefe Encuesta</center></th>
-                            <th ><center>Dirección Viv.</center></th>
-                            <th ><center>Edad</center></th>
-                            <th ><center>Parentesco</center></th>
-                            <th ><center>Sexo</center></th>
-                        </tr>            
-                    </thead>
-                </table> 
-            </div>-->
-            <div class="modal-content"> 
+            <div class="modal-body">
+                <form id="frmUsuario" name="frmUsuario">
+                    <input type="hidden" id="usuario_id" name="usuario_id" value="">
+                    <input type="hidden" class="form-control" value="" name="accion" id="accion">
+                    <div class="form-group">
+                        <label class="col-sm-12 col-form-label col-form-label-sm">LLave del Usuario</label>
+                        <input type="text" class="form-control" class="input-group input-group-sm" value="" name="txtusuario" id="txtusuario" readonly="true">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-12 col-form-label col-form-label-sm">Nombre de Usuario</label>
+                        <input type="text" class="form-control" class="input-group input-group-sm" value="" name="usuario" id="usuario">
+                    </div>
+                        <label class="col-sm-12 col-form-label col-form-label-sm">Clave</label>
+                        <input type="password" class="form-control" value="" name="clave" id="clave">
+                        <label class="col-sm-12 col-form-label col-form-label-sm">Estado</label>
+                        <select class="form-control input-sm" name="estado" id="estado"></select>
+                        <label class="col-sm-12 col-form-label col-form-label-sm">Observacion</label>
+                        <textarea id="observacion" name="observacion" class="form-control input-sm" rows="3" cols="5" maxlength="100"></textarea>
+                </form>
+            </div>
+            <div class="modal-footer"> 
                 <div class="modal-header">
-                    <button type="button" class="btn btn-block btn-danger btn-sm" id="btnGuardar" name="btnGuardar">Aceptar</button>
+                    <button type="submit" class="btn btn-primary" id="btnGuardar" >Guardar</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 </div> 
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myRolModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">x</span>
+                </button>
+                <h4 class="modal-title" id="popuptitle">Rol de Usuario</h4>
+            </div>
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form class="form" name="formRol" method="POST">
+                        <input type="hidden" value="" id="usuario_id" name="usuario_id">
+                        <select class="form-control" name="rol_id" id="rol_id">
+                        </select>
+                   </form>
+                </div>
+            </div>
+            <div class="modal-footer"> 
+                <button type="submit" class="btn btn-primary" id="btnGuardar" >Guardar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -118,18 +150,16 @@ $(document).ready(function () {
   });
   
   function GuardarUsuario(){
-       var form = $("#frmMenu");
+       var form = $("#frmUsuario");
        var data = form.serialize();
+//       console.log(data);
        //enviar datos en json
        //var formData = JSON.stringify($("#frmMenu").serializeArray());
         $.ajax({
           type:'post',
           data:data,
           url:'../Usuarios/EditarUsuario',
-//        dataType: 'json',
-//        contentType: 'application/json',
           success:function(response){
-//            console.log(response);
             $('#myModal').modal('hide'); 
             cargarTodoLosUsuarios();
           }
@@ -141,10 +171,27 @@ $(document).ready(function () {
 //          data:data,
           url:'../Usuarios/AgregarUsuario',
           success:function(response){
-            $('#myModal').modal('show'); 
-            $('#data-usuario').html(response);
+             var json = jQuery.parseJSON(response);
+             AsiganciondeValores(json);
           }
       })
+  }
+  function AsiganciondeValores(json){
+             $('#usuario_id').val(json.usuario_id);
+             $('#txtusuario').val(json.usuario_id);
+             $('#accion').val(json.accion);
+             $('#usuario').val(json.usuario);
+             $('#observacion').val(json.observacion);
+             $('#estado option').remove();
+             $('#estado').append($('<option>', {value:"1", text:'Activo'}));
+             $('#estado').append($('<option>', {value:"0", text:'Inactivo'}));
+             if(json.estado!=undefined){
+                 if(json.estado==1)
+                    $('#estado option[value="1"]').attr("selected", "selected");
+                else
+                    $('#estado option[value="0"]').attr("selected", "selected");
+             }
+             $('#myModal').modal('show'); 
   }
   function cargarTodoLosUsuarios(){
         myTable = $('#tblusuario').DataTable({
@@ -163,9 +210,16 @@ $(document).ready(function () {
                          '<a href="javascript:void(0);" id="btnEliminar" onclick="EliminarUsuario('+full.usuario_id+');" ><span class="glyphicon glyphicon-trash" ></span></a>'+
                          '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" id="btnMenueditar" onclick="EditarUsuario('+full.usuario_id+');" ><span class="glyphicon glyphicon-pencil"></span></a>'+
                          '</center></td>'
-                        }  },
+                        }  
+             },
             { data:"usuario",           class:"textFont text-left",order:false/*,      width: "20" */    },
             { data:"clave",             class:"textFont text-left"/*,      width: "100"*/    },
+            {data: 'id', render: function(value, type, full, meta) {
+                  return '<td><center>'+
+                         '<a href="javascript:void(0);" onclick="CargarRol('+full.usuario_id+');" ><span class="glyphicon glyphicon-menu-hamburger" ></span></a>'+
+                         '</center></td>'
+                    }
+            },
             { data:"estado",            class:"textFont text-left"/*,      width: "100"*/    },
             { data:"observacion",       class:"textFont text-left"/*,      width: "80" */    }
         ],
@@ -182,8 +236,8 @@ $(document).ready(function () {
           data:{usuario_id:id},
           url:'../Usuarios/ObtenerUsuario',
           success:function(response){
-            $('#myModal').modal('show'); 
-            $('#data-usuario').html(response);
+              var json = jQuery.parseJSON(response);
+              AsiganciondeValores(json);
           }
       })
   }
@@ -199,4 +253,23 @@ $(document).ready(function () {
       })   
   }
  }
+ function CargarRol(usuario_id){
+// myRolModal
+    $.ajax({
+          type:'post',
+          data:{usuario_id:usuario_id},
+          url:'../Usuarios/CargadodeRol',
+          success:function(response){
+              var json2 = jQuery.parseJSON(response);
+              $('#rol_id option').remove();
+              $('#rol_id').append($('<option>').text('Ninguno').attr({value:null}));
+              $.each(json2['todo'], function(j, resultado) {
+                  $('#rol_id').append($('<option>').text(resultado.titulo).attr({value:resultado.rol_id}));
+             });
+             $('#usuario_id').val(usuario_id);
+             $('#myRolModal').modal('show');
+             cargarTodoLosUsuarios();
+        }
+    })
+}
 </script>
