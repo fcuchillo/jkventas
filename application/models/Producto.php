@@ -11,8 +11,11 @@ class Producto extends Eloquent {
 
     protected $primaryKey = 'producto_id';
     protected $table = 't_producto';
-
     public $timestamps = false;
-
+    
+    function isEmpty($value){
+        return empty(trim($value))?null:$value;
+    }
+    
 }
 

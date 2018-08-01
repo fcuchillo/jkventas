@@ -33,15 +33,16 @@
                         
                         <div class="col-md-1">
                             <label class="PyENDES-Label">Año</label>
-                            <select class="form-control input-sm" id="anio" name="anio">
+                            <select class="form-control input-sm" id="spnanio" name="spnanio">
                                 <option value="2018">2018</option>
+                                <option value="2019">2019</option>
                             </select>
                         </div>
                         
                         <div class="col-md-1" style="display: inline-block; width: 11% ">
                             <label class="PyENDES-Label">Mes</label>
                             <?php
-                                echo '<select class="form-control input-sm" id="mes" name="mes"><option value="0">Todos</option>';
+                                echo '<select class="form-control input-sm" id="spnmes" name="spnmes"><option value="0">Todos</option>';
                                 foreach ($mes as $value) {?>
                                     <?php echo '<option value="'.$value->mes_id.'" >'.$value->nombre.'</option>';
                                 }
@@ -52,7 +53,7 @@
                         <div class="col-md-1" style="display: inline-block; width: 11% ">
                             <label class="PyENDES-Label">Estado</label>                            
                             <?php
-                                echo '<select class="form-control input-sm" id="estado" name="estado"><option value="0">Todos</option>';
+                                echo '<select class="form-control input-sm" id="spnestado" name="spnestado"><option value="0">Todos</option>';
                                 foreach ($estado as $value) {?>
                                     <?php echo '<option value="'.$value->estado_id.'" >'.$value->descripcion.'</option>';
                                 }
@@ -63,7 +64,7 @@
                         <div class="col-md-2" style="display: inline-block; width: 15% ">
                             <label class="PyENDES-Label">Marca</label>
                             <?php
-                                echo '<select class="form-control input-sm" id="marca" name="marca"><option value="0">Todos</option>';
+                                echo '<select class="form-control input-sm" id="spnmarca" name="spnmarca"><option value="0">Todos</option>';
                                 foreach ($marca as $value) {?>
                                     <?php echo '<option value="'.$value->marca_id.'" >'.$value->nombre.'</option>';
                                 }
@@ -74,7 +75,7 @@
                         <div class="col-md-2" style="display: inline-block; width: 15% ">
                             <label class="PyENDES-Label">Categoria</label>
                             <?php
-                                echo '<select class="form-control input-sm" id="categoria" name="categoria"><option value="0">Todos</option>';
+                                echo '<select class="form-control input-sm" id="spncategoria" name="spncategoria"><option value="0">Todos</option>';
                                 foreach ($categoria as $value) {?>
                                     <?php echo '<option value="'.$value->categoria_id.'" >'.$value->nombre.'</option>';
                                 }
@@ -84,7 +85,7 @@
                         
                         <div class="col-md-1" style="display: inline-block; width: 20% "> 
                             <label class="PyENDES-Label">Nombre</label>
-                            <input type="text" class="form-control input-sm" id="nombre" name="nombre" placeholder="">
+                            <input type="text" class="form-control input-sm" id="txtnombre" name="txtnombre" placeholder="">
                         </div> 
                         
                         <div class="col-md-2">
@@ -123,14 +124,12 @@
                     <div class="col-sm-12">
                         <center><label style="visibility: collapse">Espacio : </label></center>
                         <!--Region Report-->
-                            
                                 <table id="tblProducto" class="table table-sm table-condensed table-bordered" name="tblProducto">
                                     <thead id="headCoberturaConglomerado">
-                                        <tr class="info">
-                                            <!--<th><center>MODIFICAR</center></th>-->
-                                            <!--<th><center>ELIMINAR</center></th>-->
-                                            
+                                        <tr class="info">                                            
+                                            <th align="center"><center><a href="javascript:void(0);" onclick="AgregarProducto();"><span class="glyphicon glyphicon-plus"></span></a></center></th>
                                             <th><center>PRODUCTO</center></th>                                            
+                                            <th><center>ANIO</center></th>
                                             <th><center>MES</center></th>
                                             <th><center>MARCA</center></th>
                                             <th><center>CATEGORIA</center></th>
@@ -144,80 +143,80 @@
                                             <th><center>DESCRIPCION</center></th>
                                             <th><center>OBSERVACION</center></th>
                                         </tr>            
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        if(isset($producto)){
-                                        foreach ($producto as $value) {
-                                            echo 
-                                            '<tr>                                                       
-                                                <td>'.$value->producto_id.'</td>
-                                                <td>'.$value->mes.'</td>                                                
-                                                <td>'.$value->marca.'</td>
-                                                <td>'.$value->categoria.'</td>
-                                                <td>'.$value->nombre.'</td>                                                
-                                                <td>'.$value->talla.'</td>
-                                                <td>'.$value->color.'</td>
-                                                <td>'.$value->precio_compra.'</td>
-                                                <td>'.$value->precio_venta.'</td>                                                
-                                                <td>'.$value->fecha_compra.'</td>
-                                                <td>'.$value->estado.'</td>
-                                                <td>'.$value->descripcion.'</td>
-                                                <td>'.$value->observacion.'</td>                                                    
-                                            </tr>';
-                                        }
-                                        }
-                                        ?>
-                                    </tbody>
+                                    </thead>                         
                                 </table>
                             
                         <!--End Region Report-->
                     </div>
                 </div>
-                
-                <form id="frmProducto" action="../Productos/EditarProducto">
-                    <div class="col-sm-12">
-                        <table id="tblmenu" class="table table-condensed table-striped" data-toggle="table" >'
-                            <label class="PyENDES-Label">Producto_id</label>
-                            <input type="text" class="form-control" <?php.$value->producto_id.?> name="producto_id" id="producto_id" readonly>
-                            <input type="hidden" class="form-control" value="'.$accion.'" name="accion" id="accion">
-                            <label class="PyENDES-Label">Mes</label>
-                            <input type="text" class="form-control" value="'.$producto->mes.'" name="mes" id="mes">
-                            <label class="PyENDES-Label">categoria</label>
-                            <input type="text" class="form-control" value="'.$producto->categoria.'" name="categoria" id="categoria">
-                            <label class="PyENDES-Label">nombre</label>
-                            <input type="text" class="form-control" value="'.$producto->nombre.'" name="nombre" id="nombre">
-                            <label class="PyENDES-Label">talla</label>
-                            <input type="text" class="form-control" value="'.$producto->talla.'" name="talla" id="talla">
-                            <label class="PyENDES-Label">color</label>
-                            <input type="text" class="form-control" value="'.$producto->color.'" name="color" id="color">
-                            <label class="PyENDES-Label">precio_compra</label>
-                            <input type="text" class="form-control" value="'.$producto->precio_compra.'" name="precio_compra" id="precio_compra">
-                            <label class="PyENDES-Label">precio_venta</label>
-                            <input type="text" class="form-control" value="'.$producto->precio_venta.'" name="precio_venta" id="precio_venta">
-                            <label class="PyENDES-Label">fecha_compra</label>
-                            <input type="text" class="form-control" value="'.$producto->fecha_compra.'" name="fecha_compra" id="fecha_compra">
-                            <label class="PyENDES-Label">estado</label>
-                            <input type="text" class="form-control" value="'.$producto->estado.'" name="estado" id="estado">
-                            <label class="PyENDES-Label">descripcion</label>
-                            <input type="text" class="form-control" value="'.$producto->descripcion.'" name="descripcion" id="descripcion">
-                            <label class="PyENDES-Label">observacion</label>
-                            <input type="text" class="form-control" value="'.$producto->observacion.'" name="observacion" id="observacion">
-                        </table>
-                    </div>                        
-                </form>   
-                
-            </div>
-
-        </div>
-        <!--End Region Box Result-->
     </section>
 </div>
 
 
 
-<!--Region Modal-->
 <div class="modal" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">x</span>
+                </button>
+                <h4 class="modal-title" id="popuptitle">MANTENIMIENTO DE USUARIO</h4>
+            </div>
+            <div class="modal-body">  
+                <form id="frmProducto" name="frmProducto">
+                    <div class="modal-body">   
+                        
+                            <label class="col-sm-12 col-form-label col-form-label-sm">Producto_id</label>
+                            <input type="text" id="producto_id" name="producto_id" value="" readonly>
+                            <input type="hidden" class="form-control" value="" name="accion" id="accion">
+                                               
+                            <label class="col-sm-12 col-form-label col-form-label-sm">anio</label>                            
+                            <input type="text" class="form-control" value="" name="anio" id="anio">                        
+                            
+                            <label class="col-sm-12 col-form-label col-form-label-sm">Mes</label>
+                            <select class="form-control input-sm" name="mes_id" id="mes_id"></select>
+                            <label class="col-sm-12 col-form-label col-form-label-sm">Marca</label>
+                            <select class="form-control input-sm" name="marca_id" id="marca_id"></select>
+                            <label class="col-sm-12 col-form-label col-form-label-sm">categoria</label>
+                            <select class="form-control input-sm" name="categoria_id" id="categoria_id"></select>
+                            <label class="col-sm-12 col-form-label col-form-label-sm">Nombre</label>
+                            <input type="text" class="form-control" value="" name="nombre" id="nombre">
+                            <label class="PyENDES-Label">Talla</label>
+                            <input type="text" class="form-control" value="" name="talla" id="talla">
+                            <label class="PyENDES-Label">Color</label>
+                            <input type="text" class="form-control" value="" name="color" id="color">
+                            <label class="PyENDES-Label">Precio compra</label>
+                            <input type="text" class="form-control" value="" name="precio_compra" id="precio_compra">
+                            <label class="PyENDES-Label">Precio Venta</label>
+                            <input type="text" class="form-control" value="" name="precio_venta" id="precio_venta">
+                            <label class="PyENDES-Label">Fecha Compra</label>
+                            <input type="text" class="form-control" value="" name="fecha_compra" id="fecha_compra">
+                            
+                            <label class="col-sm-12 col-form-label col-form-label-sm">Estado</label>
+                            <select class="form-control input-sm" name="estado_id" id="estado_id"></select>
+                                                        
+                            <label class="PyENDES-Label">descripcion</label>
+                            <input type="text" class="form-control" value="" name="descripcion" id="descripcion">
+                            <label class="PyENDES-Label">observacion</label>
+                            <input type="text" class="form-control" value="" name="observacion" id="observacion">  
+                       
+                    </div>                        
+                </form>   
+            </div>
+            <div class="modal-footer"> 
+                <div class="modal-header">
+                    <button type="submit" class="btn btn-primary" id="btnGuardar" >Guardar</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Region Modal-->
+<!--<div class="modal" id="myModal" role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -235,10 +234,10 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 
 <!--End Region Modal-->
-<div class="modal" id="myModalRoles" role="dialog">
+<!--<div class="modal" id="myModalRoles" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -260,7 +259,7 @@
         </div>
             </div>
         </div>
-    </div>
+    </div>-->
 
 
 <!--Region Scripts-->
@@ -278,51 +277,121 @@ var nombre=null;
 var editor;
 
     $(document).ready(function () {
-//        ObtenerParametros();
+        ObtenerParametros();
         CargarTodoProducto();    
-//        $('#btnBuscar').on('click', function() {
-//            ObtenerParametros();
-//            buscarCoberturasConglomerado();
-//        });
-//
-//        $('#btnLimpiar').on('click', function(){        
-//            $('#mes').append('<option value="0" selected="selected">Todos</option>');
-//            $('#estado').val(0);
-//            $('#marca').val(0);
-//            $('#categoria').val(0);
-//            $("#nombre").val("");            
-//        });
-     });
- 
-    function ObtenerParametros(){
-        anio=$('#anio').val();
-        mes=$('#mes').val();
-        estado= $('#estado').val();
-        marca= $('#marca').val();
-        categoria=$('#categoria').val();
-        nombre=$("#nombre").val();   
-    }
+        $('#btnBuscar').on('click', function() {
+            ObtenerParametros();
+            CargarTodoProducto();
+        });
 
+        $('#btnLimpiar').on('click', function(){        
+            $('#mes').append('<option value="0" selected="selected">Todos</option>');
+            $('#estado').val(0);
+            $('#marca').val(0);
+            $('#categoria').val(0);
+            $("#nombre").val("");            
+        });
+        
+        $('#btnEditar').on('click', function(){
+           alert('clicjdjfhf') ;
+        });
+        
+        $('#btnGuardar').click(function(){
+            GuardarProducto();
+        });
+        
+     });
+     
+    function ObtenerParametros(){
+        anio=$('#spnanio').val();
+        mes=$('#spnmes').val();
+        estado= $('#spnestado').val();
+        marca= $('#spnmarca').val();
+        categoria=$('#spncategoria').val();
+        nombre=$("#txtnombre").val();   
+    }    
+    
+    function GuardarProducto(){
+        var form = $("#frmProducto");
+        var data = form.serialize();
+        $.ajax({
+            type:'post',
+            data:data,
+            url:'../Productos/EditarProducto',
+            success:function(response){
+                $('#myModal').modal('hide'); 
+                CargarTodoProducto();
+            }
+        })
+    }
+    
+    function AgregarProducto(){               
+        $.ajax({
+            type:'post',
+            url:'../Productos/AgregarProducto',
+            success:function(response){
+                console.log(response);
+                var json = jQuery.parseJSON(response);
+                AsignacionValoresProducto(json);
+            }
+        })
+    }
+    
+    function EliminarProducto(id){
+        if(confirm("Desea Eliminar? ")){
+            $.ajax({
+               type:'post',
+               data:{producto_id:id},
+               url:'../Productos/EliminarProducto',
+               success:function(response){
+                   console.log(response);
+                   CargarTodoProducto();
+               }
+            })       
+        }       
+    }
+  
+    function EditarProducto(id){      
+        $.ajax({
+            type:'post',
+            data:{producto_id:id},
+            url:'../Productos/ObtenerProducto',
+            success:function(response){
+                console.log(response);
+                var json = jQuery.parseJSON(response);
+                AsignacionValoresProducto(json);
+            }
+        })      
+    }
 
     function CargarTodoProducto(){        
         myTable =$("#tblProducto").DataTable({
         initComplete: function () {
             jsRemoveWindowLoad();
         },          
-        ajax:{            
-          dataType:'json',        
-          url:'../Productos/ObtenerListaProductos',
-          type:'post',
-          datSrc:""         
-        },      
-        colums:[
-//            {data: 'id', render: function(value, type, full, meta) {
-//                  return '<td><center>'+
-//                         '<a href="javascript:void(0);" id="btnEliminar" onclick="Eliminar('+full.producto_id+');" ><span class="glyphicon glyphicon-trash" ></span></a>'+
-//                         '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" id="btnMenueditar" onclick="Editar('+full.producto_id+');" ><span class="glyphicon glyphicon-pencil"></span></a>'+
-//                         '</center></td>'
-//                        }  },
+        ajax:{
+            dataType: 'json',
+            url:'../Productos/ObtenerListaProductos',
+            type:'post',
+            dataSrc:"",
+            data: { 
+                anio        : anio, 
+                mes         : mes, 
+                estado      : estado, 
+                marca       : marca,                 
+                categoria   : categoria,                 
+                nombre      : nombre
+            }
+        },     
+        columns:[
+            {data: 'id', render: function(value, type, full, meta) {
+                  return '<td><center>'+
+                         '<a href="javascript:void(0);" id="btnEliminar" onclick="EliminarProducto('+full.producto_id+');" ><span class="glyphicon glyphicon-trash" ></span></a>'+
+                         '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" id="btnEditar" onclick="EditarProducto('+full.producto_id+');" ><span class="glyphicon glyphicon-pencil"></span></a>'+
+                         '</center></td>'
+                        }  },
             {data:"producto_id",    class:"textFont text-left"},
+            {data:"anio",           class:"textFont text_left"},
             {data:"mes",            class:"textFont text-left"},
             {data:"marca",          class:"textFont text-left"},
             {data:"categoria",      class:"textFont text-left"},
@@ -335,213 +404,75 @@ var editor;
             {data:"estado",         class:"textFont text-left"},
             {data:"descripcion",    class:"textFont text-left"},
             {data:"observacion",    class:"textFont text-left"}
+            
         ],
         columnDefs: [
             { "orderable": false, "targets": 0 }
         ],
         autoWidth: true,
         bDestroy: true
-  });
-  }
-  
-  function EliminarProducto(id){
-    if(confirm("Desea Eliminar? ")){
-        $.ajax({
-           type:'post',
-           data:{producto_id:id},
-           url:'../Productos/EliminarProducto',
-           success:function(response){
-               CargarTodoProducto();
-           }
-        })       
+        });
     }
-  }
-  
-  function EditarProducto(id){
-      $.ajax({
-          type:'post',
-          data:{producto_id:id},
-          url:'../Productos/OptenerProducto',
-          success:function(response){
-              
-          }
-      })
-  }
+ 
+    function AsignacionValoresProducto(json){
+        var productos= json['producto'];
+        $('#accion').val(productos.accion);
+        
+        $('#producto_id').val(productos.producto_id);
+        $('#anio').val(productos.anio);                
 
-    
-//
-//    editor = new $.fn.dataTable.Editor( {
-//    ajax: "../Productos/todo",
-//    table: "#tblProducto",
-//    idSrc: "producto_id",
-//    fields: [ 
-//        {name: "producto_id"}, 
-//        {name: "anio"}, 
-//        {name: "mes_id"}, 
-//        {name: "marca_id"}, 
-//        {name: "categoria_id"}, 
-//        {name: "nombre"}, 
-//        {name: "talla"}, 
-//        {name: "color"},
-//        {name: "precio_compra"}, 
-//        {name: "precio_venta"}, 
-//        {name: "fecha_compra"}, 
-//        {name: "estado_id"}, 
-//        {name: "descripcion"}, 
-//        {name: "observacion"}
-//        ]
-//    } ); 
-//
-//    $('#tblProducto').on( 'click', 'tbody td:not(:first-child)', function (e) {
-////        console.log(this);
-//        editor.inline( this );
-//    } );
-// 
-//   $('#tblProducto').DataTable({
-////        initComplete: function () {
-////            jsRemoveWindowLoad();
-////        },
-//        dom: "Bfrtip",
-//        order: [[ 1, 'asc' ]],
-//        scrollY: 450,
-//        scrollX: true,
-//        idSrc:  'producto_id',
-//        ajax: "../Productos/todo",
-////            url: "../Productos/todo",
-////            dataSrc: "",
-////            type:"POST"
-////            data: { 
-////                anio        : anio, 
-////                mes         : mes, 
-////                estado      : estado, 
-////                marca       : marca,                 
-////                categoria   : categoria,                 
-////                nombre      : nombre
-////            },
-////        },
-//        columns:[ 
-//            {
-//                data: null,
-//                defaultContent: '',
-//                className: 'select-checkbox',
-//                orderable: false
-//            },
-//            { data:"producto_id",           class:"textFont text-left"/*,      width: "100"*/    },
-//            { data:"anio",                   class:"textFont text-left"/*,      width: "20" */    },            
-//            { data:"mes_id",                   class:"textFont text-left"/*,      width: "20" */    },            
-//            { data:"marca_id",                 class:"textFont text-left"/*,      width: "100"*/    },
-//            { data:"categoria_id",             class:"textFont text-left"/*,      width: "80" */    },
-//            { data:"nombre",                class:"textFont text-left"/*,      width: "200"*/    },
-//            { data:"talla",                 class:"textFont text-left"/*,      width: "40" */    },
-//            { data:"color",                 class:"textFont text-left"/*,      width: "40" */    },            
-//            { data:"precio_compra",         class:"textFont text-left"/*,      width: "40" */    },            
-//            { data:"precio_venta",          class:"textFont text-left"/*,      width: "40" */    },
-//            { data:"fecha_compra",          class:"textFont text-left"/*,      width: "60" */    },
-//            { data:"estado_id",                class:"textFont text-left"/*,      width: "40" */    },            
-//            { data:"descripcion",           class:"textFont text-left"/*,      width: "100"*/    },
-//            { data:"observacion",           class:"textFont text-left"/*,      width: "40" */    }
-//        ],
-//        select: {
-//            style:    'os',
-//            selector: 'td:first-child'
-//        },
-//        buttons: [
-//            { extend: "create", editor: editor },
-//            { extend: "edit",   editor: editor },
-//            { extend: "remove", editor: editor }
-//        ],
-//        
-//        bDestroy: true
-//  });
-//});
-//
+        $('#mes_id option').remove();    
+        $.each(json['mes'], function(j, resultado) {
+            if(productos.mes_id===resultado.mes_id){
+                $('#mes_id').append($('<option>').text(resultado.nombre).attr({value:resultado.mes_id,selected:'selected'}));
+            }
+            else{
+               $('#mes_id').append($('<option>').text(resultado.nombre).attr('value', resultado.mes_id));
+            }
+        });
 
+        $('#marca_id option').remove();    
+        $.each(json['marca'], function(j, resultado) {
+            if(productos.marca_id===resultado.marca_id){
+                $('#marca_id').append($('<option>').text(resultado.nombre).attr({value:resultado.marca_id,selected:'selected'}));
+            }
+            else{
+                $('#marca_id').append($('<option>').text(resultado.nombre).attr('value', resultado.marca_id));
+            }
+        });
 
-//function buscarCoberturasConglomerado(){
-//    editor = new $.fn.dataTable.Editor( {
-//    ajax: "../Productos/todo",
-//    table: "#tblProducto",
-//    idSrc: "producto_id",
-//    fields: [ 
-//       /* {name: "producto_id"}, 
-//        {name: "mes"}, 
-//        {name: "marca"}, 
-//        {name: "categoria"}, */
-//        {name: "nombre"}, 
-//       // {name: "talla"}, 
-//        {name: "color"}
-//        /*{name: "precio_compra"}, 
-//        {name: "precio_venta"}, 
-//        {name: "fecha_compra"}, 
-//        {name: "estado"}, 
-//        {name: "descripcion"}, 
-//        {name: "observacion"}*/
-//        ]
-//    } ); 
-//
-//    $('#tblProducto').on( 'click', 'tbody td:not(:first-child)', function (e) {
-////        console.log(this);
-//        editor.inline( this );
-//    } );
-// 
-//    myTable = $('#tblProducto').DataTable({
-//        initComplete: function () {
-//            jsRemoveWindowLoad();
-//        },
-//        dom: "Bfrtip",
-//        order: [[ 1, 'asc' ]],
-//        scrollY: 450,
-//        scrollX: true,
-//        idSrc:  'producto_id',
-//        ajax: {
-//            url: "../Productos/todo",
-//            dataSrc: "",
-//            type:"POST"
-////            data: { 
-////                anio        : anio, 
-////                mes         : mes, 
-////                estado      : estado, 
-////                marca       : marca,                 
-////                categoria   : categoria,                 
-////                nombre      : nombre
-////            },
-//        },
-//        columns:[ 
-//            {
-//                data: null,
-//                defaultContent: '',
-//                className: 'select-checkbox',
-//                orderable: false
-//            },
-////            /*{ data:"producto_id",           class:"textFont text-left"/*,      width: "100"*/    },
-////            { data:"mes",                   class:"textFont text-left"/*,      width: "20" */    },            
-////            { data:"marca",                 class:"textFont text-left"/*,      width: "100"*/    },
-////            { data:"categoria",             class:"textFont text-left"/*,      width: "80" */    },
-//            { data:"nombre",                class:"textFont text-left"/*,      width: "200"*/    },
-////            { data:"talla",                 class:"textFont text-left"/*,      width: "40" */    },
-//            { data:"color",                 class:"textFont text-left"/*,      width: "40" */    }            
-////            { data:"precio_compra",         class:"textFont text-left"/*,      width: "40" */    },            
-////            { data:"precio_venta",          class:"textFont text-left"/*,      width: "40" */    },
-////            { data:"fecha_compra",          class:"textFont text-left"/*,      width: "60" */    },
-////            { data:"estado",                class:"textFont text-left"/*,      width: "40" */    },            
-////            { data:"descripcion",           class:"textFont text-left"/*,      width: "100"*/    },
-////            { data:"observacion",           class:"textFont text-left"/*,      width: "40" */    }
-//        ],
-//        select: {
-//            style:    'os',
-//            selector: 'td:first-child'
-//        },
-//        buttons: [
-//            { extend: "create", editor: editor },
-//            { extend: "edit",   editor: editor },
-//            { extend: "remove", editor: editor }
-//        ],
-//        
-//        bDestroy: true
-//  }); 
-//  }
-  
+        $('#categoria_id option').remove();    
+        $.each(json['categoria'], function(j, resultado) {
+            if(productos.categoria_id===resultado.categoria_id){
+                $('#categoria_id').append($('<option>').text(resultado.nombre).attr({value:resultado.categoria_id,selected:'selected'}));
+            }
+            else{
+                $('#categoria_id').append($('<option>').text(resultado.nombre).attr('value', resultado.categoria_id));
+            }
+          });
 
+        $('#nombre').val(productos.nombre);      
+        $('#talla').val(productos.talla);      
+        $('#color').val(productos.color);      
+        $('#precio_compra').val(productos.precio_compra);      
+        $('#precio_venta').val(productos.precio_venta);      
+        $('#fecha_compra').val(productos.fecha_compra);       
+
+        $('#estado_id option').remove();    
+        $.each(json['estado'], function(j, resultado) {
+            if(productos.marca_id===resultado.marca_id){
+                $('#estado_id').append($('<option>').text(resultado.nombre).attr({value:resultado.estado_id,selected:'selected'}));
+            }
+            else{
+                $('#estado_id').append($('<option>').text(resultado.nombre).attr('value', resultado.estado_id));
+            }
+        });
+
+        $('#descripcion').val(productos.descripcion); 
+        $('#observacion').val(productos.observacion); 
+
+        $('#myModal').modal('show');       
+    }
 
 </script>
 <!--End Region Scripts-->

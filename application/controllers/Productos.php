@@ -1,18 +1,9 @@
 <?php
  require_once 'application/controllers/jkventas_controller.php';
-// require_once 'assets/plugins/datatables/extensions/Editor/php/DataTables.php';
  include( "assets/plugins/datatables/extensions/Editor/php/DataTables.php" );
 defined('BASEPATH') OR exit('No direct script access allowed');
 use Illuminate\Database\Capsule\Manager as DB;
-use DataTables\Editor,
-    DataTables\Editor\Field,
-    DataTables\Editor\Format,
-    DataTables\Editor\Mjoin,
-    DataTables\Editor\Options,
-    DataTables\Editor\Upload,
-    DataTables\Editor\Validate,
-    DataTables\Editor\ValidateOptions;
-use Illuminate\Http\Request;
+
 
 class Productos extends jkventas_controller {
     public function __construct() {
@@ -25,7 +16,6 @@ class Productos extends jkventas_controller {
     public function index() {
         $data['layout_body']    = 'Productos/index';
         $data['producto']       = DB::select('CALL Lista_Productos(?,?,?,?,?,?)',['2018', 0, 0,0,0,'']);  
-//        $data['producto'] =null;
         $data['mes']            = Mes::all();
         $data['estado']         = Estado::all();
         $data['marca']          = Marca::all();
@@ -36,7 +26,7 @@ class Productos extends jkventas_controller {
         $this->load->view('main_template', $data);
     }    
     
-    public function ObtenerListaProductos(){
+    function ObtenerListaProductos(){
         $anio       = $this->input->post('anio');
         $mes        = $this->input->post('mes');
         $estado     = $this->input->post('estado');
@@ -44,138 +34,77 @@ class Productos extends jkventas_controller {
         $categoria  = $this->input->post('categoria');
         $nombre     = $this->input->post('nombre');        
         $datos      = DB::select('CALL Lista_Productos(?,?,?,?,?,?)',[$anio,$mes,$estado,$marca,$categoria,$nombre]); 
-       echo json_encode($datos);
+        echo json_encode($datos);
     }
     
-    function ObtenerProducto(){
-       $producto_id= $this->input->post('producto_id');
-       $producto= Productos::where('producto_id','=', $producto_id)->first();
-//       echo $this->
-               
+    public function ObtenerProducto(){       
+       $producto_id=$this->input->post('producto_id');
+       $producto= Producto::where('producto_id','=',$producto_id)->first();
+       $producto->accion='edit';
+       $general['mes']=Mes::all();
+       $general['estado']= Estado::all();
+       $general['marca']= Marca::all();
+       $general['categoria']= Categoria::all();
+       
+       $general['producto']=$producto;
+       echo json_encode($general);        
+    }
+    
+    function AgregarProducto(){
+        $id= $this->DB::table('t_producto')->max('producto_id');
+        $producto=new Producto();
+        $id=$id+1;
+        $producto->producto_id=$id;
+        $producto->accion='add';
+        
+        $general['mes']=Mes::all();
+        $general['estado']= Estado::all();
+        $general['marca']= Marca::all();
+        $general['categoria']= Categoria::all();
+       
+        $general['producto']=$producto;       
+        echo json_encode($general);
     }
             
     function EliminarProducto(){
         $producto_id= $this->input->post('producto_id');
-        $producto= Productos::where('producto_id','=',$producto_id)->first();
-        $producto=delete();
+        $producto= Producto::where('producto_id','=',$producto_id)->first();
+        $producto->delete();       
     }
     
-    
-
-
-//    public function MantenimientoProducto(){
-////        $todo    = $this->input->post($data);   
-//         $todo    = $_POST['data'];
-////        var_dump($todo);
-////        print_r($producto_id);
-//        $objeto= array();
-//        $accion=null;
-//        if(isset($todo)){
-//        foreach ($todo as $key => $value) {
-////            foreach ($value as $key => $value) {
-////                print_r($key);
-//        if ($key=='action'){
-//            $accion=$value;
-//        } else {
-//            $objeto=$value;
-//        }
-//        }   
-//                
-////            } 
-//        }      
-//        $producto_id=null;
-////        var_dump($objeto);
-//        foreach ($objeto as $key =>$value){
-////            foreach ($value as $key => $value) {
-//                if($key=='producto_id'){
-//                    $producto_id=$value;
-//                }
-////            }
-//        }
-//        
-//        if($producto_id!=null && isset($producto_id)){
-//          $producto= Producto::where('producto_id','=',$producto_id)->first();  
-//        }
-////        var_dump($producto);
-////        $producto->delete();
-////        $datos          = DB::select('CALL Lista_Productos(?,?,?,?,?,?)',['2018', 0, 0,0,0,'']); 
-//    }
-//    public function todo(){
-//        Editor::inst(Producto::all())
-//    ->fields(
-//            Field::inst( 'producto_id' )
-//            ->validator( Validate::notEmpty( ValidateOptions::inst()
-//                ->message( 'A first name is required' ) 
-//            ) ),
-//            Field::inst( 'anio' )
-//            ->validator( Validate::notEmpty( ValidateOptions::inst()
-//                ->message( 'A first name is required' ) 
-//            ) ),
-//            Field::inst( 'marca_id' )
-//            ->validator( Validate::notEmpty( ValidateOptions::inst()
-//                ->message( 'A first name is required' ) 
-//            ) ),
-//            Field::inst( 'categoria_id' )
-//            ->validator( Validate::notEmpty( ValidateOptions::inst()
-//                ->message( 'A first name is required' ) 
-//            ) ),
-//            Field::inst( 'nombre' )
-//            ->validator( Validate::notEmpty( ValidateOptions::inst()
-//                ->message( 'A first name is required' ) 
-//            ) ),
-//            Field::inst( 'talla' )
-//            ->validator( Validate::notEmpty( ValidateOptions::inst()
-//                ->message( 'A first name is required' ) 
-//            ) ),
-//            Field::inst( 'color' )
-//            ->validator( Validate::notEmpty( ValidateOptions::inst()
-//                ->message( 'A first name is required' ) 
-//            ) ),
-//            Field::inst( 'precio_compra' )
-//            ->validator( Validate::notEmpty( ValidateOptions::inst()
-//                ->message( 'A first name is required' ) 
-//            ) ),
-//            Field::inst( 'precio_venta' )
-//            ->validator( Validate::notEmpty( ValidateOptions::inst()
-//                ->message( 'A first name is required' ) 
-//            ) ),
-//            Field::inst( 'fecha_compra' )
-//            ->validator( Validate::notEmpty( ValidateOptions::inst()
-//                ->message( 'A first name is required' ) 
-//            ) ),
-//        Field::inst( 'estado_id' )
-//            ->validator( Validate::notEmpty( ValidateOptions::inst()
-//                ->message( 'A first name is required' ) 
-//            ) ),
-//        Field::inst( 'descripcion' )
-//            ->validator( Validate::notEmpty( ValidateOptions::inst()
-//                ->message( 'A last name is required' )  
-//            ) ),
-//        Field::inst( 'observacion' )
-//            ->validator( Validate::notEmpty( ValidateOptions::inst()
-//                ->message( 'A last name is required' )  
-//            ) )  
-//        /*Field::inst( 'observaciones' ),
-//        Field::inst( 'email' )
-//            ->validator( Validate::email( ValidateOptions::inst()
-//                ->message( 'Please enter an e-mail address' )   
-//            ) ),
-//        Field::inst( 'office' ),
-//        Field::inst( 'extn' ),
-//        Field::inst( 'age' )
-//            ->validator( Validate::numeric() )
-//            ->setFormatter( Format::ifEmpty(null) ),
-//        Field::inst( 'salary' )
-//            ->validator( Validate::numeric() )
-//            ->setFormatter( Format::ifEmpty(null) ),
-//        Field::inst( 'start_date' )
-//            ->validator( Validate::dateFormat( 'Y-m-d' ) )
-//            ->getFormatter( Format::dateSqlToFormat( 'Y-m-d' ) )
-//            ->setFormatter( Format::dateFormatToSql('Y-m-d' ) )*/
-//    )
-//    ->process($_POST)
-//    ->json();
-//    }
+    function EditarProducto(){
+        $result = ['status'=>'success', 'message'=>'Se modificó un registro...'];
+        $producto_id=$this->input->post('producto_id');
+        $accion=$this->input->post('accion');
+        
+        if($accion=='edit'){
+            $producto= Producto::where('producto_id','=',$producto_id)->first();
+        }
+        
+        if($accion=='add'){
+            $producto=new Producto();
+            $id = $this->DB::table('t_producto')->max('producto_id');
+            $producto->producto_id=$id+1;
+        }
+       
+        $producto->anio         = $producto->isEmpty($this->input->post('anio'));
+        $producto->mes_id       = $producto->isEmpty($this->input->post('mes_id'));
+        $producto->marca_id     = $producto->isEmpty($this->input->post('marca_id'));
+        $producto->categoria_id = $producto->isEmpty($this->input->post('categoria_id'));
+        $producto->nombre       = $producto->isEmpty($this->input->post('nombre'));
+        $producto->talla        = $producto->isEmpty($this->input->post('talla'));
+        $producto->color        = $producto->isEmpty($this->input->post('color'));
+        $producto->precio_compra= $producto->isEmpty($this->input->post('precio_compra'));
+        $producto->precio_venta = $producto->isEmpty($this->input->post('precio_venta'));
+        $producto->fecha_compra = $producto->isEmpty($this->input->post('fecha_compra'));
+        $producto->estado_id    = $producto->isEmpty($this->input->post('estado_id')); //para cambiar el estado el prudcto debe estar vendido
+        $producto->descripcion  = $producto->isEmpty($this->input->post('descripcion'));
+        $producto->observacion  = $producto->isEmpty($this->input->post('observacion'));
+                
+        $producto->save();
+        echo $result;
+    }    
+ 
 }
 
 
