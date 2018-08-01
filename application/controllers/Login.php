@@ -28,8 +28,10 @@ class Login extends jkventas_controller {
 
 
 //      $tokenSesionPass = $this->session->userdata['tokenSession']['tokenSessionPass'];
-      $user = Usuario::where('usuario','=',''.$usuario.'')
-                        ->where('clave','=',''.$claveSHA1.'')->get();
+      $user = $this->db->select('*')
+                       ->from('t_usuario')
+                       ->where('usuario',$usuario)
+                       ->where('clave',$claveSHA1)->get()->result();
 //      $claveBD = $this->UsuarioModel->obtenerClave($usuario);
       
 //      $tokenSesionPassTmp = sha1($tokenSesionPass.$claveBD[0]->CLAVE);

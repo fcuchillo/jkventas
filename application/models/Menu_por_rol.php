@@ -5,13 +5,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Menu_por_rol extends Eloquent {
 
-    protected $primaryKey = 'menu_rol_id';
-    protected $table = 't_menu_x_rol';
+class Menu_por_rol extends CI_Model {
 
-    public $timestamps = false;
+  function __construct() {
+        parent::__construct();
+        
+    }
 
 }

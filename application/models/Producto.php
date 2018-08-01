@@ -5,13 +5,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-use Illuminate\Database\Eloquent\Model as Eloquent;
+class Producto extends CI_Model {
 
-class Producto extends Eloquent {
-
-    protected $primaryKey = 'producto_id';
-    protected $table = 't_producto';
-    public $timestamps = false;
+  function __construct() {
+        parent::__construct();
+        
+    }
     
     function isEmpty($value){
         return empty(trim($value))?null:$value;

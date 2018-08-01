@@ -5,14 +5,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-use Illuminate\Database\Eloquent\Model as Eloquent;
+class Marca extends CI_Model {
 
-class Marca extends Eloquent {
-
-    protected $primaryKey = 'marca_id';
-    protected $table = 't_marca';
-
-    public $timestamps = false;
+  function __construct() {
+        parent::__construct();
+        
+    }
 
 }
 

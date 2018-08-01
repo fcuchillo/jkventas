@@ -5,14 +5,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-use Illuminate\Database\Eloquent\Model as Eloquent;
+class Mes extends CI_Model {
 
-class Mes extends Eloquent {
-
-    protected $primaryKey = 'mes_id';
-    protected $table = 't_mes';
-
-    public $timestamps = false;
+  function __construct() {
+        parent::__construct();
+        
+    }
 
 }
 

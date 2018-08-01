@@ -5,11 +5,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+//
+class Rol extends CI_Model {
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
-
-class Rol extends Eloquent {
-    protected $primaryKey = 'rol_id';
-    protected $table = 't_rol';
-    public $timestamps = false;
+    function __construct() {
+        parent::__construct();
+        
+    }
 }

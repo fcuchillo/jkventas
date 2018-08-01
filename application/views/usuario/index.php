@@ -180,6 +180,7 @@ $(document).ready(function () {
 //          data:data,
           url:'../Usuarios/AgregarUsuario',
           success:function(response){
+              console.log(response);
              var json = jQuery.parseJSON(response);
              AsiganciondeValores(json);
           }
@@ -245,7 +246,9 @@ $(document).ready(function () {
           data:{usuario_id:id},
           url:'../Usuarios/ObtenerUsuario',
           success:function(response){
+//              console.log(response);
               var json = jQuery.parseJSON(response);
+              console.log(json);
               AsiganciondeValores(json);
           }
       })

@@ -5,14 +5,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Categoria extends Eloquent {
 
-    protected $primaryKey = 'categoria_id';
-    protected $table = 't_categoria';
+class Categoria extends CI_Model {
 
-    public $timestamps = false;
+  function __construct() {
+        parent::__construct();
+        
+    }
 
 }
 
