@@ -241,7 +241,10 @@ $(document).ready(function () {
   }
  }
    function CargarRoles(menu_id){
-    $.ajax({
+//       $(this).removeData('bs.modal');
+
+//       $("#disponibles").multiSelect("clearSelection");
+       $.ajax({
           type:'post',
           data:{menu_id:menu_id},
           url:'../Menus/ObtenerRolporMenu',
@@ -250,8 +253,7 @@ $(document).ready(function () {
               var json2 = jQuery.parseJSON(response);
               var registrados = [];
               registrados=json2['registrados'];
-           $('#disponibles option').remove();
-//           $('#disponibles').multiSelect('refresh');
+            $('#disponibles').multiSelect('deselect_all');
             $.each(json2['todo'], function(j, resultado) {
                if(registrados.length>=0 && registrados.indexOf(resultado.rol_id) != -1){
                    $('#disponibles').append($('<option>').text(resultado.titulo).attr({value:resultado.rol_id,selected:'selected'}));
@@ -262,8 +264,7 @@ $(document).ready(function () {
              });
             $('#disponibles').multiSelect({
                 selectableHeader: "<div class='custom-header'><center><strong>ROL NO ASIGNADO</strong></center></div>",
-                selectionHeader:  "<div class='custom-header'><center><strong>ROL ASIGNADO</strong></center></div>",    
-                refresh:false
+                selectionHeader:  "<div class='custom-header'><center><strong>ROL ASIGNADO</strong></center></div>"
             });
             $('#menu_id').val(menu_id);
             $('#myModalRoles').modal('show'); 

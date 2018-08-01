@@ -132,7 +132,8 @@ class Menus extends jkventas_controller {
     }
     function ObtenerRolporMenu(){
         $roles=$this->DB::table("t_rol")->select("rol_id")->whereIn('rol_id',function($query){
-                                                        $query->select('rol_id')->from('t_usuario_x_rol')->where('rol_id','=', Menu_por_rol::where('menu_id','=',$this->input->post('menu_id'))->first()->menu_id);
+//                                                      $query->select('rol_id')->from('t_usuario_x_rol')->whereIn('rol_id','=', Menu_por_rol::where('menu_id','=',$this->input->post('menu_id'))->get());
+                                                        $query->select('rol_id')->from('t_menu_x_rol')->where('menu_id','=',$this->input->post('menu_id'))->get();
                                                         })->get();
       $datos['todo']=Rol::all('rol_id','titulo');
       $array=[];

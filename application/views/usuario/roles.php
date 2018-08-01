@@ -224,7 +224,7 @@ $(document).ready(function () {
               var json2 = jQuery.parseJSON(response);
               var registrados = [];
               registrados=json2['registrados'];
-           $('#disponibles option').remove();
+            $('#disponibles').multiSelect('deselect_all');
             $.each(json2['todo'], function(j, resultado) {
                if(registrados.length>=0 && registrados.indexOf(resultado.menu_id) != -1){
                    $('#disponibles').append($('<option>').text(resultado.titulo).attr({value:resultado.menu_id,selected:'selected'}));
@@ -235,8 +235,7 @@ $(document).ready(function () {
              });
             $('#disponibles').multiSelect({
                 selectableHeader: "<div class='custom-header'><center><strong>MENU NO ASIGNADO</strong></center></div>",
-                selectionHeader:  "<div class='custom-header'><center><strong>MENU ASIGNADO</strong></center></div>",    
-                refresh:true
+                selectionHeader:  "<div class='custom-header'><center><strong>MENU ASIGNADO</strong></center></div>"
             });
             $('#rol_id').val(id);
             $('#myModal').modal('show'); 

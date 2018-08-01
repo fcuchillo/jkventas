@@ -99,6 +99,10 @@ class Usuarios  extends jkventas_controller {
     }
     function EliminarUsuario(){
         $usuario_id=$this->input->post('usuario_id');
+        $usuario_x_rol= Usuariopor_rol::where('usuario_id','=',$usuario_id)->first();
+        if($usuario_x_rol!=NULL){
+            $usuario_x_rol->delete();
+        }
         $usuario= Usuario::where('usuario_id','=',$usuario_id)->first();
         $usuario->delete();
     }
@@ -190,9 +194,34 @@ class Usuarios  extends jkventas_controller {
     function CargadodeRol(){
         $usuario_id=$this->input->post('usuario_id');
         $rol_id= Usuariopor_rol::where('usuario_id','=',$usuario_id)->first();
-        $roles['rol']= Rol::where('rol_id','=',$rol_id->rol_id)->first();
+        if($rol_id!=NULL){
+            $roles['rol']= Rol::select('rol_id')->where('rol_id','=',$rol_id->rol_id)->first();
+        }
+        else{
+            $roles['rol']=[];
+        }
         $roles['todo']= Rol::all('rol_id','titulo');
         echo json_encode($roles);
     }
-
+    function AsignacionRoles(){
+        $usuario_id=$this->input->post('usuario_id');
+        $rol_id=$this->input->post('rol_id');
+        if($rol_id==-1){
+            $usuario_x_rol= Usuariopor_rol::where('usuario_id','=',$usuario_id)->first();
+            $usuario_x_rol->delete();
+        }
+        else{
+            $usuario_x_rol= Usuariopor_rol::where('usuario_id','=',$usuario_id)
+                                           ->where('rol_id','=',$rol_id)->first();
+                if($usuario_x_rol==NULL){
+                    $usuario_x_rol= new Usuariopor_rol();
+                    $id = Usuariopor_rol::max('usuario_rol_id');
+                    $usuario_x_rol->usuario_rol_id=$id+1;
+                    $usuario_x_rol->usuario_id=$usuario_id;
+                    $usuario_x_rol->rol_id=$rol_id;
+                    $usuario_x_rol->estado=1;
+                }
+                $usuario_x_rol->save();
+        }
+    }
 }

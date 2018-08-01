@@ -86,25 +86,30 @@
                     <input type="hidden" class="form-control" value="" name="accion" id="accion">
                     <div class="form-group">
                         <label class="col-sm-12 col-form-label col-form-label-sm">LLave del Usuario</label>
-                        <input type="text" class="form-control" class="input-group input-group-sm" value="" name="txtusuario" id="txtusuario" readonly="true">
+                        <input type="text" class="form-control" class="input-group input-group-sm" value="" name="txtusuario" id="txtusuario" disabled>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-12 col-form-label col-form-label-sm">Nombre de Usuario</label>
-                        <input type="text" class="form-control" class="input-group input-group-sm" value="" name="usuario" id="usuario">
-                    </div>
-                        <label class="col-sm-12 col-form-label col-form-label-sm">Clave</label>
-                        <input type="password" class="form-control" value="" name="clave" id="clave">
-                        <label class="col-sm-12 col-form-label col-form-label-sm">Estado</label>
-                        <select class="form-control input-sm" name="estado" id="estado"></select>
-                        <label class="col-sm-12 col-form-label col-form-label-sm">Observacion</label>
-                        <textarea id="observacion" name="observacion" class="form-control input-sm" rows="3" cols="5" maxlength="100"></textarea>
-                </form>
+                        <div class="form-group">
+                            <label class="col-sm-12 col-form-label col-form-label-sm">Nombre de Usuario</label>
+                            <input type="text" class="form-control required" class="input-group input-group-sm" value="" name="usuario" id="usuario" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-12 col-form-label col-form-label-sm">Clave</label>
+                            <input type="password" class="form-control required" value="" name="clave" id="clave" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-12 col-form-label col-form-label-sm">Estado</label>
+                            <select class="form-control input-sm" name="estado" id="estado"></select>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-12 col-form-label col-form-label-sm">Observacion</label>
+                            <textarea id="observacion" name="observacion" class="form-control input-sm" rows="3" cols="5" maxlength="100"></textarea>
+                        </div>
+                    
+               </form>
             </div>
             <div class="modal-footer"> 
-                <div class="modal-header">
-                    <button type="submit" class="btn btn-primary" id="btnGuardar" >Guardar</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                </div> 
+                <button type="button" class="btn btn-primary btn-responsive " data-dismiss="modal" >Close</button>
+                <button type="submit" class="btn btn-primary btn-responsive " id="btnGuardar">Guardar</button>
             </div>
         </div>
     </div>
@@ -121,19 +126,21 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <form class="form" name="formRol" method="POST">
-                        <input type="hidden" value="" id="usuario_id" name="usuario_id">
+                        <input type="hidden" value="" id="usuario_idd" name="usuario_idd">
                         <select class="form-control" name="rol_id" id="rol_id">
                         </select>
                    </form>
                 </div>
             </div>
             <div class="modal-footer"> 
-                <button type="submit" class="btn btn-primary" id="btnGuardar" >Guardar</button>
+                <button type="submit" class="btn btn-primary" id="btnGuardarRol" >Guardar</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+  
+ 
 <!--End Region Modal-->
 <script>
 var myTable;
@@ -146,7 +153,9 @@ $(document).ready(function () {
     $('#btnGuardar').click(function(){
         GuardarUsuario();
     });
-    
+    $('#btnGuardarRol').click(function(){
+       GuardarRolSeleccionadoPorUsuario(); 
+    });
   });
   
   function GuardarUsuario(){
@@ -254,22 +263,42 @@ $(document).ready(function () {
   }
  }
  function CargarRol(usuario_id){
-// myRolModal
     $.ajax({
           type:'post',
           data:{usuario_id:usuario_id},
           url:'../Usuarios/CargadodeRol',
           success:function(response){
+              console.log(response);
               var json2 = jQuery.parseJSON(response);
+              var registrados = [];
+              registrados=json2['rol'];
+//              console.log(registrados.rol_id);
               $('#rol_id option').remove();
-              $('#rol_id').append($('<option>').text('Ninguno').attr({value:null}));
+              $('#rol_id').append($('<option>').text('Ninguno').attr({value:-1}));
               $.each(json2['todo'], function(j, resultado) {
+                  if(registrados.rol_id==resultado.rol_id){
+                   $('#rol_id').append($('<option>').text(resultado.titulo).attr({value:resultado.rol_id,selected:'selected'}));
+               }
+               else{
                   $('#rol_id').append($('<option>').text(resultado.titulo).attr({value:resultado.rol_id}));
+               }
              });
              $('#usuario_id').val(usuario_id);
              $('#myRolModal').modal('show');
-             cargarTodoLosUsuarios();
         }
     })
 }
+function GuardarRolSeleccionadoPorUsuario(){
+   var rol_id=$('#rol_id').val();
+   var usuario_id= $('#usuario_idd').val();
+    $.ajax({
+          type:'post',
+          url:'../Usuarios/AsignacionRoles',
+          data:{rol_id:rol_id,usuario_id:usuario_id},
+          success:function(response){
+            $('#myRolModal').modal('hide'); 
+            cargarTodoLosUsuarios();
+          }
+      })   
+  }
 </script>
