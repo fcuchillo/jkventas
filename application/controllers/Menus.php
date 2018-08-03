@@ -29,7 +29,8 @@ class Menus extends jkventas_controller {
         //mas modificaciones
     }
     public function ObtenerListadodeMenu(){
-        echo json_encode($this->DB::select('CALL Lista_Menus()'));
+        $query = $this->db->query("CALL Lista_Menus()");
+        echo json_encode( $query->result());
     }
 //    public function EditarMenu(){
 ////        $result=new  Array();
@@ -49,15 +50,15 @@ class Menus extends jkventas_controller {
 //    }
     public function ObtenerMenu(){
         $menu_id=$this->input->post('menu_id');
-        $menu= Menu::where('menu_id','=',$menu_id)->first();
-        echo $this->renderizarhtml($menu,$menu_id,'edit');       
+//        $menu= Menu::where('menu_id','=',$menu_id)->first();
+//        echo $this->renderizarhtml($menu,$menu_id,'edit');       
     }
     public function AgregarMenu(){
-        $id = $this->DB::table('t_menu')->max('menu_id');
-        $menu= new Menu();
-        $id=$id+1;
-        $menu->setMenu_menu_id($id);
-        echo $this->renderizarhtml($menu,$id,'add');
+//        $id = $this->DB::table('t_menu')->max('menu_id');
+//        $menu= new Menu();
+//        $id=$id+1;
+//        $menu->setMenu_menu_id($id);
+//        echo $this->renderizarhtml($menu,$id,'add');
     }
     function EditarMenu(){
         //obtencion de formulario en json
@@ -66,31 +67,31 @@ class Menus extends jkventas_controller {
         $menu_id=$this->input->post('menu_id');
         $accion=$this->input->post('accion');
         if($accion=='edit'){
-        $menu= Menu::where('menu_id','=',$menu_id)->first();
-        $menu->titulo=$this->input->post('titulo');
-        $menu->icono=$this->input->post('icono');
-        $menu->link=$this->input->post('link');
-        $menu->descripcion=$this->input->post('descripcion');
-        $menu->orden=$this->input->post('orden');
-        $menu->padre_id=$this->input->post('padre_id');
-        $menu->estado=$this->input->post('estado');
-        $menu->save();
+//        $menu= Menu::where('menu_id','=',$menu_id)->first();
+//        $menu->titulo=$this->input->post('titulo');
+//        $menu->icono=$this->input->post('icono');
+//        $menu->link=$this->input->post('link');
+//        $menu->descripcion=$this->input->post('descripcion');
+//        $menu->orden=$this->input->post('orden');
+//        $menu->padre_id=$this->input->post('padre_id');
+//        $menu->estado=$this->input->post('estado');
+//        $menu->save();
         }
         else if($accion=='add'){
-        $menu=new Menu();
-        $id = $this->DB::table('t_menu')->max('menu_id');
-        $id=$id+1;
-        $data=array (
-           'menu_id'=>$id,
-           'titulo'=>$this->input->post('titulo'),
-            'icono'=>$this->input->post('icono'),
-            'link'=>$this->input->post('link'),
-            'descripcion'=>$this->input->post('descripcion'),
-            'orden'=>$this->input->post('orden'),
-            'padre_id'=>$this->input->post('padre_id'),
-            'estado'=>$this->input->post('estado')
-        );
-        $this->db->insert('t_menu',$data);
+//        $menu=new Menu();
+//        $id = $this->DB::table('t_menu')->max('menu_id');
+//        $id=$id+1;
+//        $data=array (
+//           'menu_id'=>$id,
+//           'titulo'=>$this->input->post('titulo'),
+//            'icono'=>$this->input->post('icono'),
+//            'link'=>$this->input->post('link'),
+//            'descripcion'=>$this->input->post('descripcion'),
+//            'orden'=>$this->input->post('orden'),
+//            'padre_id'=>$this->input->post('padre_id'),
+//            'estado'=>$this->input->post('estado')
+//        );
+//        $this->db->insert('t_menu',$data);
         }
         echo $result;
     }
@@ -126,34 +127,34 @@ class Menus extends jkventas_controller {
         return $s;
     }
     function EliminarMenu(){
-        $menu_id=$this->input->post('menu_id');
-        $menu=Menu::where('menu_id','=',$menu_id)->first();
-        $menu->delete();
+//        $menu_id=$this->input->post('menu_id');
+//        $menu=Menu::where('menu_id','=',$menu_id)->first();
+//        $menu->delete();
     }
     function ObtenerRolporMenu(){
-        $roles=$this->DB::table("t_rol")->select("rol_id")->whereIn('rol_id',function($query){
-//                                                      $query->select('rol_id')->from('t_usuario_x_rol')->whereIn('rol_id','=', Menu_por_rol::where('menu_id','=',$this->input->post('menu_id'))->get());
-                                                        $query->select('rol_id')->from('t_menu_x_rol')->where('menu_id','=',$this->input->post('menu_id'))->get();
-                                                        })->get();
-      $datos['todo']=Rol::all('rol_id','titulo');
-      $array=[];
-      foreach ($roles as $value){ 
-        $array[] = $value->rol_id;
-      }
-      $datos['registrados']=$array;
-      echo json_encode($datos);
+//        $roles=$this->DB::table("t_rol")->select("rol_id")->whereIn('rol_id',function($query){
+////                                                      $query->select('rol_id')->from('t_usuario_x_rol')->whereIn('rol_id','=', Menu_por_rol::where('menu_id','=',$this->input->post('menu_id'))->get());
+//                                                        $query->select('rol_id')->from('t_menu_x_rol')->where('menu_id','=',$this->input->post('menu_id'))->get();
+//                                                        })->get();
+//      $datos['todo']=Rol::all('rol_id','titulo');
+//      $array=[];
+//      foreach ($roles as $value){ 
+//        $array[] = $value->rol_id;
+//      }
+//      $datos['registrados']=$array;
+//      echo json_encode($datos);
     }
     function AsignaciondeRol(){
-        $arreglo=$this->input->post('asignados');
-        $menu_id=$this->input->post('menu_id');
-        Menu_por_rol::where('menu_id',$menu_id)->delete();
-        foreach ($arreglo as $value){
-            $data=array (
-           'menu_id'=>$menu_id,
-           'rol_id'=>$value,
-           'estado'=>1
-        );
-        $this->db->insert('t_menu_x_rol',$data);
-      }
+//        $arreglo=$this->input->post('asignados');
+//        $menu_id=$this->input->post('menu_id');
+////        Menu_por_rol::where('menu_id',$menu_id)->delete();
+//        foreach ($arreglo as $value){
+//            $data=array (
+//           'menu_id'=>$menu_id,
+//           'rol_id'=>$value,
+//           'estado'=>1
+//        );
+//        $this->db->insert('t_menu_x_rol',$data);
+//      }
     }
 }

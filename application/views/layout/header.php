@@ -13,8 +13,7 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/buttons/css/buttons.dataTables.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/select/css/select.dataTables.min.css">
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/extensions/Editor/css/editor.dataTables.min.css">
-  
+    
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/jQueryUI/jquery-ui.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/AdminLTE.min.css">  
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/skins/_all-skins.min.css">

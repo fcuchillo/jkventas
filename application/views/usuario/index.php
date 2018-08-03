@@ -161,13 +161,14 @@ $(document).ready(function () {
   function GuardarUsuario(){
        var form = $("#frmUsuario");
        var data = form.serialize();
-//       console.log(data);
+       console.log(data);
        //enviar datos en json
        //var formData = JSON.stringify($("#frmMenu").serializeArray());
         $.ajax({
           type:'post',
           data:data,
           url:'../Usuarios/EditarUsuario',
+          dataSrc:"",
           success:function(response){
             $('#myModal').modal('hide'); 
             cargarTodoLosUsuarios();
@@ -175,16 +176,12 @@ $(document).ready(function () {
       })
   }
   function AgregarUsuario(){
-      $.ajax({
-          type:'post',
-//          data:data,
-          url:'../Usuarios/AgregarUsuario',
-          success:function(response){
-              console.log(response);
-             var json = jQuery.parseJSON(response);
-             AsiganciondeValores(json);
-          }
-      })
+      $('#frmUsuario')[0].reset();
+      $('#accion').val('add');
+      $('#estado option').remove();
+      $('#estado').append($('<option>', {value:"1", text:'Activo'}));
+      $('#estado').append($('<option>', {value:"0", text:'Inactivo'}));
+      $('#myModal').modal('show');
   }
   function AsiganciondeValores(json){
              $('#usuario_id').val(json.usuario_id);
@@ -286,7 +283,7 @@ $(document).ready(function () {
                   $('#rol_id').append($('<option>').text(resultado.titulo).attr({value:resultado.rol_id}));
                }
              });
-             $('#usuario_id').val(usuario_id);
+             $('#usuario_idd').val(usuario_id);
              $('#myRolModal').modal('show');
         }
     })
@@ -294,11 +291,13 @@ $(document).ready(function () {
 function GuardarRolSeleccionadoPorUsuario(){
    var rol_id=$('#rol_id').val();
    var usuario_id= $('#usuario_idd').val();
+   console.log('USUARIO: '+usuario_id+', ROL: '+rol_id);
     $.ajax({
           type:'post',
           url:'../Usuarios/AsignacionRoles',
           data:{rol_id:rol_id,usuario_id:usuario_id},
           success:function(response){
+            console.log(response);
             $('#myRolModal').modal('hide'); 
             cargarTodoLosUsuarios();
           }

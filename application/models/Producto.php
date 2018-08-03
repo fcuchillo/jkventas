@@ -6,7 +6,18 @@
  * and open the template in the editor.
  */
 class Producto extends CI_Model {
-
+  public $producto_id;
+  public $marca_id;
+  public $categoria_id;
+  public $mes_id;
+  public $nombre;
+  public $talla;
+  public $color;
+  public $precio_compra;
+  public $fecha_compra;
+  public $descripcion;
+  public $observacion;
+  public $anio;
   function __construct() {
         parent::__construct();
         

@@ -98,15 +98,37 @@
                 </button>
                 <h4 class="modal-title" id="popuptitle">Verificar</h4>
             </div>
-            <div class="modal-body" id="tbodyrol">
+            <div class="modal-body">
+                <form id="frmRol" name="frmRol">
+                    <input type="hidden" id="rol_idd" name="rol_idd" value="">
+                    <input type="hidden" class="form-control" value="" name="accion" id="accion">
+                    <div class="form-group">
+                        <label class="col-sm-12 col-form-label col-form-label-sm">LLave del Rol</label>
+                        <input type="text" class="form-control" class="input-group input-group-sm" value="" name="txtrol_id" id="txtrol_id" disabled>
+                    </div>
+                        <div class="form-group">
+                            <label class="col-sm-12 col-form-label col-form-label-sm">Nombre del Rol</label>
+                            <input type="text" class="form-control required" class="input-group input-group-sm" value="" name="titulo" id="titulo" required>
+                        </div>
+                       <div class="form-group">
+                            <label class="col-sm-12 col-form-label col-form-label-sm">Descripción</label>
+                            <textarea id="descripcion" name="descripcion" class="form-control input-sm" rows="3" cols="5" maxlength="100"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-12 col-form-label col-form-label-sm">Estado</label>
+                            <select class="form-control input-sm" name="estado" id="estado"></select>
+                        </div>
+                        
+                    
+               </form>
             </div>
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" id="btnGuardarRol" >Guardar</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-        </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="btnGuardarRol" >Guardar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
 <!--End Region Modal-->
 <script>
 var myTable;
@@ -123,6 +145,7 @@ $(document).ready(function () {
   function MantenimientoRol(){
        var form = $("#frmRol");
        var data = form.serialize();
+       console.log(data);
        $.ajax({
           type:'post',
           url:'../Usuarios/MantenimientoRol',
@@ -152,14 +175,12 @@ $(document).ready(function () {
       })
   }
   function AgregarRol(){
-      $.ajax({
-          type:'post',
-          url:'../Usuarios/ObtenerRol',
-          success:function(response){
-            $('#myModalRol').modal('show'); 
-            $('#tbodyrol').html(response);
-          }
-      })
+      $('#frmRol')[0].reset();
+      $('#accion').val('add');
+      $('#estado option').remove();
+      $('#estado').append($('<option>', {value:"1", text:'Activo'}));
+      $('#estado').append($('<option>', {value:"0", text:'Inactivo'}));
+      $('#myModalRol').modal('show');
   }
   function cargarTodoLosRoles(){
         myTable = $('#tblusuario').DataTable({
@@ -175,7 +196,7 @@ $(document).ready(function () {
         columns:[ 
             { data: 'id', render: function(value, type, full, meta) {
                   return '<td><center>'+
-                         '<a href="javascript:void(0);" id="btnEliminar" onclick="EliminarUsuario('+full.rol_id+');" ><span class="glyphicon glyphicon-trash" ></span></a>'+
+                         '<a href="javascript:void(0);" id="btnEliminar" onclick="EliminarRol('+full.rol_id+');" ><span class="glyphicon glyphicon-trash" ></span></a>'+
                          '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" id="btnMenueditar" onclick="EditarRol('+full.rol_id+');" ><span class="glyphicon glyphicon-pencil"></span></a>'+
                          '</center></td>'
                         }},
@@ -198,17 +219,34 @@ $(document).ready(function () {
           data:{rol_id:id},
           url:'../Usuarios/ObtenerRolEditar',
           success:function(response){
-            $('#myModalRol').modal('show'); 
-            $('#tbodyrol').html(response);
+            var json = jQuery.parseJSON(response);
+            AsignarValoresRol(json);
           }
       })
   }
- function EliminarUsuario(id){
+  function AsignarValoresRol(json){
+             $('#rol_idd').val(json.rol_id);
+             $('#txtrol_id').val(json.rol_id);
+             $('#accion').val(json.accion);
+             $('#titulo').val(json.titulo);
+             $('#descripcion').val(json.descripcion);
+             $('#estado option').remove();
+             $('#estado').append($('<option>', {value:"1", text:'Activo'}));
+             $('#estado').append($('<option>', {value:"0", text:'Inactivo'}));
+             if(json.estado!=undefined){
+                 if(json.estado==1)
+                    $('#estado option[value="1"]').attr("selected", "selected");
+                else
+                    $('#estado option[value="0"]').attr("selected", "selected");
+             }
+      $('#myModalRol').modal('show'); 
+  }
+ function EliminarRol(id){
    if(confirm('Desea Eliminar?')){
      $.ajax({
           type:'post',
-          data:{usuario_id:id},
-          url:'../Usuarios/EliminarUsuario',
+          data:{rol_id:id},
+          url:'../Usuarios/EliminarRol',
           success:function(response){
             cargarTodoLosUsuarios();
         }
@@ -221,6 +259,7 @@ $(document).ready(function () {
           data:{rol_id:id},
           url:'../Usuarios/ObtenerMenusporRol',
           success:function(response){
+              console.log(response);
               var json2 = jQuery.parseJSON(response);
               var registrados = [];
               registrados=json2['registrados'];

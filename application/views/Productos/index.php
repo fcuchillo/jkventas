@@ -161,7 +161,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">x</span>
                 </button>
-                <h4 class="modal-title" id="popuptitle">MANTENIMIENTO DE USUARIO</h4>
+                <h4 class="modal-title" id="popuptitle">MANTENIMIENTO DE PRODUCTO</h4>
             </div>
             <div class="modal-body">  
                 <form id="frmProducto" name="frmProducto">
@@ -325,16 +325,19 @@ var editor;
         })
     }
     
-    function AgregarProducto(){               
+    function AgregarProducto(){  
+        console.log('test');
         $.ajax({
             type:'post',
             url:'../Productos/AgregarProducto',
             success:function(response){
-                console.log(response);
-                var json = jQuery.parseJSON(response);
-                AsignacionValoresProducto(json);
+               var json = jQuery.parseJSON(response);
+               $('#frmProducto')[0].reset();
+               $('#accion').val('add');
+               AsignacionValoresProductonNuevo(json);
             }
         })
+
     }
     
     function EliminarProducto(id){
@@ -412,6 +415,26 @@ var editor;
         autoWidth: true,
         bDestroy: true
         });
+    }
+function AsignacionValoresProductonNuevo(json){
+        $('#mes_id option').remove();    
+        $.each(json['mes'], function(j, resultado) {
+               $('#mes_id').append($('<option>').text(resultado.nombre).attr('value', resultado.mes_id));
+        });
+        $('#marca_id option').remove();    
+        $.each(json['marca'], function(j, resultado) {
+                $('#marca_id').append($('<option>').text(resultado.nombre).attr('value', resultado.marca_id));
+        });
+
+        $('#categoria_id option').remove();    
+        $.each(json['categoria'], function(j, resultado) {
+                $('#categoria_id').append($('<option>').text(resultado.nombre).attr('value', resultado.categoria_id));
+          });
+       $('#estado_id option').remove();    
+        $.each(json['estado'], function(j, resultado) {
+         $('#estado_id').append($('<option>').text(resultado.nombre).attr('value', resultado.estado_id));
+        });
+        $('#myModal').modal('show');       
     }
  
     function AsignacionValoresProducto(json){

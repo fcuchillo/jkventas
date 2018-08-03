@@ -27,19 +27,19 @@ class Usuarios  extends jkventas_controller {
             $usuario->accion='edit';
             echo json_encode($usuario);
     }
-    public function AgregarUsuario(){
-//        $id = $this->DB::table('t_usuario')->max('usuario_id');
-        $this->db->select_max('usuario_id');
-        $id = $this->db->get('t_usuario');  
-        $query= $this->db->select('*')->from('t_usuario')->where('usuario_id',3)->get()->result();
-//        $id=$id+1;
-//        $usuario[]=null;
-        $usuario=$query[0];
-        $usuario->usuario_id=4;
-        $usuario->accion='add';
-//        print_r($usuario);
-        echo json_encode($usuario);
-    }
+//    public function AgregarUsuario(){
+////        $id = $this->DB::table('t_usuario')->max('usuario_id');
+//        $this->db->select_max('usuario_id');
+//        $id = $this->db->get('t_usuario');  
+//        $query= $this->db->select('*')->from('t_usuario')->where('usuario_id',3)->get()->result();
+////        $id=$id+1;
+////        $usuario[]=null;
+//        $usuario=$query[0];
+//        $usuario->usuario_id=4;
+//        $usuario->accion='add';
+////        print_r($usuario);
+//        echo json_encode($usuario);
+//    }
     function EditarUsuario(){
         //obtencion de formulario en json
         //$jsonArray = json_decode(file_get_contents('php://input'),true);
@@ -47,8 +47,6 @@ class Usuarios  extends jkventas_controller {
 //        $usuario_id=$this->input->post('usuario_id');
         $accion=$this->input->post('accion');
         if($accion=='edit'){
-//        $query= $this->db->select('*')->where('usuario_id','=',$usuario_id)->get()->result();
-//        $usuario=$query[0];
         $this->db->where('usuario_id',$this->input->post('usuario_id'));
         $this->db->update('t_usuario', array('usuario' =>$this->IsEmpty($this->input->post('usuario')),
                                              'clave'=>$this->IsEmpty($this->input->post('clave')),
@@ -56,10 +54,10 @@ class Usuarios  extends jkventas_controller {
                                              'observacion'=>$this->IsEmpty($this->input->post('observacion'))));
         }
         if($accion=='add'){
-        $usuario=new Usuario();
         $this->db->select_max('usuario_id');
-        $id = $this->db->get('t_usuario'); 
-        $this->db->update('t_usuario', array('usuario_id'=>$id+1,
+        $query = $this->db->get('t_usuario'); 
+        $id=$query->row();
+        $this->db->insert('t_usuario', array('usuario_id'=>$id->usuario_id+1,
                                              'usuario' =>$this->IsEmpty($this->input->post('usuario')),
                                              'clave'=>$this->IsEmpty($this->input->post('clave')),
                                              'estado'=>$this->IsEmpty($this->input->post('estado')),
@@ -69,12 +67,10 @@ class Usuarios  extends jkventas_controller {
     }
     function EliminarUsuario(){
         $usuario_id=$this->input->post('usuario_id');
-        $usuario_x_rol= Usuariopor_rol::where('usuario_id','=',$usuario_id)->first();
-        if($usuario_x_rol!=NULL){
-            $usuario_x_rol->delete();
-        }
-        $usuario= Usuario::where('usuario_id','=',$usuario_id)->first();
-        $usuario->delete();
+        $this->db->where('usuario_id',$usuario_id);
+        $this->db->delete('t_usuario_x_rol');
+        $this->db->where('usuario_id',$usuario_id);
+        $this->db->delete('t_usuario');
     }
     function roles(){
         $data['layout_body']    = 'usuario/roles';
@@ -87,10 +83,21 @@ class Usuarios  extends jkventas_controller {
       echo json_encode($this->db->select('*')->from('t_rol')->get()->result());  
     }
     function ObtenerMenusporRol(){
-      $menus=$this->DB::table("t_menu")->select("menu_id")->whereIn('menu_id',function($query){
-                                                        $query->select('menu_id')->from('t_menu_x_rol')->where('rol_id','=',Usuariopor_rol::where('rol_id','=',$this->input->post('rol_id'))->first()->rol_id);
-                                                        })->get();
-      $datos['todo']=$this->db->select('menu_id,titulo')->from('t_rol')->get()->result();
+            $this->db->select('rol_id');
+            $this->db->from('t_usuario_x_rol');
+            $this->db->where('rol_id',$this->input->post('rol_id'));
+            $where_rol=$this->db->get()->row();
+            
+            $this->db->select('menu_id');
+            $this->db->from('t_menu_x_rol');
+            $this->db->where('rol_id',$where_rol->rol_id);
+            $where_clause = $this->db->get_compiled_select();
+            $menus= $this->db->select('menu_id')
+                            ->from('t_menu')
+                            ->where("`menu_id` IN ($where_clause)",NULL,false)
+                            ->get()
+                            ->result();
+      $datos['todo']=$this->db->select('menu_id,titulo')->from('t_menu')->get()->result();
       $array=[];
       foreach ($menus as $value){ 
         $array[] = $value->menu_id;
@@ -101,7 +108,10 @@ class Usuarios  extends jkventas_controller {
     public function AsignaciondeMenu(){
         $arreglo=$this->input->post('asignados');
         $rol_id=$this->input->post('rol_id');
-        Menu_por_rol::where('rol_id',$rol_id)->delete();
+        
+//        Menu_por_rol::where('rol_id',$rol_id)->delete();
+        $this->db->where('rol_id',$rol_id);
+        $this->db->delete('t_menu_x_rol');
         foreach ($arreglo as $value){
             $data=array (
            'menu_id'=>$value,
@@ -111,70 +121,81 @@ class Usuarios  extends jkventas_controller {
         $this->db->insert('t_menu_x_rol',$data);
       }        
     }
-    function ObtenerRol(){
-        $id = $this->DB::table('t_rol')->max('rol_id');
-        $id=$id+1;
-        $rol=new Rol();
-        $rol->rol_id=$id;
-        echo $this->RenderHtmlRol($rol,'add');
-    }
     function MantenimientoRol(){
         $accion=$this->input->post('accion');
-        $rol_id=$this->input->post('rol_id');
+//        $rol_id=$this->input->post('rol_id');
+//        echo json_encode($this->input->post('rol_idd'));
         if($accion=='edit'){
-           $rol=Rol::where('rol_id','=',$rol_id)->first();
-           $rol->titulo=$this->input->post('titulo');
-           $rol->descripcion=$this->input->post('descripcion');
-           $rol->estado=$this->input->post('estado');
-           $rol->save();
+        $this->db->where('rol_id',$this->input->post('rol_idd'));
+        $this->db->update('t_rol', array('titulo'=> $this->IsEmpty($this->input->post('titulo')),
+                                         'descripcion'=>$this->IsEmpty($this->input->post('descripcion')),
+                                         'estado'=>$this->IsEmpty($this->input->post('estado'))));
         }
-        else if($accion=='add'){
-            $data=array (
-            'rol_id'=>$rol_id,
-            'titulo'=>$this->input->post('titulo'),
-            'descripcion'=>$this->input->post('descripcion'),
-            'estado'=>$this->input->post('estado')
-        );
-        $this->db->insert('t_rol',$data);
-     }
+        if($accion=='add'){
+        $this->db->select_max('rol_id');
+        $query = $this->db->get('t_rol'); 
+        $id=$query->row();
+        $this->db->insert('t_rol', array('rol_id'=>$id->rol_id+1,
+                                             'titulo' =>$this->IsEmpty($this->input->post('titulo')),
+                                             'descripcion'=>$this->IsEmpty($this->input->post('descripcion')),
+                                             'estado'=>$this->IsEmpty($this->input->post('estado'))));
+        }
     }
     function ObtenerRolEditar(){
         $rol_id=$this->input->post('rol_id');
-        $rol=Rol::where('rol_id','=',$rol_id)->first();
-        echo $this->RenderHtmlRol($rol,'edit');
+        $query=$this->db->select('*')->from('t_rol')->where('rol_id',$rol_id)->get()->result();
+        $rol=$query[0];
+        $rol->accion='edit';
+        echo json_encode($rol);
     }
     function CargadodeRol(){
         $usuario_id=$this->input->post('usuario_id');
-        $rol_id= Usuariopor_rol::where('usuario_id','=',$usuario_id)->first();
+        $this->db->select('rol_id');
+        $this->db->where('usuario_id',$usuario_id);
+        $query = $this->db->get('t_usuario_x_rol'); 
+        $rol_id=$query->row();
         if($rol_id!=NULL){
-            $roles['rol']= Rol::select('rol_id')->where('rol_id','=',$rol_id->rol_id)->first();
+            $query =$this->db->select('rol_id')->from('t_rol')->where('rol_id',$rol_id->rol_id)->get()->result();
+            $roles['rol']= $query[0];
         }
         else{
             $roles['rol']=[];
         }
-        $roles['todo']= Rol::all('rol_id','titulo');
+        $roles['todo']= $this->db->select('rol_id,titulo')->from('t_rol')->get()->result();
         echo json_encode($roles);
     }
     function AsignacionRoles(){
         $usuario_id=$this->input->post('usuario_id');
         $rol_id=$this->input->post('rol_id');
+        
         if($rol_id==-1){
-            $usuario_x_rol= Usuariopor_rol::where('usuario_id','=',$usuario_id)->first();
-            $usuario_x_rol->delete();
+             $this->db->where('usuario_id',$usuario_id);
+             $this->db->delete('t_usuario_x_rol');
         }
         else{
-            $usuario_x_rol= Usuariopor_rol::where('usuario_id','=',$usuario_id)
-                                           ->where('rol_id','=',$rol_id)->first();
-                if($usuario_x_rol==NULL){
-                    $usuario_x_rol= new Usuariopor_rol();
-                    $id = Usuariopor_rol::max('usuario_rol_id');
-                    $usuario_x_rol->usuario_rol_id=$id+1;
-                    $usuario_x_rol->usuario_id=$usuario_id;
-                    $usuario_x_rol->rol_id=$rol_id;
-                    $usuario_x_rol->estado=1;
-                }
-                $usuario_x_rol->save();
+            $this->db->where('usuario_id',$usuario_id);
+            $this->db->delete('t_usuario_x_rol');
+            
+            $usuario_x_rol=$this->db->select('*')->from('t_usuario_x_rol')->where('usuario_id',$usuario_id)->where('rol_id',$rol_id)->get();
+            if($usuario_x_rol->num_rows()==0){
+                    $this->db->select_max('usuario_rol_id');
+                    $query = $this->db->get('t_usuario_x_rol'); 
+                    $id=$query->row();
+                    
+                    $this->db->insert('t_usuario_x_rol',array('usuario_rol_id'=>$id->usuario_rol_id+1,
+                                                              'usuario_id'=>$usuario_id,
+                                                              'rol_id'=>$rol_id,
+                                                              'estado'=>1));
+            }
         }
+    }
+        function EliminarRol(){
+        $rol_id=$this->input->post('rol_id');
+        $this->db->where('rol_id',$rol_id);
+        $this->db->delete('t_menu_x_rol');
+
+        $this->db->where('rol_id',$rol_id);
+        $this->db->delete('t_rol');
     }
     function IsEmpty($value){
         return empty(trim($value))?null:$value;

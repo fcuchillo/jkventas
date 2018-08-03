@@ -1,9 +1,6 @@
 <?php
  require_once 'application/controllers/jkventas_controller.php';
- include( "assets/plugins/datatables/extensions/Editor/php/DataTables.php" );
-defined('BASEPATH') OR exit('No direct script access allowed');
-use Illuminate\Database\Capsule\Manager as DB;
-
+ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Productos extends jkventas_controller {
     public function __construct() {
@@ -15,11 +12,11 @@ class Productos extends jkventas_controller {
     
     public function index() {
         $data['layout_body']    = 'Productos/index';
-        $data['producto']       = DB::select('CALL Lista_Productos(?,?,?,?,?,?)',['2018', 0, 0,0,0,'']);  
-        $data['mes']            = Mes::all();
-        $data['estado']         = Estado::all();
-        $data['marca']          = Marca::all();
-        $data['categoria']      = Categoria::all();
+//        $data['producto']       = $this->db->query('CALL Lista_Productos(?,?,?,?,?,?)',['2018', 0, 0,0,0,''])->result_array();  
+        $data['mes']            = $this->db->select('*')->from('t_mes')->get()->result();
+        $data['estado']         = $this->db->select('*')->from('t_estado')->get()->result();
+        $data['marca']          = $this->db->select('*')->from('t_marca')->get()->result();
+        $data['categoria']      = $this->db->select('*')->from('t_categoria')->get()->result();
 
         $data['menu']  = $this->CargadoDelMenu();        
         $data['title'] = 'Productos';
@@ -33,43 +30,46 @@ class Productos extends jkventas_controller {
         $marca      = $this->input->post('marca');
         $categoria  = $this->input->post('categoria');
         $nombre     = $this->input->post('nombre');        
-        $datos      = DB::select('CALL Lista_Productos(?,?,?,?,?,?)',[$anio,$mes,$estado,$marca,$categoria,$nombre]); 
+        $datos      = $this->db->query('CALL Lista_Productos(?,?,?,?,?,?)',[$anio,$mes,$estado,$marca,$categoria,$nombre])->result_array();
         echo json_encode($datos);
     }
     
     public function ObtenerProducto(){       
        $producto_id=$this->input->post('producto_id');
-       $producto= Producto::where('producto_id','=',$producto_id)->first();
+       $producto= $this->db->select('*')->from('t_producto')->where('producto_id',$producto_id)->get()->row();
        $producto->accion='edit';
-       $general['mes']=Mes::all();
-       $general['estado']= Estado::all();
-       $general['marca']= Marca::all();
-       $general['categoria']= Categoria::all();
+        $general['mes']            = $this->db->select('*')->from('t_mes')->get()->result();
+        $general['estado']         = $this->db->select('*')->from('t_estado')->get()->result();
+        $general['marca']          = $this->db->select('*')->from('t_marca')->get()->result();
+        $general['categoria']      = $this->db->select('*')->from('t_categoria')->get()->result();
        
        $general['producto']=$producto;
        echo json_encode($general);        
     }
     
     function AgregarProducto(){
-        $id= $this->DB::table('t_producto')->max('producto_id');
-        $producto=new Producto();
-        $id=$id+1;
-        $producto->producto_id=$id;
-        $producto->accion='add';
-        
-        $general['mes']=Mes::all();
-        $general['estado']= Estado::all();
-        $general['marca']= Marca::all();
-        $general['categoria']= Categoria::all();
-       
-        $general['producto']=$producto;       
-        echo json_encode($general);
+        $this->db->select_max('producto_id');
+        $query = $this->db->get('t_producto'); 
+        $id=$query->row();
+        $fields = $this->db->field_data('t_producto');
+        foreach ($fields as $key => $value) {
+            print_r($value);
+        }
+//        $producto = new Producto();
+//        $producto->producto_id=$id->producto_id+1;
+//        echo json_encode($producto);
+//        $producto->accion='add';
+//        $general['mes']            = $this->db->select('*')->from('t_mes')->get()->result();
+//        $general['estado']         = $this->db->select('*')->from('t_estado')->get()->result();
+//        $general['marca']          = $this->db->select('*')->from('t_marca')->get()->result();
+//        $general['categoria']      = $this->db->select('*')->from('t_categoria')->get()->result();
+//        echo json_encode($general);
     }
             
     function EliminarProducto(){
         $producto_id= $this->input->post('producto_id');
-        $producto= Producto::where('producto_id','=',$producto_id)->first();
-        $producto->delete();       
+        $this->db->where('producto_id',$producto_id);
+        $this->delete('t_producto');
     }
     
     function EditarProducto(){
