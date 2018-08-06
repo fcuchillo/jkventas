@@ -48,28 +48,16 @@ class Productos extends jkventas_controller {
     }
     
     function AgregarProducto(){
-        $this->db->select_max('producto_id');
-        $query = $this->db->get('t_producto'); 
-        $id=$query->row();
-        $fields = $this->db->field_data('t_producto');
-        foreach ($fields as $key => $value) {
-            print_r($value);
-        }
-//        $producto = new Producto();
-//        $producto->producto_id=$id->producto_id+1;
-//        echo json_encode($producto);
-//        $producto->accion='add';
-//        $general['mes']            = $this->db->select('*')->from('t_mes')->get()->result();
-//        $general['estado']         = $this->db->select('*')->from('t_estado')->get()->result();
-//        $general['marca']          = $this->db->select('*')->from('t_marca')->get()->result();
-//        $general['categoria']      = $this->db->select('*')->from('t_categoria')->get()->result();
-//        echo json_encode($general);
+        $general['mes']            = $this->db->select('*')->from('t_mes')->get()->result();
+        $general['estado']         = $this->db->select('*')->from('t_estado')->get()->result();
+        $general['marca']          = $this->db->select('*')->from('t_marca')->get()->result();
+        $general['categoria']      = $this->db->select('*')->from('t_categoria')->get()->result();
+        echo json_encode($general);
     }
             
     function EliminarProducto(){
-        $producto_id= $this->input->post('producto_id');
-        $this->db->where('producto_id',$producto_id);
-        $this->delete('t_producto');
+        $this->db->where('producto_id',$this->input->post('producto_id'));
+        $this->db->delete('t_producto');
     }
     
     function EditarProducto(){
@@ -78,33 +66,43 @@ class Productos extends jkventas_controller {
         $accion=$this->input->post('accion');
         
         if($accion=='edit'){
-            $producto= Producto::where('producto_id','=',$producto_id)->first();
+            $this->db->where('producto_id',$producto_id);
+            $this->db->update('t_producto', array('anio'=>$this->input->post('anio'),
+                                              'mes_id'=>$this->input->post('mes_id'),
+                                              'marca_id'=>$this->input->post('marca_id'),
+                                              'categoria_id'=>$this->input->post('marca_id'),
+                                              'nombre'=>$this->input->post('nombre'),
+                                              'color'=>$this->input->post('talla'),
+                                              'color'=>$this->input->post('color'),
+                                              'precio_compra'=>$this->input->post('precio_compra'),
+                                              'precio_venta'=>$this->input->post('precio_venta'),
+                                              'fecha_compra'=>$this->input->post('fecha_compra'),
+                                              'estado_id'=>$this->input->post('estado_id'),
+                                              'descripcion'=>$this->input->post('descripcion'),
+                                              'observacion'=>$this->input->post('observacion')));
         }
         
         if($accion=='add'){
-            $producto=new Producto();
-            $id = $this->DB::table('t_producto')->max('producto_id');
-            $producto->producto_id=$id+1;
+            $this->db->select_max('producto_id');
+            $query = $this->db->get('t_producto'); 
+            $id=$query->row();
+            $this->db->insert('t_producto', array('producto_id'=>$id->producto_id+1,
+                                              'anio'=>$this->input->post('anio'),
+                                              'mes_id'=>$this->input->post('mes_id'),
+                                              'marca_id'=>$this->input->post('marca_id'),
+                                              'categoria_id'=>$this->input->post('marca_id'),
+                                              'nombre'=>$this->input->post('nombre'),
+                                              'talla'=>$this->input->post('talla'),
+                                              'color'=>$this->input->post('color'),
+                                              'precio_compra'=>$this->input->post('precio_compra'),
+                                              'precio_venta'=>$this->input->post('precio_venta'),
+                                              'fecha_compra'=>$this->input->post('fecha_compra'),
+                                              'estado_id'=>$this->input->post('estado_id'),
+                                              'descripcion'=>$this->input->post('descripcion'),
+                                              'observacion'=>$this->input->post('observacion')));
         }
-       
-        $producto->anio         = $producto->isEmpty($this->input->post('anio'));
-        $producto->mes_id       = $producto->isEmpty($this->input->post('mes_id'));
-        $producto->marca_id     = $producto->isEmpty($this->input->post('marca_id'));
-        $producto->categoria_id = $producto->isEmpty($this->input->post('categoria_id'));
-        $producto->nombre       = $producto->isEmpty($this->input->post('nombre'));
-        $producto->talla        = $producto->isEmpty($this->input->post('talla'));
-        $producto->color        = $producto->isEmpty($this->input->post('color'));
-        $producto->precio_compra= $producto->isEmpty($this->input->post('precio_compra'));
-        $producto->precio_venta = $producto->isEmpty($this->input->post('precio_venta'));
-        $producto->fecha_compra = $producto->isEmpty($this->input->post('fecha_compra'));
-        $producto->estado_id    = $producto->isEmpty($this->input->post('estado_id')); //para cambiar el estado el prudcto debe estar vendido
-        $producto->descripcion  = $producto->isEmpty($this->input->post('descripcion'));
-        $producto->observacion  = $producto->isEmpty($this->input->post('observacion'));
-                
-        $producto->save();
         echo $result;
     }    
- 
 }
 
 

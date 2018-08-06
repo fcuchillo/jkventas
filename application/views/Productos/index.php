@@ -191,7 +191,7 @@
                             <label class="PyENDES-Label">Precio Venta</label>
                             <input type="text" class="form-control" value="" name="precio_venta" id="precio_venta">
                             <label class="PyENDES-Label">Fecha Compra</label>
-                            <input type="text" class="form-control" value="" name="fecha_compra" id="fecha_compra">
+                            <input type="date" class="form-control" value="" name="fecha_compra" id="fecha_compra">
                             
                             <label class="col-sm-12 col-form-label col-form-label-sm">Estado</label>
                             <select class="form-control input-sm" name="estado_id" id="estado_id"></select>
@@ -417,6 +417,8 @@ var editor;
         });
     }
 function AsignacionValoresProductonNuevo(json){
+        $('#accion').val('add');
+        $('#anio').val($('#spnanio').val());             
         $('#mes_id option').remove();    
         $.each(json['mes'], function(j, resultado) {
                $('#mes_id').append($('<option>').text(resultado.nombre).attr('value', resultado.mes_id));

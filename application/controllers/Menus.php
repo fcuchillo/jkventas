@@ -2,9 +2,6 @@
 require_once 'application/controllers/jkventas_controller.php';
 //use Exception;
 //use aplication\models\Menu;
-use Illuminate\Http\Request;
-//use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 //use Illuminate\Database\Capsule\Manager as DB;
 /* 
