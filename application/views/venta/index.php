@@ -31,7 +31,7 @@
                         <label class="PyENDES-Label">Cliente</label>
                         <div class="input-group input-group-sm">
                             <input type="text" class="form-control " id="cliente" name="cliente" placeholder="Ingrese Cliente">
-                            <ul class="dropdown-menu txtcliente" style="margin-left:15px;margin-right:0px;" role="menu" aria-labelledby="dropdownMenu"  id="DropdownCliente"></ul>
+                            <ul class="dropdown-menu txtcliente" style="margin-left:15px;margin-right:0px;" role="menucliente" aria-labelledby="dropdownCliente"  id="DropdownCliente"></ul>
                             <small id='validationConglomerado' class="help-block validation" data-bv-validator="notEmpty" data-bv-for="conglomerado" data-bv-result="INVALID" style="display: none">Registre Cliente</small>
                         </div>
                     </div>
@@ -49,6 +49,7 @@
                         <label class="PyENDES-Label">Producto</label>
                         <div class="input-group input-group-sm">
                             <input type="text" class="form-control " id="producto" name="producto" placeholder="Busque Producto">
+                            <ul class="dropdown-menu txtproducto" style="margin-left:15px;margin-right:0px;" role="despliegue" aria-labelledby="dropdownDespliegue"  id="DropdownProducto"></ul>
                             <small id='validationConglomerado' class="help-block validation" data-bv-validator="notEmpty" data-bv-for="conglomerado" data-bv-result="INVALID" style="display: none">Registre Producto</small>
                         </div>
                     </div>
@@ -59,14 +60,22 @@
                             <small id='validationConglomerado' class="help-block validation" data-bv-validator="notEmpty" data-bv-for="conglomerado" data-bv-result="INVALID" style="display: none">Ingrese Precio</small>
                         </div>
                     </div>
+                   <div class="col-md-3"> 
+                        <label class="PyENDES-Label">Cantidad</label>
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control " id="cantidad" name="cantidad" placeholder="Ingrese cantidad" min="0">
+                            <small id='validationConglomerado' class="help-block validation" data-bv-validator="notEmpty" data-bv-for="conglomerado" data-bv-result="INVALID" style="display: none">Ingrese Precio</small>
+                        </div>
+                    </div>
                     <div class="col-md-2"> 
-                        <label class="PyENDES-Label" style="visibility: hidden">Cliente</label>
+                        <label class="PyENDES-Label" style="visibility: hidden"></label>
                         <div class="input-group input-group-sm">
                            <span class="input-group-btn"><button type="button" class="btn btn-primary btn-block btn-flat" id="btnRegistrySearch">Agregar</button></span>                           
                         </div>
                     </div>
-                    <div class="col-md-4"></div>
+                    <div class="col-md-1"></div>
                 </div>
+                <div class="row">
                 <table id="tblmenu" class="table table-condensed table-striped" data-toggle="table" >
                     <thead id="tblmenucabecera">
                         <tr class="info">
@@ -97,7 +106,8 @@
                         }
                         ?>
                     </tbody>
-                </table>
+                  </table>
+                </div>
             </div>
         </div>  
     </section>
@@ -176,17 +186,33 @@ $(document).ready(function () {
     $('ul.txtcliente').on('click', 'li a', function () {
         $('#cliente').val($(this).text());
     });
-//    cargarTodoMenu();
-//    $('#btnMenueditar').click(function(){
-////        $('#myModal').modal('show'); 
-//        alert('hiciste click');
-//    });
-//    $('#btnGuardar').click(function(){
-//        EditarMenu();
-//    });
-//    $('#btnGuardarRoles').click(function(){
-//        GuardarRolporMenu();
-//    });
+    $("#producto").keyup(function () {
+        $.ajax({
+            type: "POST",
+            url: '../Ventas/ObtenerProductoAuto',
+            data: {
+                keyword: $("#producto").val()
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.length > 0) {
+                    $('#DropdownProducto').empty();
+                    $('#producto').attr("data-toggle", "dropdown");
+                    $('#DropdownProducto').dropdown('toggle');
+                }
+                else if (data.length == 0) {
+                    $('#producto').attr("data-toggle", "");
+                }
+                $.each(data, function (key,value) {
+                    if (data.length >= 0)
+                        $('#DropdownProducto').append('<li role="displayCountries" ><a role="menuitem dropdownCountryli" class="dropdownlivalue">' + value['nombre'] + '</a></li>');
+                });
+            }
+        });
+    });
+    $('ul.txtproducto').on('click', 'li a', function () {
+        $('#producto').val($(this).text());
+    });
   });
   
   function EditarMenu(){

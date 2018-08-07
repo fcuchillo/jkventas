@@ -25,4 +25,10 @@ class Ventas extends jkventas_controller{
         $this->db->like("dni", $keyword);
         echo json_encode($this->db->get('t_cliente')->result_array());
     }
+    public function ObtenerProductoAuto() {
+        $keyword=$this->input->post('keyword');
+        $this->db->order_by('producto_id', 'DESC');
+        $this->db->like("nombre", $keyword);
+        echo json_encode($this->db->get('t_producto')->result_array());
+    }
 }
