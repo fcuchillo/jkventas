@@ -5,7 +5,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-class Marca extends CI_Model {
+
+
+class MAdm_menu_x_rol extends CI_Model {
 
   function __construct() {
         parent::__construct();
@@ -13,4 +15,3 @@ class Marca extends CI_Model {
     }
 
 }
-

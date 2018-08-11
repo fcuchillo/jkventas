@@ -2,14 +2,14 @@
  require_once 'application/controllers/jkventas_controller.php';
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Login extends jkventas_controller {
+class CAdm_login extends jkventas_controller {
     public function __construct() {
         parent::__construct();
         $this->load->library(array('session','form_validation'));
         $this->load->helper(array('url','form'));
     }               
     public function index() {
-        $data['title'] = 'Login';
+        $data['title'] = 'login';
         
         $tokenSession = array(
             'tokenSessionPass'       => rand(1,9) * 9999999 + rand(0,10) * rand(0, 99999),
@@ -17,7 +17,7 @@ class Login extends jkventas_controller {
         
         //$this->session->set_userdata('tokenSession', $tokenSession);
 
-        $this->load->view('login/index' ,$data);       
+        $this->load->view('Admin/VAdm_login/index' ,$data);       
     }    
     public function login(){
 
@@ -29,7 +29,7 @@ class Login extends jkventas_controller {
 
 //      $tokenSesionPass = $this->session->userdata['tokenSession']['tokenSessionPass'];
       $user = $this->db->select('*')
-                       ->from('t_usuario')
+                       ->from('t_adm_usuario')
                        ->where('usuario',$usuario)
                        ->where('clave',$claveSHA1)->get()->result();
 //      $claveBD = $this->UsuarioModel->obtenerClave($usuario);

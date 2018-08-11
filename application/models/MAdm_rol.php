@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 //
-class Rol extends CI_Model {
+class MAdm_rol extends CI_Model {
 
     function __construct() {
         parent::__construct();

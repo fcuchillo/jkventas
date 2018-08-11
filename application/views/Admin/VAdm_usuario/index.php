@@ -8,7 +8,7 @@
     <section class="content-header">
         <h1>Muestreo</h1>
         <ol class="breadcrumb">
-            <li><a href="../login/usuarioLogin"><i class="fa fa-dashboard"></i>Inicio</a></li>
+            <li><a href="../CAdm_login/usuarioLogin"><i class="fa fa-dashboard"></i>Inicio</a></li>
             <li><a href="#">Muestreo</a></li>
             <li class="active">Muestreo</li>
         </ol>
@@ -167,7 +167,7 @@ $(document).ready(function () {
         $.ajax({
           type:'post',
           data:data,
-          url:'../Usuarios/EditarUsuario',
+          url:'../CAdm_usuarios/EditarUsuario',
           dataSrc:"",
           success:function(response){
             $('#myModal').modal('hide'); 
@@ -207,7 +207,7 @@ $(document).ready(function () {
         },
         ajax:{
             dataType: 'json',
-            url:'../Usuarios/Listadodeusuarios',
+            url:'../CAdm_usuarios/Listadodeusuarios',
             type:'post',
             dataSrc:""
         }, 
@@ -241,7 +241,7 @@ $(document).ready(function () {
       $.ajax({
           type:'post',
           data:{usuario_id:id},
-          url:'../Usuarios/ObtenerUsuario',
+          url:'../CAdm_usuarios/ObtenerUsuario',
           success:function(response){
 //              console.log(response);
               var json = jQuery.parseJSON(response);
@@ -255,7 +255,7 @@ $(document).ready(function () {
      $.ajax({
           type:'post',
           data:{usuario_id:id},
-          url:'../Usuarios/EliminarUsuario',
+          url:'../CAdm_usuarios/EliminarUsuario',
           success:function(response){
             cargarTodoLosUsuarios();
         }
@@ -266,7 +266,7 @@ $(document).ready(function () {
     $.ajax({
           type:'post',
           data:{usuario_id:usuario_id},
-          url:'../Usuarios/CargadodeRol',
+          url:'../CAdm_usuarios/CargadodeRol',
           success:function(response){
               console.log(response);
               var json2 = jQuery.parseJSON(response);
@@ -294,7 +294,7 @@ function GuardarRolSeleccionadoPorUsuario(){
    console.log('USUARIO: '+usuario_id+', ROL: '+rol_id);
     $.ajax({
           type:'post',
-          url:'../Usuarios/AsignacionRoles',
+          url:'../CAdm_usuarios/AsignacionRoles',
           data:{rol_id:rol_id,usuario_id:usuario_id},
           success:function(response){
             console.log(response);

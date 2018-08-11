@@ -1,7 +1,7 @@
 <html>
 <?php
 if (isset($this->session->userdata["session_user"])) {
-    redirect('login/authentication','refresh');
+    redirect('CAdm_login/authentication','refresh');
 }
 ?>
 <head>
@@ -17,7 +17,7 @@ if (isset($this->session->userdata["session_user"])) {
 <div class="login-box">
   <div class="login-box-body">
     <p class="login-box-msg">Iniciar Session</p>
-    <form action="Login/login" method="POST" name="frmLogeoUsuario">
+    <form action="CAdm_login/login" method="POST" name="frmLogeoUsuario">
     <!--<form action="Encuesta/Cobertura/index" method="POST" name="frmLogeoUsuario">-->
       <div class="form-group has-feedback">
           <input type="text" class="form-control" placeholder="Usuario" name="usuario" id="usuario" required="true" value=""><span class="glyphicon glyphicon-user form-control-feedback"></span>

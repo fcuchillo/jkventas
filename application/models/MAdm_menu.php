@@ -7,12 +7,16 @@
  */
 
 
-class Categoria extends CI_Model {
+class MAdm_menu extends CI_Model {
 
   function __construct() {
         parent::__construct();
         
     }
-
+    function IsNull($value){
+        return empty($value)?null:$value;
+    } 
 }
+
+
 

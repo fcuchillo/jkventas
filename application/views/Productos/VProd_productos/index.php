@@ -55,7 +55,7 @@
                             <?php
                                 echo '<select class="form-control input-sm" id="spnestado" name="spnestado"><option value="0">Todos</option>';
                                 foreach ($estado as $value) {?>
-                                    <?php echo '<option value="'.$value->estado_id.'" >'.$value->descripcion.'</option>';
+                                    <?php echo '<option value="'.$value->estado_id.'" >'.$value->nombre.'</option>';
                                 }
                                 echo '</select>';
                             ?>                                
@@ -84,8 +84,8 @@
                         </div>
                         
                         <div class="col-md-1" style="display: inline-block; width: 20% "> 
-                            <label class="PyENDES-Label">Nombre</label>
-                            <input type="text" class="form-control input-sm" id="txtnombre" name="txtnombre" placeholder="">
+                            <label class="PyENDES-Label">Codigo</label>
+                            <input type="text" class="form-control input-sm" id="txtnombre" name="txtcodigo" placeholder="">
                         </div> 
                         
                         <div class="col-md-2">
@@ -106,19 +106,7 @@
         <!--End Region Box Filter-->
 
         <!--Region Box Result-->
-        <div class="box">
-            <div class="box-header with-border">
-<!--                <h3 class="box-title">Lista de Productos</h3>-->
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
-                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
-                </div>
-                
-                <div class="col-md-2" style="display: inline-block; width: 7% " >                                            
-                    <button type="button" class="btn btn-block btn-primary btn-sm" id="btnAgregar">Agregar</button>                    
-                </div>                
-            </div>
-            
+        <div class="box">            
             <div class="box-body" id="divContenedorProducto">                
                 <div class="row">
                     <div class="col-sm-12">
@@ -128,7 +116,8 @@
                                     <thead id="headCoberturaConglomerado">
                                         <tr class="info">                                            
                                             <th align="center"><center><a href="javascript:void(0);" onclick="AgregarProducto();"><span class="glyphicon glyphicon-plus"></span></a></center></th>
-                                            <th><center>PRODUCTO</center></th>                                            
+                                            <th><center>PRODUCTO</center></th>
+                                            <th><center>CODIGO</center></th>
                                             <th><center>ANIO</center></th>
                                             <th><center>MES</center></th>
                                             <th><center>MARCA</center></th>
@@ -145,10 +134,11 @@
                                         </tr>            
                                     </thead>                         
                                 </table>
-                            
                         <!--End Region Report-->
                     </div>
                 </div>
+            </div>
+        </div>
     </section>
 </div>
 
@@ -171,6 +161,9 @@
                             <input type="text" id="producto_id" name="producto_id" value="" readonly>
                             <input type="hidden" class="form-control" value="" name="accion" id="accion">
                                                
+                            <label class="col-sm-12 col-form-label col-form-label-sm">codigo</label>                            
+                            <input type="text" class="form-control" value="" name="codigo" id="codigo">
+                            
                             <label class="col-sm-12 col-form-label col-form-label-sm">anio</label>                            
                             <input type="text" class="form-control" value="" name="anio" id="anio">                        
                             
@@ -273,7 +266,7 @@ var mes=null;
 var estado=null;
 var marca=null;
 var categoria=null
-var nombre=null;
+var codigo=null;
 var editor;
 
     $(document).ready(function () {
@@ -289,7 +282,7 @@ var editor;
             $('#estado').val(0);
             $('#marca').val(0);
             $('#categoria').val(0);
-            $("#nombre").val("");            
+            $("#codigo").val("");            
         });
         
         $('#btnEditar').on('click', function(){
@@ -308,7 +301,7 @@ var editor;
         estado= $('#spnestado').val();
         marca= $('#spnmarca').val();
         categoria=$('#spncategoria').val();
-        nombre=$("#txtnombre").val();   
+        nombre=$("#txtcodigo").val();   
     }    
     
     function GuardarProducto(){
@@ -317,7 +310,7 @@ var editor;
         $.ajax({
             type:'post',
             data:data,
-            url:'../Productos/EditarProducto',
+            url:'../CProd_productos/EditarProducto',
             success:function(response){
                 $('#myModal').modal('hide'); 
                 CargarTodoProducto();
@@ -329,7 +322,7 @@ var editor;
         console.log('test');
         $.ajax({
             type:'post',
-            url:'../Productos/AgregarProducto',
+            url:'../CProd_productos/AgregarProducto',
             success:function(response){
                var json = jQuery.parseJSON(response);
                $('#frmProducto')[0].reset();
@@ -345,7 +338,7 @@ var editor;
             $.ajax({
                type:'post',
                data:{producto_id:id},
-               url:'../Productos/EliminarProducto',
+               url:'../CProd_productos/EliminarProducto',
                success:function(response){
                    console.log(response);
                    CargarTodoProducto();
@@ -358,7 +351,7 @@ var editor;
         $.ajax({
             type:'post',
             data:{producto_id:id},
-            url:'../Productos/ObtenerProducto',
+            url:'../CProd_productos/ObtenerProducto',
             success:function(response){
                 console.log(response);
                 var json = jQuery.parseJSON(response);
@@ -374,7 +367,7 @@ var editor;
         },          
         ajax:{
             dataType: 'json',
-            url:'../Productos/ObtenerListaProductos',
+            url:'../CProd_productos/ObtenerListaProductos',
             type:'post',
             dataSrc:"",
             data: { 
@@ -394,6 +387,7 @@ var editor;
                          '</center></td>'
                         }  },
             {data:"producto_id",    class:"textFont text-left"},
+            {data:"codigo_id",      class:"textFont text-left"},
             {data:"anio",           class:"textFont text_left"},
             {data:"mes",            class:"textFont text-left"},
             {data:"marca",          class:"textFont text-left"},
@@ -418,7 +412,8 @@ var editor;
     }
 function AsignacionValoresProductonNuevo(json){
         $('#accion').val('add');
-        $('#anio').val($('#spnanio').val());             
+        $('#anio').val($('#spnanio').val());
+        $('#codigo_id').val($('#txtcodigo').val());
         $('#mes_id option').remove();    
         $.each(json['mes'], function(j, resultado) {
                $('#mes_id').append($('<option>').text(resultado.nombre).attr('value', resultado.mes_id));
@@ -441,7 +436,7 @@ function AsignacionValoresProductonNuevo(json){
  
     function AsignacionValoresProducto(json){
         var productos= json['producto'];
-        $('#accion').val(productos.accion);
+        $('#accion').val('edit');
         
         $('#producto_id').val(productos.producto_id);
         $('#anio').val(productos.anio);                

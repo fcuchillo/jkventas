@@ -5,24 +5,24 @@ require_once 'application/controllers/jkventas_controller.php';
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-class Usuarios  extends jkventas_controller {
+class CAdm_usuarios  extends jkventas_controller {
     public function __construct() {
         parent::__construct();
         $this->load->library(array('session','form_validation'));
         $this->load->helper(array('url','form'));
     } 
     public function index() {
-        $data['layout_body']    = 'usuario/index';
+        $data['layout_body']    = 'Admin/VAdm_usuario/index';
         $data['menu_padre']     = $this->CargarMenuPadre();
         $data['menu_hijo']      = $this->CargarMenuHijo();
         $data['title']          = 'Usuario';
         $this->load->view('main_template', $data);    
     }
     function Listadodeusuarios(){
-        echo json_encode($this->db->select('*')->from('t_usuario')->get()->result());
+        echo json_encode($this->db->select('*')->from('t_adm_usuario')->get()->result());
     }
     public function ObtenerUsuario(){
-            $query=$this->db->select('*')->from('t_usuario')->where('usuario_id',$this->input->post('usuario_id'))->get()->result();
+            $query=$this->db->select('*')->from('t_adm_usuario')->where('usuario_id',$this->input->post('usuario_id'))->get()->result();
             $usuario=$query[0];
             $usuario->accion='edit';
             echo json_encode($usuario);
@@ -48,16 +48,16 @@ class Usuarios  extends jkventas_controller {
         $accion=$this->input->post('accion');
         if($accion=='edit'){
         $this->db->where('usuario_id',$this->input->post('usuario_id'));
-        $this->db->update('t_usuario', array('usuario' =>$this->IsEmpty($this->input->post('usuario')),
+        $this->db->update('t_adm_usuario', array('usuario' =>$this->IsEmpty($this->input->post('usuario')),
                                              'clave'=>$this->IsEmpty($this->input->post('clave')),
                                              'estado'=>$this->IsEmpty($this->input->post('estado')),
                                              'observacion'=>$this->IsEmpty($this->input->post('observacion'))));
         }
         if($accion=='add'){
         $this->db->select_max('usuario_id');
-        $query = $this->db->get('t_usuario'); 
+        $query = $this->db->get('t_adm_usuario'); 
         $id=$query->row();
-        $this->db->insert('t_usuario', array('usuario_id'=>$id->usuario_id+1,
+        $this->db->insert('t_adm_usuario', array('usuario_id'=>$id->usuario_id+1,
                                              'usuario' =>$this->IsEmpty($this->input->post('usuario')),
                                              'clave'=>$this->IsEmpty($this->input->post('clave')),
                                              'estado'=>$this->IsEmpty($this->input->post('estado')),
@@ -68,36 +68,36 @@ class Usuarios  extends jkventas_controller {
     function EliminarUsuario(){
         $usuario_id=$this->input->post('usuario_id');
         $this->db->where('usuario_id',$usuario_id);
-        $this->db->delete('t_usuario_x_rol');
+        $this->db->delete('t_adm_usuario_x_rol');
         $this->db->where('usuario_id',$usuario_id);
-        $this->db->delete('t_usuario');
+        $this->db->delete('t_adm_usuario');
     }
     function roles(){
-        $data['layout_body']    = 'usuario/roles';
+        $data['layout_body']    = 'Admin/VAdm_usuario/roles';
         $data['menu_padre']     = $this->CargarMenuPadre();
         $data['menu_hijo']      = $this->CargarMenuHijo();
         $data['title']          = 'Usuario';
         $this->load->view('main_template', $data);   
     }
     function ListadodeRoles(){
-      echo json_encode($this->db->select('*')->from('t_rol')->get()->result());  
+      echo json_encode($this->db->select('*')->from('t_adm_rol')->get()->result());  
     }
     function ObtenerMenusporRol(){
             $this->db->select('rol_id');
-            $this->db->from('t_usuario_x_rol');
+            $this->db->from('t_adm_usuario_x_rol');
             $this->db->where('rol_id',$this->input->post('rol_id'));
             $where_rol=$this->db->get()->row();
             
             $this->db->select('menu_id');
-            $this->db->from('t_menu_x_rol');
+            $this->db->from('t_adm_menu_x_rol');
             $this->db->where('rol_id',$where_rol->rol_id);
             $where_clause = $this->db->get_compiled_select();
             $menus= $this->db->select('menu_id')
-                            ->from('t_menu')
+                            ->from('t_adm_menu')
                             ->where("`menu_id` IN ($where_clause)",NULL,false)
                             ->get()
                             ->result();
-      $datos['todo']=$this->db->select('menu_id,titulo')->from('t_menu')->get()->result();
+      $datos['todo']=$this->db->select('menu_id,titulo')->from('t_adm_menu')->get()->result();
       $array=[];
       foreach ($menus as $value){ 
         $array[] = $value->menu_id;
@@ -111,14 +111,14 @@ class Usuarios  extends jkventas_controller {
         
 //        Menu_por_rol::where('rol_id',$rol_id)->delete();
         $this->db->where('rol_id',$rol_id);
-        $this->db->delete('t_menu_x_rol');
+        $this->db->delete('t_adm_menu_x_rol');
         foreach ($arreglo as $value){
             $data=array (
            'menu_id'=>$value,
             'rol_id'=>$rol_id,
             'estado'=>1
         );
-        $this->db->insert('t_menu_x_rol',$data);
+        $this->db->insert('t_adm_menu_x_rol',$data);
       }        
     }
     function MantenimientoRol(){
@@ -127,15 +127,15 @@ class Usuarios  extends jkventas_controller {
 //        echo json_encode($this->input->post('rol_idd'));
         if($accion=='edit'){
         $this->db->where('rol_id',$this->input->post('rol_idd'));
-        $this->db->update('t_rol', array('titulo'=> $this->IsEmpty($this->input->post('titulo')),
+        $this->db->update('t_adm_rol', array('titulo'=> $this->IsEmpty($this->input->post('titulo')),
                                          'descripcion'=>$this->IsEmpty($this->input->post('descripcion')),
                                          'estado'=>$this->IsEmpty($this->input->post('estado'))));
         }
         if($accion=='add'){
         $this->db->select_max('rol_id');
-        $query = $this->db->get('t_rol'); 
+        $query = $this->db->get('t_adm_rol'); 
         $id=$query->row();
-        $this->db->insert('t_rol', array('rol_id'=>$id->rol_id+1,
+        $this->db->insert('t_adm_rol', array('rol_id'=>$id->rol_id+1,
                                              'titulo' =>$this->IsEmpty($this->input->post('titulo')),
                                              'descripcion'=>$this->IsEmpty($this->input->post('descripcion')),
                                              'estado'=>$this->IsEmpty($this->input->post('estado'))));
@@ -143,7 +143,7 @@ class Usuarios  extends jkventas_controller {
     }
     function ObtenerRolEditar(){
         $rol_id=$this->input->post('rol_id');
-        $query=$this->db->select('*')->from('t_rol')->where('rol_id',$rol_id)->get()->result();
+        $query=$this->db->select('*')->from('t_adm_rol')->where('rol_id',$rol_id)->get()->result();
         $rol=$query[0];
         $rol->accion='edit';
         echo json_encode($rol);
@@ -152,16 +152,16 @@ class Usuarios  extends jkventas_controller {
         $usuario_id=$this->input->post('usuario_id');
         $this->db->select('rol_id');
         $this->db->where('usuario_id',$usuario_id);
-        $query = $this->db->get('t_usuario_x_rol'); 
+        $query = $this->db->get('t_adm_usuario_x_rol'); 
         $rol_id=$query->row();
         if($rol_id!=NULL){
-            $query =$this->db->select('rol_id')->from('t_rol')->where('rol_id',$rol_id->rol_id)->get()->result();
+            $query =$this->db->select('rol_id')->from('t_adm_rol')->where('rol_id',$rol_id->rol_id)->get()->result();
             $roles['rol']= $query[0];
         }
         else{
             $roles['rol']=[];
         }
-        $roles['todo']= $this->db->select('rol_id,titulo')->from('t_rol')->get()->result();
+        $roles['todo']= $this->db->select('rol_id,titulo')->from('t_adm_rol')->get()->result();
         echo json_encode($roles);
     }
     function AsignacionRoles(){
@@ -170,19 +170,19 @@ class Usuarios  extends jkventas_controller {
         
         if($rol_id==-1){
              $this->db->where('usuario_id',$usuario_id);
-             $this->db->delete('t_usuario_x_rol');
+             $this->db->delete('t_adm_usuario_x_rol');
         }
         else{
             $this->db->where('usuario_id',$usuario_id);
-            $this->db->delete('t_usuario_x_rol');
+            $this->db->delete('t_adm_usuario_x_rol');
             
-            $usuario_x_rol=$this->db->select('*')->from('t_usuario_x_rol')->where('usuario_id',$usuario_id)->where('rol_id',$rol_id)->get();
+            $usuario_x_rol=$this->db->select('*')->from('t_adm_usuario_x_rol')->where('usuario_id',$usuario_id)->where('rol_id',$rol_id)->get();
             if($usuario_x_rol->num_rows()==0){
                     $this->db->select_max('usuario_rol_id');
-                    $query = $this->db->get('t_usuario_x_rol'); 
+                    $query = $this->db->get('t_adm_usuario_x_rol'); 
                     $id=$query->row();
                     
-                    $this->db->insert('t_usuario_x_rol',array('usuario_rol_id'=>$id->usuario_rol_id+1,
+                    $this->db->insert('t_adm_usuario_x_rol',array('usuario_rol_id'=>$id->usuario_rol_id+1,
                                                               'usuario_id'=>$usuario_id,
                                                               'rol_id'=>$rol_id,
                                                               'estado'=>1));
@@ -192,10 +192,10 @@ class Usuarios  extends jkventas_controller {
         function EliminarRol(){
         $rol_id=$this->input->post('rol_id');
         $this->db->where('rol_id',$rol_id);
-        $this->db->delete('t_menu_x_rol');
+        $this->db->delete('t_adm_menu_x_rol');
 
         $this->db->where('rol_id',$rol_id);
-        $this->db->delete('t_rol');
+        $this->db->delete('t_adm_rol');
     }
     function IsEmpty($value){
         return empty(trim($value))?null:$value;

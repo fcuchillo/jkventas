@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-class Mes extends CI_Model {
+class MAdm_usuario_x_rol extends CI_Model {
 
   function __construct() {
         parent::__construct();
@@ -13,4 +13,3 @@ class Mes extends CI_Model {
     }
 
 }
-

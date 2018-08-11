@@ -10,14 +10,14 @@ require_once 'application/controllers/jkventas_controller.php';
  * and open the template in the editor.
  */
 
-class Menus extends jkventas_controller {
+class CAdm_Menus extends jkventas_controller {
     public function __construct() {
         parent::__construct();
         $this->load->library(array('session','form_validation'));
         $this->load->helper(array('url','form'));
     } 
     public function index() {
-        $data['layout_body']    = 'menu/index';
+        $data['layout_body']    = 'Admin/VAdm_menu/index';
         $data['menu_padre']     = $this->CargarMenuPadre();
         $data['menu_hijo']      = $this->CargarMenuHijo();
         $data['menus']          = null;//$this->DB::select('CALL Lista_Menus()');
@@ -26,7 +26,7 @@ class Menus extends jkventas_controller {
         //mas modificaciones
     }
     public function ObtenerListadodeMenu(){
-        $query = $this->db->query("CALL Lista_Menus()");
+        $query = $this->db->query("CALL sp_adm_Lista_Menus()");
         echo json_encode( $query->result());
     }
 //    public function EditarMenu(){
@@ -93,7 +93,7 @@ class Menus extends jkventas_controller {
         echo $result;
     }
     function renderizarhtml(Menu $menu,$menu_id,$accion){
-        $s= '<form id="frmMenu" action="../Menus/EditarMenu"><div class="box-body">'
+        $s= '<form id="frmMenu" action="../CAdm_menus/EditarMenu"><div class="box-body">'
            .'<table id="tblmenu" class="table table-condensed table-striped" data-toggle="table" >'
            .'<label class="PyENDES-Label">Menu_id</label>'
            .'<input type="text" class="form-control" value="'.$menu->menu_id.'" name="menu_id" id="menu_id" readonly>'

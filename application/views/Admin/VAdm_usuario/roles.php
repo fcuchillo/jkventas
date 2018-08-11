@@ -4,7 +4,7 @@
     <section class="content-header">
         <h1>Muestreo</h1>
         <ol class="breadcrumb">
-            <li><a href="../login/usuarioLogin"><i class="fa fa-dashboard"></i>Inicio</a></li>
+            <li><a href="../CAdm_login/usuarioLogin"><i class="fa fa-dashboard"></i>Inicio</a></li>
             <li><a href="#">Muestreo</a></li>
             <li class="active">Muestreo</li>
         </ol>
@@ -148,7 +148,7 @@ $(document).ready(function () {
        console.log(data);
        $.ajax({
           type:'post',
-          url:'../Usuarios/MantenimientoRol',
+          url:'../CAdm_usuarios/MantenimientoRol',
           data:data,
           success:function(response){
             $('#myModalRol').modal('hide'); 
@@ -166,7 +166,7 @@ $(document).ready(function () {
        //var formData = JSON.stringify($("#frmMenu").serializeArray());
     $.ajax({
           type:'post',
-          url:'../Usuarios/AsignaciondeMenu',
+          url:'../CAdm_usuarios/AsignaciondeMenu',
           data:{asignados:asignados,rol_id:rol_id},
           success:function(response){
             $('#myModal').modal('hide'); 
@@ -189,7 +189,7 @@ $(document).ready(function () {
         },
         ajax:{
             dataType: 'json',
-            url:'../Usuarios/ListadodeRoles',
+            url:'../CAdm_usuarios/ListadodeRoles',
             type:'post',
             dataSrc:""
         }, 
@@ -217,7 +217,7 @@ $(document).ready(function () {
       $.ajax({
           type:'post',
           data:{rol_id:id},
-          url:'../Usuarios/ObtenerRolEditar',
+          url:'../CAdm_usuarios/ObtenerRolEditar',
           success:function(response){
             var json = jQuery.parseJSON(response);
             AsignarValoresRol(json);
@@ -246,7 +246,7 @@ $(document).ready(function () {
      $.ajax({
           type:'post',
           data:{rol_id:id},
-          url:'../Usuarios/EliminarRol',
+          url:'../CAdm_usuarios/EliminarRol',
           success:function(response){
             cargarTodoLosUsuarios();
         }
@@ -257,7 +257,7 @@ $(document).ready(function () {
  $.ajax({
           type:'post',
           data:{rol_id:id},
-          url:'../Usuarios/ObtenerMenusporRol',
+          url:'../CAdm_usuarios/ObtenerMenusporRol',
           success:function(response){
               console.log(response);
               var json2 = jQuery.parseJSON(response);

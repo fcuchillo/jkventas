@@ -6,44 +6,16 @@
 <div class="content-wrapper">
     <!--Region Section Header-->
     <section class="content-header">
-        <h1>Muestreo</h1>
+        <h1>Venta</h1>
         <ol class="breadcrumb">
-            <li><a href="../login/usuarioLogin"><i class="fa fa-dashboard"></i>Inicio</a></li>
-            <li><a href="#">Muestreo</a></li>
-            <li class="active">Muestreo</li>
+            <li><a href="../adm_login/usuarioLogin"><i class="fa fa-dashboard"></i>Inicio</a></li>
+            <li><a href="#">Venta</a></li>
+            <li class="active">Venta</li>
         </ol>
     </section>
     <!--End Region Section Header-->
     <!--Region Section Box-->
     <section class="content">
-        <!--Region Box Filter-->
-        <div class="box">
-            <div class="box-header with-border">
-                <h3 class="box-title">Filtro</h3>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
-                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
-                </div>
-            </div>
-            <div class="box-body">
-                <div class="row">
-                    <div class="col-md-3"> 
-                        <label class="PyENDES-Label">Nro. Conglomerado</label>
-                        <div class="input-group input-group-sm">
-                            <input type="text" class="form-control " id="conglomerado" name="conglomerado" placeholder="Ingresar Nro. Conglomerado">
-                            <small id='validationConglomerado' class="help-block validation" data-bv-validator="notEmpty" data-bv-for="conglomerado" data-bv-result="INVALID" style="display: none">Nro. Conglomerado es requerido</small>
-                            <span class="input-group-btn"><button type="button" class="btn btn-primary btn-block btn-flat" id="btnRegistrySearch">Buscar</button>
-                        </div>
-                    </div>
-                    <div class="col-md-7"></div>
-                    <div class="col-md-2">
-                        <label class="PyENDES-Label">Procesar </label>
-                        <button type="button" class="btn btn-block btn-danger btn-sm" id="btnRegistryProcess" disabled>Procesar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--End Region Box Filter-->
         <!--Region Box Result-->
         <div class="box">
             <div class="box-header with-border">
@@ -54,18 +26,68 @@
                 </div>
             </div>
             <div class="box-body">
+                <div class="row">
+                    <div class="col-md-3"> 
+                        <label class="PyENDES-Label">Cliente</label>
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control " id="cliente" name="cliente" placeholder="Ingrese Cliente">
+                            <ul class="dropdown-menu txtcliente" style="margin-left:15px;margin-right:0px;" role="menucliente" aria-labelledby="dropdownCliente"  id="DropdownCliente"></ul>
+                            <small id='validationConglomerado' class="help-block validation" data-bv-validator="notEmpty" data-bv-for="conglomerado" data-bv-result="INVALID" style="display: none">Registre Cliente</small>
+                        </div>
+                    </div>
+                     <div class="col-md-3"> 
+                        <label class="PyENDES-Label">Fecha</label>
+                        <div class="input-group input-group-sm">
+                            <input type="date" class="form-control " id="fecha" name="fecha" placeholder="Ingrese Cliente">
+                            <small id='validationConglomerado' class="help-block validation" data-bv-validator="notEmpty" data-bv-for="conglomerado" data-bv-result="INVALID" style="display: none">Registre Fecha</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6"></div>
+                </div>
+               <div class="row">
+                <div class="col-md-3"> 
+                        <label class="PyENDES-Label">Producto</label>
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control " id="producto" name="producto" placeholder="Busque Producto">
+                            <ul class="dropdown-menu txtproducto" style="margin-left:15px;margin-right:0px;" role="despliegue" aria-labelledby="dropdownDespliegue"  id="DropdownProducto"></ul>
+                            <small id='validationConglomerado' class="help-block validation" data-bv-validator="notEmpty" data-bv-for="conglomerado" data-bv-result="INVALID" style="display: none">Registre Producto</small>
+                        </div>
+                    </div>
+                     <div class="col-md-3"> 
+                        <label class="PyENDES-Label">Precio</label>
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control " id="precio" name="precio" placeholder="Ingrese precio">
+                            <small id='validationConglomerado' class="help-block validation" data-bv-validator="notEmpty" data-bv-for="conglomerado" data-bv-result="INVALID" style="display: none">Ingrese Precio</small>
+                        </div>
+                    </div>
+                   <div class="col-md-3"> 
+                        <label class="PyENDES-Label">Cantidad</label>
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control " id="cantidad" name="cantidad" placeholder="Ingrese cantidad" min="0">
+                            <small id='validationConglomerado' class="help-block validation" data-bv-validator="notEmpty" data-bv-for="conglomerado" data-bv-result="INVALID" style="display: none">Ingrese Precio</small>
+                        </div>
+                    </div>
+                    <div class="col-md-2"> 
+                        <label class="PyENDES-Label" style="visibility: hidden"></label>
+                        <div class="input-group input-group-sm">
+                           <span class="input-group-btn"><button type="button" class="btn btn-primary btn-block btn-flat" id="btnRegistrySearch">Agregar</button></span>                           
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div class="row">
                 <table id="tblmenu" class="table table-condensed table-striped" data-toggle="table" >
                     <thead id="tblmenucabecera">
                         <tr class="info">
                             <th align="center"><center><a href="javascript:void(0);" onclick="AgregarMenu();"><span class="glyphicon glyphicon-plus"></span></a></center></th>
                             <!--<th align="center"></th>-->
-                            <th align="center">Menú</th>
-                            <th align="center">Ruta</th>
-                            <th align="center">Descripción</th>
-                            <th align="center">Orden</th>
+                            <th align="center">Usuario</th>
+                            <th align="center">Cliente</th>
+                            <th align="center">fecha</th>
+<!--                            <th align="center">Orden</th>
                             <th align="center">Padre</th>
                             <th align="center">Roles Asignados</th>
-                            <th align="center">Estado</th>
+                            <th align="center">Estado</th>-->
                         </tr>            
                     </thead>
                     <tbody>
@@ -84,7 +106,8 @@
                         }
                         ?>
                     </tbody>
-                </table>
+                  </table>
+                </div>
             </div>
         </div>  
     </section>
@@ -136,16 +159,59 @@
 <script>
 var myTable;
 $(document).ready(function () {
-    cargarTodoMenu();
-    $('#btnMenueditar').click(function(){
-//        $('#myModal').modal('show'); 
-        alert('hiciste click');
+     $("#cliente").keyup(function () {
+        $.ajax({
+            type: "POST",
+            url: '../CProd_ventas/ObtenerClienteAuto',
+            data: {
+                keyword: $("#cliente").val()
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.length > 0) {
+                    $('#DropdownCliente').empty();
+                    $('#cliente').attr("data-toggle", "dropdown");
+                    $('#DropdownCliente').dropdown('toggle');
+                }
+                else if (data.length == 0) {
+                    $('#cliente').attr("data-toggle", "");
+                }
+                $.each(data, function (key,value) {
+                    if (data.length >= 0)
+                        $('#DropdownCliente').append('<li role="displayCountries" ><a role="menuitem dropdownCountryli" class="dropdownlivalue">' + value['nombre'] + '</a></li>');
+                });
+            }
+        });
     });
-    $('#btnGuardar').click(function(){
-        EditarMenu();
+    $('ul.txtcliente').on('click', 'li a', function () {
+        $('#cliente').val($(this).text());
     });
-    $('#btnGuardarRoles').click(function(){
-        GuardarRolporMenu();
+    $("#producto").keyup(function () {
+        $.ajax({
+            type: "POST",
+            url: '../CProd_ventas/ObtenerProductoAuto',
+            data: {
+                keyword: $("#producto").val()
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.length > 0) {
+                    $('#DropdownProducto').empty();
+                    $('#producto').attr("data-toggle", "dropdown");
+                    $('#DropdownProducto').dropdown('toggle');
+                }
+                else if (data.length == 0) {
+                    $('#producto').attr("data-toggle", "");
+                }
+                $.each(data, function (key,value) {
+                    if (data.length >= 0)
+                        $('#DropdownProducto').append('<li role="displayCountries" ><a role="menuitem dropdownCountryli" class="dropdownlivalue">' + value['nombre'] + '</a></li>');
+                });
+            }
+        });
+    });
+    $('ul.txtproducto').on('click', 'li a', function () {
+        $('#producto').val($(this).text());
     });
   });
   
@@ -157,7 +223,7 @@ $(document).ready(function () {
         $.ajax({
           type:'post',
           data:data,
-          url:'../Menus/EditarMenu',
+          url:'../CProd_Menus/EditarMenu',
 //        dataType: 'json',
 //        contentType: 'application/json',
           success:function(response){
@@ -171,7 +237,7 @@ $(document).ready(function () {
       $.ajax({
           type:'post',
 //          data:data,
-          url:'../Menus/AgregarMenu',
+          url:'../CProd_Menus/AgregarMenu',
           success:function(response){
             $('#myModal').modal('show'); 
             $('#data-menu').html(response);
@@ -185,7 +251,7 @@ $(document).ready(function () {
         },
         ajax:{
             dataType: 'json',
-            url:'../Menus/ObtenerListadodeMenu',
+            url:'../CProd_Menus/ObtenerListadodeMenu',
             type:'post',
             dataSrc:""
         }, 
@@ -198,16 +264,16 @@ $(document).ready(function () {
                         }  },
             { data:"menu",           class:"textFont text-left",order:false/*,      width: "20" */    },
             { data:"ruta",           class:"textFont text-left"/*,      width: "100"*/    },
-            { data:"descripcion",    class:"textFont text-left"/*,      width: "100"*/    },
-            { data:"orden",          class:"textFont text-left"/*,      width: "80" */    },
-            { data:"padre",          class:"textFont text-left"/*,      width: "200"*/    },
-            {data: 'id', render: function(value, type, full, meta) {
-                  return '<td><center>'+
-                         '<a href="javascript:void(0);" onclick="CargarRoles('+full.menu_id+');" ><span class="glyphicon glyphicon-menu-hamburger" ></span></a>'+
-                         '</center></td>'
-                    }
-            },
-            { data:"estado",         class:"textFont text-left"/*,      width: "40" */    }
+            { data:"descripcion",    class:"textFont text-left"/*,      width: "100"*/    }
+//            { data:"orden",          class:"textFont text-left"/*,      width: "80" */    },
+//            { data:"padre",          class:"textFont text-left"/*,      width: "200"*/    },
+//            {data: 'id', render: function(value, type, full, meta) {
+//                  return '<td><center>'+
+//                         '<a href="javascript:void(0);" onclick="CargarRoles('+full.menu_id+');" ><span class="glyphicon glyphicon-menu-hamburger" ></span></a>'+
+//                         '</center></td>'
+//                    }
+//            },
+//            { data:"estado",         class:"textFont text-left"/*,      width: "40" */    }
         ],
         columnDefs: [
         { "orderable": false, "targets": 0 }
@@ -220,7 +286,7 @@ $(document).ready(function () {
       $.ajax({
           type:'post',
           data:{menu_id:id},
-          url:'../Menus/ObtenerMenu',
+          url:'../CProd_Menus/ObtenerMenu',
           success:function(response){
             console.log(response);
             $('#myModal').modal('show'); 
@@ -233,7 +299,7 @@ $(document).ready(function () {
      $.ajax({
           type:'post',
           data:{menu_id:id},
-          url:'../Menus/EliminarMenu',
+          url:'../CProd_Menus/EliminarMenu',
           success:function(response){
             cargarTodoMenu();
         }
@@ -247,7 +313,7 @@ $(document).ready(function () {
        $.ajax({
           type:'post',
           data:{menu_id:menu_id},
-          url:'../Menus/ObtenerRolporMenu',
+          url:'../CProd_Menus/ObtenerRolporMenu',
           success:function(response){
               console.log(response);
               var json2 = jQuery.parseJSON(response);
@@ -278,7 +344,7 @@ $(document).ready(function () {
        //var formData = JSON.stringify($("#frmMenu").serializeArray());
     $.ajax({
           type:'post',
-          url:'../Menus/AsignaciondeRol',
+          url:'../CProd_Menus/AsignaciondeRol',
           data:{asignados:asignados,menu_id:menu_id},
           success:function(response){
             $('#myModalRoles').modal('hide'); 

@@ -5,7 +5,7 @@ class jkventas_controller extends CI_Controller{
         public $DB;
 	public function __construct() {
     	parent::__construct();
-            $this->load->model(array('Menu','Usuariopor_rol','Menu_por_rol'));
+            $this->load->model(array('MAdm_menu','MAdm_usuario_x_rol','MAdm_menu_x_rol'));
             $this->DB=$this->load->database('jkventas');
 	  }
 	public function CargadoDelMenu(){
@@ -25,16 +25,16 @@ class jkventas_controller extends CI_Controller{
 //                                                       $query->select('menu_id')->from('t_menu_x_rol')->where('rol_id','=',$rol->rol_id);
 //                                                      })->get();
             $this->db->select('rol_id');
-            $this->db->from('t_usuario_x_rol');
+            $this->db->from('t_adm_usuario_x_rol');
             $this->db->where('usuario_id',$this->session->userdata['session_user']['usuario_id']);
             $where_rol=$this->db->get()->row();
 //            var_dump($where_rol);
             $this->db->select('menu_id');
-            $this->db->from('t_menu_x_rol');
+            $this->db->from('t_adm_menu_x_rol');
             $this->db->where('rol_id',$where_rol->rol_id);
             $where_clause = $this->db->get_compiled_select();
             return $this->db->select('*')
-                            ->from('t_menu')
+                            ->from('t_adm_menu')
                             ->where('padre_id')
                             ->where("`menu_id` IN ($where_clause)",NULL,false)
                             ->get()
@@ -52,16 +52,16 @@ class jkventas_controller extends CI_Controller{
 //                                                       $query->select('menu_id')->from('t_menu_x_rol')->where('rol_id','=',$rol->rol_id);
 //                                                      })->get()->sortBy('orden');
             $this->db->select('rol_id');
-            $this->db->from('t_usuario_x_rol');
+            $this->db->from('t_adm_usuario_x_rol');
             $this->db->where('usuario_id',$this->session->userdata['session_user']['usuario_id']);
             $where_rol=$this->db->get()->row();
 //            var_dump($where_rol);
             $this->db->select('menu_id');
-            $this->db->from('t_menu_x_rol');
+            $this->db->from('t_adm_menu_x_rol');
             $this->db->where('rol_id',$where_rol->rol_id);
             $where_clause = $this->db->get_compiled_select();
             return $this->db->select('*')
-                            ->from('t_menu')
+                            ->from('t_adm_menu')
                             ->where('padre_id IS NOT NULL',NULL,false)
                             ->where("`menu_id` IN ($where_clause)",NULL,false)
                             ->get()
