@@ -12,14 +12,14 @@ class CProd_productos extends jkventas_controller {
     } 
     
     public function index() {
-        //$data['producto']       = $this->db->query('CALL Lista_Productos(?,?,?,?,?,?)',['2018', 0, 0,0,0,''])->result_array();  
+        $data['menu_padre']     = $this->CargarMenuPadre();
+        $data['menu_hijo']      = $this->CargarMenuHijo();        
         $data['layout_body']    = 'Productos/VProd_productos/index';
         $data['mes']            = $this->MGest_mes->ObtenerTablaMeses();
         $data['estado']         = $this->MProd_estado->ObtenerTablaEstados();
         $data['marca']          = $this->MProd_marca->ObtenerTablaMarcas();
         $data['categoria']      = $this->MProd_categoria->ObtenerTablaCategorias();
-
-        $data['menu']  = $this->CargadoDelMenu();        
+ 
         $data['title'] = 'Productos';
         $this->load->view('main_template', $data);
     }    
