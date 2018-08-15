@@ -242,7 +242,6 @@ $(document).ready(function () {
  }
    function CargarRoles(menu_id){
 //       $(this).removeData('bs.modal');
-
 //       $("#disponibles").multiSelect("clearSelection");
        $.ajax({
           type:'post',

@@ -6,8 +6,13 @@ require_once 'application/core/Entities.php';
  * and open the template in the editor.
  */
 class MProd_marca extends CI_Model {
+    public $marca_id;
+    public $nombre;
+    public $direccion;    
+    public $descripcion;
+    public $observacion;
 
-  function __construct() {
+    function __construct() {
         parent::__construct();
         
     }

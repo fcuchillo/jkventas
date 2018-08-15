@@ -1,4 +1,3 @@
-
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
         <b>Version</b> 1.0.0
@@ -9,16 +8,23 @@
 </div>
 <!-- ./wrapper -->
 <script src="<?php echo base_url();?>assets/plugins/jQuery/jquery.form.min.js" type="text/javascript"></script>
+
+<!--yo-->
+<script src="<?php echo base_url();?>assets/plugins/jqgrid/js/grid.locale-es.js"></script>
+<script src="<?php echo base_url();?>assets/plugins/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="<?php echo base_url();?>assets/plugins/jQueryUI/jquery-ui.min.js" type="text/javascript"></script>
+
+
 <script src="<?php echo base_url();?>assets/plugins/file/fileinput.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="<?php echo base_url();?>assets/bootstrap/js/jquery.validate.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-
+ 
 <script src="<?php echo base_url();?>assets/plugins/datatables/js/jquery.dataTables.min.js" charset = "utf8" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/plugins/datatables/buttons/js/dataTables.buttons.min.js" type="text/javascript" ></script>
 <script src="<?php echo base_url();?>assets/plugins/datatables/select/js/dataTables.select.min.js" type="text/javascript" ></script>
 
-<script src="<?php echo base_url();?>assets/plugins/datatables/js/dataTables.bootstrap.min.js" charset = "utf8" type="text/javascript"></script>
+<!--<script src="<?php echo base_url();?>assets/plugins/datatables/js/dataTables.bootstrap.min.js" charset = "utf8" type="text/javascript"></script>NOOOO-->
 <script src="<?php echo base_url();?>assets/plugins/fastclick/fastclick.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/dist/js/app.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/dist/js/demo.js" type="text/javascript"></script>

@@ -12,13 +12,9 @@
  * @author dhuancacuri
  */
 class Entities {
-    //put your code here
     public static $t_prod_categoria="t_prod_categoria";
     public static $t_gest_mes="t_gest_mes";
     public static $t_prod_estado="t_prod_estado";
     public static $t_prod_marca="t_prod_marca";
-    public static $t_prod_producto="t_prod_producto";
-    
-//    public static $t_gest_mes="t_gest_mes";
-//    public static $t_gest_mes="t_gest_mes";
+    public static $t_prod_producto="t_prod_producto";    
 }

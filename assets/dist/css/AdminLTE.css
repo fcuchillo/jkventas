@@ -21,7 +21,8 @@ body {
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /*font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
+  font-family: -webkit-body;
   font-weight: 400;
   overflow-x: hidden;
   overflow-y: auto;
@@ -1250,7 +1251,8 @@ a:focus {
 .form-control {
   border-radius: 0;
   box-shadow: none;
-  border-color: #d2d6de;
+  /*border-color: #d2d6de;*/
+  border-color: #edef99fc;
 }
 .form-control:focus {
   border-color: #3c8dbc;

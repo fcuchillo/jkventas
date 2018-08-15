@@ -8,8 +8,12 @@ require_once 'application/core/Entities.php';
 
 
 class MProd_categoria extends CI_Model {
+    public $categoria_id;
+    public $nombre;
+    public $observacion;
+    
 
-  function __construct() {
+    function __construct() {
         parent::__construct();
         
     }

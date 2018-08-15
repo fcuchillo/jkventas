@@ -6,15 +6,23 @@
   <title><?php echo $title ?></title>
   
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
- <script src="<?php echo base_url(); ?>assets/plugins/jQuery/jquery-2.2.3.min.js"></script>
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css">  
-  <!--<link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/css/dataTables.bootstrap.css">-->
+  <script src="<?php echo base_url(); ?>assets/plugins/jQuery/jquery-2.2.3.min.js"></script>
   
+  
+   <!--yo-->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/jqgrid/css/jquery-ui-1.8.18.custom.css">    
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/jqgrid/css/theme/grid/ui.jqgrid.css">
+  
+  
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css">  
+  <!--<link rel="stylesheet" href="<?php // echo base_url(); ?>assets/plugins/datatables/css/dataTables.bootstrap.css">NOOOOOO-->   
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/buttons/css/buttons.dataTables.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/select/css/select.dataTables.min.css">
+  
+ 
     
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/jQueryUI/jquery-ui.min.css">
+  <!--<link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/jQueryUI/jquery-ui.min.css"> COLOR A JQGRID-->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/AdminLTE.min.css">  
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">  
