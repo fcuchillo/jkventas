@@ -18,8 +18,7 @@ class MProd_producto extends CI_Model {
   public $color;
   public $precio_compra;
   public $precio_venta;
-  public $fecha_compra;
-  public $descripcion;
+  public $fecha_compra;  
   public $observacion;
   
   
@@ -85,10 +84,6 @@ class MProd_producto extends CI_Model {
         return $this->fecha_compra;
     }
 
-    public function getDescripcion() {
-        return $this->descripcion;
-    }
-
     public function getObservacion() {
         return $this->observacion;
     }
@@ -140,11 +135,7 @@ class MProd_producto extends CI_Model {
     public function setFecha_compra($fecha_compra) {
         $this->fecha_compra = $fecha_compra;
     }
-
-    public function setDescripcion($descripcion) {
-        $this->descripcion = $descripcion;
-    }
-
+    
     public function setObservacion($observacion) {
         $this->observacion = $observacion;
     }

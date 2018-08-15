@@ -80,8 +80,7 @@ class CProd_productos extends jkventas_controller {
         $entry->setColor($row['color']);
         $entry->setPrecio_compra($row['precio_compra']);
         $entry->setPrecio_venta($row['precio_venta']);
-        $entry->setFecha_compra($row['fecha_compra']);
-        $entry->setDescripcion($row['descripcion']);
+        $entry->setFecha_compra($row['fecha_compra']);        
         $entry->setObservacion($row['observacion']);
 
         $response['rows'][$i]['id'] = $entry->getId(); //id
@@ -99,8 +98,7 @@ class CProd_productos extends jkventas_controller {
                                         $entry->getColor(),
                                         $entry->getPrecio_compra(),
                                         $entry->getPrecio_venta(),
-                                        $entry->getFecha_compra(),
-                                        $entry->getDescripcion(),
+                                        $entry->getFecha_compra(),                                        
                                         $entry->getObservacion()
                 
                                     );
@@ -142,8 +140,7 @@ class CProd_productos extends jkventas_controller {
                     'precio_compra' =>$this->input->post('precio_compra'),
                     'precio_venta'  =>$this->input->post('precio_venta'),
                     'fecha_compra'  =>$this->input->post('fecha_compra'),
-                    'estado_id'     =>$this->input->post('estado_id'),
-                    'descripcion'   =>$this->input->post('descripcion'),
+                    'estado_id'     =>$this->input->post('estado_id'),                    
                     'observacion'   =>$this->input->post('observacion')
                 );
         

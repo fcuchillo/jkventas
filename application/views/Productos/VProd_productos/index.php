@@ -108,33 +108,15 @@
 
         <!--Region Box Result-->
         <div class="box">            
-            <div class="box-body" id="divContenedorProducto">                
-                <!--<div class="row">-->
-                    <!--<div class="col-sm-12">-->
-                        <!--<center><label style="visibility: collapse">Espacio : </label></center>-->
-                        <!--Region Report-->
-<!--                                <table id="tblProducto" class="table table-sm table-condensed table-bordered" name="tblProducto">                                    
-                                <tr id="contenido_C1" align=center>			
-				<td>
-                                    <table id="grid_tablero_anemia_altitud" style="width:95%;"></table>
-                                    <div id="grid_tablero_anemia_altitud_pager" class="scroll" style="text-align: center;"></div>
-				</td>
-                                </tr>	
-                        
-                                </table>-->
-                        
-                        <table align="center" width="100%" cellpadding="0" cellspacing="0">						
-				  <tr>
-				 	<td align=center valign=top width="100%">
-				 		<table id="grid_tablero_anemia_altitud" ><tr><td></td></tr></table>
-						<div id="grid_tablero_anemia_altitud_pager" ></div>
-				 	</td>
-				 </tr>
-			</table>
-                        
-                        <!--End Region Report-->
-                    <!--</div>-->
-                <!--</div>-->
+            <div class="box-body" id="divContenedorProducto">                                        
+                <table align="center" width="100%" cellpadding="0" cellspacing="0">						
+                    <tr>
+		 	<td align=center valign=top width="100%">
+                            <table id="grid_tablero_anemia_altitud" ><tr><td></td></tr></table>
+				<div id="grid_tablero_anemia_altitud_pager" ></div>
+			</td>
+                    </tr>
+		</table>                         
             </div>                
         </div>
     </section>
@@ -158,7 +140,7 @@
                     <div class="row">
                         <div class="validarInfo">
                         <div class="col-sm-2"><label >Producto_id: </label></div>                        
-                        <div class="col-sm-3"><input class="form-control" type="text" id="producto_id" name="producto_id" value="" > <span class="help-block" id="error"></span> </div>
+                        <div class="col-sm-3"><input class="form-control" type="text" id="producto_id" name="producto_id" value="" readonly="" > <span class="help-block" id="error"></span> </div>
                         <div class="col-sm-1"></div>
                         </div>
                         <div class="validarInfo">                        
@@ -168,49 +150,67 @@
                     </div>
                     
                     <div class="row">
+                        <div class="validarInfo">
                         <div class="col-sm-2"><label>Anio:</label></div>                        
-                        <div class="col-sm-3"><input class="form-control" type="text" id="anio" name="anio" value="" ></div>
+                        <div class="col-sm-3"><input class="form-control" type="text" id="anio" name="anio" value="" readonly=""> <span class="help-block" id="error"></span></div>
                         <div class="col-sm-1"></div>
+                        </div>
+                        <div class="validarInfo">
                         <div class="col-sm-2"><label>Mes:</label></div>
-                        <div class="col-sm-4"><select class="form-control" name="mes_id" id="mes_id"></select></div>
+                        <div class="col-sm-4"><select class="form-control" name="mes_id" id="mes_id"></select> <span class="help-block" id="error"></span></div>
+                        </div>
                     </div>
                     <div class="row">
+                        <div class="validarInfo">
                         <div class="col-sm-2"><label>Marca:</label></div>
-                        <div class="col-sm-4"><select class="form-control" name="marca_id" id="marca_id"></select></div>
+                        <div class="col-sm-4"><select class="form-control" name="marca_id" id="marca_id"></select> <span class="help-block" id="error"></span></div>
+                        </div>
+                        <div class="validarInfo">
                         <div class="col-sm-2"><label>Categoria:</label></div>
-                        <div class="col-sm-4"><select class="form-control" name="categoria_id" id="categoria_id"></select></div>
+                        <div class="col-sm-4"><select class="form-control" name="categoria_id" id="categoria_id"></select> <span class="help-block" id="error"></span></div>
+                        </div>
                     </div> 
                     <div class="row">
+                        <div class="validarInfo">
                         <div class="col-sm-2"><label>Nombre:</label></div>
-                        <div class="col-sm-10"><input class="form-control" name="nombre" id="nombre"></div>
+                        <div class="col-sm-10"><input class="form-control" name="nombre" id="nombre"> <span class="help-block" id="error"></span></div>
+                        </div>
                     </div> 
                     <div class="row">
+                        <div class="validarInfo">
                         <div class="col-sm-2"><label>Talla:</label></div>
-                        <div class="col-sm-3"><input class="form-control" name="talla" id="talla"></div>
+                        <div class="col-sm-3"><input class="form-control" name="talla" id="talla"> <span class="help-block" id="error"></span></div>                        
                         <div class="col-sm-1"></div>
+                        </div>
+                        <div class="validarInfo">
                         <div class="col-sm-2"><label>Color:</label></div>
-                        <div class="col-sm-4"><input class="form-control" name="color" id="color"></div>
+                        <div class="col-sm-4"><input class="form-control" name="color" id="color"> <span class="help-block" id="error"></span></div>
+                        </div>
                     </div> 
                     <div class="row">
+                        <div class="validarInfo">
                         <div class="col-sm-3"><label>Precio Compra:</label></div>
-                        <div class="col-sm-2"><input class="form-control" name="precio_compra" id="precio_compra"></div>
+                        <div class="col-sm-2"><input class="form-control" name="precio_compra" id="precio_compra"> <span class="help-block" id="error"></span></div>
+                        </div>
                     </div> 
                     <div class="row">
+                        <div class="validarInfo">
                         <div class="col-sm-3"><label>Precio Venta:</label></div>
-                        <div class="col-sm-2"><input class="form-control" name="precio_venta" id="precio_venta"></div>
+                        <div class="col-sm-2"><input class="form-control" name="precio_venta" id="precio_venta"> <span class="help-block" id="error"></span></div>
+                        </div>
                     </div>
                     <div class="row">
+                        <div class="validarInfo">
                         <div class="col-sm-3"><label>Fecha Compra:</label></div>
-                        <div class="col-sm-5"><input class="form-control" type="date" name="fecha_compra" id="fecha_compra" value=""></div>
+                        <div class="col-sm-5"><input class="form-control" type="date" name="fecha_compra" id="fecha_compra" value=""> <span class="help-block" id="error"></span></div>
+                        </div>
                     </div>
                     <div class="row">
+                        <div class="validarInfo">
                         <div class="col-sm-3"><label>Estado:</label></div>
-                        <div class="col-sm-5"><select class="form-control" name="estado_id" id="estado_id"></select></div>
+                        <div class="col-sm-5"><select class="form-control" name="estado_id" id="estado_id"></select> <span class="help-block" id="error"></span></div>
+                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-3"><label>Descripcion:</label></div>
-                        <div class="col-sm-9"><input class="form-control" name="descripcion" id="descripcion"></div>
-                    </div> 
                     <div class="row">
                         <div class="col-sm-3"><label>Observacion:</label></div>
                         <div class="col-sm-9"><input class="form-control" name="observacion" id="observacion"></div>
@@ -221,8 +221,7 @@
                         
             <div class="modal-footer"> 
                 <div class="modal-header">
-                    <button type="submit" class="btn btn-primary" form="frmProducto" >Guardar</button>  
-                    <!--<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>-->
+                    <button type="submit" class="btn btn-primary" form="frmProducto" >Guardar</button>                      
                 </div> 
             </div>
         </div>
@@ -272,62 +271,10 @@ var editor;
             $('#spnmarca').val(0);
             $('#spncategoria').val(0);
             $("#txtcodigo").val("");            
-        });  
-        
+        });          
         ValidarInformacion();            
-     });
-    
-    function ValidarInformacion(){
-        var nameregex = /^[a-zA-Z ]+$/;       
-        $.validator.addMethod("validname", function( value, element ) {
-            return this.optional( element ) || nameregex.test( value );
-        }); 
-   
-        $("#frmProducto").validate({     
-            rules:{
-                producto_id: {
-                    required: true 
-                    /*validname: true, minlength: 4*/
-                },
-                codigo_id: {
-                    required: true 
-                    /*validname: true*/
-                }
-            },             
-
-            messages:{
-                producto_id: {
-                    required: "Ingrese id"
-    //              validname: "Name must contain only alphabets and space",
-    //              minlength: "Your Name is Too Short"
-                },
-                codigo_id: {
-                    required: "Ingrese codigo"
-    //              validname: "Enter Valid Email Address"
-                } 
-            },
-
-            errorPlacement : function(error, element) {
-                $(element).closest('.validarInfo').find('.help-block').html(error.html());
-            },
-            highlight : function(element) {
-                $(element).closest('.validarInfo').removeClass('has-success').addClass('has-error');
-            },
-            unhighlight: function(element, errorClass, validClass) {
-                $(element).closest('.validarInfo').removeClass('has-error').addClass('has-success');
-                $(element).closest('.validarInfo').find('.help-block').html('');
-            },
-
-            submitHandler: function(form) {
-                form.submit();                
-            }
-        });   
-    }
-    
-    function DDRecargarParameter_mues(){
-	DDRecargar_tablero_anemia_altitud(anio, mes, estado, marca, categoria, codigo);
-    }
-
+    });
+        
     function ObtenerParametros(){
         $('#grid_tablero_anemia_altitud').jqGrid('GridUnload');
 	gidreporte_tablero_anemia_altitud=jQuery("#grid_tablero_anemia_altitud");        
@@ -339,6 +286,78 @@ var editor;
         codigo      = $("#txtcodigo").val();   
         getAll_tablero_anemia_altitud(anio, mes, estado, marca, categoria, codigo);
     }    
+        
+    function DDRecargarParameter_mues(){
+	DDRecargar_tablero_anemia_altitud(anio, mes, estado, marca, categoria, codigo);
+    }
+    
+    function DDRecargar_tablero_anemia_altitud(anio, mes, estado, marca, categoria, codigo) {
+	gidreporte_tablero_anemia_altitud.jqGrid("setGridParam",{
+            page:1,	
+            url:'../CProd_productos/ListaProductos?anio='+anio+'&mes='+mes+'&estado='+estado+'&marca='+marca+'&categoria='+categoria+'&codigo='+codigo,
+            datatype : "json"
+	}).trigger("reloadGrid");
+	
+	return [ true, '' ]; 
+    }    
+        
+    function getAll_tablero_anemia_altitud(anio, mes, estado, marca, categoria, codigo){
+	var leditar          = { name : 'editar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EditarProductoXid};
+        var leliminar        = { name : 'eliminar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EliminarProductoXid};
+        var lproducto_id     = { name : 'producto_id'	 ,index : 'index',  width : 30,    align : "center",    fixed : true,  sortable : false };
+	var lcodigo          = { name : 'codigo'         ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };
+	var lanio            = { name : 'anio'           ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };
+        var lmes             = { name : 'mes'            ,index : 'index',  width : 70,    align : "left",      fixed : true,  sortable : false };
+	var lmarca           = { name : 'marca'          ,index : 'index',  width : 85,    align : "left",      fixed : true,  sortable : false };
+	var lcategoria       = { name : 'categoria'	 ,index : 'index',  width : 85,    align : "left",      fixed : true,  sortable : false };	
+	var lnombre          = { name : 'nombre'         ,index : 'index',  width : 130,   align : "left",      fixed : true,  sortable : false };
+	var ltalla           = { name : 'talla'          ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };
+	var lcolor           = { name : 'color'          ,index : 'index',  width : 50,    align : "center",    fixed : true,  sortable : false };
+        var lprecio_compra   = { name : 'precio_compra'	 ,index : 'index',  width : 80,    align : "center",    fixed : true,  sortable : false };
+        var lprecio_venta    = { name : 'precio_venta'	 ,index : 'index',  width : 70,    align : "center",    fixed : true,  sortable : false };
+        var lfecha_compra    = { name : 'fecha_compra'	 ,index : 'index',  width : 120,   align : "center",    fixed : true,  sortable : false };        
+        var lobservacion     = { name : 'observacion'	 ,index : 'index',  width : 140,   align : "left",      fixed : true,  sortable : false };
+        
+        colNames = ['','','Id','Codigo','Anio','Mes','Marca','Categoria','Nombre','Talla','Color','Precio Compra','Precio Venta','Fecha Compra','Observacion'];
+	colModel = [leditar,leliminar,lproducto_id,lcodigo,lanio,lmes,lmarca,lcategoria,lnombre,ltalla,lcolor,lprecio_compra,lprecio_venta,lfecha_compra,lobservacion];	    
+
+	gidreporte_tablero_anemia_altitud.jqGrid({
+		url:'../CProd_productos/ListaProductos?anio='+anio+'&mes='+mes+'&estado='+estado+'&marca='+marca+'&categoria='+categoria+'&codigo='+codigo,
+		datatype : "json",
+		mtype : 'post',
+		colNames : colNames,
+		colModel : colModel,
+		height : 'auto',
+		width : 1150,
+		pager : $('#grid_tablero_anemia_altitud_pager'),
+		rowNum : 15,
+		loadonce : true,
+		scrollrows : true,
+		rownumbers : true,
+                caption: "Listado de Productos",
+		loadComplete : function(data) { 
+		},
+		sortname : 'id',
+		sortable : false,
+		sortorder : "asc",
+		viewrecords : true,
+		loadError : function(xhr, st, err) {
+			alert(err);
+		}		
+	});
+        
+        gidreporte_tablero_anemia_altitud.navGrid('#grid_tablero_anemia_altitud_pager',{edit:false,add:false,del:false,search:false,refresh:false},{},{},{});
+	
+ 	gidreporte_tablero_anemia_altitud.navButtonAdd('#grid_tablero_anemia_altitud_pager',{ 	
+            caption:"", 
+            buttonicon:"ui-icon-plus", 
+            onClickButton: AgregarProducto,
+            position: "last", 
+            title:"Agregar Recuperación", 
+            cursor: "pointer"
+        });
+    }
+    
     
     function AgregarProducto(){  
         console.log('test');
@@ -390,97 +409,79 @@ var editor;
         })      
     }
     
+    function ValidarInformacion(){
+        var nameregex = /^[a-zA-Z ]+$/;       
+        $.validator.addMethod("validname", function( value, element ) {
+            return this.optional( element ) || nameregex.test( value );
+        }); 
+   
+        $("#frmProducto").validate({     
+            rules:{                
+                codigo_id       : {required: true},
+                marca_id        : {required: true},
+                categoria_id    : {required: true},
+                nombre          : {required: true, validname: true},
+                talla           : {required: true, maxlength: 3},
+                color           : {required: true, validname: true},
+                precio_compra   : {required: true, maxlength: 3,  },
+                precio_venta    : {required: true, maxlength: 3},
+                fecha_compra    : {required: true},
+                estado          : {required: true}
+            },             
 
-    function DDRecargar_tablero_anemia_altitud(anio, mes, estado, marca, categoria, codigo) {
-	gidreporte_tablero_anemia_altitud.jqGrid("setGridParam",{
-            page:1,	
-            url:'../CProd_productos/ListaProductos?anio='+anio+'&mes='+mes+'&estado='+estado+'&marca='+marca+'&categoria='+categoria+'&codigo='+codigo,
-            datatype : "json"
-	}).trigger("reloadGrid");
-	
-	return [ true, '' ]; 
-    }
-    
-        
-    function getAll_tablero_anemia_altitud(anio, mes, estado, marca, categoria, codigo){
-	var leditar          = { name : 'editar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EditarProductoXid};
-        var leliminar        = { name : 'eliminar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EliminarProductoXid};
-        var lproducto_id     = { name : 'producto_id'	 ,index : 'index',  width : 30,    align : "center",    fixed : true,  sortable : false };
-	var lcodigo          = { name : 'codigo'         ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };
-	var lanio            = { name : 'anio'           ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };
-        var lmes             = { name : 'mes'            ,index : 'index',  width : 70,    align : "left",      fixed : true,  sortable : false };
-	var lmarca           = { name : 'marca'          ,index : 'index',  width : 85,    align : "left",      fixed : true,  sortable : false };
-	var lcategoria       = { name : 'categoria'	 ,index : 'index',  width : 85,    align : "left",      fixed : true,  sortable : false };	
-	var lnombre          = { name : 'nombre'         ,index : 'index',  width : 130,   align : "left",      fixed : true,  sortable : false };
-	var ltalla           = { name : 'talla'          ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };
-	var lcolor           = { name : 'color'          ,index : 'index',  width : 50,    align : "center",    fixed : true,  sortable : false };
-        var lprecio_compra   = { name : 'precio_compra'	 ,index : 'index',  width : 80,    align : "center",    fixed : true,  sortable : false };
-        var lprecio_venta    = { name : 'precio_venta'	 ,index : 'index',  width : 70,    align : "center",    fixed : true,  sortable : false };
-        var lfecha_compra    = { name : 'fecha_compra'	 ,index : 'index',  width : 120,   align : "center",    fixed : true,  sortable : false };
-        var ldescripcion     = { name : 'descripcion'	 ,index : 'index',  width : 140,   align : "left",      fixed : true,  sortable : false };
-        var lobservacion     = { name : 'observacion'	 ,index : 'index',  width : 140,   align : "left",      fixed : true,  sortable : false };
-        
-        colNames = ['','','Id','Codigo','Anio','Mes','Marca','Categoria','Nombre','Talla','Color','Precio Compra','Precio Venta','Fecha Compra','Descripcion','Observacion'];
-	colModel = [leditar,leliminar,lproducto_id,lcodigo,lanio,lmes,lmarca,lcategoria,lnombre,ltalla,lcolor,lprecio_compra,lprecio_venta,lfecha_compra,ldescripcion,lobservacion];	    
+            messages:{
+                codigo_id       : {required: "Ingrese Codigo"},
+                marca_id        : {required: "Seleccione Marca"},
+                categoria_id    : {required: "Seleccione Categoria"},
+                nombre          : {required: "Ingrese Nombre Producto", validname: "Nombre de Producto debe contener solo alfabetos y espacio"},
+                talla           : {required: "Ingrese Talla", maxlength: "Validar Talla"},
+                color           : {required: "Ingrese Color",validname: "Color de Producto debe contener solo alfabetos y espacio"},
+                precio_compra   : {required: "Ingrese Precio Compra", maxlength: "Precio maximo 200"},
+                precio_venta    : {required: "Ingrese Precio Venta", maxlength: "Precio maximo 200"},
+                fecha_compra    : {required: "Ingrese Fecha Compra"},
+                estado          : {required: "Seleccione Estado"}
+            },
 
-	gidreporte_tablero_anemia_altitud.jqGrid({
-		url:'../CProd_productos/ListaProductos?anio='+anio+'&mes='+mes+'&estado='+estado+'&marca='+marca+'&categoria='+categoria+'&codigo='+codigo,
-		datatype : "json",
-		mtype : 'post',
-		colNames : colNames,
-		colModel : colModel,
-		height : 'auto',
-		width : 1300,
-		pager : $('#grid_tablero_anemia_altitud_pager'),
-		rowNum : 60,
-		loadonce : true,
-		scrollrows : true,
-		rownumbers : true,
-                caption: "Listado de Productos",
-		loadComplete : function(data) { 
-		},
-		sortname : 'id',
-		sortable : false,
-		sortorder : "asc",
-		viewrecords : true,
-		loadError : function(xhr, st, err) {
-			alert(err);
-		}		
-	});
-        
-        gidreporte_tablero_anemia_altitud.navGrid('#grid_tablero_anemia_altitud_pager',{edit:false,add:false,del:false,search:false,refresh:false},{},{},{});
-	
- 	gidreporte_tablero_anemia_altitud.navButtonAdd('#grid_tablero_anemia_altitud_pager',{ 	
-            caption:"", 
-            buttonicon:"ui-icon-plus", 
-            onClickButton: AgregarProducto,
-            position: "last", 
-            title:"Agregar Recuperación", 
-            cursor: "pointer"
-        });
+            errorPlacement : function(error, element) {
+                $(element).closest('.validarInfo').find('.help-block').html(error.html());
+            },
+            highlight : function(element) {
+                $(element).closest('.validarInfo').removeClass('has-success').addClass('has-error');
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).closest('.validarInfo').removeClass('has-error').addClass('has-success');
+                $(element).closest('.validarInfo').find('.help-block').html('');
+            },
+
+            submitHandler: function(form) {
+                form.submit();                
+            }
+        });   
     }
     
     function AsignacionValoresProductonNuevo(json){
         $('#accion').val('add');
-//        $('#codigo_id').val($('#txtcodigo').val());
         $('#anio').val($('#spnanio').val());        
         $('#mes_id option').remove();    
         $.each(json['mes'], function(j, resultado) {
                $('#mes_id').append($('<option>').text(resultado.nombre).attr('value', resultado.mes_id));
         });
         $('#marca_id option').remove();    
-        $.each(json['marca'], function(j, resultado) {
-                $('#marca_id').append($('<option>').text(resultado.nombre).attr('value', resultado.marca_id));
+        $('#marca_id').append($('<option>').text('Seleccione').attr('value', ''));    
+        $.each(json['marca'], function(j, resultado) {            
+            $('#marca_id').append($('<option>').text(resultado.nombre).attr('value', resultado.marca_id));
         });
 
         $('#categoria_id option').remove();    
+        $('#categoria_id').append($('<option>').text('Seleccione').attr('value', ''));    
         $.each(json['categoria'], function(j, resultado) {
-                $('#categoria_id').append($('<option>').text(resultado.nombre).attr('value', resultado.categoria_id));
-          });
-       $('#estado_id option').remove();    
-        $.each(json['estado'], function(j, resultado) {
-         $('#estado_id').append($('<option>').text(resultado.nombre).attr('value', resultado.estado_id));
+            $('#categoria_id').append($('<option>').text(resultado.nombre).attr('value', resultado.categoria_id));
         });
+        $('#estado_id option').remove();    
+        $.each(json['estado'], function(j, resultado) {
+            $('#estado_id').append($('<option>').text(resultado.nombre).attr('value', resultado.estado_id));
+        });
+        
         $('#myModal').modal('show');       
     }
  
@@ -538,8 +539,7 @@ var editor;
                 $('#estado_id').append($('<option>').text(resultado.nombre).attr('value', resultado.estado_id));
             }
         });
-
-        $('#descripcion').val(productos.descripcion); 
+        
         $('#observacion').val(productos.observacion); 
 
         $('#myModal').modal('show');       
