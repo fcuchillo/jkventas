@@ -10,6 +10,7 @@ class CProd_ventas extends jkventas_controller{
         parent::__construct();
         $this->load->library(array('session','form_validation'));
         $this->load->helper(array('url','form'));
+        $this->load->model(array('MProd_venta_detalle')); 
     }
         public function index() {
         $data['layout_body']    = 'Productos/VProd_venta/index';
@@ -27,8 +28,14 @@ class CProd_ventas extends jkventas_controller{
     }
     public function ObtenerProductoAuto() {
         $keyword=$this->input->post('keyword');
-        $this->db->order_by('producto_id', 'DESC');
-        $this->db->like("nombre", $keyword);
+        $this->db->order_by('codigo_id', 'DESC');
+        $this->db->like("codigo_id", $keyword);
         echo json_encode($this->db->get('t_prod_producto')->result_array());
+    }
+    public function GuardaDetalleVenta(){
+        $array = array('producto_id'=>$this->input->post('producto_id'),
+                       'usuario_id'=>$this->session->userdata['session_user']['usuario'],
+                       'cantidad'=>$this->input->post('cantidad'));
+        
     }
 }

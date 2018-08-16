@@ -44,37 +44,48 @@
                     </div>
                     <div class="col-md-6"></div>
                 </div>
+                <form id="formguardadetalleventa" action=".../CProd_ventas/GuardaDetalleVenta" method="post">
                <div class="row">
-                <div class="col-md-3"> 
-                        <label class="PyENDES-Label">Producto</label>
+                <div class="col-md-1"> 
+                        <label class="PyENDES-Label">Codigo Producto</label>
                         <div class="input-group input-group-sm">
-                            <input type="text" class="form-control " id="producto" name="producto" placeholder="Busque Producto">
-                            <ul class="dropdown-menu txtproducto" style="margin-left:15px;margin-right:0px;" role="despliegue" aria-labelledby="dropdownDespliegue"  id="DropdownProducto"></ul>
-                            <small id='validationConglomerado' class="help-block validation" data-bv-validator="notEmpty" data-bv-for="conglomerado" data-bv-result="INVALID" style="display: none">Registre Producto</small>
+                            <input type="text" class="form-control " id="codigo_id" name="codigo_id" placeholder="Ingrese Código">
                         </div>
-                    </div>
-                     <div class="col-md-3"> 
+                </div>
+                <div class="col-md-1"> 
+                        <label class="PyENDES-Label" style="visibility: hidden"></label>
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control " id="producto_idd" name="producto_idd" readonly="">
+                            <input type="hidden" id="producto_id" name="producto_id">                            
+                        </div>
+                </div>
+                <div class="col-md-3"> 
+                        <label class="PyENDES-Label">Nombre Producto</label>
+                        <div class="input-group input-group-sm">
+                          <input type="text" class="form-control " id="nombre_producto" name="nombre_producto" readonly="">
+                        </div>
+                </div>
+                     <div class="col-md-1"> 
                         <label class="PyENDES-Label">Precio</label>
                         <div class="input-group input-group-sm">
                             <input type="text" class="form-control " id="precio" name="precio" placeholder="Ingrese precio">
-                            <small id='validationConglomerado' class="help-block validation" data-bv-validator="notEmpty" data-bv-for="conglomerado" data-bv-result="INVALID" style="display: none">Ingrese Precio</small>
-                        </div>
+                       </div>
                     </div>
-                   <div class="col-md-3"> 
+                   <div class="col-md-1"> 
                         <label class="PyENDES-Label">Cantidad</label>
                         <div class="input-group input-group-sm">
-                            <input type="number" class="form-control " id="cantidad" name="cantidad" placeholder="Ingrese cantidad" min="0">
-                            <small id='validationConglomerado' class="help-block validation" data-bv-validator="notEmpty" data-bv-for="conglomerado" data-bv-result="INVALID" style="display: none">Ingrese Precio</small>
+                            <input type="number" class="form-control " id="cantidad" name="cantidad" placeholder="Ingrese cantidad" min="0" value="1">
                         </div>
                     </div>
                     <div class="col-md-2"> 
                         <label class="PyENDES-Label" style="visibility: hidden"></label>
                         <div class="input-group input-group-sm">
-                           <span class="input-group-btn"><button type="button" class="btn btn-primary btn-block btn-flat" id="btnRegistrySearch">Agregar</button></span>                           
+                            <span class="input-group-btn"><button type="submit" class="btn btn-primary btn-block btn-flat" id="btnRegistrySearch">Agregar</button></span>                           
                         </div>
                     </div>
-                    <div class="col-md-1"></div>
+                    <div class="col-md-3"></div>
                 </div>
+               </form>
                 <div class="row">
                 <table id="tblmenu" class="table table-condensed table-striped" data-toggle="table" >
                     <thead id="tblmenucabecera">
@@ -205,7 +216,7 @@ $(document).ready(function () {
                 }
                 $.each(data, function (key,value) {
                     if (data.length >= 0)
-                        $('#DropdownProducto').append('<li role="displayCountries" ><a role="menuitem dropdownCountryli" class="dropdownlivalue">' + value['nombre'] + '</a></li>');
+                        $('#DropdownProducto').append('<li role="displayCountries" ><a role="menuitem dropdownCountryli" class="dropdownlivalue">' + value['codigo_id'] + '</a></li>');
                 });
             }
         });

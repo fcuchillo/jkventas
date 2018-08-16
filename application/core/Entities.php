@@ -17,4 +17,5 @@ class Entities {
     public static $t_prod_estado="t_prod_estado";
     public static $t_prod_marca="t_prod_marca";
     public static $t_prod_producto="t_prod_producto";    
+    public static $t_prod_temp_detalle_venta="t_prod_temp_detalle_venta";  
 }
