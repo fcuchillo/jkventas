@@ -2,7 +2,7 @@
  require_once 'application/controllers/jkventas_controller.php';
  defined('BASEPATH') OR exit('No direct script access allowed');
 
-class CProd_productos extends jkventas_controller {
+class CProd_categorias extends jkventas_controller {
 
     public function __construct() {
         parent::__construct();
@@ -12,14 +12,14 @@ class CProd_productos extends jkventas_controller {
     } 
     
     public function index() {
-        $data['menu_padre']     = $this->CargarMenuPadre();
-        $data['menu_hijo']      = $this->CargarMenuHijo();        
+        //$data['producto']       = $this->db->query('CALL Lista_Productos(?,?,?,?,?,?)',['2018', 0, 0,0,0,''])->result_array();  
         $data['layout_body']    = 'Productos/VProd_productos/index';
         $data['mes']            = $this->MGest_mes->ObtenerTablaMeses();
         $data['estado']         = $this->MProd_estado->ObtenerTablaEstados();
         $data['marca']          = $this->MProd_marca->ObtenerTablaMarcas();
         $data['categoria']      = $this->MProd_categoria->ObtenerTablaCategorias();
- 
+
+        $data['menu']  = $this->CargadoDelMenu();        
         $data['title'] = 'Productos';
         $this->load->view('main_template', $data);
     }    

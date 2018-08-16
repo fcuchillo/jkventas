@@ -30,36 +30,7 @@
             <div class="box-body">
                 <div class="row">
                     <div class="col-md-12">  
-                        
-                        <div class="col-md-1">
-                            <label>Año</label>
-                            <select class="form-control input-sm" id="spnanio" name="spnanio">
-                                <option value="2018">2018</option>
-                                <option value="2019">2019</option>
-                            </select>
-                        </div>
-                        
-                        <div class="col-md-2">
-                            <label>Mes</label>
-                            <?php
-                                echo '<select class="form-control input-sm" id="spnmes" name="spnmes"><option value="0">Todos</option>';
-                                foreach ($mes as $value) {?>
-                                    <?php echo '<option value="'.$value->mes_id.'" >'.$value->nombre.'</option>';
-                                }
-                                echo '</select>';
-                            ?> 
-                        </div>
-                        
-                        <div class="col-md-2">
-                            <label>Estado</label>                            
-                            <?php
-                                echo '<select class="form-control input-sm" id="spnestado" name="spnestado"><option value="0">Todos</option>';
-                                foreach ($estado as $value) {?>
-                                    <?php echo '<option value="'.$value->estado_id.'" >'.$value->nombre.'</option>';
-                                }
-                                echo '</select>';
-                            ?>                                
-                        </div>
+                                
                         
                         <div class="col-md-2">
                             <label>Marca</label>
@@ -70,23 +41,8 @@
                                 }
                                 echo '</select>';
                             ?>                    
-                        </div>
-                        
-                        <div class="col-md-2">
-                            <label>Categoria</label>
-                            <?php
-                                echo '<select class="form-control input-sm" id="spncategoria" name="spncategoria"><option value="0">Todos</option>';
-                                foreach ($categoria as $value) {?>
-                                    <?php echo '<option value="'.$value->categoria_id.'" >'.$value->nombre.'</option>';
-                                }
-                                echo '</select>';
-                            ?>  
-                        </div>
-                        
-                        <div class="col-md-1"> 
-                            <label>Codigo</label>
-                            <input type="text" class="form-control input-sm" id="txtcodigo" name="txtcodigo" placeholder="">
-                        </div> 
+                        </div>              
+                                         
                         
                         <div class="col-md-2">
                             <div style="display: inline-block; width: 39% ">
@@ -138,78 +94,26 @@
                     
                     <div class="row">
                         <div class="validarInfo">
-                        <div class="col-sm-2"><label >Producto_id: </label></div>                        
-                        <div class="col-sm-3"><input class="form-control" type="text" id="producto_id" name="producto_id" value="" readonly="" > <span class="help-block" id="error"></span> </div>
+                        <div class="col-sm-2"><label >Marca_id: </label></div>                        
+                        <div class="col-sm-3"><input class="form-control" type="text" id="marca_id" name="marca_id" value="" > <span class="help-block" id="error"></span> </div>
                         <div class="col-sm-1"></div>
                         </div>
-                        <div class="validarInfo">                        
-                        <div class="col-sm-2"><label>Codigo:</label></div>                        
-                        <div class="col-sm-3"><input class="form-control" type="text" id="codigo_id" name="codigo_id" value=""> <span class="help-block" id="error"></span></div>
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="validarInfo">
-                        <div class="col-sm-2"><label>Anio:</label></div>                        
-                        <div class="col-sm-3"><input class="form-control" type="text" id="anio" name="anio" value="" readonly=""> <span class="help-block" id="error"></span></div>
-                        <div class="col-sm-1"></div>
-                        </div>
-                        <div class="validarInfo">
-                        <div class="col-sm-2"><label>Mes:</label></div>
-                        <div class="col-sm-4"><select class="form-control" name="mes_id" id="mes_id"></select> <span class="help-block" id="error"></span></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="validarInfo">
-                        <div class="col-sm-2"><label>Marca:</label></div>
-                        <div class="col-sm-4"><select class="form-control" name="marca_id" id="marca_id"></select> <span class="help-block" id="error"></span></div>
-                        </div>
-                        <div class="validarInfo">
-                        <div class="col-sm-2"><label>Categoria:</label></div>
-                        <div class="col-sm-4"><select class="form-control" name="categoria_id" id="categoria_id"></select> <span class="help-block" id="error"></span></div>
-                        </div>
-                    </div> 
+                    </div>                 
+               
                     <div class="row">
                         <div class="validarInfo">
                         <div class="col-sm-2"><label>Nombre:</label></div>
-                        <div class="col-sm-10"><input class="form-control" name="nombre" id="nombre"> <span class="help-block" id="error"></span></div>
+                        <div class="col-sm-4"><input class="form-control" name="nombre" id="marca_id"> <span class="help-block" id="error"></span></div>
                         </div>
-                    </div> 
+                    </div>    
+                    
                     <div class="row">
                         <div class="validarInfo">
-                        <div class="col-sm-2"><label>Talla:</label></div>
-                        <div class="col-sm-3"><input class="form-control" name="talla" id="talla"> <span class="help-block" id="error"></span></div>                        
-                        <div class="col-sm-1"></div>
+                        <div class="col-sm-2"><label>Direccion:</label></div>
+                        <div class="col-sm-4"><input class="form-control" name="direccion" id="direccion"> <span class="help-block" id="error"></span></div>
                         </div>
-                        <div class="validarInfo">
-                        <div class="col-sm-2"><label>Color:</label></div>
-                        <div class="col-sm-4"><input class="form-control" name="color" id="color"> <span class="help-block" id="error"></span></div>
-                        </div>
-                    </div> 
-                    <div class="row">
-                        <div class="validarInfo">
-                        <div class="col-sm-3"><label>Precio Compra:</label></div>
-                        <div class="col-sm-2"><input class="form-control" name="precio_compra" id="precio_compra"> <span class="help-block" id="error"></span></div>
-                        </div>
-                    </div> 
-                    <div class="row">
-                        <div class="validarInfo">
-                        <div class="col-sm-3"><label>Precio Venta:</label></div>
-                        <div class="col-sm-2"><input class="form-control" name="precio_venta" id="precio_venta"> <span class="help-block" id="error"></span></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="validarInfo">
-                        <div class="col-sm-3"><label>Fecha Compra:</label></div>
-                        <div class="col-sm-5"><input class="form-control" type="date" name="fecha_compra" id="fecha_compra" value=""> <span class="help-block" id="error"></span></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="validarInfo">
-                        <div class="col-sm-3"><label>Estado:</label></div>
-                        <div class="col-sm-5"><select class="form-control" name="estado_id" id="estado_id"></select> <span class="help-block" id="error"></span></div>
-                        </div>
-                    </div>
+                    </div>               
+             
                     <div class="row">
                         <div class="col-sm-3"><label>Observacion:</label></div>
                         <div class="col-sm-9"><input class="form-control" name="observacion" id="observacion"></div>
@@ -246,12 +150,7 @@ jQuery.browser.version = RegExp.$1;
 
 var gidreporte_tablero_anemia_altitud=jQuery("#grid_tablero_anemia_altitud");
 var myTable;
-var anio=null;
-var mes=null;
-var estado=null;
 var marca=null;
-var categoria=null
-var codigo=null;
 var editor;
 
     $(document).ready(function () {                       
@@ -276,24 +175,19 @@ var editor;
         
     function ObtenerParametros(){
         $('#grid_tablero_anemia_altitud').jqGrid('GridUnload');
-	gidreporte_tablero_anemia_altitud=jQuery("#grid_tablero_anemia_altitud");        
-        anio        = $('#spnanio').val();
-        mes         = $('#spnmes').val();
-        estado      = $('#spnestado').val();
+	gidreporte_tablero_anemia_altitud=jQuery("#grid_tablero_anemia_altitud");   
         marca       = $('#spnmarca').val();
-        categoria   = $('#spncategoria').val();
-        codigo      = $("#txtcodigo").val();   
-        getAll_tablero_anemia_altitud(anio, mes, estado, marca, categoria, codigo);
+        getAll_tablero_anemia_altitud(marca);
     }    
         
     function DDRecargarParameter_mues(){
-	DDRecargar_tablero_anemia_altitud(anio, mes, estado, marca, categoria, codigo);
+	DDRecargar_tablero_anemia_altitud(marca);
     }
     
-    function DDRecargar_tablero_anemia_altitud(anio, mes, estado, marca, categoria, codigo) {
+    function DDRecargar_tablero_anemia_altitud(marca) {
 	gidreporte_tablero_anemia_altitud.jqGrid("setGridParam",{
             page:1,	
-            url:'../CProd_productos/ListaProductos?anio='+anio+'&mes='+mes+'&estado='+estado+'&marca='+marca+'&categoria='+categoria+'&codigo='+codigo,
+            url:'../CProd_productos/ListaMarcas?marca='+marca,
             datatype : "json"
 	}).trigger("reloadGrid");
 	
@@ -303,25 +197,16 @@ var editor;
     function getAll_tablero_anemia_altitud(anio, mes, estado, marca, categoria, codigo){
 	var leditar          = { name : 'editar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EditarProductoXid};
         var leliminar        = { name : 'eliminar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EliminarProductoXid};
-        var lproducto_id     = { name : 'producto_id'	 ,index : 'index',  width : 30,    align : "center",    fixed : true,  sortable : false };
-	var lcodigo          = { name : 'codigo'         ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };
-	var lanio            = { name : 'anio'           ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };
-        var lmes             = { name : 'mes'            ,index : 'index',  width : 70,    align : "left",      fixed : true,  sortable : false };
-	var lmarca           = { name : 'marca'          ,index : 'index',  width : 85,    align : "left",      fixed : true,  sortable : false };
-	var lcategoria       = { name : 'categoria'	 ,index : 'index',  width : 85,    align : "left",      fixed : true,  sortable : false };	
+        var lmarca_id        = { name : 'marca_id'	 ,index : 'index',  width : 30,    align : "center",    fixed : true,  sortable : false };	
 	var lnombre          = { name : 'nombre'         ,index : 'index',  width : 130,   align : "left",      fixed : true,  sortable : false };
-	var ltalla           = { name : 'talla'          ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };
-	var lcolor           = { name : 'color'          ,index : 'index',  width : 50,    align : "center",    fixed : true,  sortable : false };
-        var lprecio_compra   = { name : 'precio_compra'	 ,index : 'index',  width : 80,    align : "center",    fixed : true,  sortable : false };
-        var lprecio_venta    = { name : 'precio_venta'	 ,index : 'index',  width : 70,    align : "center",    fixed : true,  sortable : false };
-        var lfecha_compra    = { name : 'fecha_compra'	 ,index : 'index',  width : 120,   align : "center",    fixed : true,  sortable : false };        
+	var ldireccion       = { name : 'direccion'      ,index : 'index',  width : 130,   align : "left",      fixed : true,  sortable : false };
         var lobservacion     = { name : 'observacion'	 ,index : 'index',  width : 140,   align : "left",      fixed : true,  sortable : false };
         
-        colNames = ['','','Id','Codigo','Anio','Mes','Marca','Categoria','Nombre','Talla','Color','Precio Compra','Precio Venta','Fecha Compra','Observacion'];
-	colModel = [leditar,leliminar,lproducto_id,lcodigo,lanio,lmes,lmarca,lcategoria,lnombre,ltalla,lcolor,lprecio_compra,lprecio_venta,lfecha_compra,lobservacion];	    
+        colNames = ['','','Id','Nombre','Direccion''Observacion'];
+	colModel = [leditar,leliminar,lmarca_id,lnombre,ldireccion,lobservacion];	    
 
 	gidreporte_tablero_anemia_altitud.jqGrid({
-		url:'../CProd_productos/ListaProductos?anio='+anio+'&mes='+mes+'&estado='+estado+'&marca='+marca+'&categoria='+categoria+'&codigo='+codigo,
+		url:'../CProd_productos/ListaMarcas?marca='+marca,
 		datatype : "json",
 		mtype : 'post',
 		colNames : colNames,
@@ -362,7 +247,7 @@ var editor;
         console.log('test');
         $.ajax({
             type:'post',
-            url:'../CProd_productos/AgregarProducto',
+            url:'../CProd_marca/AgregarProducto',
             success:function(response){
                var json = jQuery.parseJSON(response);
                $('#frmProducto')[0].reset();
@@ -385,7 +270,7 @@ var editor;
             $.ajax({
                type:'post',
                data:{producto_id:id},
-               url:'../CProd_productos/EliminarProducto',
+               url:'../CProd_marca/EliminarMarca',
                success:function(response){
                    console.log(response);
                    ObtenerParametros();
@@ -399,7 +284,7 @@ var editor;
         $.ajax({
             type:'post',
             data:{producto_id:id},
-            url:'../CProd_productos/ObtenerProducto',
+            url:'../CProd_marca/ObtenerMarca',
             success:function(response){
                 console.log(response);
                 var json = jQuery.parseJSON(response);

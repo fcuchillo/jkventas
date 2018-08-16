@@ -14,9 +14,16 @@
 <script src="<?php echo base_url();?>assets/plugins/jqgrid/js/jquery.jqGrid.min.js"></script>
 <script src="<?php echo base_url();?>assets/plugins/jQueryUI/jquery-ui.min.js" type="text/javascript"></script>
 
+<!--<script src="<?php echo base_url();?>assets/bootstrap/js/jquery.min.js" type="text/javascript"></script>-->
+<!--<script src="<?php echo base_url();?>assets/bootstrap/js/grid.locale-en.js" type="text/javascript"></script>
+<script src="<?php echo base_url();?>assets/bootstrap/js/jquery.jqGrid.js" type="text/javascript"></script>-->
+
 
 <script src="<?php echo base_url();?>assets/plugins/file/fileinput.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+
+
 <script src="<?php echo base_url();?>assets/bootstrap/js/jquery.validate.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
  
@@ -24,7 +31,6 @@
 <script src="<?php echo base_url();?>assets/plugins/datatables/buttons/js/dataTables.buttons.min.js" type="text/javascript" ></script>
 <script src="<?php echo base_url();?>assets/plugins/datatables/select/js/dataTables.select.min.js" type="text/javascript" ></script>
 
-<!--<script src="<?php echo base_url();?>assets/plugins/datatables/js/dataTables.bootstrap.min.js" charset = "utf8" type="text/javascript"></script>NOOOO-->
 <script src="<?php echo base_url();?>assets/plugins/fastclick/fastclick.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/dist/js/app.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/dist/js/demo.js" type="text/javascript"></script>
