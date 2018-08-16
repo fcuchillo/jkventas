@@ -82,8 +82,12 @@ class MProd_marca extends CI_Model {
         return $this->db->where('marca_id',$marca_id)->delete(Entities::$t_prod_marca);
     }
     
-    public function ObtenerTablaMarcas($parametros) {        
+    public function ObtenerSPMarcas($parametros) {        
         return $this->db->query('CALL sp_prod_Lista_Marcas(?)',[$parametros['marca']]);
+    }
+    
+    public function ObtenerTablaMarcas(){
+        return $this->db->select('*')->from(Entities::$t_prod_marca)->get()->result();
     }
     
     function ObtenerTablaMarcaMaximoID() {        

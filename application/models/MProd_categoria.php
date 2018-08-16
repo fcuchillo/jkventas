@@ -40,6 +40,10 @@ class MProd_categoria extends CI_Model {
         return empty(trim($value))?null:$value;
     }
     
+    public function ObtenerTablaCategorias(){
+        return $this->db->select('*')->from(Entities::$t_prod_categoria)->get()->result();
+    }
+    
     function ObtenerTablaCategoriasXproducto_id($categoria_id) {  
         return $this->db->select('*')->from(Entities::$t_prod_categoria)->where('categoria_id',$categoria_id)->get()->row();
     }
