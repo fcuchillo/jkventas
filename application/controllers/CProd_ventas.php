@@ -37,7 +37,7 @@ class CProd_ventas extends jkventas_controller{
                        'producto_id'=>$this->input->post('producto_id'),
                        'usuario_id'=>$this->ObtenerSessionUsuario_id(),
                        'precio'=>$this->input->post('precio'));
-        echo json_encode($this->MProd_venta_detalle->GuardarDetalleVenta($data));
+        echo json_encode($this->MProd_venta_detalle->GuardarDetalleVentatemp($data));
     }
     public function ObtenerProductoByCodigo(){
           echo json_encode($this->MProd_venta_detalle->ObtenerProductoByCodigo($this->input->post('codigo_id')));
@@ -66,8 +66,6 @@ class CProd_ventas extends jkventas_controller{
                                             );
             $i++;
             }
-            $data->next_result(); 
-            $data->free_result(); 
             echo json_encode($response);
     }
     public function EliminarVentaDetalle(){
@@ -78,37 +76,38 @@ class CProd_ventas extends jkventas_controller{
     }
     public function GuardarCompraGeneral(){
         $result = [];
-        $data=$this->MProd_venta_detalle->ObtenerTodoLosProductosaVender($this->ObtenerSessionUsuario_id());
         $cliente_id=$this->input->post('cliente_id');
         $venta=array(
-                    'venta_id'    =>1,
+                    'venta_id'    =>$this->MProd_venta_detalle->ObtenerMaximoIDVenta()->venta_id+1,
                     'usuario_id'  =>$this->ObtenerSessionUsuario_id(),
                     'cliente_id'  =>$cliente_id,
                     'fecha'       =>$this->ObtenerFechaActual()           
                     );
-//        $this->db->trans_begin();
-        $venta_id=$this->MProd_venta_detalle->GuardarVenta($venta);
-//        foreach ($data->result_array()  as $row) {
-//        $venta_detalle=array(
-//                            'detalle_venta_id'  =>'',
-//                            'venta_id'          =>$venta_id,
-//                            'producto_id'       =>$row['producto_id'],
-//                            'precio'            =>$row['precio'],
-//                            'cantidad'          =>1
-//                            );
-//            $this->MProd_venta_detalle->GuardarDetalleVenta($venta_detalle); 
-//        }
-//        $this->MProd_venta_detalle->EliminarporSessiondeUsuario($this->ObtenerSessionUsuario_id());
-//        if ($this->db->trans_status() === FALSE){
-//            $result['status']='error';
-//            $result['message']='error al insertar';
-//            $this->db->trans_rollback();
-//        }
-//        else{
-//                $this->db->trans_commit();
-//                $result['status']='succes: '+$venta_id;
-//        }
-     echo json_encode($venta_id);  
+                   
+        $this->db->trans_begin();
+        $this->MProd_venta_detalle->GuardarVenta($venta);
+        $data=$this->MProd_venta_detalle->ObtenerTodoLosRegistrostmp($this->ObtenerSessionUsuario_id());
+        foreach ($data->result_array()  as $row) {
+        $venta_detalle=array(
+                            'detalle_venta_id'  =>'',
+                            'venta_id'          =>$this->MProd_venta_detalle->ObtenerMaximoIDVenta()->venta_id,
+                            'producto_id'       =>$row['producto_id'],
+                            'precio'            =>$row['precio'],
+                            'cantidad'          =>1
+                            );
+          $this->MProd_venta_detalle->GuardarDetalleVenta($venta_detalle);
+        }
+        $this->MProd_venta_detalle->EliminarporSessiondeUsuario($this->ObtenerSessionUsuario_id());
+        if ($this->db->trans_status() === FALSE){
+            $result['status']='error';
+            $result['message']='error al insertar';
+            $this->db->trans_rollback();
+        }
+        else{
+                $this->db->trans_commit();
+                $result['status']='succes: ';
+        }
+     echo json_encode($result);  
     }
     
 }
