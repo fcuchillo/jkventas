@@ -100,6 +100,7 @@ class CGest_ingresos extends jkventas_controller {
         if($accion=='add'){   
             $this->MGest_ingresos->AgregarTablaIngresos($data);
         }
+        
         redirect('../CGest_ingresos/index');
     }    
 }

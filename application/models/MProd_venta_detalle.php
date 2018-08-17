@@ -95,19 +95,29 @@ class MProd_venta_detalle extends CI_Model {
      public function ObtenerTodoLosProductosaVender($usuario){ 
         return $this->db->query('CALL sp_prod_Lista_Ventas(?)',$usuario);
     }
-    public function GuardarDetalleVenta($detalleventa){
+    public function GuardarDetalleVentatemp($detalleventa){
         return $this->db->insert(Entities::$t_prod_temp_detalle_venta,$detalleventa);
+    }
+    public function GuardarDetalleVenta($detalleventa){
+        return $this->db->insert(Entities::$t_prod_detalle_venta,$detalleventa);
     }
     public function ObtenerClientebyDni($dni){
        return $this->db->select('*')->from(Entities::$t_gest_cliente)->where('dni',$dni)->get()->row();
     }
     public function GuardarVenta($venta){
-        $this->db->insert(Entities::$t_prod_venta,$venta);
-        $last_id = $this->db->insert_id();
-        return $last_id;
+        return $this->db->insert(Entities::$t_prod_venta,$venta);
+    }
+    function ObtenerMaximoIDVenta() {        
+        $this->db->select_max('venta_id');
+        $query = $this->db->get(Entities::$t_prod_venta); 
+        $id=$query->row();            
+        return $id;
     }
     public function  EliminarporSessiondeUsuario($usuario_id){
       return $this->db->where('usuario_id',$usuario_id)->delete(Entities::$t_prod_temp_detalle_venta);
+    }
+    public function ObtenerTodoLosRegistrostmp($usuario){ 
+        return $this->db->select('*')->from(Entities::$t_prod_temp_detalle_venta)->where('usuario_id',$usuario)->get();
     }
 }
 

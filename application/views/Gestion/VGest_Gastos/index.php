@@ -100,7 +100,7 @@
                 <h4 class="modal-title" id="popuptitle">Producto</h4>
             </div>
             <div class="modal-body">                  
-                <form id="frmGasto" name="frmGasto" action="../Cgest_Gastos/EditarGasto" method="POST">
+                <form id="frmGasto" name="frmGasto" action="" method="POST">
                     <input type="hidden" value="" name="accion" id="accion">
                     
                     <div class="row">                        
@@ -173,7 +173,8 @@ var tipogasto=null;
 var mes=null;
 var editor;
 
-    $(document).ready(function () {                       
+    $(document).ready(function () {
+        
         ObtenerParametros();  
         RecargarParameter_tabla_gastos();
         
@@ -184,9 +185,24 @@ var editor;
         
         $('#btnLimpiar').on('click', function(){ 
             $('#spngasto').val(0);        
-        });          
+        }); 
+       
+        $('#frmGasto').submit(function(event){
+            event.preventDefault();
+            btnGuardarVentas();            
+        });
+        
+
+        
         ValidarInformacion();            
     });
+    
+    function btnGuardarVentas(){
+      $.post( "../Cgest_Gastos/EditarGasto",$("#frmGasto").serialize(), function( data ) {
+         ObtenerParametros();
+            RecargarParameter_tabla_gastos();
+      });
+    }
         
     function ObtenerParametros(){
         $('#grid_tabla_gastos').jqGrid('GridUnload');

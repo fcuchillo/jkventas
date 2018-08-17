@@ -100,7 +100,8 @@ class CGest_gastos extends jkventas_controller {
         if($accion=='add'){   
             $this->MGest_gastos->AgregarTablaGastos($data);
         }
-        redirect('../CGest_gastos/index');
+//        redirect('../CGest_gastos/index');
+        echo json_encode($result);
     }    
 }
 
