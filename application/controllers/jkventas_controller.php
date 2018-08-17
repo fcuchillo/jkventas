@@ -73,6 +73,16 @@ class jkventas_controller extends CI_Controller{
 //          return Menu::where(array('padre_id' => NULL))->whereNotIn('menu_id',$menu_id)->get();
           return Menu::where(array('padre_id' => NULL))->get();
       }
+      public function ObtenerSessionUsuario_id(){
+          $usuario_id=null;
+          if(isset($_SESSION['session_user'])) { 
+            $usuario_id=$this->session->userdata['session_user']['usuario_id'];
+          }
+          return $usuario_id;
+      }
+      public function ObtenerFechaActual(){
+          return date('Y-m-d H:i:s');
+      }
       /*public function VerificarsiAccedeDesdePath(){
         //Validamos si es el path principal ? , si lo es deje accesar desde url
         if ($this->uri->uri_string()) {

@@ -18,4 +18,7 @@ class Entities {
     public static $t_prod_marca="t_prod_marca";
     public static $t_prod_producto="t_prod_producto";    
     public static $t_prod_temp_detalle_venta="t_prod_temp_detalle_venta";  
+    public static $t_gest_cliente="t_gest_cliente";  
+    public static $t_prod_venta="t_prod_venta";  
+    public static $t_prod_detalle_venta='t_prod_detalle_venta';
 }
