@@ -107,12 +107,12 @@
 
         <!--Region Box Result class="col-md-12"--> 
         <div class="box">            
-            <div class="box-body pre-scrollable" id="divContenedorProducto" >                                        
+            <div class="box-body pre-scrollable" id="divContenedorProductos" >                                        
                 <table align="center" width="100%" cellpadding="0" cellspacing="0">						
                     <tr>
 		 	<td align=center valign=top width="100%">
-                            <table id="grid_tablero_anemia_altitud"></table>
-                            <div id="grid_tablero_anemia_altitud_pager" ></div>
+                            <table id="grid_tabla_productos"></table>
+                            <div id="grid_tabla_productos_pager" ></div>
 			</td>
                     </tr>
 		</table>                         
@@ -136,29 +136,22 @@
                 <form id="frmProducto" name="frmProducto" action="../CProd_productos/EditarProducto" method="POST">
                     <input type="hidden" value="" name="accion" id="accion">
                     
-                    <div class="row">
-                        <div class="validarInfo">
-                        <div class="col-sm-2"><label >Producto_id: </label></div>                        
-                        <div class="col-sm-3"><input class="form-control" type="text" id="producto_id" name="producto_id" value="" readonly="" > <span class="help-block" id="error"></span> </div>
-                        <div class="col-sm-1"></div>
-                        </div>
+                    <div class="row">                        
+                        <div class="col-sm-2"><label >Producto id: </label></div>                        
+                        <div class="col-sm-3"><input class="form-control" type="text" id="producto_id" name="producto_id" value="" readonly="" ></div>                        
+                        
                         <div class="validarInfo">                        
                         <div class="col-sm-2"><label>Codigo:</label></div>                        
                         <div class="col-sm-3"><input class="form-control" type="text" id="codigo_id" name="codigo_id" value=""> <span class="help-block" id="error"></span></div>
                         </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="validarInfo">
+                    </div>                    
+                    <div class="row">                        
                         <div class="col-sm-2"><label>Anio:</label></div>                        
-                        <div class="col-sm-3"><input class="form-control" type="text" id="anio" name="anio" value="" readonly=""> <span class="help-block" id="error"></span></div>
-                        <div class="col-sm-1"></div>
-                        </div>
-                        <div class="validarInfo">
+                        <div class="col-sm-3"><input class="form-control" type="text" id="anio" name="anio" value="" readonly=""> <span class="help-block" id="error"></span></div>                        
+                        
                         <div class="col-sm-2"><label>Mes:</label></div>
-                        <div class="col-sm-4"><select class="form-control" name="mes_id" id="mes_id"></select> <span class="help-block" id="error"></span></div>
-                        </div>
-                    </div>
+                        <div class="col-sm-4"><select class="form-control" name="mes_id" id="mes_id"></select> <span class="help-block" id="error"></span></div>                        
+                    </div>        
                     <div class="row">
                         <div class="validarInfo">
                         <div class="col-sm-2"><label>Marca:</label></div>
@@ -201,7 +194,7 @@
                     <div class="row">
                         <div class="validarInfo">
                         <div class="col-sm-3"><label>Fecha Compra:</label></div>
-                        <div class="col-sm-5"><input class="form-control" type="date" name="fecha_compra" id="fecha_compra" value=""> <span class="help-block" id="error"></span></div>
+                        <div class="col-sm-5"><input class="form-control" type="datetime" name="fecha_compra" id="fecha_compra" value=""> <span class="help-block" id="error"></span></div>
                         </div>
                     </div>
                     <div class="row">
@@ -244,7 +237,7 @@ jQuery.browser.version = RegExp.$1;
 }
 })();
 
-var gidreporte_tablero_anemia_altitud=jQuery("#grid_tablero_anemia_altitud");
+var grid_tabla_productos=jQuery("#grid_tabla_productos");
 var myTable;
 var anio=null;
 var mes=null;
@@ -256,11 +249,11 @@ var editor;
 
     $(document).ready(function () {                       
         ObtenerParametros();  
-        DDRecargarParameter_mues();
+        RecargarParameter_tabla_productos();
         
         $('#btnBuscar').on('click', function() {
             ObtenerParametros();
-            DDRecargarParameter_mues();
+            RecargarParameter_tabla_productos();
         });
         
         $('#btnLimpiar').on('click', function(){        
@@ -275,23 +268,23 @@ var editor;
     });
         
     function ObtenerParametros(){
-        $('#grid_tablero_anemia_altitud').jqGrid('GridUnload');
-	gidreporte_tablero_anemia_altitud=jQuery("#grid_tablero_anemia_altitud");        
+        $('#grid_tabla_productos').jqGrid('GridUnload');
+	grid_tabla_productos=jQuery("#grid_tabla_productos");        
         anio        = $('#spnanio').val();
         mes         = $('#spnmes').val();
         estado      = $('#spnestado').val();
         marca       = $('#spnmarca').val();
         categoria   = $('#spncategoria').val();
         codigo      = $("#txtcodigo").val();   
-        getAll_tablero_anemia_altitud(anio, mes, estado, marca, categoria, codigo);
+        getAll_grid_tabla_productos(anio, mes, estado, marca, categoria, codigo);
     }    
         
-    function DDRecargarParameter_mues(){
-	DDRecargar_tablero_anemia_altitud(anio, mes, estado, marca, categoria, codigo);
+    function RecargarParameter_tabla_productos(){
+	DDRecargar_tabla_productos(anio, mes, estado, marca, categoria, codigo);
     }
     
-    function DDRecargar_tablero_anemia_altitud(anio, mes, estado, marca, categoria, codigo) {
-	gidreporte_tablero_anemia_altitud.jqGrid("setGridParam",{
+    function DDRecargar_tabla_productos(anio, mes, estado, marca, categoria, codigo) {
+	grid_tabla_productos.jqGrid("setGridParam",{
             page:1,	
             url:'../CProd_productos/ListaProductos?anio='+anio+'&mes='+mes+'&estado='+estado+'&marca='+marca+'&categoria='+categoria+'&codigo='+codigo,
             datatype : "json"
@@ -300,7 +293,7 @@ var editor;
 	return [ true, '' ]; 
     }    
         
-    function getAll_tablero_anemia_altitud(anio, mes, estado, marca, categoria, codigo){
+    function getAll_grid_tabla_productos(anio, mes, estado, marca, categoria, codigo){
 	var leditar          = { name : 'editar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EditarProductoXid};
         var leliminar        = { name : 'eliminar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EliminarProductoXid};
         var lproducto_id     = { name : 'producto_id'	 ,index : 'index',  width : 30,    align : "center",    fixed : true,  sortable : false };
@@ -320,7 +313,7 @@ var editor;
         colNames = ['','','Id','Codigo','Anio','Mes','Marca','Categoria','Nombre','Talla','Color','Precio Compra','Precio Venta','Fecha Compra','Observacion'];
 	colModel = [leditar,leliminar,lproducto_id,lcodigo,lanio,lmes,lmarca,lcategoria,lnombre,ltalla,lcolor,lprecio_compra,lprecio_venta,lfecha_compra,lobservacion];	    
 
-	gidreporte_tablero_anemia_altitud.jqGrid({
+	grid_tabla_productos.jqGrid({
 		url:'../CProd_productos/ListaProductos?anio='+anio+'&mes='+mes+'&estado='+estado+'&marca='+marca+'&categoria='+categoria+'&codigo='+codigo,
 		datatype : "json",
 		mtype : 'post',
@@ -328,7 +321,7 @@ var editor;
 		colModel : colModel,
 		height : 'auto',
 		width : 1150,
-		pager : $('#grid_tablero_anemia_altitud_pager'),
+		pager : $('#grid_tabla_productos_pager'),
 		rowNum : 10,
 		loadonce : true,
 		scrollrows : true,
@@ -345,9 +338,9 @@ var editor;
 		}		
 	});
         
-        gidreporte_tablero_anemia_altitud.navGrid('#grid_tablero_anemia_altitud_pager',{edit:false,add:false,del:false,search:false,refresh:false},{},{},{});
+        grid_tabla_productos.navGrid('#grid_tabla_productos_pager',{edit:false,add:false,del:false,search:false,refresh:false},{},{},{});
 	
- 	gidreporte_tablero_anemia_altitud.navButtonAdd('#grid_tablero_anemia_altitud_pager',{ 	
+ 	grid_tabla_productos.navButtonAdd('#grid_tabla_productos_pager',{ 	
             caption:"", 
             buttonicon:"ui-icon-plus", 
             onClickButton: AgregarProducto,
@@ -367,7 +360,7 @@ var editor;
                var json = jQuery.parseJSON(response);
                $('#frmProducto')[0].reset();
                $('#accion').val('add');
-               AsignacionValoresProductonNuevo(json);
+               AsignacionValoresProductoNuevo(json);
             }
         })
     }
@@ -389,7 +382,7 @@ var editor;
                success:function(response){
                    console.log(response);
                    ObtenerParametros();
-                    DDRecargarParameter_mues();
+                   RecargarParameter_tabla_productos();
                }
             })       
         }       
@@ -403,7 +396,7 @@ var editor;
             success:function(response){
                 console.log(response);
                 var json = jQuery.parseJSON(response);
-                AsignacionValoresProducto(json);
+                AsignacionValoresProductoEditar(json);
             }
         })      
     }
@@ -458,7 +451,7 @@ var editor;
         });   
     }
     
-    function AsignacionValoresProductonNuevo(json){
+    function AsignacionValoresProductoNuevo(json){
         $('#accion').val('add');
         $('#anio').val($('#spnanio').val());        
         $('#mes_id option').remove();    
@@ -484,7 +477,7 @@ var editor;
         $('#myModal').modal('show');       
     }
  
-    function AsignacionValoresProducto(json){
+    function AsignacionValoresProductoEditar(json){
         var productos= json['producto'];
         $('#accion').val('edit');
         

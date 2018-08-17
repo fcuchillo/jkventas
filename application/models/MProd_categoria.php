@@ -6,9 +6,18 @@ require_once 'application/core/Entities.php';
  * and open the template in the editor.
  */
 class MProd_categoria extends CI_Model {  
+  public $id;
   public $categoria_id;
   public $nombre;
   public $observacion;
+  
+  function getId() {
+      return $this->id;
+  }
+
+  function setId($id) {
+      $this->id = $id;
+  }
   
   function getCategoria_id() {
       return $this->categoria_id;
@@ -44,14 +53,14 @@ class MProd_categoria extends CI_Model {
         return $this->db->select('*')->from(Entities::$t_prod_categoria)->get()->result();
     }
     
-    function ObtenerTablaCategoriasXproducto_id($categoria_id) {  
+    public function ObtenerSPCategorias($parametros) {        
+        return $this->db->query('CALL sp_prod_Lista_Categorias(?)',[$parametros['categoria']]);
+    }
+    
+    function ObtenerTablaCategoriasXcategoria_id($categoria_id) {  
         return $this->db->select('*')->from(Entities::$t_prod_categoria)->where('categoria_id',$categoria_id)->get()->row();
     }
-         
-    function EliminarTablaCategorias($categoria_id) {        
-        return $this->db->where('categoria_id',$categoria_id)->delete(Entities::$t_prod_categoria);
-    }
-       
+    
     function ObtenerTablaCategoriaMaximoID() {        
         $this->db->select_max('categoria_id');
         $query = $this->db->get(Entities::$t_prod_categoria); 
@@ -62,9 +71,13 @@ class MProd_categoria extends CI_Model {
     function AgregarTablaCategorias($categoria) {        
         return $this->db->insert(Entities::$t_prod_categoria,$categoria);
     }
+         
+    function EliminarTablaCategorias($categoria_id) {        
+        return $this->db->where('categoria_id',$categoria_id)->delete(Entities::$t_prod_categoria);
+    }   
     
     function EditarTablaCategorias($categoria) {        
-        return $this->db->where('$categoria_id',$categoria['categoria_id'])->update(Entities::$t_prod_categoria,$categoria);                     
+        return $this->db->where('categoria_id',$categoria['categoria_id'])->update(Entities::$t_prod_categoria,$categoria);                     
     }
     
      

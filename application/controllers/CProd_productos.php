@@ -6,7 +6,7 @@ class CProd_productos extends jkventas_controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->library(array('form_validation'));
+        $this->load->library(array('session','form_validation'));
         $this->load->helper(array('url','form'));
         $this->load->model(array('MProd_producto','MGest_mes','MProd_estado','MProd_marca','MProd_categoria'));   
     } 
@@ -24,18 +24,18 @@ class CProd_productos extends jkventas_controller {
         $this->load->view('main_template', $data);
     }    
     
-    function ObtenerListaProductos(){    
-        $parametros = array (
-            'anio'       =>$this->input->post('anio'),
-            'mes'        =>$this->input->post('mes'),
-            'estado'     =>$this->input->post('estado'),
-            'marca'      =>$this->input->post('marca'),
-            'categoria'  =>$this->input->post('categoria'),
-            'codigo'     =>$this->input->post('codigo'),
-        );
-        $datos      = $this->MProd_producto->ObtenerTablaProductos($parametros);
-        echo json_encode($datos);
-    }
+//    function ObtenerListaProductos(){    
+//        $parametros = array (
+//            'anio'       =>$this->input->post('anio'),
+//            'mes'        =>$this->input->post('mes'),
+//            'estado'     =>$this->input->post('estado'),
+//            'marca'      =>$this->input->post('marca'),
+//            'categoria'  =>$this->input->post('categoria'),
+//            'codigo'     =>$this->input->post('codigo'),
+//        );
+//        $datos      = $this->MProd_producto->ObtenerSPProductos($parametros);
+//        echo json_encode($datos);
+//    }
     
     public function ObtenerProducto(){       
        $producto_id=$this->input->post('producto_id');
@@ -60,15 +60,12 @@ class CProd_productos extends jkventas_controller {
             'categoria'  =>$this->input->get('categoria'),
             'codigo'     =>$this->input->get('codigo'),
         );
-        $resultset = $this->MProd_producto->ObtenerTablaProductos($parametros);
-        //echo json_encode($datos);
-//        var_dump($resultset);
+        $resultset = $this->MProd_producto->ObtenerSPProductos($parametros);        
         $i=0;
         $response=[];
         foreach ($resultset->result_array()  as $row) {
         $entry  = new MProd_producto();
 
-//        var_dump($row);     
         $entry->setId($row['id']);
         $entry->setProducto_id($row['producto_id']);
         $entry->setCodigo($row['codigo']);
@@ -123,8 +120,7 @@ class CProd_productos extends jkventas_controller {
        echo json_encode($this->MProd_producto->EliminarTablaProductos($producto_id));
     }
     
-    function EditarProducto(){
-        
+    function EditarProducto(){        
         $result = ['status'=>'success', 'message'=>'Se modificó un registro...'];
         $accion=$this->input->post('accion');        
         $producto_id=($accion=='edit'?$this->input->post('producto_id'):$this->MProd_producto->ObtenerTablaProductoMaximoID()->producto_id+1);

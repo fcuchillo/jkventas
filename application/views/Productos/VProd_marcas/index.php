@@ -3,11 +3,11 @@
 <div class="content-wrapper">
     <!--Region Section Header-->
     <section class="content-header">
-        <h1>Productos</h1>
+        <!--<h1>Marcas</h1>-->
         <ol class="breadcrumb">
             <li><a href="<?=base_url()?>login/authentication"><i class="fa fa-dashboard"></i> Inicio</a></li>
-            <li><a href="#">Productos</a></li>
-            <li class="active">Productos</li>
+            <li><a href="#">Marcas</a></li>
+            <li class="active">Marcas</li>
         </ol>
     </section>
     
@@ -18,7 +18,7 @@
         <!--Region Box Filter-->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Filtros</h3>
+                <!--<h3 class="box-title">Filtros</h3>-->
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                         <i class="fa fa-minus"></i></button>
@@ -63,12 +63,12 @@
 
         <!--Region Box Result class="col-md-12"--> 
         <div class="box">            
-            <div class="box-body pre-scrollable" id="divContenedorProducto" >                                        
+            <div class="box-body pre-scrollable" id="divContenedorMarcas" >                                        
                 <table align="center" width="100%" cellpadding="0" cellspacing="0">						
                     <tr>
 		 	<td align=center valign=top width="100%">
-                            <table id="grid_tablero_anemia_altitud"></table>
-                            <div id="grid_tablero_anemia_altitud_pager" ></div>
+                            <table id="grid_tabla_marcas"></table>
+                            <div id="grid_tabla_marcas_pager" ></div>
 			</td>
                     </tr>
 		</table>                         
@@ -89,27 +89,24 @@
                 <h4 class="modal-title" id="popuptitle">Producto</h4>
             </div>
             <div class="modal-body">                  
-                <form id="frmProducto" name="frmProducto" action="../CProd_productos/EditarProducto" method="POST">
+                <form id="frmMarca" name="frmMarca" action="../CProd_marcas/EditarMarca" method="POST">
                     <input type="hidden" value="" name="accion" id="accion">
                     
-                    <div class="row">
-                        <div class="validarInfo">
-                        <div class="col-sm-2"><label >Marca_id: </label></div>                        
-                        <div class="col-sm-3"><input class="form-control" type="text" id="marca_id" name="marca_id" value="" > <span class="help-block" id="error"></span> </div>
-                        <div class="col-sm-1"></div>
-                        </div>
+                    <div class="row">                        
+                        <div class="col-sm-3"><label >Marca id: </label></div>                        
+                        <div class="col-sm-3"><input class="form-control" type="text" id="marca_id" name="marca_id" value="" readonly="" ></div>                                                
                     </div>                 
                
                     <div class="row">
                         <div class="validarInfo">
-                        <div class="col-sm-2"><label>Nombre:</label></div>
-                        <div class="col-sm-4"><input class="form-control" name="nombre" id="marca_id"> <span class="help-block" id="error"></span></div>
+                        <div class="col-sm-3"><label>Nombre:</label></div>
+                        <div class="col-sm-4"><input class="form-control" name="nombre" id="nombre"> <span class="help-block" id="error"></span></div>
                         </div>
                     </div>    
                     
                     <div class="row">
                         <div class="validarInfo">
-                        <div class="col-sm-2"><label>Direccion:</label></div>
+                        <div class="col-sm-3"><label>Direccion:</label></div>
                         <div class="col-sm-4"><input class="form-control" name="direccion" id="direccion"> <span class="help-block" id="error"></span></div>
                         </div>
                     </div>               
@@ -124,7 +121,7 @@
                         
             <div class="modal-footer"> 
                 <div class="modal-header">
-                    <button type="submit" class="btn btn-primary" form="frmProducto" >Guardar</button>                      
+                    <button type="submit" class="btn btn-primary" form="frmMarca" >Guardar</button>                      
                 </div> 
             </div>
         </div>
@@ -148,77 +145,72 @@ jQuery.browser.version = RegExp.$1;
 }
 })();
 
-var gidreporte_tablero_anemia_altitud=jQuery("#grid_tablero_anemia_altitud");
+var grid_tabla_marcas=jQuery("#grid_tabla_marcas");
 var myTable;
 var marca=null;
 var editor;
 
     $(document).ready(function () {                       
         ObtenerParametros();  
-        DDRecargarParameter_mues();
+        RecargarParameter_tabla_marcas();
         
         $('#btnBuscar').on('click', function() {
             ObtenerParametros();
-            DDRecargarParameter_mues();
+            RecargarParameter_tabla_marcas();
         });
         
-        $('#btnLimpiar').on('click', function(){        
-            $('#spnanio').append('<option value="2018" selected="selected">2018</option>');
-            $('#spnmes').val(0);
-            $('#spnestado').val(0);
-            $('#spnmarca').val(0);
-            $('#spncategoria').val(0);
-            $("#txtcodigo").val("");            
+        $('#btnLimpiar').on('click', function(){ 
+            $('#spnmarca').val(0);        
         });          
         ValidarInformacion();            
     });
         
     function ObtenerParametros(){
-        $('#grid_tablero_anemia_altitud').jqGrid('GridUnload');
-	gidreporte_tablero_anemia_altitud=jQuery("#grid_tablero_anemia_altitud");   
+        $('#grid_tabla_marcas').jqGrid('GridUnload');
+	grid_tabla_marcas=jQuery("#grid_tabla_marcas");   
         marca       = $('#spnmarca').val();
-        getAll_tablero_anemia_altitud(marca);
+        getAll_grid_tabla_marcas(marca);
     }    
         
-    function DDRecargarParameter_mues(){
-	DDRecargar_tablero_anemia_altitud(marca);
+    function RecargarParameter_tabla_marcas(){
+	DDRecargar_tabla_marcas(marca);
     }
     
-    function DDRecargar_tablero_anemia_altitud(marca) {
-	gidreporte_tablero_anemia_altitud.jqGrid("setGridParam",{
+    function DDRecargar_tabla_marcas(marca){
+	grid_tabla_marcas.jqGrid("setGridParam",{
             page:1,	
-            url:'../CProd_productos/ListaMarcas?marca='+marca,
+            url:'../CProd_marcas/ListaMarcas?marca='+marca,
             datatype : "json"
 	}).trigger("reloadGrid");
 	
 	return [ true, '' ]; 
     }    
         
-    function getAll_tablero_anemia_altitud(anio, mes, estado, marca, categoria, codigo){
-	var leditar          = { name : 'editar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EditarProductoXid};
-        var leliminar        = { name : 'eliminar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EliminarProductoXid};
-        var lmarca_id        = { name : 'marca_id'	 ,index : 'index',  width : 30,    align : "center",    fixed : true,  sortable : false };	
-	var lnombre          = { name : 'nombre'         ,index : 'index',  width : 130,   align : "left",      fixed : true,  sortable : false };
-	var ldireccion       = { name : 'direccion'      ,index : 'index',  width : 130,   align : "left",      fixed : true,  sortable : false };
-        var lobservacion     = { name : 'observacion'	 ,index : 'index',  width : 140,   align : "left",      fixed : true,  sortable : false };
+    function getAll_grid_tabla_marcas(marca){
+	var leditar          = { name : 'editar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EditarMarcaXid};
+        var leliminar        = { name : 'eliminar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EliminarMarcaXid};
+        var lmarca_id        = { name : 'marca_id'	 ,index : 'index',  width : 50,    align : "center",    fixed : true,  sortable : false };	
+	var lnombre          = { name : 'nombre'         ,index : 'index',  width : 160,   align : "left",      fixed : true,  sortable : false };
+	var ldireccion       = { name : 'direccion'      ,index : 'index',  width : 180,   align : "left",      fixed : true,  sortable : false };
+        var lobservacion     = { name : 'observacion'	 ,index : 'index',  width : 220,   align : "left",      fixed : true,  sortable : false };
         
-        colNames = ['','','Id','Nombre','Direccion''Observacion'];
+        colNames = ['','','Id','Nombre','Direccion','Observacion'];
 	colModel = [leditar,leliminar,lmarca_id,lnombre,ldireccion,lobservacion];	    
 
-	gidreporte_tablero_anemia_altitud.jqGrid({
-		url:'../CProd_productos/ListaMarcas?marca='+marca,
+	grid_tabla_marcas.jqGrid({
+		url:'../CProd_marcas/ListaMarcas?marca='+marca,
 		datatype : "json",
 		mtype : 'post',
 		colNames : colNames,
 		colModel : colModel,
 		height : 'auto',
-		width : 1150,
-		pager : $('#grid_tablero_anemia_altitud_pager'),
+		width : 710,
+		pager : $('#grid_tabla_marcas_pager'),
 		rowNum : 10,
 		loadonce : true,
 		scrollrows : true,
 		rownumbers : true,
-                caption: "Listado de Productos",
+                caption: "Listado de Marcas",
 		loadComplete : function(data) { 
 		},
 		sortname : 'id',
@@ -230,12 +222,12 @@ var editor;
 		}		
 	});
         
-        gidreporte_tablero_anemia_altitud.navGrid('#grid_tablero_anemia_altitud_pager',{edit:false,add:false,del:false,search:false,refresh:false},{},{},{});
+        grid_tabla_marcas.navGrid('#grid_tabla_marcas_pager',{edit:false,add:false,del:false,search:false,refresh:false},{},{},{});
 	
- 	gidreporte_tablero_anemia_altitud.navButtonAdd('#grid_tablero_anemia_altitud_pager',{ 	
+ 	grid_tabla_marcas.navButtonAdd('#grid_tabla_marcas_pager',{ 	
             caption:"", 
             buttonicon:"ui-icon-plus", 
-            onClickButton: AgregarProducto,
+            onClickButton: AgregarMarca,
             position: "last", 
             title:"Agregar Recuperación", 
             cursor: "pointer"
@@ -243,87 +235,86 @@ var editor;
     }
     
     
-    function AgregarProducto(){  
+    function AgregarMarca(){  
         console.log('test');
         $.ajax({
             type:'post',
-            url:'../CProd_marca/AgregarProducto',
+            url:'../CProd_marcas/AgregarMarca',
             success:function(response){
                var json = jQuery.parseJSON(response);
-               $('#frmProducto')[0].reset();
+               $('#frmMarca')[0].reset();
                $('#accion').val('add');
-               AsignacionValoresProductonNuevo(json);
+               AsignacionValoresMarcaNuevo(json);
             }
         })
     }
     
-    function EliminarProductoXid(cellvalue, options, rowObject){	
-	return '<a href="javascript:void(0);" id="btnEliminar" onclick="EliminarProducto('+rowObject[0]+');" ><span class="glyphicon glyphicon-trash" ></span></a>';
+    function EliminarMarcaXid(cellvalue, options, rowObject){	
+	return '<a href="javascript:void(0);" id="btnEliminar" onclick="EliminarMarca('+rowObject[0]+');" ><span class="glyphicon glyphicon-trash" ></span></a>';
     }
     
-    function EditarProductoXid(cellvalue, options, rowObject){	                
-	return '<a href="javascript:void(0);" id="btnEditar" onclick="EditarProducto('+rowObject[0]+');" ><span class="glyphicon glyphicon-pencil" ></span></a>';
+    function EditarMarcaXid(cellvalue, options, rowObject){	                
+	return '<a href="javascript:void(0);" id="btnEditar" onclick="EditarMarca('+rowObject[0]+');" ><span class="glyphicon glyphicon-pencil" ></span></a>';
     }
 
-    function EliminarProducto(id){
+    function EliminarMarca(id){
         if(confirm("Desea Eliminar? ")){
             $.ajax({
                type:'post',
-               data:{producto_id:id},
-               url:'../CProd_marca/EliminarMarca',
+               data:{marca_id:id},
+               url:'../CProd_marcas/EliminarMarca',
                success:function(response){
                    console.log(response);
                    ObtenerParametros();
-                    DDRecargarParameter_mues();
+                   RecargarParameter_tabla_marcas();
                }
             })       
         }       
     }
   
-    function EditarProducto(id){      
+    function EditarMarca(id){      
         $.ajax({
             type:'post',
-            data:{producto_id:id},
-            url:'../CProd_marca/ObtenerMarca',
+            data:{marca_id:id},
+            url:'../CProd_marcas/ObtenerMarca',
             success:function(response){
                 console.log(response);
                 var json = jQuery.parseJSON(response);
-                AsignacionValoresProducto(json);
+                AsignacionValoresMarcaEditar(json);
             }
         })      
     }
-    
+        
+    function AsignacionValoresMarcaNuevo(json){
+        $('#accion').val('add');               
+        $('#myModal').modal('show');       
+    }
+ 
+    function AsignacionValoresMarcaEditar(json){
+        var marcas= json['marca'];
+        $('#accion').val('edit');        
+        $('#marca_id').val(marcas.marca_id);
+        $('#nombre').val(marcas.nombre);              
+        $('#direccion').val(marcas.direccion);              
+        $('#observacion').val(marcas.observacion); 
+        $('#myModal').modal('show');       
+    }
+        
     function ValidarInformacion(){
         var nameregex = /^[a-zA-Z ]+$/;       
         $.validator.addMethod("validname", function( value, element ) {
             return this.optional( element ) || nameregex.test( value );
         }); 
    
-        $("#frmProducto").validate({     
-            rules:{                
-                codigo_id       : {required: true},
-                marca_id        : {required: true},
-                categoria_id    : {required: true},
-                nombre          : {required: true, validname: true},
-                talla           : {required: true, maxlength: 3},
-                color           : {required: true, validname: true},
-                precio_compra   : {required: true, maxlength: 3,  },
-                precio_venta    : {required: true, maxlength: 3},
-                fecha_compra    : {required: true},
-                estado          : {required: true}
+        $("#frmMarca").validate({     
+            rules:{   
+                nombre      : {required: true},
+                direccion   : {required: true},
             },             
 
-            messages:{
-                codigo_id       : {required: "Ingrese Codigo"},
-                marca_id        : {required: "Seleccione Marca"},
-                categoria_id    : {required: "Seleccione Categoria"},
-                nombre          : {required: "Ingrese Nombre Producto", validname: "Nombre de Producto debe contener solo alfabetos y espacio"},
-                talla           : {required: "Ingrese Talla", maxlength: "Validar Talla"},
-                color           : {required: "Ingrese Color",validname: "Color de Producto debe contener solo alfabetos y espacio"},
-                precio_compra   : {required: "Ingrese Precio Compra", maxlength: "Precio maximo 200"},
-                precio_venta    : {required: "Ingrese Precio Venta", maxlength: "Precio maximo 200"},
-                fecha_compra    : {required: "Ingrese Fecha Compra"},
-                estado          : {required: "Seleccione Estado"}
+            messages:{               
+                nombre      : {required: "Ingrese Nombre"},
+                direccion   : {required: "Ingrese Direccion"},
             },
 
             errorPlacement : function(error, element) {
@@ -341,92 +332,6 @@ var editor;
                 form.submit();                
             }
         });   
-    }
-    
-    function AsignacionValoresProductonNuevo(json){
-        $('#accion').val('add');
-        $('#anio').val($('#spnanio').val());        
-        $('#mes_id option').remove();    
-        $.each(json['mes'], function(j, resultado) {
-               $('#mes_id').append($('<option>').text(resultado.nombre).attr('value', resultado.mes_id));
-        });
-        $('#marca_id option').remove();    
-        $('#marca_id').append($('<option>').text('Seleccione').attr('value', ''));    
-        $.each(json['marca'], function(j, resultado) {            
-            $('#marca_id').append($('<option>').text(resultado.nombre).attr('value', resultado.marca_id));
-        });
-
-        $('#categoria_id option').remove();    
-        $('#categoria_id').append($('<option>').text('Seleccione').attr('value', ''));    
-        $.each(json['categoria'], function(j, resultado) {
-            $('#categoria_id').append($('<option>').text(resultado.nombre).attr('value', resultado.categoria_id));
-        });
-        $('#estado_id option').remove();    
-        $.each(json['estado'], function(j, resultado) {
-            $('#estado_id').append($('<option>').text(resultado.nombre).attr('value', resultado.estado_id));
-        });
-        
-        $('#myModal').modal('show');       
-    }
- 
-    function AsignacionValoresProducto(json){
-        var productos= json['producto'];
-        $('#accion').val('edit');
-        
-        $('#producto_id').val(productos.producto_id);
-        $('#codigo_id').val(productos.codigo_id);
-        $('#anio').val(productos.anio);                
-
-        $('#mes_id option').remove();    
-        $.each(json['mes'], function(j, resultado) {
-            if(productos.mes_id===resultado.mes_id){
-                $('#mes_id').append($('<option>').text(resultado.nombre).attr({value:resultado.mes_id,selected:'selected'}));
-            }
-            else{
-               $('#mes_id').append($('<option>').text(resultado.nombre).attr('value', resultado.mes_id));
-            }
-        });
-
-        $('#marca_id option').remove();    
-        $.each(json['marca'], function(j, resultado) {
-            if(productos.marca_id===resultado.marca_id){
-                $('#marca_id').append($('<option>').text(resultado.nombre).attr({value:resultado.marca_id,selected:'selected'}));
-            }
-            else{
-                $('#marca_id').append($('<option>').text(resultado.nombre).attr('value', resultado.marca_id));
-            }
-        });
-
-        $('#categoria_id option').remove();    
-        $.each(json['categoria'], function(j, resultado) {
-            if(productos.categoria_id===resultado.categoria_id){
-                $('#categoria_id').append($('<option>').text(resultado.nombre).attr({value:resultado.categoria_id,selected:'selected'}));
-            }
-            else{
-                $('#categoria_id').append($('<option>').text(resultado.nombre).attr('value', resultado.categoria_id));
-            }
-          });
-
-        $('#nombre').val(productos.nombre);      
-        $('#talla').val(productos.talla);      
-        $('#color').val(productos.color);      
-        $('#precio_compra').val(productos.precio_compra);      
-        $('#precio_venta').val(productos.precio_venta);      
-        $('#fecha_compra').val(productos.fecha_compra);       
-
-        $('#estado_id option').remove();    
-        $.each(json['estado'], function(j, resultado) {
-            if(productos.marca_id===resultado.marca_id){
-                $('#estado_id').append($('<option>').text(resultado.nombre).attr({value:resultado.estado_id,selected:'selected'}));
-            }
-            else{
-                $('#estado_id').append($('<option>').text(resultado.nombre).attr('value', resultado.estado_id));
-            }
-        });
-        
-        $('#observacion').val(productos.observacion); 
-
-        $('#myModal').modal('show');       
     }
 
 </script>

@@ -73,22 +73,17 @@ class MProd_marca extends CI_Model {
         return empty(trim($value))?null:$value;
     }
     
-    
-    function ObtenerTablaMArcasXmarca_id($marca_id) {  
-        return $this->db->select('*')->from(Entities::$t_prod_marca)->where('marca_id',$marca_id)->get()->row();
-    }  
-
-    function EliminarTablaMarcas($marca_id) {        
-        return $this->db->where('marca_id',$marca_id)->delete(Entities::$t_prod_marca);
+    public function ObtenerTablaMarcas(){
+        return $this->db->select('*')->from(Entities::$t_prod_marca)->get()->result();
     }
     
     public function ObtenerSPMarcas($parametros) {        
         return $this->db->query('CALL sp_prod_Lista_Marcas(?)',[$parametros['marca']]);
     }
     
-    public function ObtenerTablaMarcas(){
-        return $this->db->select('*')->from(Entities::$t_prod_marca)->get()->result();
-    }
+    function ObtenerTablaMarcasXmarca_id($marca_id) {  
+        return $this->db->select('*')->from(Entities::$t_prod_marca)->where('marca_id',$marca_id)->get()->row();
+    }   
     
     function ObtenerTablaMarcaMaximoID() {        
         $this->db->select_max('marca_id');
@@ -101,8 +96,12 @@ class MProd_marca extends CI_Model {
         return $this->db->insert(Entities::$t_prod_marca,$marca);
     }
     
-    function EditarTablaMarcas($producto) {        
-        return $this->db->where('marca_id',$producto['marca_id'])->update(Entities::$t_prod_marca,$marca);                     
+    function EliminarTablaMarcas($marca_id) {        
+        return $this->db->where('marca_id',$marca_id)->delete(Entities::$t_prod_marca);
+    }
+    
+    function EditarTablaMarcas($marca) {        
+        return $this->db->where('marca_id',$marca['marca_id'])->update(Entities::$t_prod_marca,$marca);                     
     }
     
      

@@ -6,32 +6,24 @@ class CProd_marcas extends jkventas_controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->library(array('form_validation'));
+        $this->load->library(array('session','form_validation'));
         $this->load->helper(array('url','form'));
         $this->load->model(array('MProd_producto','MGest_mes','MProd_estado','MProd_marca','MProd_categoria'));   
     } 
     
     public function index() {        
+        $data['menu_padre']     = $this->CargarMenuPadre();
+        $data['menu_hijo']      = $this->CargarMenuHijo();        
         $data['layout_body']    = 'Productos/VProd_marcas/index';
         $data['marca']          = $this->MProd_marca->ObtenerTablaMarcas();
-
-        $data['menu']  = $this->CargadoDelMenu();        
-        $data['title'] = 'Categorias';
+        
+        $data['title'] = 'Marcas';
         $this->load->view('main_template', $data);
     }    
     
-    function ObtenerListaProductos(){    
-        $parametros = array (
-            'marca'      =>$this->input->post('marca'),   
-        );
-        $datos      = $this->MProd_marca->ObtenerTablaMarcas($parametros);
-        echo json_encode($datos);
-    }
-    
     public function ObtenerMarca(){       
        $marca_id=$this->input->post('marca_id');
-       $general['marca']       = $this->MProd_marca->ObtenerTablaMArcasXmarca_id($marcas_id); 
-       $general['marca']       = $this->MProd_marca->ObtenerTablaMarcas();
+       $general['marca']       = $this->MProd_marca->ObtenerTablaMarcasXmarca_id($marca_id); 
        echo json_encode($general);        
     }
     
@@ -39,7 +31,7 @@ class CProd_marcas extends jkventas_controller {
         $parametros = array (      
             'marca'      =>$this->input->get('marca'),          
         );
-        $resultset = $this->MProd_marca->ObtenerTablaMarcas($parametros);
+        $resultset = $this->MProd_marca->ObtenerSPMarcas($parametros);
         $i=0;
         $response=[];
         foreach ($resultset->result_array()  as $row) {
@@ -68,49 +60,35 @@ class CProd_marcas extends jkventas_controller {
     
     }
     
-    function AgregarProducto(){
-        $general['mes']            = $this->MGest_mes->ObtenerTablaMeses();
-        $general['estado']         = $this->MProd_estado->ObtenerTablaEstados();
+    function AgregarMarca(){
         $general['marca']          = $this->MProd_marca->ObtenerTablaMarcas();
-        $general['categoria']      = $this->MProd_categoria->ObtenerTablaCategorias();
         echo json_encode($general);
     }
             
     function EliminarMarca(){
-       $marca_id=$this->input->post('marca_id');
-       echo json_encode($this->MProd_marca->EliminarTablaMarcas($marca_id));
+        $marca_id=$this->input->post('marca_id');
+        echo json_encode($this->MProd_marca->EliminarTablaMarcas($marca_id));
     }
     
-    function EditarProducto(){
-        
+    function EditarMarca(){        
         $result = ['status'=>'success', 'message'=>'Se modificó un registro...'];
         $accion=$this->input->post('accion');        
-        $producto_id=($accion=='edit'?$this->input->post('producto_id'):$this->MProd_producto->ObtenerTablaProductoMaximoID()->producto_id+1);
+        $marca_id=($accion=='edit'?$this->input->post('marca_id'):$this->MProd_marca->ObtenerTablaMarcaMaximoID()->marca_id+1);
         $data=  array(
-                    'producto_id'   =>$producto_id,
-                    'codigo_id'     =>$this->input->post('codigo_id'),
-                    'anio'          =>$this->input->post('anio'),
-                    'mes_id'        =>$this->input->post('mes_id'),
-                    'marca_id'      =>$this->input->post('marca_id'),
-                    'categoria_id'  =>$this->input->post('marca_id'),
-                    'nombre'        =>$this->input->post('nombre'),
-                    'talla'         =>$this->input->post('talla'),
-                    'color'         =>$this->input->post('color'),
-                    'precio_compra' =>$this->input->post('precio_compra'),
-                    'precio_venta'  =>$this->input->post('precio_venta'),
-                    'fecha_compra'  =>$this->input->post('fecha_compra'),
-                    'estado_id'     =>$this->input->post('estado_id'),                    
+                    'marca_id'      =>$marca_id,                    
+                    'nombre'        =>$this->input->post('nombre'),                    
+                    'direccion'     =>$this->input->post('direccion'),                    
                     'observacion'   =>$this->input->post('observacion')
                 );
         
         if($accion=='edit'){                                    
-           $this->MProd_producto->EditarTablaProductos($data);
+           $this->MProd_marca->EditarTablaMarcas($data);
         }
         
         if($accion=='add'){   
-            $this->MProd_producto->AgregarTablaProductos($data);
+            $this->MProd_marca->AgregarTablaMarcas($data);
         }
-        redirect('../CProd_productos/index');
+        redirect('../CProd_marcas/index');
     }    
 }
 

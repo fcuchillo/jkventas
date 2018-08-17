@@ -16,5 +16,8 @@ class Entities {
     public static $t_gest_mes="t_gest_mes";
     public static $t_prod_estado="t_prod_estado";
     public static $t_prod_marca="t_prod_marca";
-    public static $t_prod_producto="t_prod_producto";    
+    public static $t_prod_producto="t_prod_producto";
+    
+    public static $t_gest_gastos="t_gest_gastos";
+    public static $t_gest_tipogastos="t_gest_tipogastos";
 }

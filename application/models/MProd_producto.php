@@ -154,7 +154,7 @@ class MProd_producto extends CI_Model {
         return $this->db->select('*')->from(Entities::$t_prod_producto)->where('producto_id',$producto_id)->get()->row();
     }
     
-    public function ObtenerTablaProductos($parametros) {        
+    public function ObtenerSPProductos($parametros) {        
         return $this->db->query('CALL sp_prod_Lista_Productos(?,?,?,?,?,?)',[$parametros['anio'],$parametros['mes'],$parametros['estado'],$parametros['marca'],$parametros['categoria'],$parametros['codigo']]);
     }
     
