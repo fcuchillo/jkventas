@@ -182,7 +182,7 @@
                     <div class="row">
                         <div class="validarInfo">
                         <div class="col-sm-3"><label>Precio Compra:</label></div>
-                        <div class="col-sm-2"><input class="form-control" name="precio_compra" id="precio_compra"> <span class="help-block" id="error"></span></div>
+                        <div class="col-sm-2"><input class="form-control" name="precio_compra" id="precio_compra"><span class="help-block" id="error"></span></div>
                         </div>
                     </div> 
                     <div class="row">

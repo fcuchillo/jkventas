@@ -28,86 +28,87 @@
             <div class="box-body">
                 <div class="row">
                     <div class="col-md-3"> 
-                        <label class="PyENDES-Label">Cliente</label>
+                        <label class="PyENDES-Label">Dni Cliente</label>
                         <div class="input-group input-group-sm">
                             <input type="text" class="form-control " id="cliente" name="cliente" placeholder="Ingrese Cliente">
-                            <ul class="dropdown-menu txtcliente" style="margin-left:15px;margin-right:0px;" role="menucliente" aria-labelledby="dropdownCliente"  id="DropdownCliente"></ul>
-                            <small id='validationConglomerado' class="help-block validation" data-bv-validator="notEmpty" data-bv-for="conglomerado" data-bv-result="INVALID" style="display: none">Registre Cliente</small>
+                            <span id="errorcliente"></span>
                         </div>
                     </div>
                      <div class="col-md-3"> 
-                        <label class="PyENDES-Label">Fecha</label>
+                        <label class="PyENDES-Label">Nombre Cliente</label>
                         <div class="input-group input-group-sm">
-                            <input type="date" class="form-control " id="fecha" name="fecha" placeholder="Ingrese Cliente">
-                            <small id='validationConglomerado' class="help-block validation" data-bv-validator="notEmpty" data-bv-for="conglomerado" data-bv-result="INVALID" style="display: none">Registre Fecha</small>
+                            <input type="text" class="form-control " id="nombrecliente" name="nombrecliente" placeholder="Nombre Cliente" readonly="">
+                            <input type="hidden" class="form-control " id="cliente_id" name="cliente_id">
                         </div>
                     </div>
                     <div class="col-md-6"></div>
                 </div>
-               <div class="row">
-                <div class="col-md-3"> 
-                        <label class="PyENDES-Label">Producto</label>
-                        <div class="input-group input-group-sm">
-                            <input type="text" class="form-control " id="producto" name="producto" placeholder="Busque Producto">
-                            <ul class="dropdown-menu txtproducto" style="margin-left:15px;margin-right:0px;" role="despliegue" aria-labelledby="dropdownDespliegue"  id="DropdownProducto"></ul>
-                            <small id='validationConglomerado' class="help-block validation" data-bv-validator="notEmpty" data-bv-for="conglomerado" data-bv-result="INVALID" style="display: none">Registre Producto</small>
+                <div class="row">
+                  <div class="col-md-2"> 
+                        <label class="PyENDES-Label">Codigo Producto</label>
+                        <div class="input-group  input-group-sm">
+                            <input type="text" class="form-control " id="codigo_id" name="codigo_id" placeholder="Ingrese Código">
+                            <span id="errorproducto"></span>
+                        </div>
+                </div>
+                    <div class="col-md-2"> 
+                        <label class="PyENDES-Label" style="visibility: hidden"></label>
+                        <div class="input-group input-group-sm" style="visibility: hidden">
+                            <span class="input-group-btn"><button type="button" class="btn btn-primary btn-block btn-flat" id="btnVentaBuscar">Buscar</button></span>                           
                         </div>
                     </div>
-                     <div class="col-md-3"> 
+                    <div class="col-md-8">
+                    </div>
+                </div>
+                <form id="formguardadetalleventa" name="formguardadetalleventa" action="" method="post">
+               <div class="row">
+
+                <div class="col-md-2"> 
+                        <label class="PyENDES-Label">Codigo Producto</label>
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control " id="producto_idd" name="producto_idd" readonly="" required="">
+                            <input type="hidden" id="producto_id" name="producto_id">                            
+                        </div>
+                </div>
+                <div class="col-md-4"> 
+                        <label class="PyENDES-Label">Nombre Producto</label>
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control " id="nombre_producto" name="nombre_producto" readonly="" required="">
+                        </div>
+                </div>
+                     <div class="col-md-1"> 
                         <label class="PyENDES-Label">Precio</label>
                         <div class="input-group input-group-sm">
-                            <input type="text" class="form-control " id="precio" name="precio" placeholder="Ingrese precio">
-                            <small id='validationConglomerado' class="help-block validation" data-bv-validator="notEmpty" data-bv-for="conglomerado" data-bv-result="INVALID" style="display: none">Ingrese Precio</small>
-                        </div>
-                    </div>
-                   <div class="col-md-3"> 
-                        <label class="PyENDES-Label">Cantidad</label>
-                        <div class="input-group input-group-sm">
-                            <input type="number" class="form-control " id="cantidad" name="cantidad" placeholder="Ingrese cantidad" min="0">
-                            <small id='validationConglomerado' class="help-block validation" data-bv-validator="notEmpty" data-bv-for="conglomerado" data-bv-result="INVALID" style="display: none">Ingrese Precio</small>
-                        </div>
+                            <input type="text" class="form-control " id="precio" name="precio" placeholder="Ingrese precio" required="">
+                       </div>
                     </div>
                     <div class="col-md-2"> 
                         <label class="PyENDES-Label" style="visibility: hidden"></label>
                         <div class="input-group input-group-sm">
-                           <span class="input-group-btn"><button type="button" class="btn btn-primary btn-block btn-flat" id="btnRegistrySearch">Agregar</button></span>                           
+                            <span class="input-group-btn"><button type="submit" class="btn btn-primary btn-block btn-flat" id="btnGuardarVentas">Agregar</button></span>                           
                         </div>
                     </div>
-                    <div class="col-md-1"></div>
+                   <div class="col-md-2">
+                       <label class="PyENDES-Label" style="visibility: hidden"></label>
+                       <div class="input-group input-group-sm col-md-2" >
+                            <span class="input-group-btn"><button type="button" class="btn btn-primary btn-block btn-flat" id="btnConfirmarcompra">Confirmar Compra</button></span>                           
+                        </div> 
+                   </div>
+                   <div class="col-md-2"></div>
                 </div>
+                </form>
                 <div class="row">
-                <table id="tblmenu" class="table table-condensed table-striped" data-toggle="table" >
-                    <thead id="tblmenucabecera">
-                        <tr class="info">
-                            <th align="center"><center><a href="javascript:void(0);" onclick="AgregarMenu();"><span class="glyphicon glyphicon-plus"></span></a></center></th>
-                            <!--<th align="center"></th>-->
-                            <th align="center">Usuario</th>
-                            <th align="center">Cliente</th>
-                            <th align="center">fecha</th>
-<!--                            <th align="center">Orden</th>
-                            <th align="center">Padre</th>
-                            <th align="center">Roles Asignados</th>
-                            <th align="center">Estado</th>-->
-                        </tr>            
-                    </thead>
-                    <tbody>
-                        <?php
-                        if(isset($menus)){
-                            foreach ($menus as $atributo){
-                                echo '<tr>'
-                                        .'<td>'.$atributo->menu.'</td>'
-                                        .'<td>'.$atributo->ruta.'</td>'
-                                        .'<td>'.$atributo->descripcion.'</td>'
-                                        .'<td>'.$atributo->orden.'</td>'
-                                        .'<td>'.$atributo->padre.'</td>'
-                                        .'<td>'.$atributo->estado.'</td>'.
-                                     '</tr>';
-                            }
-                        }
-                        ?>
-                    </tbody>
-                  </table>
-                </div>
+               <div class="box-body pre-scrollable" id="divContenedorVentas" >                                        
+                <table align="center" width="100%" cellpadding="0" cellspacing="0">						
+                    <tr>
+		 	<td align=center valign=top width="100%">
+                            <table id="grid_tabla_jkventas"></table>
+                            <div id="grid_tabla_jkventas_pager" ></div>
+			</td>
+                    </tr>
+		</table>                         
+               </div>    
+               </div>
             </div>
         </div>  
     </section>
@@ -157,199 +158,190 @@
         </div>
     </div>
 <script>
-var myTable;
+jQuery.browser = {};
+(function () {
+jQuery.browser.msie = false;
+jQuery.browser.version = 0;
+if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+jQuery.browser.msie = true;
+jQuery.browser.version = RegExp.$1;
+}
+})();
+var grid_tabla_jkventas=jQuery("#grid_tabla_jkventas");
+
 $(document).ready(function () {
-     $("#cliente").keyup(function () {
-        $.ajax({
-            type: "POST",
-            url: '../CProd_ventas/ObtenerClienteAuto',
-            data: {
-                keyword: $("#cliente").val()
-            },
-            dataType: "json",
-            success: function (data) {
-                if (data.length > 0) {
-                    $('#DropdownCliente').empty();
-                    $('#cliente').attr("data-toggle", "dropdown");
-                    $('#DropdownCliente').dropdown('toggle');
-                }
-                else if (data.length == 0) {
-                    $('#cliente').attr("data-toggle", "");
-                }
-                $.each(data, function (key,value) {
-                    if (data.length >= 0)
-                        $('#DropdownCliente').append('<li role="displayCountries" ><a role="menuitem dropdownCountryli" class="dropdownlivalue">' + value['nombre'] + '</a></li>');
-                });
+    ObtenerTablajkventas();
+    RecargarTabla_jkventas();
+    $('#codigo_id').keypress(function (e) {
+     var key = e.which;
+     if(key === 13){
+        ObtenerProductoByCodigo($('#codigo_id').val());
+        }
+    });
+    $('#cliente').keypress(function (e) {
+     var key = e.which;
+     if(key === 13 && $('#cliente').val().length==8){
+        ObtenerClientebyDni($('#cliente').val());
+        }
+    });
+    $('#formguardadetalleventa').submit(function(event){
+        event.preventDefault();
+        btnGuardarVentas();
+        LimpiarCampos();
+    });
+    $('#btnVentaBuscar').click(function(){
+       RecargarTabla_jkventas(); 
+    });
+    $('#btnConfirmarcompra').click(function(){
+        var cliente=$('#cliente_id').val();
+        if(cliente===null || cliente.trim().length===0){
+            $('#errorcliente').text('Debe Ingresar Cliente');
+        }
+        else{
+            $('#errorcliente').text('');
+            if(confirm("Desea Confimar la compra? ")){    
+                ConfirmacionDeLaCompra(cliente);
             }
-        });
-    });
-    $('ul.txtcliente').on('click', 'li a', function () {
-        $('#cliente').val($(this).text());
-    });
-    $("#producto").keyup(function () {
-        $.ajax({
-            type: "POST",
-            url: '../CProd_ventas/ObtenerProductoAuto',
-            data: {
-                keyword: $("#producto").val()
-            },
-            dataType: "json",
-            success: function (data) {
-                if (data.length > 0) {
-                    $('#DropdownProducto').empty();
-                    $('#producto').attr("data-toggle", "dropdown");
-                    $('#DropdownProducto').dropdown('toggle');
-                }
-                else if (data.length == 0) {
-                    $('#producto').attr("data-toggle", "");
-                }
-                $.each(data, function (key,value) {
-                    if (data.length >= 0)
-                        $('#DropdownProducto').append('<li role="displayCountries" ><a role="menuitem dropdownCountryli" class="dropdownlivalue">' + value['nombre'] + '</a></li>');
-                });
+            else{
+                console.log('cancel');
             }
-        });
-    });
-    $('ul.txtproducto').on('click', 'li a', function () {
-        $('#producto').val($(this).text());
+        }
     });
   });
-  
-  function EditarMenu(){
-       var form = $("#frmMenu");
-       var data = form.serialize();
-       //enviar datos en json
-       //var formData = JSON.stringify($("#frmMenu").serializeArray());
-        $.ajax({
-          type:'post',
-          data:data,
-          url:'../CProd_Menus/EditarMenu',
-//        dataType: 'json',
-//        contentType: 'application/json',
-          success:function(response){
-//            console.log(response);
-            $('#myModal').modal('hide'); 
-            cargarTodoMenu();
-          }
-      })
-  }
-  function AgregarMenu(){
-      $.ajax({
-          type:'post',
-//          data:data,
-          url:'../CProd_Menus/AgregarMenu',
-          success:function(response){
-            $('#myModal').modal('show'); 
-            $('#data-menu').html(response);
-          }
-      })
-  }
-  function cargarTodoMenu(){
-        myTable = $('#tblmenu').DataTable({
-        initComplete: function () {
-            jsRemoveWindowLoad();
-        },
-        ajax:{
-            dataType: 'json',
-            url:'../CProd_Menus/ObtenerListadodeMenu',
-            type:'post',
-            dataSrc:""
-        }, 
-        columns:[ 
-            { data: 'id', render: function(value, type, full, meta) {
-                  return '<td><center>'+
-                         '<a href="javascript:void(0);" id="btnEliminar" onclick="Eliminar('+full.menu_id+');" ><span class="glyphicon glyphicon-trash" ></span></a>'+
-                         '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" id="btnMenueditar" onclick="Editar('+full.menu_id+');" ><span class="glyphicon glyphicon-pencil"></span></a>'+
-                         '</center></td>'
-                        }  },
-            { data:"menu",           class:"textFont text-left",order:false/*,      width: "20" */    },
-            { data:"ruta",           class:"textFont text-left"/*,      width: "100"*/    },
-            { data:"descripcion",    class:"textFont text-left"/*,      width: "100"*/    }
-//            { data:"orden",          class:"textFont text-left"/*,      width: "80" */    },
-//            { data:"padre",          class:"textFont text-left"/*,      width: "200"*/    },
-//            {data: 'id', render: function(value, type, full, meta) {
-//                  return '<td><center>'+
-//                         '<a href="javascript:void(0);" onclick="CargarRoles('+full.menu_id+');" ><span class="glyphicon glyphicon-menu-hamburger" ></span></a>'+
-//                         '</center></td>'
-//                    }
-//            },
-//            { data:"estado",         class:"textFont text-left"/*,      width: "40" */    }
-        ],
-        columnDefs: [
-        { "orderable": false, "targets": 0 }
-        ],
-        autoWidth: true,
-        bDestroy: true
-  });   
-  }
-  function Editar(id){
-      $.ajax({
-          type:'post',
-          data:{menu_id:id},
-          url:'../CProd_Menus/ObtenerMenu',
-          success:function(response){
-            console.log(response);
-            $('#myModal').modal('show'); 
-            $('#data-menu').html(response);
-          }
-      })
-  }
- function Eliminar(id){
-   if(confirm('Desea Eliminar?')){
-     $.ajax({
-          type:'post',
-          data:{menu_id:id},
-          url:'../CProd_Menus/EliminarMenu',
-          success:function(response){
-            cargarTodoMenu();
+  function ObtenerProductoByCodigo(codigo_id){
+      $.post( "../CProd_ventas/ObtenerProductoByCodigo",{codigo_id:codigo_id}, function( data ) {
+        LimpiarCampos();
+        var producto = jQuery.parseJSON(data);
+        if(producto!==null){
+            $('#error').text('');
+            $('#producto_idd').val(producto.producto_id);
+            $('#producto_id').val(producto.producto_id);
+            $('#nombre_producto').val(producto.nombre);
+            $('#precio').val(producto.precio_venta);
+            $('#precio').focus();
         }
-      })   
+        else{
+           $('#codigo_id').focus();
+           $('#errorproducto').text('Codigo no encontrado');
+        }
+    });
   }
- }
-   function CargarRoles(menu_id){
-//       $(this).removeData('bs.modal');
+  function LimpiarCampos(){
+     $('#producto_idd').val('');
+     $('#producto_id').val('');
+     $('#nombre_producto').val('');
+     $('#precio').val(''); 
+  }
+      function RecargarTabla_jkventas() {
+	grid_tabla_jkventas.jqGrid("setGridParam",{
+            page:1,	
+            url:'../CProd_ventas/ObtenerTodoLosProductosaVender',
+            datatype : "json"
+	}).trigger("reloadGrid");
+	
+	return [ true, '' ]; 
+    }    
+        
+    function ObtenerTablajkventas(){
+	var leditar          = { name : 'editar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EditarVentaXid};
+        var leliminar        = { name : 'eliminar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EliminarVentaXid};
+//        var ltmp_id          = { name : 'tamporal_id'	 ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };
+        var ltmp_id          = { name : 'id'	 ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };
+	var ltmpproducto_id  = { name : 'producto_id'    ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false, hidden:true };
+	var lcodigo_id       = { name : 'codigo_id'      ,index : 'index',  width : 50,    align : "center",    fixed : true,  sortable : false };
+        var lnombreproducto  = { name : 'nombre'         ,index : 'index',  width : 350,    align : "left",      fixed : true,  sortable : false };
+	var lprecio       = { name : 'precio'       ,index : 'index',  width : 50,    align : "left",      fixed : true,  sortable : false /*,formatter:'currency',formatoptions: {prefix:'s/.', suffix:'', thousandsSeparator:','}*/ };
+        colNames = ['','','Id','Producto_id','Codigo','Nombre','Precio'];
+	colModel = [leditar,leliminar,ltmp_id,ltmpproducto_id,lcodigo_id,lnombreproducto,lprecio];	    
+	grid_tabla_jkventas.jqGrid({
+		url:'../CProd_ventas/ObtenerTodoLosProductosaVender',
+		datatype : "json",
+		mtype : 'post',
+		colNames : colNames,
+		colModel : colModel,
+		height : 'auto',
+		width : 590,
+		pager : $('#grid_tabla_jkventas_pager'),
+		rowNum : 10,
+		loadonce : true,
+		scrollrows : true,
+		rownumbers : true,
+                caption: "Listado de Productos a Vender",
+		loadComplete : function(data) { 
+		},
+                gridComplete:function(data){
+                   var $grid = $('#grid_tabla_jkventas');
+                   var colSum = $grid.jqGrid('getCol', 'precio', true, 'sum');
+                   console.log(colSum);
+                   $grid.jqGrid('footerData', 'set', {'precio':colSum });  
+                },
+		sortname : 'id',
+		sortable : false,
+		sortorder : "asc",
+		viewrecords : true,
+                footerrow : true,
+                userDataOnFooter : true,
+		loadError : function(xhr, st, err) {
+			alert(err);
+		}		
+	});
+        grid_tabla_jkventas.navGrid('#grid_tabla_jkventas_pager',{edit:false,add:false,del:false,search:false,refresh:false},{},{},{});
+        var sum = grid_tabla_jkventas.jqGrid('getCol', 'precio', false, 'sum');
+        grid_tabla_jkventas.jqGrid('footerData','set', {ID: 'Total:', amount: sum});
+    }
+  function btnGuardarVentas(){
+      $.post( "../CProd_ventas/GuardaDetalleVenta",$("#formguardadetalleventa").serialize(), function( data ) {
+         RecargarTabla_jkventas();
+      });
+  }
+    function EliminarVentaXid(cellvalue, options, rowObject){	
+            return '<a href="javascript:void(0);" id="btnEliminar" onclick="EliminarVenta('+rowObject[0]+');" ><span class="glyphicon glyphicon-trash" ></span></a>';
+        }
 
-//       $("#disponibles").multiSelect("clearSelection");
-       $.ajax({
-          type:'post',
-          data:{menu_id:menu_id},
-          url:'../CProd_Menus/ObtenerRolporMenu',
-          success:function(response){
-              console.log(response);
-              var json2 = jQuery.parseJSON(response);
-              var registrados = [];
-              registrados=json2['registrados'];
-            $('#disponibles').multiSelect('deselect_all');
-            $.each(json2['todo'], function(j, resultado) {
-               if(registrados.length>=0 && registrados.indexOf(resultado.rol_id) != -1){
-                   $('#disponibles').append($('<option>').text(resultado.titulo).attr({value:resultado.rol_id,selected:'selected'}));
-               }
-               else{
-                   $('#disponibles').append($('<option>').text(resultado.titulo).attr('value', resultado.rol_id));
-               }
-             });
-            $('#disponibles').multiSelect({
-                selectableHeader: "<div class='custom-header'><center><strong>ROL NO ASIGNADO</strong></center></div>",
-                selectionHeader:  "<div class='custom-header'><center><strong>ROL ASIGNADO</strong></center></div>"
-            });
-            $('#menu_id').val(menu_id);
-            $('#myModalRoles').modal('show'); 
-        }
-      })
- }
-   function GuardarRolporMenu(){
-   var asignados=$('#disponibles').val();
-   var menu_id= $('#menu_id').val();
-       //enviar datos en json
-       //var formData = JSON.stringify($("#frmMenu").serializeArray());
-    $.ajax({
-          type:'post',
-          url:'../CProd_Menus/AsignaciondeRol',
-          data:{asignados:asignados,menu_id:menu_id},
-          success:function(response){
-            $('#myModalRoles').modal('hide'); 
-            cargarTodoMenu();
-          }
-      })
+    function EditarVentaXid(cellvalue, options, rowObject){	                
+            return '<a href="javascript:void(0);" id="btnEditar" onclick="EditarVenta('+rowObject[0]+');" ><span class="glyphicon glyphicon-pencil" ></span></a>';
+      }
+    function EliminarVenta(id){
+        if(confirm("Desea Eliminar? ")){
+            $.post( "../CProd_ventas/EliminarVentaDetalle",{venta_id:id}, function( data ) {
+                RecargarTabla_jkventas();
+            });     
+        }       
+    }
+  
+    function EditarVenta(id){      
+     $.post( "../CProd_ventas/EditarVenta",{venta_id:id}, function( data ) {
+         RecargarTabla_jkventas();
+      });
+    }
+  function ObtenerClientebyDni(dni){
+     $.post( "../CProd_ventas/ObtenerClientebyDni",{dni:dni}, function( data ) {
+            var cliente = jQuery.parseJSON(data);
+            if(cliente!==null){
+               $('#errorcliente').text('');
+                LimpiarCliente();
+                $('#cliente_id').val(cliente.cliente_id);
+                $('#nombrecliente').val(cliente.nombre);
+            }
+            else{
+                $('#errorcliente').text('Cliente no encontrado');
+            }
+      }); 
+  }
+  function LimpiarCliente(){
+     $('#cliente_id').val('');
+     $('#nombrecliente').val(''); 
+  }
+  function ConfirmacionDeLaCompra(cliente_id){
+       $.post( "../CProd_ventas/GuardarCompraGeneral",{cliente_id:cliente_id}, function( data ) {
+            var response = jQuery.parseJSON(data);
+            console.log(response);
+            if(response.status==='success'){
+                console.log('venta realizada con exito');
+            }
+            else{
+                console.log('paso algo malo');
+                }
+      }); 
   }
 </script>
