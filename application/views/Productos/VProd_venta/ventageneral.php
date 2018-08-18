@@ -53,9 +53,8 @@
                 </div>
                     <div class="col-md-2"> 
                         <label class="PyENDES-Label" style="visibility: hidden"></label>
-                        <div class="input-group input-group-sm">
-                            <!--<span class="input-group-btn"><button type="button" class="btn btn-primary btn-block btn-flat" id="btnVentaBuscar">Buscar</button></span>--> 
-                            <a href="ventas">ir a ventas</a>
+                        <div class="input-group input-group-sm" style="visibility: hidden">
+                            <span class="input-group-btn"><button type="button" class="btn btn-primary btn-block btn-flat" id="btnVentaBuscar">Buscar</button></span>                           
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -103,8 +102,8 @@
                 <table align="center" width="100%" cellpadding="0" cellspacing="0">						
                     <tr>
 		 	<td align=center valign=top width="100%">
-                            <table id="grid_tabla_jkventas"></table>
-                            <div id="grid_tabla_jkventas_pager" ></div>
+                            <table id="grid_tabla_jkventas_generales"></table>
+                            <div id="grid_tabla_jkventas_generales_pager" ></div>
 			</td>
                     </tr>
 		</table>                         
@@ -168,7 +167,7 @@ jQuery.browser.msie = true;
 jQuery.browser.version = RegExp.$1;
 }
 })();
-var grid_tabla_jkventas=jQuery("#grid_tabla_jkventas");
+var grid_tabla_jkventas_generales=jQuery("#grid_tabla_jkventas_generales");
 
 $(document).ready(function () {
     ObtenerTablajkventas();
@@ -234,9 +233,9 @@ $(document).ready(function () {
      $('#precio').val(''); 
   }
       function RecargarTabla_jkventas() {
-	grid_tabla_jkventas.jqGrid("setGridParam",{
+	grid_tabla_jkventas_generales.jqGrid("setGridParam",{
             page:1,	
-            url:'../CProd_ventas/ObtenerTodoLosProductosaVender',
+            url:'../CProd_ventas/ObtenerTodasLasVentasBySession',
             datatype : "json"
 	}).trigger("reloadGrid");
 	
@@ -244,25 +243,25 @@ $(document).ready(function () {
     }    
         
     function ObtenerTablajkventas(){
-	var leditar          = { name : 'editar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EditarVentaXid};
-        var leliminar        = { name : 'eliminar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EliminarVentaXid};
+//	var leditar          = { name : 'editar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EditarVentaXid};
+//        var leliminar        = { name : 'eliminar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EliminarVentaXid};
 //        var ltmp_id          = { name : 'tamporal_id'	 ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };
-        var ltmp_id          = { name : 'id'	 ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };
-	var ltmpproducto_id  = { name : 'producto_id'    ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false, hidden:true };
-	var lcodigo_id       = { name : 'codigo_id'      ,index : 'index',  width : 50,    align : "center",    fixed : true,  sortable : false };
-        var lnombreproducto  = { name : 'nombre'         ,index : 'index',  width : 350,    align : "left",      fixed : true,  sortable : false };
-	var lprecio       = { name : 'precio'       ,index : 'index',  width : 50,    align : "left",      fixed : true,  sortable : false /*,formatter:'currency',formatoptions: {prefix:'s/.', suffix:'', thousandsSeparator:','}*/ };
-        colNames = ['','','Id','Producto_id','Codigo','Nombre','Precio'];
-	colModel = [leditar,leliminar,ltmp_id,ltmpproducto_id,lcodigo_id,lnombreproducto,lprecio];	    
-	grid_tabla_jkventas.jqGrid({
-		url:'../CProd_ventas/ObtenerTodoLosProductosaVender',
+        var ltmp_id          = { name : 'venta_id'	 ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };
+	var lnombre          = { name : 'nombre'    ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false};
+	var lfecha           = { name : 'fecha'      ,index : 'index',  width : 90,    align : "center",    fixed : true,  sortable : false };
+        var lcantidad        = { name : 'cantidad'         ,index : 'index',  width : 350,    align : "left",      fixed : true,  sortable : false };
+	var ltotal           = { name : 'total'       ,index : 'index',  width : 50,    align : "left",      fixed : true,  sortable : false /*,formatter:'currency',formatoptions: {prefix:'s/.', suffix:'', thousandsSeparator:','}*/ };
+        colNames = ['Id','Cliente','Fecha','Cantidad','Total'];
+	colModel = [ltmp_id,lnombre,lfecha,lcantidad,ltotal];	    
+	grid_tabla_jkventas_generales.jqGrid({
+		url:'../CProd_ventas/ObtenerTodasLasVentasBySession',
 		datatype : "json",
 		mtype : 'post',
 		colNames : colNames,
 		colModel : colModel,
 		height : 'auto',
-		width : 590,
-		pager : $('#grid_tabla_jkventas_pager'),
+		width : 750,
+		pager : $('#grid_tabla_jkventas_generales_pager'),
 		rowNum : 10,
 		loadonce : true,
 		scrollrows : true,
@@ -271,10 +270,11 @@ $(document).ready(function () {
 		loadComplete : function(data) { 
 		},
                 gridComplete:function(data){
-                   var $grid = $('#grid_tabla_jkventas');
-                   var colSum = $grid.jqGrid('getCol', 'precio', true, 'sum');
-                   console.log(colSum);
-                   $grid.jqGrid('footerData', 'set', {'precio':colSum });  
+                   var $grid = $('#grid_tabla_jkventas_generales');
+                   var colSum = $grid.jqGrid('getCol', 'total', true, 'sum');
+                   var colcantidad = $grid.jqGrid('getCol', 'cantidad', true, 'sum');
+                   $grid.jqGrid('footerData', 'set', {'cantidad':colcantidad });
+                   $grid.jqGrid('footerData', 'set', {'total':colSum });  
                 },
 		sortname : 'id',
 		sortable : false,
@@ -282,13 +282,13 @@ $(document).ready(function () {
 		viewrecords : true,
                 footerrow : true,
                 userDataOnFooter : true,
+                subGrid: true, // set the subGrid property to true to show expand buttons for each row
+                subGridRowExpanded: showChildGrids, // javascript function that will take care of showing the child grid
 		loadError : function(xhr, st, err) {
 			alert(err);
 		}		
 	});
-        grid_tabla_jkventas.navGrid('#grid_tabla_jkventas_pager',{edit:false,add:false,del:false,search:false,refresh:false},{},{},{});
-        var sum = grid_tabla_jkventas.jqGrid('getCol', 'precio', false, 'sum');
-        grid_tabla_jkventas.jqGrid('footerData','set', {ID: 'Total:', amount: sum});
+        grid_tabla_jkventas_generales.navGrid('#grid_tabla_jkventas_generales_pager',{edit:false,add:false,del:false,search:false,refresh:false},{},{},{});
     }
   function btnGuardarVentas(){
       $.post( "../CProd_ventas/GuardaDetalleVenta",$("#formguardadetalleventa").serialize(), function( data ) {
@@ -309,7 +309,39 @@ $(document).ready(function () {
             });     
         }       
     }
-  
+  function showChildGrids(parentRowID, parentRowKey){
+      showFirstChildGrid(parentRowID, parentRowKey);
+   }
+   function showFirstChildGrid(parentRowID, parentRowKey){
+            var childGridID = parentRowID + "_table";
+            var childGridPagerID = parentRowID + "_pager";
+             console.log(childGridID);
+             console.log(childGridPagerID);
+            // send the parent row primary key to the server so that we know which grid to show
+            var childGridURL = "../CProd_ventas/ObtenerTodoLosProductosporVenta?jqGridID=JQGrid2"
+            childGridURL = childGridURL + "&parentRowID=" + encodeURIComponent(parentRowKey)
+
+            // add a table and pager HTML elements to the parent grid row - we will render the child grid here
+            $('#' + parentRowID).append('<table id=' + childGridID + '></table><div id=' + childGridPagerID + '></div>');
+
+            $("#" + childGridID).jqGrid({
+                url: childGridURL,
+                mtype: "GET",
+                datatype: "json",
+                page: 1,
+                colNames: ['ID', 'producto', 'Codigo', 'Nombre','Precio'],
+                colModel: [
+                    { name: 'id', key: true, width: 75 },
+                    { name: 'producto', width: 100 ,hidden:true},
+                    { name: 'codigo', width: 100 },
+                    { name: 'nombre', width: 100 },
+                    { name: 'precio', width: 100 }
+                ],
+                width: 500,
+                height: '100%',
+                pager: "#" + childGridPagerID
+            })
+    }
     function EditarVenta(id){      
      $.post( "../CProd_ventas/EditarVenta",{venta_id:id}, function( data ) {
          RecargarTabla_jkventas();

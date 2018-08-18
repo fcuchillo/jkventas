@@ -6,7 +6,8 @@ require_once 'application/controllers/jkventas_controller.php';
  * and open the template in the editor.
  */
 class CProd_ventas extends jkventas_controller{
-      public function __construct() {
+    public static $todos="'*'";
+    public function __construct() {
         parent::__construct();
         $this->load->library(array('session','form_validation'));
         $this->load->helper(array('url','form'));
@@ -108,6 +109,64 @@ class CProd_ventas extends jkventas_controller{
                 $result['status']='succes: ';
         }
      echo json_encode($result);  
+    }
+    
+    /**VENTAS GENERALES**/
+    public function ventas() {
+        $data['layout_body']    = 'Productos/VProd_venta/ventageneral';
+        $data['menu_padre']     = $this->CargarMenuPadre();
+        $data['menu_hijo']      = $this->CargarMenuHijo();
+        $data['title']          = 'Ventas';
+        $this->load->view('main_template', $data);    
+        //mas modificaciones
+    }
+   public function  ObtenerTodasLasVentasBySession(){
+      $data=$this->MProd_venta_detalle->ObtenerTodasLasVentasBySession($this->ObtenerSessionUsuario_id()); 
+            $i=0;
+            $response=[];
+            foreach ($data->result_array()  as $row) {
+            $entry  = new MProd_venta_detalle();
+            $entry->setId ($row['id']);
+            $entry->setVenta_id ($row['venta_id']);
+            $entry->setNombre($row['nombre']);
+            $entry->setFecha($row['fecha']);
+            $entry->setCantidad($row['cantidad']);
+            $entry->setTotal($row['total']);
+            $response['rows'][$i]['id'] = $entry->getVenta_id(); //id
+            $response['rows'][$i]['cell'] = array (                                                                  
+                                            $entry->getVenta_id(),
+                                            $entry->getNombre(),
+                                            $entry->getFecha(),
+                                            $entry->getCantidad(),
+                                            $entry->getTotal()
+                                            );
+            $i++;
+            }
+            echo json_encode($response);
+   }
+   public function ObtenerTodoLosProductosporVenta(){
+            $data=$this->MProd_venta_detalle->ObtenerTodasLasVentasByVentaId($this->input->get('parentRowID'));
+            $i=0;
+            $response=[];
+            foreach ($data->result_array()  as $row) {
+            $entry  = new MProd_venta_detalle();
+            $entry->setId ($row['id']);
+            $entry->setDetalle_venta_id ($row['detalle_venta_id']);
+            $entry->setProducto_id($row['producto_id']);
+            $entry->setCodigo_id($row['codigo_id']);
+            $entry->setNombre($row['nombre']);
+            $entry->setPrecio($row['precio']);
+            $response['rows'][$i]['id'] = $entry->getId(); //id
+            $response['rows'][$i]['cell'] = array (                                                                  
+                                            $entry->getDetalle_venta_id(),
+                                            $entry->getProducto_id(),
+                                            $entry->getCodigo_id(),
+                                            $entry->getNombre(),
+                                            $entry->getPrecio()
+                                            );
+            $i++;
+            }
+            echo json_encode($response);
     }
     
 }

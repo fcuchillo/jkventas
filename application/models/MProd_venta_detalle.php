@@ -14,6 +14,13 @@ class MProd_venta_detalle extends CI_Model {
   public $nombre;
   public $precio;
   
+  /***ventas**/
+  public $venta_id;
+  public $fecha;
+  public $cantidad;
+  public $total;
+  public $detalle_venta_id;
+  
     function __construct() {
         parent::__construct();
         
@@ -72,7 +79,55 @@ class MProd_venta_detalle extends CI_Model {
     function setPrecio($precio) {
         $this->precio = $precio;
     }
+    
+    /*****/
+    function getVenta_id() {
+        return $this->venta_id;
+    }
 
+    function getCliente_id() {
+        return $this->cliente_id;
+    }
+
+    function getFecha() {
+        return $this->fecha;
+    }
+
+    function setVenta_id($venta_id) {
+        $this->venta_id = $venta_id;
+    }
+
+    function setCliente_id($cliente_id) {
+        $this->cliente_id = $cliente_id;
+    }
+
+    function setFecha($fecha) {
+        $this->fecha = $fecha;
+    }
+    function getCantidad() {
+        return $this->cantidad;
+    }
+
+    function getTotal() {
+        return $this->total;
+    }
+
+    function setCantidad($cantidad) {
+        $this->cantidad = $cantidad;
+    }
+
+    function setTotal($total) {
+        $this->total = $total;
+    }
+    function getDetalle_venta_id() {
+        return $this->detalle_venta_id;
+    }
+
+    function setDetalle_venta_id($detalle_venta_id) {
+        $this->detalle_venta_id = $detalle_venta_id;
+    }
+
+   /*****/
     function ObtenerTablaProductosXproducto_id($temporal_id) {  
         return $this->db->select('*')->from(Entities::$t_prod_temp_detalle_venta)->where('temporal_id',$temporal_id)->get()->row();
     }
@@ -93,7 +148,7 @@ class MProd_venta_detalle extends CI_Model {
         return $this->db->select('*')->from(Entities::$t_prod_producto)->where('codigo_id',$codigo_producto)->get()->row();                     
     }
      public function ObtenerTodoLosProductosaVender($usuario){ 
-        return $this->db->query('CALL sp_prod_Lista_Ventas(?)',$usuario);
+        return $this->db->query('CALL sp_prod_Lista_Ventas_temp(?)',$usuario);
     }
     public function GuardarDetalleVentatemp($detalleventa){
         return $this->db->insert(Entities::$t_prod_temp_detalle_venta,$detalleventa);
@@ -119,5 +174,13 @@ class MProd_venta_detalle extends CI_Model {
     public function ObtenerTodoLosRegistrostmp($usuario){ 
         return $this->db->select('*')->from(Entities::$t_prod_temp_detalle_venta)->where('usuario_id',$usuario)->get();
     }
+    /***VENTAS GENERALES*****/
+    public function ObtenerTodasLasVentasBySession($usuario_id){
+        return $this->db->query('CALL sp_prod_Lista_Ventas(?)',$usuario_id);
+    }
+    public function ObtenerTodasLasVentasByVentaId($venta_id){
+        return $this->db->query('CALL sp_prod_Lista_Ventas_ByVentaid(?)',$venta_id);
+    }
+   
 }
 
