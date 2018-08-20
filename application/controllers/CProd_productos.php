@@ -70,7 +70,7 @@ class CProd_productos extends jkventas_controller {
         $entry->setProducto_id($row['producto_id']);
         $entry->setCodigo($row['codigo']);
         $entry->setAnio($row['anio']);
-        $entry->setMes($row['mes']);
+        $entry->setEstado($row['estado']);
         $entry->setMarca($row['marca']);
         $entry->setCategoria($row['categoria']);        
         $entry->setNombre($row['nombre']);
@@ -88,7 +88,7 @@ class CProd_productos extends jkventas_controller {
                                         $entry->getProducto_id(),
                                         $entry->getCodigo(),
                                         $entry->getAnio(),
-                                        $entry->getMes(),    
+                                        $entry->getEstado(),    
                                         $entry->getMarca(),
                                         $entry->getCategoria(),                                        
                                         $entry->getNombre(),
@@ -128,7 +128,7 @@ class CProd_productos extends jkventas_controller {
                     'producto_id'   =>$producto_id,
                     'codigo_id'     =>$this->input->post('codigo_id'),
                     'anio'          =>$this->input->post('anio'),
-                    'mes_id'        =>$this->input->post('mes_id'),
+                    'estado_id'     =>$this->input->post('estado_id'),
                     'marca_id'      =>$this->input->post('marca_id'),
                     'categoria_id'  =>$this->input->post('marca_id'),
                     'nombre'        =>$this->input->post('nombre'),

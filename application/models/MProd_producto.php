@@ -10,7 +10,7 @@ class MProd_producto extends CI_Model {
   public $producto_id;
   public $codigo;
   public $anio;
-  public $mes;
+  public $estado;
   public $marca;
   public $categoria;  
   public $nombre;
@@ -48,11 +48,11 @@ class MProd_producto extends CI_Model {
         return $this->anio;
     }
 
-    public function getMes() {
-        return $this->mes;
+    function getEstado() {
+        return $this->estado;
     }
 
-    public function getMarca() {
+        public function getMarca() {
         return $this->marca;
     }
 
@@ -100,10 +100,10 @@ class MProd_producto extends CI_Model {
         $this->anio = $anio;
     }
 
-    public function setMes($mes) {
-        $this->mes = $mes;
+    function setEstado($estado) {
+        $this->estado = $estado;
     }
-
+    
     public function setMarca($marca) {
         $this->marca = $marca;
     }

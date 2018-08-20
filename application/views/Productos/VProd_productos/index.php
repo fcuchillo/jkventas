@@ -137,7 +137,7 @@
                     <input type="hidden" value="" name="accion" id="accion">
                     
                     <div class="row">                        
-                        <div class="col-sm-2"><label >Producto id: </label></div>                        
+                        <div class="col-sm-2"><label >Id: </label></div>                        
                         <div class="col-sm-3"><input class="form-control" type="text" id="producto_id" name="producto_id" value="" readonly="" ></div>                        
                         
                         <div class="validarInfo">                        
@@ -147,10 +147,7 @@
                     </div>                    
                     <div class="row">                        
                         <div class="col-sm-2"><label>Anio:</label></div>                        
-                        <div class="col-sm-3"><input class="form-control" type="text" id="anio" name="anio" value="" readonly=""> <span class="help-block" id="error"></span></div>                        
-                        
-                        <div class="col-sm-2"><label>Mes:</label></div>
-                        <div class="col-sm-4"><select class="form-control" name="mes_id" id="mes_id"></select> <span class="help-block" id="error"></span></div>                        
+                        <div class="col-sm-3"><input class="form-control" type="text" id="anio" name="anio" value="" readonly=""> <span class="help-block" id="error"></span></div>                                                                        
                     </div>        
                     <div class="row">
                         <div class="validarInfo">
@@ -170,8 +167,8 @@
                     </div> 
                     <div class="row">
                         <div class="validarInfo">
-                        <div class="col-sm-2"><label>Talla:</label></div>
-                        <div class="col-sm-3"><input class="form-control" name="talla" id="talla"> <span class="help-block" id="error"></span></div>                        
+                        <div class="col-sm-3"><label>Talla:</label></div>
+                        <div class="col-sm-2"><input class="form-control" name="talla" id="talla"> <span class="help-block" id="error"></span></div>                        
                         <div class="col-sm-1"></div>
                         </div>
                         <div class="validarInfo">
@@ -181,7 +178,7 @@
                     </div> 
                     <div class="row">
                         <div class="validarInfo">
-                        <div class="col-sm-3"><label>Precio Compra:</label></div>
+                        <div class="col-sm-3"><label>Precio compra:</label></div>
                         <div class="col-sm-2"><input class="form-control" name="precio_compra" id="precio_compra"><span class="help-block" id="error"></span></div>
                         </div>
                     </div> 
@@ -298,9 +295,9 @@ var editor;
         var leliminar        = { name : 'eliminar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EliminarProductoXid};
         var lproducto_id     = { name : 'producto_id'	 ,index : 'index',  width : 30,    align : "center",    fixed : true,  sortable : false };
 	var lcodigo          = { name : 'codigo'         ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };
-	var lanio            = { name : 'anio'           ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };
-        var lmes             = { name : 'mes'            ,index : 'index',  width : 70,    align : "left",      fixed : true,  sortable : false };
-	var lmarca           = { name : 'marca'          ,index : 'index',  width : 85,    align : "left",      fixed : true,  sortable : false };
+	var lanio            = { name : 'anio'           ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };        
+	var lestado          = { name : 'estado'         ,index : 'index',  width : 85,    align : "left",      fixed : true,  sortable : false };
+        var lmarca           = { name : 'marca'          ,index : 'index',  width : 85,    align : "left",      fixed : true,  sortable : false };
 	var lcategoria       = { name : 'categoria'	 ,index : 'index',  width : 85,    align : "left",      fixed : true,  sortable : false };	
 	var lnombre          = { name : 'nombre'         ,index : 'index',  width : 130,   align : "left",      fixed : true,  sortable : false };
 	var ltalla           = { name : 'talla'          ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };
@@ -308,10 +305,10 @@ var editor;
         var lprecio_compra   = { name : 'precio_compra'	 ,index : 'index',  width : 80,    align : "center",    fixed : true,  sortable : false };
         var lprecio_venta    = { name : 'precio_venta'	 ,index : 'index',  width : 70,    align : "center",    fixed : true,  sortable : false };
         var lfecha_compra    = { name : 'fecha_compra'	 ,index : 'index',  width : 120,   align : "center",    fixed : true,  sortable : false };        
-        var lobservacion     = { name : 'observacion'	 ,index : 'index',  width : 140,   align : "left",      fixed : true,  sortable : false };
+        var lobservacion     = { name : 'observacion'	 ,index : 'index',  width : 150,   align : "left",      fixed : true,  sortable : false };
         
-        colNames = ['','','Id','Codigo','Anio','Mes','Marca','Categoria','Nombre','Talla','Color','Precio Compra','Precio Venta','Fecha Compra','Observacion'];
-	colModel = [leditar,leliminar,lproducto_id,lcodigo,lanio,lmes,lmarca,lcategoria,lnombre,ltalla,lcolor,lprecio_compra,lprecio_venta,lfecha_compra,lobservacion];	    
+        colNames = ['','','Id','Codigo','Anio','Estado','Marca','Categoria','Nombre','Talla','Color','Precio Compra','Precio Venta','Fecha Compra','Observacion'];
+	colModel = [leditar,leliminar,lproducto_id,lcodigo,lanio,lestado,lmarca,lcategoria,lnombre,ltalla,lcolor,lprecio_compra,lprecio_venta,lfecha_compra,lobservacion];	    
 
 	grid_tabla_productos.jqGrid({
 		url:'../CProd_productos/ListaProductos?anio='+anio+'&mes='+mes+'&estado='+estado+'&marca='+marca+'&categoria='+categoria+'&codigo='+codigo,
@@ -454,10 +451,7 @@ var editor;
     function AsignacionValoresProductoNuevo(json){
         $('#accion').val('add');
         $('#anio').val($('#spnanio').val());        
-        $('#mes_id option').remove();    
-        $.each(json['mes'], function(j, resultado) {
-               $('#mes_id').append($('<option>').text(resultado.nombre).attr('value', resultado.mes_id));
-        });
+        
         $('#marca_id option').remove();    
         $('#marca_id').append($('<option>').text('Seleccione').attr('value', ''));    
         $.each(json['marca'], function(j, resultado) {            
@@ -484,17 +478,6 @@ var editor;
         $('#producto_id').val(productos.producto_id);
         $('#codigo_id').val(productos.codigo_id);
         $('#anio').val(productos.anio);                
-
-        $('#mes_id option').remove();    
-        $.each(json['mes'], function(j, resultado) {
-            if(productos.mes_id===resultado.mes_id){
-                $('#mes_id').append($('<option>').text(resultado.nombre).attr({value:resultado.mes_id,selected:'selected'}));
-            }
-            else{
-               $('#mes_id').append($('<option>').text(resultado.nombre).attr('value', resultado.mes_id));
-            }
-        });
-
         $('#marca_id option').remove();    
         $.each(json['marca'], function(j, resultado) {
             if(productos.marca_id===resultado.marca_id){
