@@ -85,7 +85,7 @@ class MGest_ingresos extends CI_Model {
     }
     
     public function ObtenerSPIngresos($parametros) {        
-        return $this->db->query('CALL sp_gest_Lista_ingresos(?,?)',[$parametros['tipoingreso'],$parametros['mes']]);
+        return $this->db->query('CALL sp_gest_Lista_Ingresos(?,?)',[$parametros['tipoingreso'],$parametros['mes']]);
     }
     
     function ObtenerTablaIngresosXingreso_id($ingreso_id) {  

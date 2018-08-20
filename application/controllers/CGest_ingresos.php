@@ -14,18 +14,18 @@ class CGest_ingresos extends jkventas_controller {
     public function index() {        
         $data['menu_padre']     = $this->CargarMenuPadre();
         $data['menu_hijo']      = $this->CargarMenuHijo();        
-        $data['layout_body']    = 'Gestion/VGest_ingresos/index';
-        $data['tipoingreso']      = $this->MGest_tipoingresos->ObtenerTablaTipoingresos();
+        $data['layout_body']    = 'Gestion/VGest_Ingresos/index';
+        $data['tipoingreso']    = $this->MGest_tipoingresos->ObtenerTablaTipoingresos();
         $data['mes']            = $this->MGest_mes->ObtenerTablaMeses();
         
-        $data['title'] = 'ingresos';
+        $data['title'] = 'Ingresos';
         $this->load->view('main_template', $data);
     }    
     
     public function ObtenerIngreso(){       
        $ingreso_id=$this->input->post('ingreso_id');
-       $general['ingreso']        = $this->MGest_ingresos->ObtenerTablaIngresosXingreso_id($ingreso_id); 
-       $general['tipoingreso']    = $this->MGest_tipoingresos->ObtenerTablaTipoingresos(); 
+       $general['ingreso']      = $this->MGest_ingresos->ObtenerTablaIngresosXingreso_id($ingreso_id); 
+       $general['tipoingreso']  = $this->MGest_tipoingresos->ObtenerTablaTipoingresos(); 
        $general['mes']          = $this->MGest_mes->ObtenerTablaMeses();
             
        echo json_encode($general);        
@@ -70,7 +70,7 @@ class CGest_ingresos extends jkventas_controller {
     }
     
     function AgregarIngreso(){
-        $general['tipoingreso']    = $this->MGest_tipoingresos->ObtenerTablaTipoingresos(); 
+        $general['tipoingreso']  = $this->MGest_tipoingresos->ObtenerTablaTipoingresos(); 
         $general['mes']          = $this->MGest_ingresos->ObtenerTablaIngresos();        
         echo json_encode($general);
     }
@@ -87,10 +87,10 @@ class CGest_ingresos extends jkventas_controller {
         $data=  array(
                     'ingreso_id'      =>$ingreso_id,                    
                     'tipoingreso_id'  =>$this->input->post('tipoingreso_id'),                    
-                    'descripcion'   =>$this->input->post('descripcion'),                    
-                    'monto'         =>$this->input->post('monto'),                    
-                    'fecha'         =>$this->input->post('fecha'),                    
-                    'observacion'   =>$this->input->post('observacion')
+                    'descripcion'     =>$this->input->post('descripcion'),                    
+                    'monto'           =>$this->input->post('monto'),                    
+                    'fecha'           =>$this->input->post('fecha'),                    
+                    'observacion'     =>$this->input->post('observacion')
                 );
         
         if($accion=='edit'){                                    

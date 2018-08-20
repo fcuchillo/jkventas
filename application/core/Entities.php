@@ -27,5 +27,9 @@ class Entities {
     public static $t_gest_cliente="t_gest_cliente";  
     public static $t_prod_venta="t_prod_venta";  
     public static $t_prod_detalle_venta='t_prod_detalle_venta';
+    
+    public static $t_gest_ingresos="t_gest_ingresos";
+    public static $t_gest_tipoingresos="t_gest_tipoingresos";
+    
 
 }

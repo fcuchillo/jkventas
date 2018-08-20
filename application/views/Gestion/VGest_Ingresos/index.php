@@ -35,9 +35,9 @@
                         <div class="col-md-2">
                             <label>Tipo Ingreso</label>
                             <?php
-                                echo '<select class="form-control input-sm" id="spntipogasto" name="spntipogasto"><option value="0">Todos</option>';
-                                foreach ($tipogasto as $value) {?>
-                                    <?php echo '<option value="'.$value->tipogasto_id.'" >'.$value->nombre.'</option>';
+                                echo '<select class="form-control input-sm" id="spntipoingreso" name="spntipoingreso"><option value="0">Todos</option>';
+                                foreach ($tipoingreso as $value) {?>
+                                    <?php echo '<option value="'.$value->tipoingreso_id.'" >'.$value->nombre.'</option>';
                                 }
                                 echo '</select>';
                             ?>                    
@@ -78,8 +78,8 @@
                 <table align="center" width="100%" cellpadding="0" cellspacing="0">						
                     <tr>
 		 	<td align=center valign=top width="100%">
-                            <table id="grid_tabla_gastos"></table>
-                            <div id="grid_tabla_gastos_pager" ></div>
+                            <table id="grid_tabla_ingresos"></table>
+                            <div id="grid_tabla_ingresos_pager" ></div>
 			</td>
                     </tr>
 		</table>                         
@@ -105,12 +105,12 @@
                     
                     <div class="row">                        
                         <div class="col-sm-3"><label >Ingresos id: </label></div>                        
-                        <div class="col-sm-3"><input class="form-control" type="text" id="gasto_id" name="gasto_id" value="" readonly="" ></div>                                                
+                        <div class="col-sm-3"><input class="form-control" type="text" id="ingreso_id" name="ingreso_id" value="" readonly="" ></div>                                                
                     </div>  
                     <div class="row">                        
                         <div class="validarInfo">
                         <div class="col-sm-3"><label>Tipo Ingreso:</label></div>
-                        <div class="col-sm-4"><select class="form-control" name="tipogasto_id" id="tipogasto_id"></select> <span class="help-block" id="error"></span></div>                        
+                        <div class="col-sm-4"><select class="form-control" name="tipoingreso_id" id="tipoingreso_id"></select> <span class="help-block" id="error"></span></div>                        
                         </div>
                     </div>                       
                     <div class="row">
@@ -183,7 +183,8 @@ var editor;
         });
         
         $('#btnLimpiar').on('click', function(){ 
-            $('#spningreso').val(0);        
+            $('#spntipoingreso').val(0);        
+            $('#spnmes').val(0);        
         });          
         ValidarInformacion();            
     });
@@ -213,7 +214,7 @@ var editor;
     function getAll_grid_tabla_ingresos(tipoingreso, mes){
 	var leditar         = { name : 'editar'         ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EditarIngresoXid};
         var leliminar       = { name : 'eliminar'	,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EliminarIngresoXid};
-        var lingresoo_id       = { name : 'ingreso_id'	,index : 'index',  width : 50,    align : "center",    fixed : true,  sortable : false };	
+        var lingreso_id     = { name : 'ingreso_id'	,index : 'index',  width : 50,    align : "center",    fixed : true,  sortable : false };	
 	var lnombre         = { name : 'nombre'         ,index : 'index',  width : 80,   align : "left",      fixed : true,  sortable : false };
 	var ldescripcion    = { name : 'descripcion'    ,index : 'index',  width : 200,   align : "left",      fixed : true,  sortable : false };
         var lmonto          = { name : 'monto'          ,index : 'index',  width : 50,   align : "left",      fixed : true,  sortable : false };
@@ -239,10 +240,18 @@ var editor;
                 caption: "Listado de Ingresos",
 		loadComplete : function(data) { 
 		},
+                gridComplete:function(data){
+                   var $grid = $('#grid_tabla_ingresos');
+                   var colSum = $grid.jqGrid('getCol', 'monto', true, 'sum');
+                   console.log(colSum);
+                   $grid.jqGrid('footerData', 'set', {'monto':colSum });  
+                },
 		sortname : 'id',
 		sortable : false,
 		sortorder : "asc",
 		viewrecords : true,
+                footerrow : true,
+                userDataOnFooter : true,
 		loadError : function(xhr, st, err) {
 			alert(err);
 		}		
@@ -258,6 +267,9 @@ var editor;
             title:"Agregar Recuperación", 
             cursor: "pointer"
         });
+        
+        var sum = grid_tabla_ingresos.jqGrid('getCol', 'monto', false, 'sum');
+        grid_tabla_ingresos.jqGrid('footerData','set', {ID: 'Total:', amount: sum});
     }
     
     
