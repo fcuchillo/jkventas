@@ -71,10 +71,16 @@
                             <input type="hidden" id="producto_id" name="producto_id">                            
                         </div>
                 </div>
-                <div class="col-md-4"> 
+                <div class="col-md-2"> 
                         <label class="PyENDES-Label">Nombre Producto</label>
                         <div class="input-group input-group-sm">
                             <input type="text" class="form-control " id="nombre_producto" name="nombre_producto" readonly="" required="">
+                        </div>
+                </div>
+                <div class="col-md-2"> 
+                        <label class="PyENDES-Label">Estado</label>
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control" id="estado_producto" name="estado_producto" readonly="">
                         </div>
                 </div>
                      <div class="col-md-1"> 
@@ -114,45 +120,31 @@
         </div>  
     </section>
 </div>
-<!--Region Modal-->
-<div class="modal" id="myModal" role="dialog">
+<!--End Region Modal-->
+<div class="modal" id="myModalVenta" data-keyboard="false" tabindex="-1" data-backdrop="static"  role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">x</span>
                 </button>
-                <h4 class="modal-title" id="popuptitle"></h4>
-            </div>
-            <div id="data-menu"></div>
-
-            <div class="modal-content"> 
-                <div class="modal-header">
-                    <button type="button" class="btn btn-block btn-danger btn-sm" id="btnGuardar" name="btnGuardar">Aceptar</button>
-                </div> 
-            </div>
-        </div>
-    </div>
-</div>
-<!--End Region Modal-->
-<div class="modal" id="myModalRoles" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">x</span>
-                </button>
-                <h4 class="modal-title" id="popuptitle">Roles</h4>
+                <h4 class="modal-title" id="popuptitle">Venta</h4>
             </div>
             <div class="modal-body">
-                <form class="form" name="formMenu" method="POST">
-                    <input type="hidden" value="" id="menu_id" name="menu_id">
-                    <select class="form-control" name="disponibles[]" id="disponibles" multiple="multiple">
-                    </select>
-               </form>
+                <form class="form" name="formVenta" id="formVenta" method="POST">
+                   <input type="hidden" id="temporal_id" name="temporal_id" value="">  
+                            <label class="PyENDES-Label">Nombre</label>
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control " id="nombre" name="nombre" readonly="">
+                            </div>
+                            <label class="PyENDES-Label">Precio</label>
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control " id="preciomodal" name="preciomodal">
+                            </div>
+                </form>
             </div>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" id="btnGuardarRoles" >Guardar</button>
+            <button type="submit" class="btn btn-primary" id="btnGuardarCambios" form="formVenta">Guardar</button>
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
         </div>
             </div>
@@ -187,7 +179,9 @@ $(document).ready(function () {
     });
     $('#formguardadetalleventa').submit(function(event){
         event.preventDefault();
-        btnGuardarVentas();
+        if($("#producto_id").val().length!==0){
+            btnGuardarVentas();
+        }
         LimpiarCampos();
     });
     $('#btnVentaBuscar').click(function(){
@@ -208,6 +202,10 @@ $(document).ready(function () {
             }
         }
     });
+    $('#formVenta').submit(function(event){
+        event.preventDefault();
+        EditarVentaDetalle();
+    });
   });
   function ObtenerProductoByCodigo(codigo_id){
       $.post( "../CProd_ventas/ObtenerProductoByCodigo",{codigo_id:codigo_id}, function( data ) {
@@ -218,8 +216,18 @@ $(document).ready(function () {
             $('#producto_idd').val(producto.producto_id);
             $('#producto_id').val(producto.producto_id);
             $('#nombre_producto').val(producto.nombre);
+            if(producto.estado_id==2){
+                $("#btnGuardarVentas").prop("disabled",true);
+                $('#estado_producto').val('Agotado');
+            }
+            else{
+                $("#btnGuardarVentas").prop("disabled",false);
+                $('#estado_producto').val('Disponible');
+            }
             $('#precio').val(producto.precio_venta);
             $('#precio').focus();
+            console.log(producto.estado_id);
+            
         }
         else{
            $('#codigo_id').focus();
@@ -231,6 +239,7 @@ $(document).ready(function () {
      $('#producto_idd').val('');
      $('#producto_id').val('');
      $('#nombre_producto').val('');
+     $('#estado_producto').val('');
      $('#precio').val(''); 
   }
       function RecargarTabla_jkventas() {
@@ -311,8 +320,13 @@ $(document).ready(function () {
     }
   
     function EditarVenta(id){      
-     $.post( "../CProd_ventas/EditarVenta",{venta_id:id}, function( data ) {
-         RecargarTabla_jkventas();
+     $.post( "../CProd_ventas/EditarVentaTemporal",{temporal_id:id}, function( data ) {
+              var temporal = jQuery.parseJSON(data);  
+              console.log(temporal);
+              $('#temporal_id').val(temporal.temporal_id);
+              $('#nombre').val(temporal.nombre);
+              $('#preciomodal').val(temporal.precio);
+              $('#myModalVenta').modal('show'); 
       });
     }
   function ObtenerClientebyDni(dni){
@@ -336,13 +350,21 @@ $(document).ready(function () {
   function ConfirmacionDeLaCompra(cliente_id){
        $.post( "../CProd_ventas/GuardarCompraGeneral",{cliente_id:cliente_id}, function( data ) {
             var response = jQuery.parseJSON(data);
+            RecargarTabla_jkventas();
             console.log(response);
             if(response.status==='success'){
-                console.log('venta realizada con exito');
+               console.log('venta realizada con exito');
             }
             else{
                 console.log('paso algo malo');
                 }
       }); 
+  }
+  function EditarVentaDetalle(){
+      $.post("../CProd_ventas/EditarVentaDetalle",$("#formVenta").serialize(),function(data){
+            var response = jQuery.parseJSON(data);  
+            $('#myModalVenta').modal('hide');
+            RecargarTabla_jkventas();
+       });
   }
 </script>

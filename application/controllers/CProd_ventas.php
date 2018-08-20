@@ -41,7 +41,7 @@ class CProd_ventas extends jkventas_controller{
         echo json_encode($this->MProd_venta_detalle->GuardarDetalleVentatemp($data));
     }
     public function ObtenerProductoByCodigo(){
-          echo json_encode($this->MProd_venta_detalle->ObtenerProductoByCodigo($this->input->post('codigo_id')));
+          echo json_encode($this->MProd_venta_detalle->ObtenerProductoByCodigo($this->input->post('codigo_id'),$this->ObtenerSessionUsuario_id()));
     }
     public function ObtenerTodoLosProductosaVender(){
             $data=$this->MProd_venta_detalle->ObtenerTodoLosProductosaVender($this->ObtenerSessionUsuario_id());
@@ -96,7 +96,8 @@ class CProd_ventas extends jkventas_controller{
                             'precio'            =>$row['precio'],
                             'cantidad'          =>1
                             );
-          $this->MProd_venta_detalle->GuardarDetalleVenta($venta_detalle);
+        $this->MProd_venta_detalle->GuardarDetalleVenta($venta_detalle);
+        $this->MProd_venta_detalle->ModificarEstadoDeProductoVendido($row['producto_id']);
         }
         $this->MProd_venta_detalle->EliminarporSessiondeUsuario($this->ObtenerSessionUsuario_id());
         if ($this->db->trans_status() === FALSE){
@@ -106,7 +107,7 @@ class CProd_ventas extends jkventas_controller{
         }
         else{
                 $this->db->trans_commit();
-                $result['status']='succes: ';
+                $result['status']='succes';
         }
      echo json_encode($result);  
     }
@@ -168,5 +169,12 @@ class CProd_ventas extends jkventas_controller{
             }
             echo json_encode($response);
     }
-    
+    public function EditarVentaTemporal(){
+        echo json_encode($this->MProd_venta_detalle->EditarVentaTemporal($this->input->post('temporal_id')));
+    }
+    public function EditarVentaDetalle(){
+        $data=array('temporal_id'=>$this->input->post('temporal_id'),
+                    'precio'=>$this->input->post('preciomodal'));
+        echo json_encode($this->MProd_venta_detalle->GuardarEdicionDetalleVenta($data));
+    }
 }

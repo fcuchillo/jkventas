@@ -13,6 +13,7 @@ class MProd_venta_detalle extends CI_Model {
   public $codigo_id;
   public $nombre;
   public $precio;
+  public $estado;
   
   /***ventas**/
   public $venta_id;
@@ -79,8 +80,15 @@ class MProd_venta_detalle extends CI_Model {
     function setPrecio($precio) {
         $this->precio = $precio;
     }
-    
-    /*****/
+    function getEstado() {
+        return $this->estado;
+    }
+
+    function setEstado($estado) {
+        $this->estado = $estado;
+    }
+
+        /*****/
     function getVenta_id() {
         return $this->venta_id;
     }
@@ -144,8 +152,12 @@ class MProd_venta_detalle extends CI_Model {
     function EditarTablaProductos($detalle_venta) {        
         return $this->db->where('temporal_id',$detalle_venta['producto_id'])->update(Entities::$t_prod_temp_detalle_venta,$detalle_venta);                     
     }
-    public function  ObtenerProductoByCodigo($codigo_producto){
-        return $this->db->select('*')->from(Entities::$t_prod_producto)->where('codigo_id',$codigo_producto)->get()->row();                     
+    public function  ObtenerProductoByCodigo($codigo_producto,$usuario){
+            $this->db->select('producto_id');
+            $this->db->from(Entities::$t_prod_temp_detalle_venta);
+            $this->db->where('usuario_id',$usuario);
+            $where_clause = $this->db->get_compiled_select();
+        return $this->db->select('*')->from(Entities::$t_prod_producto)->where('codigo_id',$codigo_producto)->where("producto_id NOT IN ($where_clause)",NULL,false)->get()->row();                     
     }
      public function ObtenerTodoLosProductosaVender($usuario){ 
         return $this->db->query('CALL sp_prod_Lista_Ventas_temp(?)',$usuario);
@@ -173,6 +185,18 @@ class MProd_venta_detalle extends CI_Model {
     }
     public function ObtenerTodoLosRegistrostmp($usuario){ 
         return $this->db->select('*')->from(Entities::$t_prod_temp_detalle_venta)->where('usuario_id',$usuario)->get();
+    }
+    public function ModificarEstadoDeProductoVendido($producto_id){
+        return $this->db->where('producto_id',$producto_id)->update(Entities::$t_prod_producto,array('estado_id'=>2));                     
+    }
+    public function EditarVentaTemporal($temporal_id){
+        return $this->db->select('*')
+                ->from(Entities::$t_prod_temp_detalle_venta)
+                ->join(Entities::$t_prod_producto,'t_prod_producto.producto_id=t_prod_temp_detalle_venta.producto_id')
+                ->where('temporal_id',$temporal_id)->get()->row();
+    }
+    public function GuardarEdicionDetalleVenta($data){
+        return $this->db->where('temporal_id',$data['temporal_id'])->update(Entities::$t_prod_temp_detalle_venta,array('precio'=>$data['precio']));
     }
     /***VENTAS GENERALES*****/
     public function ObtenerTodasLasVentasBySession($usuario_id){
