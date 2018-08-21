@@ -185,7 +185,13 @@ var editor;
         $('#btnLimpiar').on('click', function(){ 
             $('#spntipoingreso').val(0);        
             $('#spnmes').val(0);        
-        });          
+        });   
+        
+        $('#frmIngreso').submit(function(event){
+            event.preventDefault();
+            EditarVentaDetalle();
+        });
+    
         ValidarInformacion();            
     });
         

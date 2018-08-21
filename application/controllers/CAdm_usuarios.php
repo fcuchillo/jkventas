@@ -21,6 +21,11 @@ class CAdm_usuarios  extends jkventas_controller {
     function Listadodeusuarios(){
         echo json_encode($this->db->select('*')->from('t_adm_usuario')->get()->result());
     }
+    
+    public function ObtenerTablaUsuarios(){
+        return $this->db->select('*')->from(Entities::$t_adm_usuario)->get()->result();
+    }
+    
     public function ObtenerUsuario(){
             $query=$this->db->select('*')->from('t_adm_usuario')->where('usuario_id',$this->input->post('usuario_id'))->get()->result();
             $usuario=$query[0];

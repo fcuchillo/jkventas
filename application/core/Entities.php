@@ -31,5 +31,7 @@ class Entities {
     public static $t_gest_ingresos="t_gest_ingresos";
     public static $t_gest_tipoingresos="t_gest_tipoingresos";
     
+    public static $t_adm_usuario="t_adm_usuario";
+    
 
 }

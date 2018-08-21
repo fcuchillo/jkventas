@@ -8,8 +8,7 @@ require_once 'application/core/Entities.php';
 class MProd_producto extends CI_Model {
   public $id;
   public $producto_id;
-  public $codigo;
-  public $anio;
+  public $codigo;  
   public $estado;
   public $marca;
   public $categoria;  
@@ -43,11 +42,7 @@ class MProd_producto extends CI_Model {
     public function getCodigo() {
         return $this->codigo;
     }
-
-    public function getAnio() {
-        return $this->anio;
-    }
-
+    
     function getEstado() {
         return $this->estado;
     }
@@ -94,10 +89,6 @@ class MProd_producto extends CI_Model {
 
     public function setCodigo($codigo) {
         $this->codigo = $codigo;
-    }
-
-    public function setAnio($anio) {
-        $this->anio = $anio;
     }
 
     function setEstado($estado) {

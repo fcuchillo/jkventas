@@ -100,7 +100,7 @@
                 <h4 class="modal-title" id="popuptitle">Producto</h4>
             </div>
             <div class="modal-body">                  
-                <form id="frmGasto" name="frmGasto" action="" method="POST">
+                <form id="frmGasto" name="frmGasto" method="POST">
                     <input type="hidden" value="" name="accion" id="accion">
                     
                     <div class="row">                        
@@ -140,9 +140,9 @@
             </div>
                         
             <div class="modal-footer"> 
-                <div class="modal-header">
-                    <button type="submit" class="btn btn-primary" form="frmGasto" >Guardar</button>                      
-                </div> 
+                <!--<div class="modal-header">-->
+                    <button type="submit" class="btn btn-primary" id="btnGuardarCambios" form="frmGasto" >Guardar</button>                      
+                <!--</div>--> 
             </div>
         </div>
     </div>
@@ -186,23 +186,22 @@ var editor;
         $('#btnLimpiar').on('click', function(){ 
             $('#spngasto').val(0);        
         }); 
-       
+        
         $('#frmGasto').submit(function(event){
             event.preventDefault();
-            btnGuardarVentas();            
-        });
-        
-
-        
-        ValidarInformacion();            
+            btnGuardarVentas();
+//            ValidarInformacion(); 
+        });                   
     });
     
     function btnGuardarVentas(){
-      $.post( "../Cgest_Gastos/EditarGasto",$("#frmGasto").serialize(), function( data ) {
-         ObtenerParametros();
+        $.post( "../Cgest_Gastos/EditarGasto",$("#frmGasto").serialize(), function( data ) {
+            var response = jQuery.parseJSON(data);  
+            $('#myModal').modal('hide');            
+            ObtenerParametros();
             RecargarParameter_tabla_gastos();
-      });
-    }
+        });
+    }  
         
     function ObtenerParametros(){
         $('#grid_tabla_gastos').jqGrid('GridUnload');

@@ -144,10 +144,6 @@
                         <div class="col-sm-2"><label>Codigo:</label></div>                        
                         <div class="col-sm-3"><input class="form-control" type="text" id="codigo_id" name="codigo_id" value=""> <span class="help-block" id="error"></span></div>
                         </div>
-                    </div>                    
-                    <div class="row">                        
-                        <div class="col-sm-2"><label>Anio:</label></div>                        
-                        <div class="col-sm-3"><input class="form-control" type="text" id="anio" name="anio" value="" readonly=""> <span class="help-block" id="error"></span></div>                                                                        
                     </div>        
                     <div class="row">
                         <div class="validarInfo">
@@ -294,21 +290,20 @@ var editor;
 	var leditar          = { name : 'editar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EditarProductoXid};
         var leliminar        = { name : 'eliminar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EliminarProductoXid};
         var lproducto_id     = { name : 'producto_id'	 ,index : 'index',  width : 30,    align : "center",    fixed : true,  sortable : false };
-	var lcodigo          = { name : 'codigo'         ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };
-	var lanio            = { name : 'anio'           ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };        
-	var lestado          = { name : 'estado'         ,index : 'index',  width : 85,    align : "left",      fixed : true,  sortable : false };
+	var lcodigo          = { name : 'codigo'         ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };	
+	var lestado          = { name : 'estado'         ,index : 'index',  width : 65,    align : "left",      fixed : true,  sortable : false };
         var lmarca           = { name : 'marca'          ,index : 'index',  width : 85,    align : "left",      fixed : true,  sortable : false };
-	var lcategoria       = { name : 'categoria'	 ,index : 'index',  width : 85,    align : "left",      fixed : true,  sortable : false };	
-	var lnombre          = { name : 'nombre'         ,index : 'index',  width : 130,   align : "left",      fixed : true,  sortable : false };
+	var lcategoria       = { name : 'categoria'	 ,index : 'index',  width : 75,    align : "left",      fixed : true,  sortable : false };	
+	var lnombre          = { name : 'nombre'         ,index : 'index',  width : 100,   align : "left",      fixed : true,  sortable : false };
 	var ltalla           = { name : 'talla'          ,index : 'index',  width : 40,    align : "center",    fixed : true,  sortable : false };
 	var lcolor           = { name : 'color'          ,index : 'index',  width : 50,    align : "center",    fixed : true,  sortable : false };
-        var lprecio_compra   = { name : 'precio_compra'	 ,index : 'index',  width : 80,    align : "center",    fixed : true,  sortable : false };
-        var lprecio_venta    = { name : 'precio_venta'	 ,index : 'index',  width : 70,    align : "center",    fixed : true,  sortable : false };
+        var lprecio_compra   = { name : 'precio_compra'	 ,index : 'index',  width : 60,    align : "center",    fixed : true,  sortable : false };
+        var lprecio_venta    = { name : 'precio_venta'	 ,index : 'index',  width : 60,    align : "center",    fixed : true,  sortable : false };
         var lfecha_compra    = { name : 'fecha_compra'	 ,index : 'index',  width : 120,   align : "center",    fixed : true,  sortable : false };        
-        var lobservacion     = { name : 'observacion'	 ,index : 'index',  width : 150,   align : "left",      fixed : true,  sortable : false };
+        var lobservacion     = { name : 'observacion'	 ,index : 'index',  width : 135,   align : "left",      fixed : true,  sortable : false };
         
-        colNames = ['','','Id','Codigo','Anio','Estado','Marca','Categoria','Nombre','Talla','Color','Precio Compra','Precio Venta','Fecha Compra','Observacion'];
-	colModel = [leditar,leliminar,lproducto_id,lcodigo,lanio,lestado,lmarca,lcategoria,lnombre,ltalla,lcolor,lprecio_compra,lprecio_venta,lfecha_compra,lobservacion];	    
+        colNames = ['','','Id','Codigo','Estado','Marca','Categoria','Producto','Talla','Color','P. Compra','P. Venta','Fecha Compra','Observacion'];
+	colModel = [leditar,leliminar,lproducto_id,lcodigo,lestado,lmarca,lcategoria,lnombre,ltalla,lcolor,lprecio_compra,lprecio_venta,lfecha_compra,lobservacion];	    
 
 	grid_tabla_productos.jqGrid({
 		url:'../CProd_productos/ListaProductos?anio='+anio+'&mes='+mes+'&estado='+estado+'&marca='+marca+'&categoria='+categoria+'&codigo='+codigo,
@@ -317,7 +312,7 @@ var editor;
 		colNames : colNames,
 		colModel : colModel,
 		height : 'auto',
-		width : 1150,
+		width : 1000,
 		pager : $('#grid_tabla_productos_pager'),
 		rowNum : 10,
 		loadonce : true,
@@ -449,8 +444,7 @@ var editor;
     }
     
     function AsignacionValoresProductoNuevo(json){
-        $('#accion').val('add');
-        $('#anio').val($('#spnanio').val());        
+        $('#accion').val('add'); 
         
         $('#marca_id option').remove();    
         $('#marca_id').append($('<option>').text('Seleccione').attr('value', ''));    
@@ -477,7 +471,7 @@ var editor;
         
         $('#producto_id').val(productos.producto_id);
         $('#codigo_id').val(productos.codigo_id);
-        $('#anio').val(productos.anio);                
+        
         $('#marca_id option').remove();    
         $.each(json['marca'], function(j, resultado) {
             if(productos.marca_id===resultado.marca_id){

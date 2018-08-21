@@ -93,7 +93,7 @@
                     <input type="hidden" value="" name="accion" id="accion">
                     
                     <div class="row">                        
-                        <div class="col-sm-3"><label >Marca id: </label></div>                        
+                        <div class="col-sm-3"><label>Marca id: </label></div>                        
                         <div class="col-sm-3"><input class="form-control" type="text" id="marca_id" name="marca_id" value="" readonly="" ></div>                                                
                     </div>                 
                

@@ -68,8 +68,7 @@ class CProd_productos extends jkventas_controller {
 
         $entry->setId($row['id']);
         $entry->setProducto_id($row['producto_id']);
-        $entry->setCodigo($row['codigo']);
-        $entry->setAnio($row['anio']);
+        $entry->setCodigo($row['codigo']);        
         $entry->setEstado($row['estado']);
         $entry->setMarca($row['marca']);
         $entry->setCategoria($row['categoria']);        
@@ -86,8 +85,7 @@ class CProd_productos extends jkventas_controller {
                                         $entry->getProducto_id(),                            
                                         $entry->getProducto_id(),
                                         $entry->getProducto_id(),
-                                        $entry->getCodigo(),
-                                        $entry->getAnio(),
+                                        $entry->getCodigo(),                                        
                                         $entry->getEstado(),    
                                         $entry->getMarca(),
                                         $entry->getCategoria(),                                        
@@ -126,8 +124,7 @@ class CProd_productos extends jkventas_controller {
         $producto_id=($accion=='edit'?$this->input->post('producto_id'):$this->MProd_producto->ObtenerTablaProductoMaximoID()->producto_id+1);
         $data=  array(
                     'producto_id'   =>$producto_id,
-                    'codigo_id'     =>$this->input->post('codigo_id'),
-                    'anio'          =>$this->input->post('anio'),
+                    'codigo_id'     =>$this->input->post('codigo_id'),                    
                     'estado_id'     =>$this->input->post('estado_id'),
                     'marca_id'      =>$this->input->post('marca_id'),
                     'categoria_id'  =>$this->input->post('marca_id'),

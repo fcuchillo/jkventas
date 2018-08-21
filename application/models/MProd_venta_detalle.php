@@ -135,11 +135,11 @@ class MProd_venta_detalle extends CI_Model {
         $this->detalle_venta_id = $detalle_venta_id;
     }
 
-   /*****/
+    
+    
     function ObtenerTablaProductosXproducto_id($temporal_id) {  
         return $this->db->select('*')->from(Entities::$t_prod_temp_detalle_venta)->where('temporal_id',$temporal_id)->get()->row();
     }
-
     
     function EliminarTablaVentaDetalle($temporal_id) {        
         return $this->db->where('temporal_id',$temporal_id)->delete(Entities::$t_prod_temp_detalle_venta);
@@ -152,6 +152,7 @@ class MProd_venta_detalle extends CI_Model {
     function EditarTablaProductos($detalle_venta) {        
         return $this->db->where('temporal_id',$detalle_venta['producto_id'])->update(Entities::$t_prod_temp_detalle_venta,$detalle_venta);                     
     }
+    
     public function  ObtenerProductoByCodigo($codigo_producto,$usuario){
             $this->db->select('producto_id');
             $this->db->from(Entities::$t_prod_temp_detalle_venta);
@@ -159,51 +160,64 @@ class MProd_venta_detalle extends CI_Model {
             $where_clause = $this->db->get_compiled_select();
         return $this->db->select('*')->from(Entities::$t_prod_producto)->where('codigo_id',$codigo_producto)->where("producto_id NOT IN ($where_clause)",NULL,false)->get()->row();                     
     }
-     public function ObtenerTodoLosProductosaVender($usuario){ 
+    
+    public function ObtenerTodoLosProductosaVender($usuario){ 
         return $this->db->query('CALL sp_prod_Lista_Ventas_temp(?)',$usuario);
     }
+    
     public function GuardarDetalleVentatemp($detalleventa){
         return $this->db->insert(Entities::$t_prod_temp_detalle_venta,$detalleventa);
     }
+    
     public function GuardarDetalleVenta($detalleventa){
         return $this->db->insert(Entities::$t_prod_detalle_venta,$detalleventa);
     }
+    
     public function ObtenerClientebyDni($dni){
        return $this->db->select('*')->from(Entities::$t_gest_cliente)->where('dni',$dni)->get()->row();
     }
+    
     public function GuardarVenta($venta){
         return $this->db->insert(Entities::$t_prod_venta,$venta);
     }
+    
     function ObtenerMaximoIDVenta() {        
         $this->db->select_max('venta_id');
         $query = $this->db->get(Entities::$t_prod_venta); 
         $id=$query->row();            
         return $id;
     }
+    
     public function  EliminarporSessiondeUsuario($usuario_id){
       return $this->db->where('usuario_id',$usuario_id)->delete(Entities::$t_prod_temp_detalle_venta);
     }
+    
     public function ObtenerTodoLosRegistrostmp($usuario){ 
         return $this->db->select('*')->from(Entities::$t_prod_temp_detalle_venta)->where('usuario_id',$usuario)->get();
     }
+    
     public function ModificarEstadoDeProductoVendido($producto_id){
         return $this->db->where('producto_id',$producto_id)->update(Entities::$t_prod_producto,array('estado_id'=>2));                     
     }
+    
     public function EditarVentaTemporal($temporal_id){
         return $this->db->select('*')
                 ->from(Entities::$t_prod_temp_detalle_venta)
                 ->join(Entities::$t_prod_producto,'t_prod_producto.producto_id=t_prod_temp_detalle_venta.producto_id')
                 ->where('temporal_id',$temporal_id)->get()->row();
     }
+    
     public function GuardarEdicionDetalleVenta($data){
         return $this->db->where('temporal_id',$data['temporal_id'])->update(Entities::$t_prod_temp_detalle_venta,array('precio'=>$data['precio']));
     }
+    
     /***VENTAS GENERALES*****/
     public function ObtenerTodasLasVentasBySession($usuario_id){
         return $this->db->query('CALL sp_prod_Lista_Ventas(?)',$usuario_id);
     }
+    
     public function ObtenerTodasLasVentasByVentaId($venta_id){
-        return $this->db->query('CALL sp_prod_Lista_Ventas_ByVentaid(?)',$venta_id);
+        return $this->db->query('CALL sp_prod_ReporteDetalleVentaId(?)',$venta_id);
     }
    
 }
