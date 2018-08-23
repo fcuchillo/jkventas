@@ -47,8 +47,7 @@ class CGest_ingresos extends jkventas_controller {
         $entry->setNombre($row['nombre']);       
         $entry->setDescripcion($row['descripcion']);        
         $entry->setMonto($row['monto']);        
-        $entry->setFecha($row['fecha']);        
-        $entry->setObservacion($row['observacion']);
+        $entry->setFecha($row['fecha']); 
 
         $response['rows'][$i]['id'] = $entry->getId(); //id
         $response['rows'][$i]['cell'] = array (                                                                  
@@ -58,9 +57,7 @@ class CGest_ingresos extends jkventas_controller {
                                         $entry->getNombre(),                                       
                                         $entry->getDescripcion(),
                                         $entry->getMonto(),
-                                        $entry->getFecha(),
-                                        $entry->getObservacion()
-                
+                                        $entry->getFecha()
                                     );
         $i++;
 
@@ -89,8 +86,7 @@ class CGest_ingresos extends jkventas_controller {
                     'tipoingreso_id'  =>$this->input->post('tipoingreso_id'),                    
                     'descripcion'     =>$this->input->post('descripcion'),                    
                     'monto'           =>$this->input->post('monto'),                    
-                    'fecha'           =>$this->input->post('fecha'),                    
-                    'observacion'     =>$this->input->post('observacion')
+                    'fecha'           =>$this->input->post('fecha')
                 );
         
         if($accion=='edit'){                                    
@@ -101,7 +97,7 @@ class CGest_ingresos extends jkventas_controller {
             $this->MGest_ingresos->AgregarTablaIngresos($data);
         }
         
-        redirect('../CGest_ingresos/index');
+        echo json_encode($result);
     }    
 }
 

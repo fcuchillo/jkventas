@@ -18,6 +18,8 @@ class MProd_producto extends CI_Model {
   public $precio_compra;
   public $precio_venta;
   public $fecha_compra;  
+  public $fechaVenta;
+  public $precioVenta;
   public $observacion;
   
   
@@ -131,8 +133,24 @@ class MProd_producto extends CI_Model {
         $this->observacion = $observacion;
     }
 
-    
+    function getFechaVenta() {
+        return $this->fechaVenta;
+    }
 
+    function getPrecioVenta() {
+        return $this->precioVenta;
+    }
+
+    function setFechaVenta($fechaVenta) {
+        $this->fechaVenta = $fechaVenta;
+    }
+
+    function setPrecioVenta($precioVenta) {
+        $this->precioVenta = $precioVenta;
+    }
+
+    
+    
 
     
     

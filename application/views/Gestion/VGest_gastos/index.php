@@ -77,7 +77,7 @@
             <div class="box-body pre-scrollable" id="divContenedorGastos" >                                        
                 <table align="center" width="100%" cellpadding="0" cellspacing="0">						
                     <tr>
-		 	<td align=center valign=top width="100%">
+		 	<td align=left valign=top width="100%">
                             <table id="grid_tabla_gastos"></table>
                             <div id="grid_tabla_gastos_pager" ></div>
 			</td>
@@ -130,10 +130,6 @@
                         <div class="col-sm-3"><label>Fecha</label></div>
                         <div class="col-sm-5"><input class="form-control" type="datetime" name="fecha" id="fecha" value=""> <span class="help-block" id="error"></span></div>
                         </div>
-                    </div>             
-                    <div class="row">
-                        <div class="col-sm-3"><label>Observacion:</label></div>
-                        <div class="col-sm-9"><input class="form-control" name="observacion" id="observacion"></div>
                     </div>
                                            
                 </form>               
@@ -189,12 +185,12 @@ var editor;
         
         $('#frmGasto').submit(function(event){
             event.preventDefault();
-            btnGuardarVentas();
-//            ValidarInformacion(); 
+            btnGuardar();
+            ValidarInformacion(); 
         });                   
     });
     
-    function btnGuardarVentas(){
+    function btnGuardar(){
         $.post( "../Cgest_Gastos/EditarGasto",$("#frmGasto").serialize(), function( data ) {
             var response = jQuery.parseJSON(data);  
             $('#myModal').modal('hide');            
@@ -228,15 +224,14 @@ var editor;
     function getAll_grid_tabla_gastos(tipogasto, mes){
 	var leditar         = { name : 'editar'         ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EditarGastoXid};
         var leliminar       = { name : 'eliminar'	,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EliminarGastoXid};
-        var lgasto_id       = { name : 'gasto_id'	,index : 'index',  width : 50,    align : "center",    fixed : true,  sortable : false };	
-	var lnombre         = { name : 'nombre'         ,index : 'index',  width : 80,   align : "left",      fixed : true,  sortable : false };
-	var ldescripcion    = { name : 'descripcion'    ,index : 'index',  width : 200,   align : "left",      fixed : true,  sortable : false };
+        var lgasto_id       = { name : 'gasto_id'	,index : 'index',  width : 30,    align : "center",    fixed : true,  sortable : false };	
+	var lnombre         = { name : 'nombre'         ,index : 'index',  width : 60,   align : "left",      fixed : true,  sortable : false };
+	var ldescripcion    = { name : 'descripcion'    ,index : 'index',  width : 165,   align : "left",      fixed : true,  sortable : false };
         var lmonto          = { name : 'monto'          ,index : 'index',  width : 50,   align : "left",      fixed : true,  sortable : false };
-        var lfecha          = { name : 'fecha'          ,index : 'index',  width : 120,   align : "left",      fixed : true,  sortable : false };
-        var lobservacion    = { name : 'observacion'	,index : 'index',  width : 190,   align : "left",      fixed : true,  sortable : false };
+        var lfecha          = { name : 'fecha'          ,index : 'index',  width : 110,   align : "left",      fixed : true,  sortable : false };        
         
-        colNames = ['','','Id','Nombre','descripcion','Monto','Fecha','Observacion'];
-	colModel = [leditar,leliminar,lgasto_id,lnombre,ldescripcion,lmonto,lfecha,lobservacion];	    
+        colNames = ['','','Id','Gasto','Descripcion','Monto','Fecha'];
+	colModel = [leditar,leliminar,lgasto_id,lnombre,ldescripcion,lmonto,lfecha];	    
 
 	grid_tabla_gastos.jqGrid({
 		url:'../CGest_gastos/ListaGastos?tipogasto='+tipogasto+'&mes='+mes,
@@ -245,9 +240,9 @@ var editor;
 		colNames : colNames,
 		colModel : colModel,
 		height : 'auto',
-		width : 800,
+		width : 520,
 		pager : $('#grid_tabla_gastos_pager'),
-		rowNum : 10,
+		rowNum : 5,
 		loadonce : true,
 		scrollrows : true,
 		rownumbers : true,
@@ -256,8 +251,8 @@ var editor;
 		},
 		sortname : 'id',
 		sortable : false,
-		sortorder : "asc",
-		viewrecords : true,
+		sortorder : "asc",		
+                viewrecords : true,
 		loadError : function(xhr, st, err) {
 			alert(err);
 		}		
@@ -291,11 +286,25 @@ var editor;
     }
     
     function EliminarGastoXid(cellvalue, options, rowObject){	
-	return '<a href="javascript:void(0);" id="btnEliminar" onclick="EliminarGasto('+rowObject[0]+');" ><span class="glyphicon glyphicon-trash" ></span></a>';
+        var valor=(rowObject[0]==undefined?rowObject.gasto_id:rowObject[0]);
+        if(valor>0){
+            return '<a href="javascript:void(0);" id="btnEliminar" onclick="EliminarGasto('+valor+');" ><span class="glyphicon glyphicon-trash" ></span></a>';
+        }
+        else{
+            return '';
+        }
+	
     }
     
-    function EditarGastoXid(cellvalue, options, rowObject){	                
-	return '<a href="javascript:void(0);" id="btnEditar" onclick="EditarGasto('+rowObject[0]+');" ><span class="glyphicon glyphicon-pencil" ></span></a>';
+    function EditarGastoXid(cellvalue, options, rowObject){	              
+        var valor=(rowObject[0]==undefined?rowObject.gasto_id:rowObject[0]);
+        if(valor>0){
+            return '<a href="javascript:void(0);" id="btnEditar" onclick="EditarGasto('+valor+');" ><span class="glyphicon glyphicon-pencil" ></span></a>';
+        }
+        else{
+            return ''
+        }
+	
     }
 
     function EliminarGasto(id){
@@ -353,8 +362,7 @@ var editor;
                  
         $('#descripcion').val(gastos.descripcion);              
         $('#monto').val(gastos.monto);              
-        $('#fecha').val(gastos.fecha);              
-        $('#observacion').val(gastos.observacion); 
+        $('#fecha').val(gastos.fecha);                      
         $('#myModal').modal('show');       
     }
         

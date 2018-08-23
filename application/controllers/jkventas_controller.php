@@ -7,6 +7,7 @@ class jkventas_controller extends CI_Controller{
     	parent::__construct();
             $this->load->model(array('MAdm_menu','MAdm_usuario_x_rol','MAdm_menu_x_rol'));
             $this->DB=$this->load->database('jkventas');
+//            $this->VerificarsiAccedeDesdePath();
 	  }
 	public function CargadoDelMenu(){
 	  if(isset($_SESSION['session_user'])) { 
@@ -83,7 +84,7 @@ class jkventas_controller extends CI_Controller{
       public function ObtenerFechaActual(){
           return date('Y-m-d H:i:s');
       }
-      /*public function VerificarsiAccedeDesdePath(){
+      public function VerificarsiAccedeDesdePath(){
         //Validamos si es el path principal ? , si lo es deje accesar desde url
         if ($this->uri->uri_string()) {
             //Carga Libraria User_agent
@@ -103,5 +104,5 @@ class jkventas_controller extends CI_Controller{
                 redirect(base_url());
             }
         }
-      }*/
+      }
 }

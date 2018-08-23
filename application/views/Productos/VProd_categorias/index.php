@@ -64,7 +64,7 @@
             <div class="box-body pre-scrollable" id="divContenedorCategoria" >                                        
                 <table align="center" width="100%" cellpadding="0" cellspacing="0">						
                     <tr>
-		 	<td align=center valign=top width="100%">
+		 	<td align=left valign=top width="100%">
                             <table id="grid_tabla_categorias"></table>
                             <div id="grid_tabla_categorias_pager" ></div>
 			</td>

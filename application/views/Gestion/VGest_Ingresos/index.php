@@ -77,7 +77,7 @@
             <div class="box-body pre-scrollable" id="divContenedorIngresos" >                                        
                 <table align="center" width="100%" cellpadding="0" cellspacing="0">						
                     <tr>
-		 	<td align=center valign=top width="100%">
+		 	<td align=left valign=top width="100%">
                             <table id="grid_tabla_ingresos"></table>
                             <div id="grid_tabla_ingresos_pager" ></div>
 			</td>
@@ -100,11 +100,11 @@
                 <h4 class="modal-title" id="popuptitle">Producto</h4>
             </div>
             <div class="modal-body">                  
-                <form id="frmIngreso" name="frmIngreso" action="../Cgest_Ingresos/EditarIngreso" method="POST">
+                <form id="frmIngreso" name="frmIngreso" method="POST">
                     <input type="hidden" value="" name="accion" id="accion">
                     
                     <div class="row">                        
-                        <div class="col-sm-3"><label >Ingresos id: </label></div>                        
+                        <div class="col-sm-3"><label >Id: </label></div>                        
                         <div class="col-sm-3"><input class="form-control" type="text" id="ingreso_id" name="ingreso_id" value="" readonly="" ></div>                                                
                     </div>  
                     <div class="row">                        
@@ -130,10 +130,6 @@
                         <div class="col-sm-3"><label>Fecha</label></div>
                         <div class="col-sm-5"><input class="form-control" type="datetime" name="fecha" id="fecha" value=""> <span class="help-block" id="error"></span></div>
                         </div>
-                    </div>             
-                    <div class="row">
-                        <div class="col-sm-3"><label>Observacion:</label></div>
-                        <div class="col-sm-9"><input class="form-control" name="observacion" id="observacion"></div>
                     </div>
                                            
                 </form>               
@@ -189,11 +185,20 @@ var editor;
         
         $('#frmIngreso').submit(function(event){
             event.preventDefault();
-            EditarVentaDetalle();
-        });
-    
-        ValidarInformacion();            
+            btnGuardar();            
+        }); 
+        ValidarInformacion();
+
     });
+    
+    function btnGuardar(){
+        $.post( "../Cgest_Ingresos/EditarIngreso",$("#frmIngreso").serialize(), function( data ) {
+            var response = jQuery.parseJSON(data);  
+            $('#myModal').modal('hide');            
+            ObtenerParametros();
+            RecargarParameter_tabla_ingresos();
+        });
+    } 
         
     function ObtenerParametros(){
         $('#grid_tabla_ingresos').jqGrid('GridUnload');
@@ -220,15 +225,14 @@ var editor;
     function getAll_grid_tabla_ingresos(tipoingreso, mes){
 	var leditar         = { name : 'editar'         ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EditarIngresoXid};
         var leliminar       = { name : 'eliminar'	,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EliminarIngresoXid};
-        var lingreso_id     = { name : 'ingreso_id'	,index : 'index',  width : 50,    align : "center",    fixed : true,  sortable : false };	
-	var lnombre         = { name : 'nombre'         ,index : 'index',  width : 80,   align : "left",      fixed : true,  sortable : false };
-	var ldescripcion    = { name : 'descripcion'    ,index : 'index',  width : 200,   align : "left",      fixed : true,  sortable : false };
+        var lingreso_id     = { name : 'ingreso_id'	,index : 'index',  width : 30,    align : "center",    fixed : true,  sortable : false };	
+	var lnombre         = { name : 'nombre'         ,index : 'index',  width : 60,   align : "left",      fixed : true,  sortable : false };
+	var ldescripcion    = { name : 'descripcion'    ,index : 'index',  width : 165,   align : "left",      fixed : true,  sortable : false };
         var lmonto          = { name : 'monto'          ,index : 'index',  width : 50,   align : "left",      fixed : true,  sortable : false };
-        var lfecha          = { name : 'fecha'          ,index : 'index',  width : 120,   align : "left",      fixed : true,  sortable : false };
-        var lobservacion    = { name : 'observacion'	,index : 'index',  width : 190,   align : "left",      fixed : true,  sortable : false };
+        var lfecha          = { name : 'fecha'          ,index : 'index',  width : 110,   align : "left",      fixed : true,  sortable : false };        
         
-        colNames = ['','','Id','Nombre','descripcion','Monto','Fecha','Observacion'];
-	colModel = [leditar,leliminar,lingreso_id,lnombre,ldescripcion,lmonto,lfecha,lobservacion];	    
+        colNames = ['','','Id','Ingreso','Descripcion','Monto','Fecha'];
+	colModel = [leditar,leliminar,lingreso_id,lnombre,ldescripcion,lmonto,lfecha];	    
 
 	grid_tabla_ingresos.jqGrid({
 		url:'../CGest_ingresos/ListaIngresos?tipoingreso='+tipoingreso+'&mes='+mes,
@@ -237,27 +241,19 @@ var editor;
 		colNames : colNames,
 		colModel : colModel,
 		height : 'auto',
-		width : 800,
+		width : 520,
 		pager : $('#grid_tabla_ingresos_pager'),
-		rowNum : 10,
+		rowNum : 5,
 		loadonce : true,
 		scrollrows : true,
 		rownumbers : true,
                 caption: "Listado de Ingresos",
 		loadComplete : function(data) { 
 		},
-                gridComplete:function(data){
-                   var $grid = $('#grid_tabla_ingresos');
-                   var colSum = $grid.jqGrid('getCol', 'monto', true, 'sum');
-                   console.log(colSum);
-                   $grid.jqGrid('footerData', 'set', {'monto':colSum });  
-                },
 		sortname : 'id',
 		sortable : false,
 		sortorder : "asc",
 		viewrecords : true,
-                footerrow : true,
-                userDataOnFooter : true,
 		loadError : function(xhr, st, err) {
 			alert(err);
 		}		
@@ -273,9 +269,6 @@ var editor;
             title:"Agregar Recuperación", 
             cursor: "pointer"
         });
-        
-        var sum = grid_tabla_ingresos.jqGrid('getCol', 'monto', false, 'sum');
-        grid_tabla_ingresos.jqGrid('footerData','set', {ID: 'Total:', amount: sum});
     }
     
     
@@ -294,11 +287,24 @@ var editor;
     }
     
     function EliminarIngresoXid(cellvalue, options, rowObject){	
-	return '<a href="javascript:void(0);" id="btnEliminar" onclick="EliminarIngreso('+rowObject[0]+');" ><span class="glyphicon glyphicon-trash" ></span></a>';
+        var valor=(rowObject[0]==undefined?rowObject.ingreso_id:rowObject[0]);
+        if(valor>0){
+            return '<a href="javascript:void(0);" id="btnEliminar" onclick="EliminarIngreso('+valor+');" ><span class="glyphicon glyphicon-trash" ></span></a>';
+        }
+        else{
+            return ''
+        }
     }
     
-    function EditarIngresoXid(cellvalue, options, rowObject){	                
-	return '<a href="javascript:void(0);" id="btnEditar" onclick="EditarIngreso('+rowObject[0]+');" ><span class="glyphicon glyphicon-pencil" ></span></a>';
+    function EditarIngresoXid(cellvalue, options, rowObject){	               
+        var valor=(rowObject[0]==undefined?rowObject.ingreso_id:rowObject[0]);
+        if(valor>0){
+            return '<a href="javascript:void(0);" id="btnEditar" onclick="EditarIngreso('+valor+');" ><span class="glyphicon glyphicon-pencil" ></span></a>';
+        }
+        else{
+            return '';
+        }
+	
     }
 
     function EliminarIngreso(id){
@@ -356,8 +362,7 @@ var editor;
                  
         $('#descripcion').val(ingresos.descripcion);              
         $('#monto').val(ingresos.monto);              
-        $('#fecha').val(ingresos.fecha);              
-        $('#observacion').val(ingresos.observacion); 
+        $('#fecha').val(ingresos.fecha);                      
         $('#myModal').modal('show');       
     }
         

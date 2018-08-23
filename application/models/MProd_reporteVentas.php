@@ -5,7 +5,7 @@ require_once 'application/core/Entities.php';
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-class MGest_reporteVentas extends CI_Model {
+class MProd_reporteVentas extends CI_Model {
   public $id;
   public $venta_id;  
   public $usuario;
@@ -76,27 +76,10 @@ class MGest_reporteVentas extends CI_Model {
     }
 
     
-    function isEmpty($value){
-        return empty(trim($value))?null:$value;
-    }
-    
-//    function ObtenerTablaProductosXproducto_id($producto_id) {  
-//        return $this->db->select('*')->from(Entities::$t_prod_producto)->where('producto_id',$producto_id)->get()->row();
-//    }
-    
+        
     public function ObtenerSPReporteVentas($parametros) {        
         return $this->db->query('CALL sp_prod_RerpoteVentas(?,?,?)',[$parametros['anio'],$parametros['mes'],$parametros['usuario']]);
     }
-        
-//    function ObtenerTablaProductoMaximoID() {        
-//        $this->db->select_max('producto_id');
-//        $query = $this->db->get(Entities::$t_prod_producto); 
-//        $id=$query->row();            
-//        return $id;
-//    }
-    
-   
-    
      
 }
 

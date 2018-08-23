@@ -12,8 +12,6 @@ class MGest_gastos extends CI_Model {
   public $descripcion;
   public $monto;
   public $fecha;
-  public $observacion;
-    
   
     function __construct() {
         parent::__construct();
@@ -44,10 +42,6 @@ class MGest_gastos extends CI_Model {
         return $this->fecha;
     }
 
-    function getObservacion() {
-        return $this->observacion;
-    }
-
     function setId($id) {
         $this->id = $id;
     }
@@ -71,13 +65,9 @@ class MGest_gastos extends CI_Model {
     function setFecha($fecha) {
         $this->fecha = $fecha;
     }
-
-    function setObservacion($observacion) {
-        $this->observacion = $observacion;
-    }
     
     function isEmpty($value){
-        return empty(trim($value))?null:$value;
+        return $value;
     }
     
     public function ObtenerTablaGastos(){

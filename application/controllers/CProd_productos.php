@@ -12,6 +12,7 @@ class CProd_productos extends jkventas_controller {
     } 
     
     public function index() {
+//        $this->VerificarsiAccedeDesdePath();
         $data['menu_padre']     = $this->CargarMenuPadre();
         $data['menu_hijo']      = $this->CargarMenuHijo();        
         $data['layout_body']    = 'Productos/VProd_productos/index';
@@ -77,7 +78,9 @@ class CProd_productos extends jkventas_controller {
         $entry->setColor($row['color']);
         $entry->setPrecio_compra($row['precio_compra']);
         $entry->setPrecio_venta($row['precio_venta']);
-        $entry->setFecha_compra($row['fecha_compra']);        
+        $entry->setFecha_compra($row['fecha_compra']);         
+        $entry->setPrecioVenta($row['precioVenta']); 
+        $entry->setFechaVenta($row['fechaVenta']);         
         $entry->setObservacion($row['observacion']);
 
         $response['rows'][$i]['id'] = $entry->getId(); //id
@@ -94,7 +97,9 @@ class CProd_productos extends jkventas_controller {
                                         $entry->getColor(),
                                         $entry->getPrecio_compra(),
                                         $entry->getPrecio_venta(),
-                                        $entry->getFecha_compra(),                                        
+                                        $entry->getFecha_compra(),
+                                        $entry->getPrecioVenta(),
+                                        $entry->getFechaVenta(),
                                         $entry->getObservacion()
                 
                                     );

@@ -8,7 +8,7 @@ class MAdm_usuarios extends CI_Model {
         
     }
     function isEmpty($value){
-        return empty(trim($value))?null:$value;
+        return $value;
     }
     
     public function ObtenerTablaUsuarios() {

@@ -4,7 +4,7 @@
 
       <div class="user-panel">
         <div class="pull-left image">
-            <img src="<?php echo base_url();?>assets/dist/img/endes_logo.jpg" class="img-circle" alt="User Image">
+            <img src="<?php echo base_url();?>assets/dist/img/jykale.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php  if(isset($_SESSION['session_user'])) { echo ($this->session->userdata['session_user']['nombre']);}?></p>

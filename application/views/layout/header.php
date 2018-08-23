@@ -66,13 +66,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo base_url(); ?>assets/dist/img/endes_logo.jpg" class="user-image" alt="User Image">
+              <img src="<?php echo base_url(); ?>assets/dist/img/jykale.jpg" class="user-image" alt="User Image">
             <span class="hidden-xs"><?php if(isset($_SESSION['session_user'])) { echo utf8_encode($this->session->userdata['session_user']['area']); } ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?php echo base_url(); ?>assets/dist/img/endes_logo.jpg" class="img-circle" alt="User Image">
+                <img src="<?php echo base_url(); ?>assets/dist/img/jykale.jpg" class="img-circle" alt="User Image">
                 <p>
                  <?php if(isset($_SESSION['session_user'])) { echo ($this->session->userdata['session_user']['nombre'].' '.$this->session->userdata['session_user']['apellidos']); } ?>  
                  <small>Fecha de Acceso: <?= date("d-m-Y") ?></small>

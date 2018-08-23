@@ -46,7 +46,7 @@ class MProd_categoria extends CI_Model {
     
   
     function isEmpty($value){
-        return empty(trim($value))?null:$value;
+        return $value;
     }
     
     public function ObtenerTablaCategorias(){

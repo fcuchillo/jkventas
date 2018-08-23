@@ -68,7 +68,7 @@ class MGest_ingresos extends CI_Model {
     }
     
     function isEmpty($value){
-        return $value;
+        return empty(trim($value))?null:$value;
     }
     
     public function ObtenerTablaIngresos(){

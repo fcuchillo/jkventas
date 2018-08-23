@@ -150,7 +150,7 @@ var editor;
     function DDRecargar_reporte_ventas(anio, mes, usuario) {
 	grid_reporte_ventas.jqGrid("setGridParam",{
             page:1,	
-            url:'../CGest_reporteVentas/ListaReporteVentas?anio='+anio+'&mes='+mes+'&usuario='+usuario,
+            url:'../CProd_reporteVentas/ListaReporteVentas?anio='+anio+'&mes='+mes+'&usuario='+usuario,
             datatype : "json"
 	}).trigger("reloadGrid");
 	
@@ -169,7 +169,7 @@ var editor;
 	colModel = [lventa_id,lusuario,lcliente,lfecha,lcantidad,ltotal];	    
 
 	grid_reporte_ventas.jqGrid({
-		url:'../CGest_reporteVentas/ListaReporteVentas?anio='+anio+'&mes='+mes+'&usuario='+usuario,
+		url:'../CProd_reporteVentas/ListaReporteVentas?anio='+anio+'&mes='+mes+'&usuario='+usuario,
 		datatype : "json",
 		mtype : 'post',
 		colNames : colNames,
@@ -184,19 +184,10 @@ var editor;
                 caption: "Reporte de ventas",
 		loadComplete : function(data) { 
 		},
-                gridComplete:function(data){
-                   var $grid = $('#grid_reporte_ventas');
-                   var colSum = $grid.jqGrid('getCol', 'total', true, 'sum');
-                   var colcantidad = $grid.jqGrid('getCol', 'cantidad', true, 'sum');
-                   $grid.jqGrid('footerData', 'set', {'cantidad':colcantidad });
-                   $grid.jqGrid('footerData', 'set', {'total':colSum });  
-                },
 		sortname : 'id',
 		sortable : false,
 		sortorder : "asc",
 		viewrecords : true,
-                footerrow : true,
-                userDataOnFooter : true,
                 subGrid: true,
                 subGridRowExpanded: showChildGrids,
 		loadError : function(xhr, st, err) {
@@ -217,7 +208,7 @@ var editor;
              console.log(childGridID);
              console.log(childGridPagerID);
             // send the parent row primary key to the server so that we know which grid to show
-            var childGridURL = "../CGest_reporteVentas/ObtenerTodoLosProductosporVenta?jqGridID=JQGrid2"
+            var childGridURL = "../CProd_reporteVentas/ObtenerTodoLosProductosporVenta?jqGridID=JQGrid2"
             childGridURL = childGridURL + "&parentRowID=" + encodeURIComponent(parentRowKey)
 
             // add a table and pager HTML elements to the parent grid row - we will render the child grid here

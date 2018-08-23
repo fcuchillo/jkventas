@@ -66,7 +66,7 @@
             <div class="box-body pre-scrollable" id="divContenedorMarcas" >                                        
                 <table align="center" width="100%" cellpadding="0" cellspacing="0">						
                     <tr>
-		 	<td align=center valign=top width="100%">
+		 	<td align=left valign=top width="100%">
                             <table id="grid_tabla_marcas"></table>
                             <div id="grid_tabla_marcas_pager" ></div>
 			</td>

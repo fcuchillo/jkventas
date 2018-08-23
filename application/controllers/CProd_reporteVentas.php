@@ -2,19 +2,19 @@
  require_once 'application/controllers/jkventas_controller.php';
  defined('BASEPATH') OR exit('No direct script access allowed');
 
-class CGest_reporteVentas extends jkventas_controller {
+class CProd_reporteVentas extends jkventas_controller {
 
     public function __construct() {
         parent::__construct();
         $this->load->library(array('session','form_validation'));
         $this->load->helper(array('url','form'));
-        $this->load->model(array('MProd_producto','MGest_mes','MProd_estado','MProd_marca','MProd_categoria','MGest_reporteVentas','MAdm_usuarios','MGest_clientes','MProd_venta_detalle'));   
+        $this->load->model(array('MProd_producto','MGest_mes','MProd_estado','MProd_marca','MProd_categoria','MProd_reporteVentas','MAdm_usuarios','MGest_clientes','MProd_venta_detalle'));   
     } 
     
     public function index() {
         $data['menu_padre']     = $this->CargarMenuPadre();
         $data['menu_hijo']      = $this->CargarMenuHijo();        
-        $data['layout_body']    = 'Gestion/VGest_reporteVentas/index';
+        $data['layout_body']    = 'Productos/VProd_reporteVentas/index';
         $data['mes']            = $this->MGest_mes->ObtenerTablaMeses();
         $data['usuario']        = $this->MAdm_usuarios->ObtenerTablaUsuarios();
         $data['cliente']        = $this->MGest_clientes->ObtenerTablaClientes();
@@ -30,11 +30,11 @@ class CGest_reporteVentas extends jkventas_controller {
             'mes'        =>$this->input->get('mes'),
             'usuario'     =>$this->input->get('usuario')          
         );
-        $resultset = $this->MGest_reporteVentas->ObtenerSPReporteVentas($parametros);        
+        $resultset = $this->MProd_reporteVentas->ObtenerSPReporteVentas($parametros);        
         $i=0;
         $response=[];
         foreach ($resultset->result_array()  as $row) {
-        $entry  = new MGest_reporteVentas();
+        $entry  = new MProd_reporteVentas();
 
         $entry->setId($row['id']);
         $entry->setVenta_id($row['venta_id']);                
