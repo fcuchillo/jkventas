@@ -6,12 +6,12 @@
 <div class="content-wrapper">
     <!--Region Section Header-->
     <section class="content-header">
-        <h1>Venta</h1>
+<!--        <h1>Venta</h1>
         <ol class="breadcrumb">
             <li><a href="../adm_login/usuarioLogin"><i class="fa fa-dashboard"></i>Inicio</a></li>
             <li><a href="#">Venta</a></li>
             <li class="active">Venta</li>
-        </ol>
+        </ol>-->
     </section>
     <!--End Region Section Header-->
     <!--Region Section Box-->
@@ -19,10 +19,10 @@
         <!--Region Box Result-->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title" id="inquesttitles"></h3>
+                <!--<h3 class="box-title" id="inquesttitles"></h3>-->
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
-                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+                    <!--<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>-->
                 </div>
             </div>
             <div class="box-body">                

@@ -3118,8 +3118,8 @@ fieldset[disabled] .btn-default.focus {
 }
 .btn-primary {
   color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
+  background-color: #de747a;
+  border-color: #de747a;
 }
 .btn-primary:focus,
 .btn-primary.focus {
@@ -3129,15 +3129,15 @@ fieldset[disabled] .btn-default.focus {
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #286090;
-  border-color: #204d74;
+  background-color: #de747a;
+  border-color: #de747a;
 }
 .btn-primary:active,
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
   color: #fff;
-  background-color: #286090;
-  border-color: #204d74;
+  background-color: #de747a;
+  border-color: #de747a;
 }
 .btn-primary:active:hover,
 .btn-primary.active:hover,

@@ -6,9 +6,9 @@
         <div class="pull-left image">
             <img src="<?php echo base_url();?>assets/dist/img/jykale.jpg" class="img-circle" alt="User Image">
         </div>
-        <div class="pull-left info">
-          <p><?php  if(isset($_SESSION['session_user'])) { echo ($this->session->userdata['session_user']['nombre']);}?></p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        <div class="pull info">
+          <p><?php if(isset($_SESSION['session_user'])) { echo ($this->session->userdata['session_user']['nombre']);}?></p>
+          <!--<a href="#"><i class="fa fa-circle text-success"></i> Online</a>-->
         </div>
       </div>
 

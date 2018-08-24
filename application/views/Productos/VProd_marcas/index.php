@@ -3,12 +3,12 @@
 <div class="content-wrapper">
     <!--Region Section Header-->
     <section class="content-header">
-        <!--<h1>Marcas</h1>-->
+<!--        <h1>Marcas</h1>
         <ol class="breadcrumb">
             <li><a href="<?=base_url()?>login/authentication"><i class="fa fa-dashboard"></i> Inicio</a></li>
             <li><a href="#">Marcas</a></li>
             <li class="active">Marcas</li>
-        </ol>
+        </ol>-->
     </section>
     
     <!--End Region Section Header-->
@@ -22,8 +22,8 @@
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                         <i class="fa fa-minus"></i></button>
-                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                        <i class="fa fa-times"></i></button>
+<!--                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fa fa-times"></i></button>-->
                 </div>
             </div>
             
@@ -189,12 +189,12 @@ var editor;
     function getAll_grid_tabla_marcas(marca){
 	var leditar          = { name : 'editar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EditarMarcaXid};
         var leliminar        = { name : 'eliminar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EliminarMarcaXid};
-        var lmarca_id        = { name : 'marca_id'	 ,index : 'index',  width : 50,    align : "center",    fixed : true,  sortable : false };	
-	var lnombre          = { name : 'nombre'         ,index : 'index',  width : 160,   align : "left",      fixed : true,  sortable : false };
-	var ldireccion       = { name : 'direccion'      ,index : 'index',  width : 180,   align : "left",      fixed : true,  sortable : false };
-        var lobservacion     = { name : 'observacion'	 ,index : 'index',  width : 220,   align : "left",      fixed : true,  sortable : false };
+        var lmarca_id        = { name : 'marca_id'	 ,index : 'index',  width : 30,    align : "center",    fixed : true,  sortable : false };	
+	var lnombre          = { name : 'nombre'         ,index : 'index',  width : 100,   align : "left",      fixed : true,  sortable : false };
+	var ldireccion       = { name : 'direccion'      ,index : 'index',  width : 120,   align : "left",      fixed : true,  sortable : false };
+        var lobservacion     = { name : 'observacion'	 ,index : 'index',  width : 100,   align : "left",      fixed : true,  sortable : false };
         
-        colNames = ['','','Id','Nombre','Direccion','Observacion'];
+        colNames = ['','','Id','Marca','Direccion','Observacion'];
 	colModel = [leditar,leliminar,lmarca_id,lnombre,ldireccion,lobservacion];	    
 
 	grid_tabla_marcas.jqGrid({
@@ -204,7 +204,7 @@ var editor;
 		colNames : colNames,
 		colModel : colModel,
 		height : 'auto',
-		width : 710,
+		width : 450,
 		pager : $('#grid_tabla_marcas_pager'),
 		rowNum : 10,
 		loadonce : true,

@@ -3,12 +3,12 @@
 <div class="content-wrapper">
     <!--Region Section Header-->
     <section class="content-header">
-        <!--<h1>Marcas</h1>-->
+<!--        <h1>Marcas</h1>
         <ol class="breadcrumb">
             <li><a href="<?=base_url()?>login/authentication"><i class="fa fa-dashboard"></i> Inicio</a></li>
             <li><a href="#">Categoria</a></li>
             <li class="active">Categoria</li>
-        </ol>
+        </ol>-->
     </section>
     
     <!--End Region Section Header-->
@@ -22,8 +22,8 @@
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                         <i class="fa fa-minus"></i></button>
-                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                        <i class="fa fa-times"></i></button>
+<!--                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fa fa-times"></i></button>-->
                 </div>
             </div>
             
@@ -180,11 +180,11 @@ var editor;
     function getAll_grid_tabla_categorias(categoria){
 	var leditar          = { name : 'editar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EditarCategoriaXid};
         var leliminar        = { name : 'eliminar'	 ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EliminarCategoriaXid};
-        var lcategoria_id    = { name : 'categoria'	 ,index : 'index',  width : 50,    align : "center",    fixed : true,  sortable : false };	
-	var lnombre          = { name : 'nombre'         ,index : 'index',  width : 160,   align : "left",      fixed : true,  sortable : false };	
-        var lobservacion     = { name : 'observacion'	 ,index : 'index',  width : 300,   align : "left",      fixed : true,  sortable : false };
+        var lcategoria_id    = { name : 'categoria'	 ,index : 'index',  width : 30,    align : "center",    fixed : true,  sortable : false };	
+	var lnombre          = { name : 'nombre'         ,index : 'index',  width : 105,   align : "left",      fixed : true,  sortable : false };	
+        var lobservacion     = { name : 'observacion'	 ,index : 'index',  width : 150,   align : "left",      fixed : true,  sortable : false };
         
-        colNames = ['','','Id','Nombre','Observacion'];
+        colNames = ['','','Id','Categoria','Observacion'];
 	colModel = [leditar,leliminar,lcategoria_id,lnombre,lobservacion];	    
 
 	grid_tabla_categorias.jqGrid({
@@ -194,7 +194,7 @@ var editor;
 		colNames : colNames,
 		colModel : colModel,
 		height : 'auto',
-		width : 605,
+		width : 380,
 		pager : $('#grid_tabla_categorias_pager'),
 		rowNum : 10,
 		loadonce : true,

@@ -46,9 +46,9 @@
     <!-- Logo -->
     <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>J&K</b></span>
+      <!--<span class="logo-mini"><b>J&Kale</b></span>-->
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>J&K</b></span>
+      <span class="logo-lg"><b>J&Kale</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -82,7 +82,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-right">
-                  <a href="<?php echo base_url(); ?>CAdm_login/signout" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?php echo base_url(); ?>CAdm_login/signout" class="btn btn-primary">Cerrar</a>
                 </div>
               </li>
             </ul>

@@ -3,12 +3,12 @@
 <div class="content-wrapper">
     <!--Region Section Header-->
     <section class="content-header">
-        <h1>Productos</h1>
+<!--        <h1>Productos</h1>
         <ol class="breadcrumb">
             <li><a href="<?=base_url()?>login/authentication"><i class="fa fa-dashboard"></i> Inicio</a></li>
             <li><a href="#">Productos</a></li>
-            <li class="active">Productos</li>
-        </ol>
+            <li class="active"></li>
+        </ol>-->
     </section>
     
     <!--End Region Section Header-->
@@ -18,12 +18,12 @@
         <!--Region Box Filter-->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Filtros</h3>
+                <!--<h3 class="box-title"></h3>-->
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                         <i class="fa fa-minus"></i></button>
-                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                        <i class="fa fa-times"></i></button>
+<!--                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fa fa-times"></i></button>-->
                 </div>
             </div>
             
@@ -142,17 +142,17 @@ var tipo=null;
     }    
         
     function getAll_grid_reporteFinanzas(anio, tipo){	
-        var ltipoDescripcion        = { name : 'tipoDescripcion'     ,index : 'index',  width : 80,    align : "left",        fixed : true,  sortable : false };		
-	var ltotalProductosC        = { name : 'totalProductosC'     ,index : 'index',  width : 60,    align : "center",      fixed : true,  sortable : false };
-        var lTotalMontoC            = { name : 'totalMontoC'         ,index : 'index',  width : 60,    align : "center",      fixed : true,  sortable : false };
-	var ltotalProductosV        = { name : 'totalProductosV'     ,index : 'index',  width : 70,    align : "center",      fixed : true,  sortable : false };	
-        var ltotalMontoV            = { name : 'totalMontoV'         ,index : 'index',  width : 60,    align : "center",      fixed : true,  sortable : false };	
-        var ltotalMontoI            = { name : 'totalMontoI'         ,index : 'index',  width : 60,    align : "center",      fixed : true,  sortable : false };	
-        var ltotalMontoG            = { name : 'totalMontoG'         ,index : 'index',  width : 60,    align : "center",      fixed : true,  sortable : false };	
-        var lVentasMenosGastos      = { name : 'ventasMenosGastos'   ,index : 'index',  width : 80,    align : "center",      fixed : true,  sortable : false };	
-        var lIngresosMenosGastos    = { name : 'ingresosMenosGastos' ,index : 'index',  width : 85,    align : "center",      fixed : true,  sortable : false };	
+        var ltipoDescripcion        = { name : 'tipoDescripcion'     ,index : 'index',  width : 70,    align : "left",        fixed : true,  sortable : false };		
+	var ltotalProductosC        = { name : 'totalProductosC'     ,index : 'index',  width : 40,    align : "center",      fixed : true,  sortable : false };
+        var lTotalMontoC            = { name : 'totalMontoC'         ,index : 'index',  width : 40,    align : "center",      fixed : true,  sortable : false };
+	var ltotalProductosV        = { name : 'totalProductosV'     ,index : 'index',  width : 40,    align : "center",      fixed : true,  sortable : false };	
+        var ltotalMontoV            = { name : 'totalMontoV'         ,index : 'index',  width : 45,    align : "center",      fixed : true,  sortable : false };	
+        var ltotalMontoI            = { name : 'totalMontoI'         ,index : 'index',  width : 45,    align : "center",      fixed : true,  sortable : false };	
+        var ltotalMontoG            = { name : 'totalMontoG'         ,index : 'index',  width : 45,    align : "center",      fixed : true,  sortable : false };	
+        var lVentasMenosGastos      = { name : 'ventasMenosGastos'   ,index : 'index',  width : 50,    align : "center",      fixed : true,  sortable : false };	
+        var lIngresosMenosGastos    = { name : 'ingresosMenosGastos' ,index : 'index',  width : 50,    align : "center",      fixed : true,  sortable : false };	
 	
-        colNames = ['Tipo','Stock','Total','P. Vendidos','Total V.','Total I.','Total G.','Ventas-Gastos','Ingresos-Gastos'];
+        colNames = ['Tipo','Stock','Total','Ventas','Total V.','Total I.','Total G.','V-Gastos','I-Gastos'];
 	colModel = [ltipoDescripcion,ltotalProductosC,lTotalMontoC,ltotalProductosV,ltotalMontoV,ltotalMontoI,ltotalMontoG,lVentasMenosGastos,lIngresosMenosGastos];	    
 
 	grid_reporteFinanzas.jqGrid({
@@ -162,7 +162,7 @@ var tipo=null;
 		colNames : colNames,
 		colModel : colModel,
 		height : 'auto',
-		width : 690,
+		width : 500,
 		pager : $('#grid_reporteFinanzas_pager'),
 		rowNum : 10,
 		loadonce : true,

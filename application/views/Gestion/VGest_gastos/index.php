@@ -3,12 +3,12 @@
 <div class="content-wrapper">
     <!--Region Section Header-->
     <section class="content-header">
-        <!--<h1>Marcas</h1>-->
+<!--        <h1>Marcas</h1>
         <ol class="breadcrumb">
             <li><a href="<?=base_url()?>login/authentication"><i class="fa fa-dashboard"></i> Inicio</a></li>
             <li><a href="#">Marcas</a></li>
             <li class="active">Marcas</li>
-        </ol>
+        </ol>-->
     </section>
     
     <!--End Region Section Header-->
@@ -18,12 +18,12 @@
         <!--Region Box Filter-->
         <div class="box">
             <div class="box-header with-border">
-                <!--<h3 class="box-title">Filtros</h3>-->
+                <!--<h3 class="box-title"></h3>-->
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                         <i class="fa fa-minus"></i></button>
-                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                        <i class="fa fa-times"></i></button>
+<!--                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fa fa-times"></i></button>-->
                 </div>
             </div>
             
@@ -224,13 +224,13 @@ var editor;
     function getAll_grid_tabla_gastos(tipogasto, mes){
 	var leditar         = { name : 'editar'         ,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EditarGastoXid};
         var leliminar       = { name : 'eliminar'	,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false, formatter:EliminarGastoXid};
-        var lgasto_id       = { name : 'gasto_id'	,index : 'index',  width : 30,    align : "center",    fixed : true,  sortable : false };	
+        var lgasto_id       = { name : 'gasto_id'	,index : 'index',  width : 20,    align : "center",    fixed : true,  sortable : false };	
 	var lnombre         = { name : 'nombre'         ,index : 'index',  width : 60,   align : "left",      fixed : true,  sortable : false };
-	var ldescripcion    = { name : 'descripcion'    ,index : 'index',  width : 165,   align : "left",      fixed : true,  sortable : false };
-        var lmonto          = { name : 'monto'          ,index : 'index',  width : 50,   align : "left",      fixed : true,  sortable : false };
-        var lfecha          = { name : 'fecha'          ,index : 'index',  width : 110,   align : "left",      fixed : true,  sortable : false };        
+	var ldescripcion    = { name : 'descripcion'    ,index : 'index',  width : 130,   align : "left",      fixed : true,  sortable : false };
+        var lmonto          = { name : 'monto'          ,index : 'index',  width : 40,   align : "right",      fixed : true,  sortable : false };
+        var lfecha          = { name : 'fecha'          ,index : 'index',  width : 100,   align : "center",      fixed : true,  sortable : false };        
         
-        colNames = ['','','Id','Gasto','Descripcion','Monto','Fecha'];
+        colNames = ['','','Id','Gastos','Descripcion','Monto','Fecha'];
 	colModel = [leditar,leliminar,lgasto_id,lnombre,ldescripcion,lmonto,lfecha];	    
 
 	grid_tabla_gastos.jqGrid({
@@ -240,7 +240,7 @@ var editor;
 		colNames : colNames,
 		colModel : colModel,
 		height : 'auto',
-		width : 520,
+		width : 455,
 		pager : $('#grid_tabla_gastos_pager'),
 		rowNum : 5,
 		loadonce : true,
